@@ -1,11 +1,18 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Raleway'), local('Raleway-Regular'), url(../fonts/Raleway-Regular.ttf) format('truetype');
+}
+
 body,h1,h2,h3,h4,h5,h6 {
-	font-family: "Raleway", Arial, Helvetica, sans-serif;
+	font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
 /*  ==========   Header Styles   ==========  */
 
 .main-banner{
-	max-width:1500px;
+	max-width: 1500px;
 }
 .banner-img {
 	min-width: 1000px;
@@ -14,7 +21,7 @@ body,h1,h2,h3,h4,h5,h6 {
 /*  ==========   Home page content Styles   ==========  */
 
 .home-content{
-	max-width:1532px;
+	max-width: 1532px;
 }
 
 .full-width-img{
