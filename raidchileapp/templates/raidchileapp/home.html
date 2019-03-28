@@ -212,14 +212,9 @@
 			<i class="fa fa-map-marker w3-text-red width30"></i> Alguna dirección, Santiago, Chile<br>
 			<i class="fa fa-phone w3-text-red width30"></i> Teléfono: +56 9 151515<br>
 			<i class="fa fa-envelope w3-text-red width30"> </i> Email: mail@mail.com<br>
-			<form action="/action_page.php" target="_blank">
-				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nombre" required="" name="Name"></p>
-				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Email" required="" name="Email"></p>
-				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Teléfono" required="" name="Phone"></p>
-				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Cantidad de Personas" required="" name="Total"></p>
-				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Mensaje" required="" name="Message"></p>
-				<p><button class="w3-button w3-black w3-padding-large" type="submit"><i class="fa fa-send fa-fw"></i> Enviar Mensaje</button></p>
-			</form>
+
+			<!-- Contact Form fields and submit button -->
+			{% include "raidchileapp/contact_form.html" %}
 		</div>
 
 		<!-- End page content -->
