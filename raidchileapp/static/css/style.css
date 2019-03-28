@@ -37,6 +37,10 @@ body,h1,h2,h3,h4,h5,h6 {
 	width: 30px;
 }
 
+.bot-margin-23{
+	margin-bottom: 23px;
+}
+
 textarea.no-resize{
 	resize: none;
 }

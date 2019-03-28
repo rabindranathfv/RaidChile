@@ -20,28 +20,7 @@
 		</div>
 
 		<!--  Inline Form  -->
-		<div class="w3-row-padding">
-			<div class="w3-col m4">
-				<label><i class="fa fa-search-plus"></i> Términos de Busqueda</label>
-				<input class="w3-input w3-border" type="text">
-			</div>
-			<div class="w3-col m2">
-				<label><i class="fa fa-calendar-o"></i> Fecha de Reserva</label>
-				<input class="w3-input w3-border" type="text" placeholder="DD MM YYYY">
-			</div>
-			<div class="w3-col m2">
-				<label><i class="fa fa-male"></i> Adultos</label>
-				<input class="w3-input w3-border" type="number" placeholder="1">
-			</div>
-			<div class="w3-col m2">
-				<label><i class="fa fa-child"></i> Niños</label>
-				<input class="w3-input w3-border" type="number" placeholder="0">
-			</div>
-			<div class="w3-col m2">
-				<label>Consultar disponibilidad</label>
-				<button class="w3-button w3-block w3-black"><i class="fa fa-search"></i></button>
-			</div>
-		</div>
+		{% include "raidchileapp/inline_product_search_form.html" %}
 
 		<!-- Product Gallery in Rows -->
 		<!-- First Row -->
@@ -54,7 +33,7 @@
 					<p>Single bed</p>
 					<p>15m<sup>2</sup></p>
 					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
 				</div>
 			</div>
 			<div class="w3-third w3-margin-bottom">
@@ -65,7 +44,7 @@
 					<p>Queen-size bed</p>
 					<p>25m<sup>2</sup></p>
 					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
 				</div>
 			</div>
 			<div class="w3-third w3-margin-bottom">
@@ -76,7 +55,7 @@
 					<p>King-size bed</p>
 					<p>40m<sup>2</sup></p>
 					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
 				</div>
 			</div>
 		</div>
@@ -91,7 +70,7 @@
 					<p>Single bed</p>
 					<p>15m<sup>2</sup></p>
 					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
 				</div>
 			</div>
 			<div class="w3-third w3-margin-bottom">
@@ -102,7 +81,7 @@
 					<p>Queen-size bed</p>
 					<p>25m<sup>2</sup></p>
 					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
 				</div>
 			</div>
 			<div class="w3-third w3-margin-bottom">
@@ -113,7 +92,7 @@
 					<p>King-size bed</p>
 					<p>40m<sup>2</sup></p>
 					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
 				</div>
 			</div>
 		</div>
@@ -149,7 +128,7 @@
 
 		<!-- Additional services or offers -->
 		<div class="w3-panel w3-red w3-leftbar w3-padding-32">
-			<h6><i class="fa fa-info w3-blue w3-padding w3-margin-right"></i> On demand, we can offer playstation, babycall, children care, dog equipment, etc.</h6>
+			<h6><i class="fa fa-info w3-blue w3-padding w3-margin-right"></i> Para recibir servicios adicionales recuerde consultarnos en las reservaciones con antelación</h6>
 		</div>
 
 		<div class="w3-container">
@@ -200,7 +179,7 @@
 		<div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
 			<h2>¡Reciba siempre las mejores ofertas primero!</h2>
 			<p>Únase a nuestra lista de correos.</p>
-			<form action="" method="post">
+			<form action="" method="POST">
 				{% csrf_token %}
 				{{ mail_form }}
 				<input class="w3-button w3-red w3-margin-top" type="submit" value="Subscribirme">
