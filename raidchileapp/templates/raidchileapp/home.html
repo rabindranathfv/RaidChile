@@ -200,9 +200,11 @@
 		<div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
 			<h2>¡Reciba siempre las mejores ofertas primero!</h2>
 			<p>Únase a nuestra lista de correos.</p>
-			<label>E-mail</label>
-			<input class="w3-input w3-border" type="text" placeholder="Su dirección de correo">
-			<button type="button" class="w3-button w3-red w3-margin-top">Subscribirme</button>
+			<form action="" method="post">
+				{% csrf_token %}
+				{{ mail_form }}
+				<input class="w3-button w3-red w3-margin-top" type="submit" value="Subscribirme">
+			</form>
 		</div>
 
 		<!-- Contanc us Section -->
