@@ -1,0 +1,7 @@
+<form action="" method="post">
+	{% csrf_token %}
+	{% for field in contact_form %}
+		<p>{{ field }}</p>
+	{% endfor %}
+	<p><input class="w3-button w3-black w3-padding-large" type="submit" value="Enviar Mensaje"></p>
+</form>
