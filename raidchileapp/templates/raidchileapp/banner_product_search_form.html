@@ -1,7 +1,7 @@
 {% if search_form %}
 <form action="" method="GET">
 	<div class="w3-row-padding" style="margin:0 -16px;">
-		<div class="w3-half w3-margin-bottom">
+		<div class="w3-col s12 w3-margin-bottom">
 			<label><i class="fa fa-calendar-o"></i> Fecha de Reserva</label>
 			{{ search_form.reservation_date }}
 		</div>
@@ -17,10 +17,10 @@
 		</div>
 	</div>
 	<div class="w3-row w3-padding" style="margin:8px -16px;">
-		<div class="w3-col s8">
+		<div class="w3-col s9">
 			{{ search_form.search_terms }}
 		</div>
-		<div class="w3-col s4">
+		<div class="w3-col s3">
 			<button type="submit" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search fa-fw"></i> Buscar</button>
 		</div>
 	</div>

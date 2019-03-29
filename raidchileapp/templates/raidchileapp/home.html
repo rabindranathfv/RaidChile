@@ -216,27 +216,41 @@
 		</div>
 
 		<!-- Email list Section -->
+		{% if mail_form %}
 		<div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
 			<h2>¡Reciba siempre las mejores ofertas primero!</h2>
 			<p>Únase a nuestra lista de correos.</p>
 			<form action="" method="POST">
 				{% csrf_token %}
-				{{ mail_form }}
-				<input class="w3-button w3-red w3-margin-top" type="submit" value="Subscribirme">
+				<div class="w3-row-padding">
+					<div class="w3-half w3-margin-bottom">
+						{{ mail_form.name }}
+					</div>
+					<div class="w3-half w3-margin-bottom">
+						{{ mail_form.email }}
+					</div>
+				</div>
+				<div class="w3-row-padding">
+					<div class="w3-half w3-margin-bottom">
+						<input class="w3-button w3-red w3-margin-top" type="submit" value="Subscribirme">
+					</div>
+				</div>
 			</form>
 		</div>
+		{% endif %}
 
 		<!-- Contanc us Section -->
+		{% if contact_form %}
 		<div class="w3-container" id="contact">
 			<h2>Contáctanos</h2>
 			<p>Si tiene alguna pregunta, no dude en consultarnos.</p>
 			<i class="fa fa-map-marker w3-text-red width30"></i> Alguna dirección, Santiago, Chile<br>
 			<i class="fa fa-phone w3-text-red width30"></i> Teléfono: +56 9 151515<br>
 			<i class="fa fa-envelope w3-text-red width30"> </i> Email: mail@mail.com<br>
-
 			<!-- Contact Form fields and submit button -->
 			{% include "raidchileapp/contact_form.html" %}
 		</div>
+		{% endif %}
 
 		<!-- End page content -->
 	</div>

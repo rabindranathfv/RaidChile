@@ -1,7 +1,29 @@
-<form action="" method="POST">
+<form class="w3-padding-16" action="" method="POST">
 	{% csrf_token %}
-	{% for field in contact_form %}
-		<p>{{ field }}</p>
-	{% endfor %}
-	<p><input class="w3-button w3-black w3-padding-large" type="submit" value="Enviar Mensaje"></p>
+	<div class="w3-row-padding">
+		<div class="w3-half w3-margin-bottom">
+			{{ contact_form.name }}
+		</div>
+		<div class="w3-half w3-margin-bottom">
+			{{ contact_form.email }}
+		</div>
+	</div>
+	<div class="w3-row-padding">
+		<div class="w3-half w3-margin-bottom">
+			{{ contact_form.phone_number }}
+		</div>
+		<div class="w3-half w3-margin-bottom">
+			{{ contact_form.people_qty }}
+		</div>
+	</div>
+	<div class="w3-row-padding">
+		<div class="w3-rest w3-padding-small w3-margin-bottom">
+			{{ contact_form.message }}
+		</div>
+	</div>
+	<div class="w3-row-padding">
+		<div class="w3-half w3-margin-bottom">
+			<input class="w3-button w3-black w3-padding-large" type="submit" value="Enviar Mensaje">
+		</div>
+	</div>
 </form>

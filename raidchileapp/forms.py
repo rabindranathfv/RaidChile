@@ -1,7 +1,9 @@
 from django import forms
+from django.conf import settings
 from django.core.validators import RegexValidator
 
 # Create the forms here
+
 
 class SearchForm(forms.Form):
 	search_terms = forms.CharField(	label='Términos de Busqueda',
@@ -12,7 +14,8 @@ class SearchForm(forms.Form):
 									)
 	reservation_date = forms.DateField(	label = 'Fecha de Reservación',
 										required=False,
-										widget= forms.DateInput(attrs={'class': 'w3-input  w3-border'})
+										input_formats= settings.DATE_FORMATS,
+										widget= forms.DateInput(attrs={'class': 'datepicker reservation w3-input  w3-border'})
 									)
 	adult_qty = forms.IntegerField(	label='Adultos',
 										min_value=1,
@@ -28,7 +31,11 @@ class SearchForm(forms.Form):
 									)
 
 class MailListForm(forms.Form):
-	# Campo de nombre no requerido tambien.
+	name = forms.CharField(	label='Nombre',
+							max_length=100,
+							widget=forms.TextInput(attrs={'placeholder': 'Su nombre',
+														'class': 'w3-input w3-border'})
+						)
 	email = forms.EmailField(	label='Email',
 								max_length=100,
 								widget=forms.EmailInput(attrs={'placeholder': 'Su dirección de email',
