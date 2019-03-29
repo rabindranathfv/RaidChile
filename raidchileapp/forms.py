@@ -7,7 +7,8 @@ class SearchForm(forms.Form):
 	search_terms = forms.CharField(	label='Términos de Busqueda',
 									required=False,
 									max_length=200,
-									widget= forms.TextInput(attrs={'class': 'w3-input  w3-border'})
+									widget= forms.TextInput(attrs={	'placeholder': 'Buscar...',
+																	'class': 'w3-input  w3-border'})
 									)
 	reservation_date = forms.DateField(	label = 'Fecha de Reservación',
 										required=False,
@@ -27,6 +28,7 @@ class SearchForm(forms.Form):
 									)
 
 class MailListForm(forms.Form):
+	# Campo de nombre no requerido tambien.
 	email = forms.EmailField(	label='Email',
 								max_length=100,
 								widget=forms.EmailInput(attrs={'placeholder': 'Su dirección de email',
