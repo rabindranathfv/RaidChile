@@ -1,11 +1,257 @@
 {% extends "raidchileapp/base.html" %}
+{% load static %}
 
-{% block page_title %} Home {% endblock %}
+{% block page_title %} Chile Raids | Inicio {% endblock page_title %}
 
 {% block content %}
-	<h1>Esto es una demostración de BS4 y W3.CSS</h1>
-	<div class="w3-panel w3-teal">
-		<h5>...y funciona!</h5>
-		<a href="#" class="w3-bar-item w3-button w3-red w3-mobile"><i class="fa fa-bed w3-margin-right"></i>Logo</a>
+
+	<!-- Webpage navbar goes here (if applicable)-->
+	{% include "raidchileapp/navbar.html" %}
+
+	<!-- Main banner/header with form goes here -->
+	{% include "raidchileapp/main_banner_w_form.html" %}
+
+	<!-- Page content -->
+	<div class="w3-content home-content">
+
+		<div class="w3-container w3-margin-top" id="rutas">
+			<h3>Tours</h3>
+			<p>Insertemos acá un slogan interesante que represente los servicios de Chile Raids.</p>
+		</div>
+
+		<!--  Inline Form  -->
+		{% include "raidchileapp/inline_product_search_form.html" %}
+
+		<!-- Product Gallery in Rows -->
+		<!-- First Row -->
+		<div class="w3-row-padding w3-padding-16">
+			<div class="w3-third w3-margin-bottom">
+				<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-white w3-card-2">
+					<h3>Single Room</h3>
+					<h6 class="w3-opacity">Desde $99</h6>
+					<p>Single bed</p>
+					<p>15m<sup>2</sup></p>
+					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+				</div>
+			</div>
+			<div class="w3-third w3-margin-bottom">
+				<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-white w3-card-2">
+					<h3>Double Room</h3>
+					<h6 class="w3-opacity">Desde $149</h6>
+					<p>Queen-size bed</p>
+					<p>25m<sup>2</sup></p>
+					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+				</div>
+			</div>
+			<div class="w3-third w3-margin-bottom">
+				<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-white w3-card-2">
+					<h3>Deluxe Room</h3>
+					<h6 class="w3-opacity">Desde $199</h6>
+					<p>King-size bed</p>
+					<p>40m<sup>2</sup></p>
+					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Second Row -->
+		<div class="w3-row-padding w3-padding-16">
+			<div class="w3-third w3-margin-bottom">
+				<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-white w3-card-2">
+					<h3>Single Room</h3>
+					<h6 class="w3-opacity">Desde $99</h6>
+					<p>Single bed</p>
+					<p>15m<sup>2</sup></p>
+					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+				</div>
+			</div>
+			<div class="w3-third w3-margin-bottom">
+				<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-white w3-card-2">
+					<h3>Double Room</h3>
+					<h6 class="w3-opacity">Desde $149</h6>
+					<p>Queen-size bed</p>
+					<p>25m<sup>2</sup></p>
+					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+				</div>
+			</div>
+			<div class="w3-third w3-margin-bottom">
+				<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-white w3-card-2">
+					<h3>Deluxe Room</h3>
+					<h6 class="w3-opacity">Desde $199</h6>
+					<p>King-size bed</p>
+					<p>40m<sup>2</sup></p>
+					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
+					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Transport Section -->
+		<div class="w3-container w3-row-padding w3-white w3-margin-bottom" id="transport">
+
+			<h3>Servicios de Transporte</h3>
+			<p>También ofrecemos diferentes medios de transporte para movilizar a su grupo.</p>
+
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/plane.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Aviones</h4>
+					<h6 class="w3-opacity">Desde $299</h6>
+					<h6>De 10 a 40 personas</h6>
+				</div>
+			</div>
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/chile_boat.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Botes</h4>
+					<h6 class="w3-opacity">Desde $199</h6>
+					<h6>De 10 a 25 personas</h6>
+				</div>
+			</div>
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/chile_taxis.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Taxis</h4>
+					<h6 class="w3-opacity">Desde $99</h6>
+					<h6>De 1 a 5 personas</h6>
+				</div>
+			</div>
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/busses.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Autobuses</h4>
+					<h6 class="w3-opacity">Desde $79</h6>
+					<h6>De 6 a 30 personas</h6>
+				</div>
+			</div>
+		</div>
+
+		<!-- About Section -->
+		<div class="w3-row-padding" id="about">
+			<div class="w3-col l4">
+				<h3>¿Quiénes Somos?</h3>
+				<h6 class='justify-text'>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+					esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+					cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+					id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+				</h6>
+				<p>Métodos de Pago: <i class="fa fa-credit-card fa-2x"></i> <i class="fa fa-cc-mastercard fa-2x"></i> <i class="fa fa-cc-amex fa-2x"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal fa-2x"></i></p>
+			</div>
+			<div class="w3-col l8">
+				<!-- Image of location/map -->
+				<img src="{% static 'img/map.jpg' %}" class="w3-image w3-greyscale" class="full-width-img">
+			</div>
+		</div>
+
+		<div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
+			<div class="w3-third"><i class="fa fa-map-marker w3-text-red"></i> Alguna dirección, Santiago, Chile</div>
+			<div class="w3-third"><i class="fa fa-phone w3-text-red"></i> Teléfono: +56 9 151515</div>
+			<div class="w3-third"><i class="fa fa-envelope w3-text-red"></i> Email: mail@mail.com</div>
+		</div>
+		<!-- END About Section -->
+
+		<!-- Additional services or offers -->
+		<div class="w3-panel w3-red w3-leftbar w3-padding-32">
+			<h6><i class="fa fa-info w3-blue w3-padding w3-margin-right"></i> Para recibir servicios adicionales recuerde consultarnos en las reservaciones con antelación</h6>
+		</div>
+
+		<div class="w3-container">
+			<h3>Nuestros Tours</h3>
+			<h6>Podrá encontrar siempre un tour de su agrado en algún lugar de Chile:</h6>
+		</div>
+
+		<div class="w3-row-padding w3-padding-16 w3-text-white w3-large">
+			<div class="w3-half w3-margin-bottom">
+				<div class="w3-display-container">
+					<img src="{% static 'img/cinqueterre.jpg' %}" alt="Cinque Terre" class="full-width-img">
+					<span class="w3-display-bottomleft w3-padding">Cinque Terre</span>
+				</div>
+			</div>
+			<div class="w3-half">
+				<div class="w3-row-padding" style="margin:0 -16px">
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/newyork2.jpg' %}" alt="New York" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">New York</span>
+						</div>
+					</div>
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/sanfran.jpg' %}" alt="San Francisco" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">San Francisco</span>
+						</div>
+					</div>
+				</div>
+				<div class="w3-row-padding" style="margin:0 -16px">
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/pisa.jpg' %}" alt="Pisa" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">Pisa</span>
+						</div>
+					</div>
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/paris.jpg' %}" alt="Paris" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">Paris</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Email list Section -->
+		{% if mail_form %}
+		<div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
+			<h2>¡Reciba siempre las mejores ofertas primero!</h2>
+			<p>Únase a nuestra lista de correos.</p>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="w3-row-padding">
+					<div class="w3-half w3-margin-bottom">
+						{{ mail_form.name }}
+					</div>
+					<div class="w3-half w3-margin-bottom">
+						{{ mail_form.email }}
+					</div>
+				</div>
+				<div class="w3-row-padding">
+					<div class="w3-half w3-margin-bottom">
+						<input class="w3-button w3-red w3-margin-top" type="submit" value="Subscribirme">
+					</div>
+				</div>
+			</form>
+		</div>
+		{% endif %}
+
+		<!-- Contanc us Section -->
+		{% if contact_form %}
+		<div class="w3-container" id="contact">
+			<h2>Contáctanos</h2>
+			<p>Si tiene alguna pregunta, no dude en consultarnos.</p>
+			<i class="fa fa-map-marker w3-text-red width30"></i> Alguna dirección, Santiago, Chile<br>
+			<i class="fa fa-phone w3-text-red width30"></i> Teléfono: +56 9 151515<br>
+			<i class="fa fa-envelope w3-text-red width30"> </i> Email: mail@mail.com<br>
+			<!-- Contact Form fields and submit button -->
+			{% include "raidchileapp/contact_form.html" %}
+		</div>
+		{% endif %}
+
+		<!-- End page content -->
 	</div>
-{% endblock %}
+{% endblock content %}

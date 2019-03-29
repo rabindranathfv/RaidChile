@@ -6,25 +6,35 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="author" content="RocketLabs">
-		<title>{% block page_title %}{% endblock %}</title>
+		<title>{% block page_title %}{% endblock page_title %}</title>
 
 		<!--   Bootstrap 4 CSS    -->
-		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+		<!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"> -->
 		<!--   W3 CSS    -->
 		<link rel="stylesheet" href="{% static 'css/w3.css' %}" type="text/css">
 		<!--   Font-Awesome CSS    -->
 		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+		<!--   Importing Fonts   -->
+		<!--<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
+		<!--   jQueryUI 1.12.1 CSS    -->
+		<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
 		<!--   Custom CSS    -->
 		<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 	</head>
 
-	<body>
+	<body class="w3-light-grey">
+
 		<!-- Webpage content goes inside this block -->
-		{% block content %}{% endblock %}
+		{% block content %}{% endblock content %}
+
+		<!-- Webpage footer goes here-->
+		{% include "raidchileapp/footer.html" %}
 
 		<!-- Optional JavaScript -->
-		<!-- jQuery, then Popper.js and Bootstrap JS in a bundle file -->
-		<script src="{% static 'js/jquery-3.3.1.min.js' %}" ></script>
-		<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+		<!-- jQuery, Popper.js and Bootstrap JS in a bundle file, and jQueryUI 1.12.1 -->
+		<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+		<!--<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> -->
+		<script src="{% static 'js/jquery-ui-1.12.1.min.js' %}"></script>
+		<script src="{% static 'js/behaviour.js' %}" ></script>
 	</body>
 </html>

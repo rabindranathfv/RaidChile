@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Raleway'), local('Raleway-Regular'), url(../fonts/Raleway-Regular.ttf) format('truetype');
+}
+
+body,h1,h2,h3,h4,h5,h6 {
+	font-family: 'Raleway', Arial, Helvetica, sans-serif;
+}
+
+/*  ==========   Header Styles   ==========  */
+
+.main-banner{
+	max-width: 1500px;
+}
+.banner-img {
+	min-width: 1000px;
+}
+
+/*  ==========   Home page content Styles   ==========  */
+
+.home-content{
+	max-width: 1532px;
+}
+
+.full-width-img{
+	width: 100%;
+}
+
+.justify-text{
+	text-align: justify;
+	text-justify: inter-word;
+}
+
+.width30{
+	width: 30px;
+}
+
+.bot-margin-23{
+	margin-bottom: 23px;
+}
+
+button.searchbar-btn {
+	border-left: none !important; /* Prevent double borders */
+	cursor: pointer;
+}
+
+textarea.no-resize{
+	resize: none;
+}
