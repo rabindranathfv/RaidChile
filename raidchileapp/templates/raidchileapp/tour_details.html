@@ -6,14 +6,17 @@
 {% block content %}
 
 	<div class="w3-content home-content ">
-		<div class="w3-container w3-white">
-			<h2 class="w3-padding-large"><b>Nombre atractivo de Tour</b></h2>
+		<div class="w3-container">
+			<div class="w3-center">
+				<h2>Viña del Mar + Valparaíso</h2>
+			</div>
+
 
 			<!--  Slideshow of the tour photos  -->
 			<div class="w3-content slideshow-area">
-				<img class="slideshow-slide full-width-img" src="{% static 'img/room_single.jpg' %}">
-				<img class="slideshow-slide hidden full-width-img" src="{% static 'img/room_double.jpg' %}">
-				<img class="slideshow-slide hidden full-width-img" src="{% static 'img/room_deluxe.jpg' %}">
+				<img class="slideshow-slide w3-animate-left full-width-img" src="{% static 'img/room_single.jpg' %}">
+				<img class="slideshow-slide w3-animate-left hidden full-width-img" src="{% static 'img/room_double.jpg' %}">
+				<img class="slideshow-slide w3-animate-left hidden full-width-img" src="{% static 'img/room_deluxe.jpg' %}">
 
 				<div class="w3-row-padding w3-section">
 					<div class="w3-col s4">
@@ -30,9 +33,9 @@
 
 			<!--  Description of Tour  -->
 			<div class="w3-row-padding">
-				<div class="w3-half w3-margin-bottom">
+				<div class="w3-col s12 l6 w3-margin-bottom">
 					<h2>Información</h2>
-					<hr>
+					<hr class="better-hr">
 					<h6 class='justify-text'>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -43,10 +46,11 @@
 						id est laborum consectetur adipiscing elit, sed do eiusmod tempor
 						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 					</h6>
+					<h4>Precio: $30.000</h4>
 				</div>
-				<div class="w3-half w3-margin-bottom">
+				<div class="w3-col s12 l6 w3-margin-bottom">
 					<h2>Incluye</h2>
-					<hr>
+					<hr class="better-hr">
 					<div class="w3-row-padding">
 						<div class="w3-half w3-margin-bottom">
 							<i class="fa fa-bus fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Transporte</h5>
@@ -64,11 +68,9 @@
 				</div>
 			</div>
 
-			<hr>
-
 			<div class="w3-right w3-padding-16">
 				<a class="w3-button w3-xlarge w3-bold w3-black w3-margin" href="">Contacto</a>
-				<a class="w3-button w3-xlarge w3-bold w3-deep-orange w3-margin-bottom w3-card-4 w3-margin" href="">Reservar</a>
+				<a class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-4 w3-margin" href="">Reservar</a>
 			</div>
 
 

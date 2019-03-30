@@ -67,3 +67,7 @@ textarea.no-resize{
 .slideshow-area{
 	max-width: 700px
 }
+
+.better-hr{
+	border: 1px solid #AAA;
+}
