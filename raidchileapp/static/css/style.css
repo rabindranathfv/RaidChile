@@ -49,3 +49,21 @@ button.searchbar-btn {
 textarea.no-resize{
 	resize: none;
 }
+/*  ==========   Tour Details content Styles   ==========  */
+
+.hidden{
+	display: none;
+}
+
+.slideshow-slide{
+
+}
+
+.slide-thumbnail{
+	width: 100%;
+	cursor:pointer;
+}
+
+.slideshow-area{
+	max-width: 700px
+}

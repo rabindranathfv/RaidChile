@@ -1,0 +1,83 @@
+{% extends "raidchileapp/base.html" %}
+{% load static %}
+
+{% block page_title %} Chile Raids | Inicio {% endblock page_title %}
+
+{% block content %}
+
+	<div class="w3-content home-content ">
+		<div class="w3-container w3-white">
+			<h2 class="w3-padding-large"><b>Nombre atractivo de Tour</b></h2>
+
+			<!--  Slideshow of the tour photos  -->
+			<div class="w3-content slideshow-area">
+				<img class="slideshow-slide full-width-img" src="{% static 'img/room_single.jpg' %}">
+				<img class="slideshow-slide hidden full-width-img" src="{% static 'img/room_double.jpg' %}">
+				<img class="slideshow-slide hidden full-width-img" src="{% static 'img/room_deluxe.jpg' %}">
+
+				<div class="w3-row-padding w3-section">
+					<div class="w3-col s4">
+						<img class="w3-opacity w3-opacity-off w3-hover-opacity-off slide-thumbnail" src="{% static 'img/room_single.jpg' %}">
+					</div>
+					<div class="w3-col s4">
+						<img class="w3-opacity w3-hover-opacity-off slide-thumbnail" src="{% static 'img/room_double.jpg' %}">
+					</div>
+					<div class="w3-col s4">
+						<img class="w3-opacity w3-hover-opacity-off slide-thumbnail" src="{% static 'img/room_deluxe.jpg' %}">
+					</div>
+				</div>
+			</div>
+
+			<!--  Description of Tour  -->
+			<div class="w3-row-padding">
+				<div class="w3-half w3-margin-bottom">
+					<h2>Información</h2>
+					<hr>
+					<h6 class='justify-text'>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+						esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+						cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+						id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+					</h6>
+				</div>
+				<div class="w3-half w3-margin-bottom">
+					<h2>Incluye</h2>
+					<hr>
+					<div class="w3-row-padding">
+						<div class="w3-half w3-margin-bottom">
+							<i class="fa fa-bus fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Transporte</h5>
+						</div>
+						<div class="w3-half w3-margin-bottom">
+							<i class="fa fa-cutlery fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Comidas</h5>
+						</div>
+						<div class="w3-half w3-margin-bottom">
+							<i class="fa fa-glass fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Bar</h5>
+						</div>
+						<div class="w3-half w3-margin-bottom">
+							<i class="fa fa-bed fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Hospedaje</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="w3-right w3-padding-16">
+				<a class="w3-button w3-xlarge w3-bold w3-black w3-margin" href="">Contacto</a>
+				<a class="w3-button w3-xlarge w3-bold w3-deep-orange w3-margin-bottom w3-card-4 w3-margin" href="">Reservar</a>
+			</div>
+
+
+
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block extra_js %}
+		<script src="{% static 'js/slideshow.js' %}" ></script>
+{% endblock extra_js %}

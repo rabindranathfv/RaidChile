@@ -5,16 +5,13 @@
 
 {% block content %}
 
-	<!-- Webpage navbar goes here (if applicable)-->
-	{% include "raidchileapp/navbar.html" %}
-
 	<!-- Main banner/header with form goes here -->
 	{% include "raidchileapp/main_banner_w_form.html" %}
 
 	<!-- Page content -->
 	<div class="w3-content home-content">
 
-		<div class="w3-container w3-margin-top" id="rutas">
+		<div class="w3-container w3-margin-top" id="tours">
 			<h3>Tours</h3>
 			<p>Insertemos acá un slogan interesante que represente los servicios de Chile Raids.</p>
 		</div>
@@ -33,7 +30,7 @@
 					<p>Single bed</p>
 					<p>15m<sup>2</sup></p>
 					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
 				</div>
 			</div>
 			<div class="w3-third w3-margin-bottom">
@@ -61,7 +58,7 @@
 		</div>
 
 		<!-- Second Row -->
-		<div class="w3-row-padding w3-padding-16">
+		<div class="w3-row-padding">
 			<div class="w3-third w3-margin-bottom">
 				<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
 				<div class="w3-container w3-white w3-card-2">

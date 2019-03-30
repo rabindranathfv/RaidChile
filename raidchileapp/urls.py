@@ -17,4 +17,5 @@ from . import views
 app_name = 'raidchileapp'
 urlpatterns = [
     path('', views.home, name='home'),
+    path('tours/detalles', views.tour_details, name='tour_details'),
 ]
