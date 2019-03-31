@@ -71,3 +71,17 @@ textarea.no-resize{
 .better-hr{
 	border: 1px solid #AAA;
 }
+
+/*  ==========   Comment section Styles   ==========  */
+
+.comment-box{
+	max-width: 1024px;
+}
+
+.comment-right-padding{
+	padding-right: 16px;
+}
+
+.avatar-mwidth{
+	max-width: 96px;
+}
