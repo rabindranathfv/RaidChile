@@ -14,3 +14,8 @@ def tour_details(request):
 	comment_form = CommentForm()
 	context = {'comment_form': comment_form}
 	return render(request, "raidchileapp/tour_details.html", context)
+
+def tour_search(request):
+	search_form = SearchForm()
+	context = {'search_form': search_form }
+	return render(request, "raidchileapp/tour_search.html", context)

@@ -1,0 +1,40 @@
+{% extends "raidchileapp/base.html" %}
+{% load static %}
+
+{% block page_title %} Chile Raids | Busca y Reserva {% endblock page_title %}
+
+{% block content %}
+
+	<!-- Search Bar Section -->
+	<div class="w3-panel">
+		<div class="w3-row">
+			<div class="w3-col s1 w3-container"></div>
+			<div class="w3-col s10">
+				<div class="w3-panel w3-white w3-card-2 w3-padding-large">
+					<div class="w3-row">
+						<div class="w3-col s10 m9 l10">
+							<input class="w3-input w3-border" placeholder="Buscar..." type="text" name="search">
+						</div>
+						<div class="w3-col s2 m3 l2">
+							<button type="submit" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search fa-fw"></i> <span class="w3-hide-small">Buscar</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  Content wrapper row (Contains sidebar and search results)  -->
+	<div class="w3-row w3-white">
+		<div class="w3-col m3 l2">
+			<!-- Filter Search Sidebar goes here-->
+			{% include "raidchileapp/search_sidebar.html" %}
+		</div>
+		<div class="w3-col m9 l10">
+			<h1>Contenido</h1>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block extra_js %}{% endblock extra_js %}
