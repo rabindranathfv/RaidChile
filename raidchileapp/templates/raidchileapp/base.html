@@ -23,6 +23,8 @@
 	</head>
 
 	<body class="w3-light-grey">
+		<!-- Webpage navbar goes here (if applicable)-->
+		{% include "raidchileapp/navbar.html" %}
 
 		<!-- Webpage content goes inside this block -->
 		{% block content %}{% endblock content %}
@@ -36,5 +38,6 @@
 		<!--<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> -->
 		<script src="{% static 'js/jquery-ui-1.12.1.min.js' %}"></script>
 		<script src="{% static 'js/behaviour.js' %}" ></script>
+		{% block extra_js %}{% endblock extra_js %}
 	</body>
 </html>
