@@ -42,6 +42,25 @@ class MailListForm(forms.Form):
 																'class': 'w3-input w3-border'})
 								)
 
+class CommentForm(forms.Form):
+	name = forms.CharField(	label='Nombre',
+							max_length=100,
+							widget=forms.TextInput(attrs={'placeholder': 'Su nombre',
+														'class': 'w3-input w3-border'})
+						)
+	email = forms.EmailField(	label='Email',
+								max_length=100,
+								widget=forms.EmailInput(attrs={'placeholder': 'Su dirección de email',
+																'class': 'w3-input w3-border'})
+								)
+	comment = forms.CharField(	label='Comentario',
+							max_length=500,
+							widget=forms.Textarea(attrs={'placeholder': 'Comentario',
+														'rows': 2,
+														'cols': 50,
+														'class': 'w3-input w3-padding-16 w3-border no-resize'})
+							)
+
 class ContactForm(forms.Form):
 	name = forms.CharField(	label='Nombre',
 							max_length=100,

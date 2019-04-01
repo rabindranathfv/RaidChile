@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .forms import ContactForm, MailListForm, SearchForm
+from .forms import CommentForm, ContactForm, MailListForm, SearchForm
 
 # Create your views here.
 def home(request):
@@ -11,5 +11,6 @@ def home(request):
 	return render(request, "raidchileapp/home.html", context)
 
 def tour_details(request):
-	context = {}
+	comment_form = CommentForm()
+	context = {'comment_form': comment_form}
 	return render(request, "raidchileapp/tour_details.html", context)
