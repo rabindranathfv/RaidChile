@@ -4,7 +4,7 @@
 {% block page_title %} Chile Raids | Busca y Reserva {% endblock page_title %}
 
 {% block content %}
-
+<form action="" method="GET" id="search-form">
 	<!-- Search Bar Section -->
 	<div class="w3-panel">
 		<div class="w3-row">
@@ -16,7 +16,7 @@
 							<input class="w3-input w3-border" placeholder="Buscar..." type="text" name="search">
 						</div>
 						<div class="w3-col s3 m3 l2">
-							<button type="submit" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search"></i> <span class="w3-hide-small">Buscar</span></button>
+							<button type="submit" for="search-form" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search"></i> <span class="w3-hide-small">Buscar</span></button>
 						</div>
 					</div>
 				</div>
@@ -162,6 +162,7 @@
 
 		</div>
 	</div>
+</form>
 {% endblock content %}
 
 {% block extra_js %}{% endblock extra_js %}
