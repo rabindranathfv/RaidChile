@@ -31,10 +31,137 @@
 			{% include "raidchileapp/search_sidebar.html" %}
 		</div>
 		<div class="w3-col m9 l10">
-			<h1>Contenido</h1>
+			<!--  Search result rows  -->
+			<!-- First Row (for small and large screen sizes) -->
+			<div class="w3-row-padding w3-margin-top w3-hide-medium">
+				<div class="w3-third w3-margin-bottom">
+					<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Single Room</h3>
+						<h6 class="w3-opacity">Desde $99</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+						<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
+					</div>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Double Room</h3>
+						<h6 class="w3-opacity">Desde $149</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Deluxe Room</h3>
+						<h6 class="w3-opacity">Desde $199</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Second Row (for small and large screen sizes) -->
+			<div class="w3-row-padding w3-hide-medium">
+				<div class="w3-third w3-margin-bottom">
+					<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Single Room</h3>
+						<h6 class="w3-opacity">Desde $99</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+						<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
+					</div>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Double Room</h3>
+						<h6 class="w3-opacity">Desde $149</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Deluxe Room</h3>
+						<h6 class="w3-opacity">Desde $199</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- First Row (for medium screen sizes) -->
+			<div class="w3-row-padding w3-margin-top w3-hide-small w3-hide-large">
+				<div class="w3-half w3-margin-bottom">
+					<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Single Room</h3>
+						<h6 class="w3-opacity">Desde $99</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+						<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
+					</div>
+				</div>
+				<div class="w3-half w3-margin-bottom">
+					<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Double Room</h3>
+						<h6 class="w3-opacity">Desde $149</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Second Row (for medium screen sizes) -->
+			<div class="w3-row-padding w3-hide-small w3-hide-large">
+				<div class="w3-half w3-margin-bottom">
+					<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Deluxe Room</h3>
+						<h6 class="w3-opacity">Desde $199</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+				<div class="w3-half w3-margin-bottom">
+					<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Single Room</h3>
+						<h6 class="w3-opacity">Desde $99</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+						<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Third Row (for medium screen sizes) -->
+			<div class="w3-row-padding w3-hide-small w3-hide-large">
+				<div class="w3-half w3-margin-bottom">
+					<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Double Room</h3>
+						<h6 class="w3-opacity">Desde $149</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+				<div class="w3-half w3-margin-bottom">
+					<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>Deluxe Room</h3>
+						<h6 class="w3-opacity">Desde $199</h6>
+						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
+						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
-
 {% endblock content %}
 
 {% block extra_js %}{% endblock extra_js %}
