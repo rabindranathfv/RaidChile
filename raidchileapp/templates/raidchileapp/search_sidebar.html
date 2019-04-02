@@ -1,0 +1,56 @@
+<div class="w3-container w3-border-right w3-hide-small w3-animate-top" id="filters-sidebar">
+	<div class="w3-center">
+		<h3 class="w3-border-bottom"><i class="fa fa-sliders"></i> Filtros</h3>
+	</div>
+	<!-- Filters start from here -->
+	<div class="w3-border-bottom">
+		<h5>Ubicaciones</h5>
+
+		<input type="checkbox" checked="checked" value="Ubicacion 1">
+		<label>Ubicación 1</label><br>
+
+		<input type="checkbox">
+		<label>Ubicación 2</label><br>
+
+		<input type="checkbox">
+		<label>Ubicación 3</label><br>
+
+		<input type="checkbox">
+		<label>Ubicación 4</label><br class="w3-margin-bottom">
+	</div>
+
+	<div class="w3-border-bottom">
+		<h5>Precio (CLP)</h5>
+		<div class="w3-row w3-margin-bottom">
+			<div class="w3-half w3-center">
+				<label>Desde</label>
+				<input class="w3-input w3-border w3-round"type="text" placeholder="Min">
+			</div>
+			<div class="w3-half w3-center">
+				<label>Hasta</label>
+				<input class="w3-input w3-border w3-round" type="text" placeholder="Max">
+			</div>
+		</div>
+	</div>
+
+	<div class="w3-border-bottom">
+		<h5>Personas</h5>
+
+		<div class="w3-row-padding w3-margin-bottom">
+			<div class="w3-half w3-center">
+				<label><i class="fa fa-male"></i> Adultos:</label>
+				<input class="w3-input w3-border w3-round"type="number" name="adult_qty">
+			</div>
+			<div class="w3-half w3-center">
+				<label><i class="fa fa-child"></i> Niños:</label>
+				<input class="w3-input w3-border w3-round"type="number" name="_qty">
+			</div>
+		</div>
+	</div>
+
+	<button class="w3-button w3-block w3-dark-gray w3-margin-top">Aplicar</button>
+
+</div>
+<div class="w3-center">
+	<button type="submit" for="search-form" class="w3-button w3-red w3-large w3-hide-medium w3-hide-large w3-margin-top" id="filter-toggle"><i class="fa fa-sliders"></i> Filtros</button>
+</div>
