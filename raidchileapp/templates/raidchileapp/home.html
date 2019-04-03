@@ -94,8 +94,8 @@
 			</div>
 		</div>
 
-		<!-- Transport Section -->
-		<div class="w3-container w3-row-padding w3-white w3-margin-bottom" id="transport">
+		<!-- Transport Section (commented out until it is discussed again )-->
+		<!--<div class="w3-container w3-row-padding w3-white w3-margin-bottom" id="transport">
 
 			<h3>Servicios de Transporte</h3>
 			<p>También ofrecemos diferentes medios de transporte para movilizar a su grupo.</p>
@@ -132,7 +132,7 @@
 					<h6>De 6 a 30 personas</h6>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- About Section -->
 		<div class="w3-row-padding" id="about">
@@ -211,30 +211,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- Email list Section -->
-		{% if mail_form %}
-		<div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
-			<h2>¡Reciba siempre las mejores ofertas primero!</h2>
-			<p>Únase a nuestra lista de correos.</p>
-			<form action="" method="POST">
-				{% csrf_token %}
-				<div class="w3-row-padding">
-					<div class="w3-half w3-margin-bottom">
-						{{ mail_form.name }}
-					</div>
-					<div class="w3-half w3-margin-bottom">
-						{{ mail_form.email }}
-					</div>
-				</div>
-				<div class="w3-row-padding">
-					<div class="w3-half w3-margin-bottom">
-						<input class="w3-button w3-red w3-margin-top" type="submit" value="Subscribirme">
-					</div>
-				</div>
-			</form>
-		</div>
-		{% endif %}
 
 		<!-- Contanc us Section -->
 		{% if contact_form %}
