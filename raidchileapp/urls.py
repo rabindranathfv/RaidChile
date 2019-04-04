@@ -18,7 +18,7 @@ app_name = 'raidchileapp'
 urlpatterns = [
 	path('', views.home, name='home'),
 	path('tours/<slug:category_slug>/', views.tour_search_by_category, name='tour_search_by_category'),
-	path('tours/<int:id>)/<slug:slug>/', views.tour_details, name='tour_details'),
+	path('tours/<int:id>/<slug:slug>/', views.tour_details, name='tour_details'),
 	# Template testing urls
 	path('tours/details', views.tour_details_dummy, name='tour_details'),
 	path('tours/search', views.tour_search_dummy, name='tour_search'),
