@@ -10,12 +10,23 @@ def home(request):
 	context = {'contact_form': contact_form, 'mail_form': mail_form, 'search_form': search_form }
 	return render(request, "raidchileapp/home.html", context)
 
-def tour_details(request):
+def tour_details(request, id, slug):
 	comment_form = CommentForm()
 	context = {'comment_form': comment_form}
 	return render(request, "raidchileapp/tour_details.html", context)
 
-def tour_search(request):
+def tour_search_by_category(request, category_slug):
+	search_form = SearchForm()
+	context = {'search_form': search_form }
+	return render(request, "raidchileapp/tour_search.html", context)
+
+# Template testing views
+def tour_details_dummy(request):
+	comment_form = CommentForm()
+	context = {'comment_form': comment_form}
+	return render(request, "raidchileapp/tour_details.html", context)
+
+def tour_search_dummy(request):
 	search_form = SearchForm()
 	context = {'search_form': search_form }
 	return render(request, "raidchileapp/tour_search.html", context)

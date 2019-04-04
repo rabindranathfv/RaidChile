@@ -14,6 +14,14 @@ class Category(models.Model):
 		unique=True ,
 		db_index=True
 	)
+	image = models.ForeignKey(
+		'TourImage',
+		blank=True,
+		null=True,
+		related_name='categories',
+		related_query_name='category',
+		on_delete=models.SET_NULL
+	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
 		verbose_name='created at'
@@ -32,7 +40,7 @@ class Category(models.Model):
 		return self.name
 
 	def get_absolute_url(self):
-		return reverse('raidchileapp:tour_list_by_category', args=[self.slug])
+		return reverse('raidchileapp:tour_search_by_category', args=[self.slug])
 
 
 
@@ -114,12 +122,10 @@ class Tour(models.Model):
 		related_name='tours',
 		related_query_name='tour'
 	)
-	category = models.ForeignKey(
+	category = models.ManyToManyField(
 		Category,
 		related_name='tours',
 		related_query_name='tour',
-		on_delete=models.SET_NULL,
-		null=True
 	)
 	features = models.ManyToManyField(
 		Feature,
