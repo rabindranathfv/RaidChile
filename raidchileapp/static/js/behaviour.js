@@ -10,11 +10,13 @@ $( document ).ready(function(){
 
 
 	// Method to remove empty fields from GET forms.
+	/*
 	$("#search-form").submit(function() {
 		$(this).find(":input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
 		return true; // Ensure form still submits
-	});
+	});*/
 
 	// Un-disable form fields when page loads, in case they click back after submission
-	$("#search-form").find(":input").prop("disabled", false);
+	//$("#search-form").find(":input").removeAttr("disabled");
+
 });

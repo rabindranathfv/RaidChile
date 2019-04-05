@@ -74,6 +74,7 @@ class SearchForm(forms.Form):
 		)
 	)
 
+"""
 class MailListForm(forms.Form):
 	name = forms.CharField(	label='Nombre',
 							max_length=100,
@@ -85,6 +86,7 @@ class MailListForm(forms.Form):
 								widget=forms.EmailInput(attrs={'placeholder': 'Su dirección de email',
 																'class': 'w3-input w3-border'})
 								)
+"""
 
 class CommentForm(forms.Form):
 	name = forms.CharField(	label='Nombre',

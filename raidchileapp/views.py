@@ -1,15 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 
 from .models import Category, Feature, Location, Tour, TourImage
-from .forms import CommentForm, ContactForm, MailListForm, SearchForm
+from .forms import CommentForm, ContactForm, SearchForm
 
 
 
 def home(request):
 	contact_form = ContactForm()
-	mail_form = MailListForm()
 	search_form = SearchForm()
-	context = {'contact_form': contact_form, 'mail_form': mail_form, 'search_form': search_form }
+	context = {'contact_form': contact_form, 'search_form': search_form }
 	return render(request, "raidchileapp/home.html", context)
 
 
@@ -24,20 +23,38 @@ def tour_details(request, id, slug):
 
 
 def search_all_tours(request):
-	tours = None
+	tours = Tour.objects.filter(available=True)
 	search_form = SearchForm(request.GET or None)
 	categories = Category.objects.all()
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
 	if request.GET:
 		# Verify querystring parameters integrity.
-		print ("Busqueda con Filtros.", request.GET)
-		# Filter tours
-	else:
-		# Return all the tours, without filtering, not retrieving their description or features.
-		print ("Busqueda SIN Filtros!")
-		tours = Tour.objects.defer('description').filter(available=True)
+		# Delete non-form and empty fields from the get request.
+		form_fields = search_form.fields.keys()
+		filter_parameters = { k:v for k,v in request.GET.items() if k in form_fields and k != 'locations' and v }
 
+		if 'locations' in request.GET.keys():
+			# Using getlist to obtain the multiple choices
+			filter_parameters['locations'] = request.GET.getlist('locations')
+
+		# Validating parameters data type and constraints
+		# Constraint: Max price > min price else swap them.
+		min_price = filter_parameters.get('min_price', None)
+		max_price = filter_parameters.get('max_price', None)
+		if (min_price and max_price) and (max_price < min_price):
+			filter_parameters['min_price'], filter_parameters['max_price'] = filter_parameters['max_price'], filter_parameters['min_price']
+
+		# Filtering tours depending on existing filter parameters
+		# Locations
+		if filter_parameters.get('locations', None):
+			tours = tours.filter(locations__in=filter_parameters['locations'])
+		# Min Price
+		if filter_parameters.get('min_price', None):
+			tours = tours.filter(adult_sale_price__gte=filter_parameters['min_price'])
+		# Max Price
+		if filter_parameters.get('max_price', None):
+			tours = tours.filter(adult_reg_price__lte=filter_parameters['max_price'])
 
 	context = {
 		'tours': tours,

@@ -7,15 +7,15 @@
 		<h5>Categories</h5>
 		<div class="w3-row w3-margin-bottom">
 			{% if category %}
-				<a href="{% url 'raidchileapp:search_all_tours' %}">All Tours</a><br>
+				<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_tours' %}">All Tours</a><br>
 			{% else %}
-				<h6>All Tours</h6>
+				<span class="w3-text-blue">All Tours</span><br>
 			{% endif %}
 			{% for cat in categories %}
 				{% if cat != category %}
-					<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a><br>
+					<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a><br>
 				{% else %}
-					<h6>{{ cat.name }}</h6>
+					<span class="w3-text-blue">{{ cat.name }}</span><br>
 				{% endif %}
 			{% endfor %}
 		</div>
@@ -36,7 +36,7 @@
 			</div>
 			<div class="w3-half w3-center">
 				<label>Max.</label>
-				{{ search_form.min_price }}
+				{{ search_form.max_price }}
 				<!--<input class="w3-input w3-border w3-round" type="text" placeholder="Max"> -->
 			</div>
 		</div>
