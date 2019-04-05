@@ -1,34 +1,68 @@
+from decimal import Decimal
+
 from django import forms
 from django.conf import settings
 from django.core.validators import RegexValidator
+
+from .models import Location
 
 # Create the forms here
 
 
 class SearchForm(forms.Form):
-	search_terms = forms.CharField(	label='Términos de Busqueda',
-									required=False,
-									max_length=200,
-									widget= forms.TextInput(attrs={	'placeholder': 'Buscar...',
-																	'class': 'w3-input  w3-border'})
-									)
-	reservation_date = forms.DateField(	label = 'Fecha de Reservación',
-										required=False,
-										input_formats= settings.DATE_FORMATS,
-										widget= forms.DateInput(attrs={'class': 'datepicker reservation w3-input  w3-border'})
-									)
-	adult_qty = forms.IntegerField(	label='Adultos',
-										min_value=1,
-										max_value=100,
-										widget=forms.NumberInput(attrs={'value': '1',
-																		'class': 'w3-input  w3-border'})
-									)
-	kids_qty = forms.IntegerField(	label='Niños',
-										min_value=0,
-										max_value=100,
-										widget=forms.NumberInput(attrs={'value': '0',
-																		'class': 'w3-input w3-border'})
-									)
+	search_terms = forms.CharField(
+		label='Search terms',
+		required=False,
+		max_length=200,
+		widget= forms.TextInput(
+			attrs={
+				'placeholder': 'Search...',
+				'class': 'w3-input w3-border'
+			}
+		)
+	)
+	locations = forms.ModelMultipleChoiceField(
+		label='Locations',
+		queryset=Location.objects.all(),
+		widget=forms.CheckboxSelectMultiple,
+		required=False
+	)
+	min_price = forms.DecimalField(
+		label='Minimum Price',
+		required=False,
+		min_value=Decimal(0),
+		max_digits=10,
+		decimal_places=2,
+	)
+	max_price = forms.DecimalField(
+		label='Maximum Price',
+		required=False,
+		min_value=Decimal(0),
+		max_digits=10,
+		decimal_places=2,
+	)
+	adult_qty = forms.IntegerField(
+		label='Adults',
+		min_value=1,
+		max_value=500,
+		widget=forms.NumberInput(
+			attrs={
+				'value': '1',
+				'class': 'w3-input  w3-border'
+			}
+		)
+	)
+	kids_qty = forms.IntegerField(
+		label='Children',
+		min_value=0,
+		max_value=500,
+		widget=forms.NumberInput(
+			attrs={
+				'value': '0',
+				'class': 'w3-input w3-border'
+			}
+		)
+	)
 
 class MailListForm(forms.Form):
 	name = forms.CharField(	label='Nombre',

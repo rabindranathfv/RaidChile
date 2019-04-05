@@ -1,10 +1,15 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
 
-{% block page_title %} Chile Raids | Busca y Reserva {% endblock page_title %}
+{% block page_title %} {{ category.name }} {% endblock page_title %}
 
 {% block content %}
-<form action="" method="GET" id="search-form">
+
+{# Setting url variables #}
+{% url 'raidchileapp:search_all_tours' as all_url %}
+{% url 'raidchileapp:tour_search_by_category' category.id category.slug as cat_url %}
+
+<form action="{% if category %}{{ cat_url }}{% else %}{{ all_url }}{% endif %}" method="GET" id="search-form">
 	<!-- Search Bar Section -->
 	<div class="w3-panel">
 		<div class="w3-row">
@@ -13,7 +18,7 @@
 				<div class="w3-panel w3-white w3-card-2 w3-padding-large">
 					<div class="w3-row">
 						<div class="w3-col s9 m9 l10">
-							<input class="w3-input w3-border" placeholder="Buscar..." type="text" name="search">
+							{{ search_form.search_terms }}
 						</div>
 						<div class="w3-col s3 m3 l2">
 							<button type="submit" for="search-form" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search"></i> <span class="w3-hide-small">Buscar</span></button>
@@ -32,62 +37,26 @@
 		</div>
 		<div class="w3-col m9 l10">
 			<!--  Search result rows  -->
-			<!-- First Row (for small and large screen sizes) -->
 			<div class="w3-row-padding w3-margin-top">
-				<div class="w3-col m6 l4 w3-margin-bottom">
-					<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
-					<div class="w3-container w3-white w3-card-2">
-						<h3>Single Room</h3>
-						<h6 class="w3-opacity">Desde $99</h6>
-						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-						<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
+				{% for tour in tours %}
+					<div class="w3-col m6 l4 w3-margin-bottom">
+						<img src="{{ tour.images.all.first.image.url }}" alt="{{ tour.images.all.first.alternative }}" class="full-width-img">
+						<div class="w3-container w3-white w3-card-2">
+							<!-- Tour title -->
+							<h4>{{ tour.name }}</h4>
+							<!-- Tour adult sale prices -->
+							<h6 class="w3-opacity">From ${{ tour.adult_sale_price }}</h6>
+							<!-- Features Icons -->
+							<p class="w3-large">
+								{% for feature in tour.features.all %}
+								<i class="fa {{ feature.icon }}"></i>
+								{% endfor %}
+							</p>
+							<!-- Tour details button -->
+							<a class="w3-button w3-block w3-black w3-margin-bottom" href="{{ tour.get_absolute_url }}">See more...</a>
+						</div>
 					</div>
-				</div>
-				<div class="w3-col m6 l4 w3-margin-bottom">
-					<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
-					<div class="w3-container w3-white w3-card-2">
-						<h3>Double Room</h3>
-						<h6 class="w3-opacity">Desde $149</h6>
-						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
-						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-					</div>
-				</div>
-				<div class="w3-col m6 l4 w3-margin-bottom">
-					<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
-					<div class="w3-container w3-white w3-card-2">
-						<h3>Deluxe Room</h3>
-						<h6 class="w3-opacity">Desde $199</h6>
-						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
-						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-					</div>
-				</div>
-				<div class="w3-col m6 l4 w3-margin-bottom">
-					<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
-					<div class="w3-container w3-white w3-card-2">
-						<h3>Single Room</h3>
-						<h6 class="w3-opacity">Desde $99</h6>
-						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-						<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
-					</div>
-				</div>
-				<div class="w3-col m6 l4 w3-margin-bottom">
-					<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
-					<div class="w3-container w3-white w3-card-2">
-						<h3>Double Room</h3>
-						<h6 class="w3-opacity">Desde $149</h6>
-						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
-						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-					</div>
-				</div>
-				<div class="w3-col m6 l4 w3-margin-bottom">
-					<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
-					<div class="w3-container w3-white w3-card-2">
-						<h3>Deluxe Room</h3>
-						<h6 class="w3-opacity">Desde $199</h6>
-						<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
-						<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>

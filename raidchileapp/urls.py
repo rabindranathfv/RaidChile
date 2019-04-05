@@ -17,6 +17,7 @@ from . import views
 app_name = 'raidchileapp'
 urlpatterns = [
 	path('', views.home, name='home'),
+	path('tours/', views.search_all_tours, name='search_all_tours'),
 	path('tours/<slug:category_slug>/', views.tour_search_by_category, name='tour_search_by_category'),
 	path('tours/<int:id>/<slug:slug>/', views.tour_details, name='tour_details'),
 	# Template testing urls
