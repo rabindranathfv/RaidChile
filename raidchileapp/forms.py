@@ -33,6 +33,11 @@ class SearchForm(forms.Form):
 		min_value=Decimal(0),
 		max_digits=10,
 		decimal_places=2,
+		widget= forms.NumberInput(
+			attrs={
+				'class': 'w3-input w3-border w3-round'
+			}
+		)
 	)
 	max_price = forms.DecimalField(
 		label='Maximum Price',
@@ -40,6 +45,11 @@ class SearchForm(forms.Form):
 		min_value=Decimal(0),
 		max_digits=10,
 		decimal_places=2,
+		widget= forms.NumberInput(
+			attrs={
+				'class': 'w3-input w3-border w3-round'
+			}
+		)
 	)
 	adult_qty = forms.IntegerField(
 		label='Adults',

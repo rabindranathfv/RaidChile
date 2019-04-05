@@ -26,19 +26,22 @@ def tour_details(request, id, slug):
 def search_all_tours(request):
 	tours = None
 	search_form = SearchForm(request.GET or None)
+	categories = Category.objects.all()
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
 	if request.GET:
 		# Verify querystring parameters integrity.
-		print ("Busqueda con Filtros.")
+		print ("Busqueda con Filtros.", request.GET)
 		# Filter tours
 	else:
 		# Return all the tours, without filtering, not retrieving their description or features.
 		print ("Busqueda SIN Filtros!")
-		tours = Tour.objects.defer('description').all()
+		tours = Tour.objects.defer('description').filter(available=True)
+
 
 	context = {
 		'tours': tours,
+		'categories': categories,
 		'search_form': search_form,
 	}
 	return render(request, "raidchileapp/tour_search.html", context)
@@ -46,7 +49,14 @@ def search_all_tours(request):
 
 def tour_search_by_category(request, category_slug):
 	search_form = SearchForm()
-	context = {'search_form': search_form }
+	categories = Category.objects.all()
+	category = get_object_or_404(Category, slug=category_slug)
+
+	context = {
+		'category': category,
+		'categories': categories,
+		'search_form': search_form,
+	}
 	return render(request, "raidchileapp/tour_search.html", context)
 
 

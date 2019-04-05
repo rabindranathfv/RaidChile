@@ -1,7 +1,7 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
 
-{% block page_title %} {{ category.name }} {% endblock page_title %}
+{% block page_title %}{% if category %} {{ category.name }} {% else %} All Tours {% endif %} {% endblock page_title %}
 
 {% block content %}
 
@@ -21,7 +21,7 @@
 							{{ search_form.search_terms }}
 						</div>
 						<div class="w3-col s3 m3 l2">
-							<button type="submit" for="search-form" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search"></i> <span class="w3-hide-small">Buscar</span></button>
+							<button type="submit" for="search-form" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search"></i> <span class="w3-hide-small">Search</span></button>
 						</div>
 					</div>
 				</div>
