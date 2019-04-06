@@ -119,16 +119,19 @@ class Tour(models.Model):
 	)
 	locations = models.ManyToManyField(
 		Location,
+		blank=True,
 		related_name='tours',
 		related_query_name='tour'
 	)
-	category = models.ManyToManyField(
+	categories = models.ManyToManyField(
 		Category,
+		blank=True,
 		related_name='tours',
 		related_query_name='tour',
 	)
 	features = models.ManyToManyField(
 		Feature,
+		blank=True,
 		related_name='tours',
 		related_query_name='tour'
 	)
@@ -202,6 +205,7 @@ class Tour(models.Model):
 class TourImage(models.Model):
 	tours = models.ManyToManyField(
 		Tour,
+		blank=True,
 		related_name='images',
 		related_query_name='image'
 	)

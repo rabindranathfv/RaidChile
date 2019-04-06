@@ -7,7 +7,7 @@
 
 {# Setting url variables #}
 {% url 'raidchileapp:search_all_tours' as all_url %}
-{% url 'raidchileapp:tour_search_by_category' category.id category.slug as cat_url %}
+{% url 'raidchileapp:tour_search_by_category' category.slug as cat_url %}
 
 <form action="{% if category %}{{ cat_url }}{% else %}{{ all_url }}{% endif %}" method="GET" id="search-form">
 	<!-- Search Bar Section -->

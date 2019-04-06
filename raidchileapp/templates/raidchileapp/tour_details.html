@@ -54,9 +54,15 @@
 						{{ tour.description|linebreaksbr }}
 					</h6>
 
+					<div class="w3-row">
+						<div class="w3-col s12">
+							<h5><strong>Min. passengers per booking:</strong> {{ tour.min_pax_number }} ppl.</h5>
+						</div>
+					</div>
+
 					<h5 class="w3-margin-top"><strong>Categories:</strong></h5>
 					<h4>
-					{% for cat in tour.category.all %}
+					{% for cat in tour.categories.all %}
 						{% if not forloop.last %}
 						<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>,
 						{% else %}
