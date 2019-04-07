@@ -52,7 +52,7 @@ class ContactForm2(forms.ModelForm):
 		}
 
 class ContactForm(forms.Form):
-	name = forms.CharField(
+	full_name = forms.CharField(
 		label='Full name',
 		max_length=100,
 		widget=forms.TextInput(
