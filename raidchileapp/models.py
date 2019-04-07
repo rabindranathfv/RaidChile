@@ -22,6 +22,11 @@ class Category(models.Model):
 		related_query_name='category',
 		on_delete=models.SET_NULL
 	)
+	short_desc = models.TextField(
+		blank=True,
+		max_length=200,
+		verbose_name='short description'
+	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
 		verbose_name='created at'

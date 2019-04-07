@@ -39,7 +39,12 @@ def tour_filter_search(request, queryset, search_form):
 def home(request):
 	contact_form = ContactForm()
 	search_form = SearchForm()
-	context = {'contact_form': contact_form, 'search_form': search_form }
+	categories = Category.objects.all()[:4] # First 4 categories
+	context = {
+		'categories': categories,
+		'contact_form': contact_form,
+		'search_form': search_form
+	}
 	return render(request, "raidchileapp/home.html", context)
 
 

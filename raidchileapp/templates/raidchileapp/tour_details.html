@@ -46,7 +46,7 @@
 							<h5><strong>Type:</strong> {{ tour.get_tour_type_display }}</h5>
 						</div>
 						<div class="w3-half">
-							<h5><strong>Duration:</strong> {{ tour.duration}} Hour{{ tour.duration|pluralize }}</h5>
+							<h5><strong>Duration:</strong> {{ tour.duration }} Hour{{ tour.duration|pluralize }}</h5>
 						</div>
 					</div>
 
@@ -56,18 +56,19 @@
 
 					<div class="w3-row">
 						<div class="w3-col s12">
-							<h5><strong>Min. passengers per booking:</strong> {{ tour.min_pax_number }} ppl.</h5>
+							<h5><strong>Min. passengers per reservation:</strong> {{ tour.min_pax_number }} ppl.</h5>
 						</div>
 					</div>
 
 					<h5 class="w3-margin-top"><strong>Categories:</strong></h5>
 					<h4>
+						<span class="w3-tag w3-blue w3-round">
+							<a  href="{% url 'raidchileapp:search_all_tours' %}">All Tours</a>
+						</span>
 					{% for cat in tour.categories.all %}
-						{% if not forloop.last %}
-						<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>,
-						{% else %}
+					<span class="w3-tag w3-blue w3-round w3-margin-top">
 						<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-						{% endif %}
+					</span>
 					{% endfor %}
 					</h4>
 				</div>

@@ -12,86 +12,29 @@
 	<div class="w3-content home-content">
 
 		<div class="w3-container w3-margin-top" id="tours">
-			<h3>Tours</h3>
+			<h3>Tour Categories</h3>
 			<p>Insertemos acá un slogan interesante que represente los servicios de Chile Raids (In english).</p>
 		</div>
 
-		<!--  Inline Form  -->
-		{% include "raidchileapp/inline_product_search_form.html" %}
-
 		<!-- Product Gallery in Rows -->
-		<!-- First Row -->
 		<div class="w3-row-padding w3-padding-16">
-			<div class="w3-third w3-margin-bottom">
-				<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
-				<div class="w3-container w3-white w3-card-2">
-					<h3>Single Room</h3>
-					<h6 class="w3-opacity">Desde $99</h6>
-					<p>Single bed</p>
-					<p>15m<sup>2</sup></p>
-					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-					<a class="w3-button w3-block w3-black w3-margin-bottom" href="{% url 'raidchileapp:tour_details' %}">Ver detalles</a>
-				</div>
-			</div>
-			<div class="w3-third w3-margin-bottom">
-				<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
-				<div class="w3-container w3-white w3-card-2">
-					<h3>Double Room</h3>
-					<h6 class="w3-opacity">Desde $149</h6>
-					<p>Queen-size bed</p>
-					<p>25m<sup>2</sup></p>
-					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-				</div>
-			</div>
-			<div class="w3-third w3-margin-bottom">
-				<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
-				<div class="w3-container w3-white w3-card-2">
-					<h3>Deluxe Room</h3>
-					<h6 class="w3-opacity">Desde $199</h6>
-					<p>King-size bed</p>
-					<p>40m<sup>2</sup></p>
-					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-				</div>
-			</div>
-		</div>
+			{% for cat in categories %}
+				<div class="w3-half w3-margin-bottom">
+					<img src="{{ cat.image.image.url }}" alt="{{ cat.image.alternative }}" class="full-width-img">
+					<div class="w3-container w3-white w3-card-2">
+						<h3>{{ cat.name }}</h3>
 
-		<!-- Second Row -->
-		<div class="w3-row-padding">
-			<div class="w3-third w3-margin-bottom">
-				<img src="{% static 'img/room_single.jpg' %}" alt="Norway" class="full-width-img">
-				<div class="w3-container w3-white w3-card-2">
-					<h3>Single Room</h3>
-					<h6 class="w3-opacity">Desde $99</h6>
-					<p>Single bed</p>
-					<p>15m<sup>2</sup></p>
-					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
+						<p>{{ cat.short_desc }}</p>
+
+						<h4 class="w3-margin-bottom"><em>{{ cat.tours.count }} Tour{{ cat.tours.count|pluralize }}</em></h4>
+
+						<div class="w3-center">
+							<a class="w3-button w3-black w3-margin-bottom w3-padding-large" href="{% url 'raidchileapp:tour_search_by_category' cat.slug %}">See category</a>
+						</div>
+
+					</div>
 				</div>
-			</div>
-			<div class="w3-third w3-margin-bottom">
-				<img src="{% static 'img/room_double.jpg' %}" alt="Norway" class="full-width-img">
-				<div class="w3-container w3-white w3-card-2">
-					<h3>Double Room</h3>
-					<h6 class="w3-opacity">Desde $149</h6>
-					<p>Queen-size bed</p>
-					<p>25m<sup>2</sup></p>
-					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-				</div>
-			</div>
-			<div class="w3-third w3-margin-bottom">
-				<img src="{% static 'img/room_deluxe.jpg' %}" alt="Norway" class="full-width-img">
-				<div class="w3-container w3-white w3-card-2">
-					<h3>Deluxe Room</h3>
-					<h6 class="w3-opacity">Desde $199</h6>
-					<p>King-size bed</p>
-					<p>40m<sup>2</sup></p>
-					<p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
-					<button class="w3-button w3-block w3-black w3-margin-bottom">Ver detalles</button>
-				</div>
-			</div>
+			{% endfor %}
 		</div>
 
 		<!-- Transport Section (commented out until it is discussed again )-->
@@ -169,7 +112,7 @@
 		</div>
 
 		<div class="w3-container">
-			<h3>Our Tours</h3>
+			<h3>Tours Locations</h3>
 			<h6>You can find a tour in any of these beautiful locations and more:</h6>
 		</div>
 
