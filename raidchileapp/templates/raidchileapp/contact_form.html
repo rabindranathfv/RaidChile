@@ -1,19 +1,16 @@
 <form class="w3-padding-16" action="" method="POST">
 	{% csrf_token %}
 	<div class="w3-row-padding">
-		<div class="w3-half w3-margin-bottom">
+		<div class="w3-col s12 w3-margin-bottom">
 			{{ contact_form.name }}
-		</div>
-		<div class="w3-half w3-margin-bottom">
-			{{ contact_form.email }}
 		</div>
 	</div>
 	<div class="w3-row-padding">
 		<div class="w3-half w3-margin-bottom">
-			{{ contact_form.phone_number }}
+			{{ contact_form.email }}
 		</div>
 		<div class="w3-half w3-margin-bottom">
-			{{ contact_form.people_qty }}
+			{{ contact_form.phone_number }}
 		</div>
 	</div>
 	<div class="w3-row-padding">
@@ -23,7 +20,7 @@
 	</div>
 	<div class="w3-row-padding">
 		<div class="w3-half w3-margin-bottom">
-			<button type="submit" class="w3-button w3-black w3-padding-large"><i class="fa fa-send fa-fw"></i> Enviar Mensaje</button>
+			<button type="submit" class="w3-button w3-black w3-padding-large"><i class="fa fa-send fa-fw"></i> Send Message</button>
 		</div>
 	</div>
 </form>

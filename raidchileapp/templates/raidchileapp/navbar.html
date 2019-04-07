@@ -1,14 +1,14 @@
 <!-- Navigation Bar -->
-<div class="w3-bar w3-white w3-large">
+<div class="w3-bar w3-white w3-large" id="top">
 	<a href="{% url 'raidchileapp:home' %}" class="w3-bar-item w3-button w3-red w3-hover-blue w3-mobile"><i class="fa fa-bus w3-margin-right"></i>Chile Raids</a>
 
 	<a href="{% url 'raidchileapp:home' %}#tours" class="w3-bar-item w3-button w3-mobile">Tours</a>
 
-	<a href="{% url 'raidchileapp:home' %}#transport" class="w3-bar-item w3-button w3-mobile w3-hide-medium">Transporte</a>
-	<a href="{% url 'raidchileapp:home' %}#transport" class="w3-bar-item w3-button w3-mobile w3-hide-small w3-hide-large">Transporte</a>
+	<a href="{% url 'raidchileapp:home' %}#about" class="w3-bar-item w3-button w3-mobile w3-hide-medium">About us</a>
+	<a href="{% url 'raidchileapp:home' %}#about" class="w3-bar-item w3-button w3-mobile w3-hide-small w3-hide-large">About us</a>
 
-	<a href="{% url 'raidchileapp:home' %}#contact" class="w3-bar-item w3-button w3-mobile">Contacto</a>
+	<a href="{% url 'raidchileapp:home' %}#contact" class="w3-bar-item w3-button w3-mobile">Contact</a>
 
-	<a href="{% url 'raidchileapp:tour_search' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-medium">¡Reserva ya!</a>
-	<a href="{% url 'raidchileapp:tour_search' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-small w3-hide-large">¡Reservar!</a>
+	<a href="{% url 'raidchileapp:tour_search' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-medium">Reservations</a>
+	<a href="{% url 'raidchileapp:tour_search' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-small w3-hide-large">Reservations</a>
 </div>

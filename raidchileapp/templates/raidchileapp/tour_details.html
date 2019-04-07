@@ -1,77 +1,125 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
 
-{% block page_title %} Chile Raids | Viña del Mar + Valparaíso {% endblock page_title %}
+{% block page_title %} {{ tour.name }} {% endblock page_title %}
 
 {% block content %}
 
 	<div class="w3-content home-content ">
 		<div class="w3-container">
 			<div class="w3-center">
-				<h2>Viña del Mar + Valparaíso</h2>
+				<h2>{{ tour.name }}</h2>
 			</div>
 
 			<!--  Slideshow of the tour photos  -->
 			<div class="w3-content slideshow-area">
-				<img class="slideshow-slide w3-animate-left full-width-img" src="{% static 'img/room_single.jpg' %}">
-				<img class="slideshow-slide w3-animate-left hidden full-width-img" src="{% static 'img/room_double.jpg' %}">
-				<img class="slideshow-slide w3-animate-left hidden full-width-img" src="{% static 'img/room_deluxe.jpg' %}">
+				{% with gallery=tour.images.all %}
+					{% if gallery %}
+						{% for image in gallery %}
+							<img class="slideshow-slide w3-animate-left {% if not forloop.first %}hidden{% endif %} full-width-img" src="{{ image.image.url }}">
+						{% endfor %}
 
-				<div class="w3-row-padding w3-section">
-					<div class="w3-col s4">
-						<img class="w3-opacity w3-opacity-off w3-hover-opacity-off slide-thumbnail" src="{% static 'img/room_single.jpg' %}">
-					</div>
-					<div class="w3-col s4">
-						<img class="w3-opacity w3-hover-opacity-off slide-thumbnail" src="{% static 'img/room_double.jpg' %}">
-					</div>
-					<div class="w3-col s4">
-						<img class="w3-opacity w3-hover-opacity-off slide-thumbnail" src="{% static 'img/room_deluxe.jpg' %}">
-					</div>
-				</div>
+						<!--  Thumbnail images in rows of 4  -->
+						<div class="w3-row-padding w3-section">
+							{% for image in gallery %}
+								<div class="w3-col s3">
+									<img class="w3-opacity {% if forloop.first %}w3-opacity-off{% endif %} w3-hover-opacity-off slide-thumbnail" src="{{ image.image.url }}">
+								</div>
+							{% endfor %}
+						</div>
+					{% else %}
+						<div class="w3-center w3-padding-64">
+							<h4><em>We're sorry, there are no images available for this tour right now.</em></h4>
+						</div>
+					{% endif %}
+				{% endwith %}
 			</div>
 
-			<!--  Description of Tour  -->
+
 			<div class="w3-row-padding">
+				<!--  Description of Tour  -->
 				<div class="w3-col s12 l6 w3-margin-bottom">
-					<h2>Información</h2>
+					<h2>Information</h2>
 					<hr class="better-hr">
+					<div class="w3-row">
+						<div class="w3-half">
+							<h5><strong>Type:</strong> {{ tour.get_tour_type_display }}</h5>
+						</div>
+						<div class="w3-half">
+							<h5><strong>Duration:</strong> {{ tour.duration }} Hour{{ tour.duration|pluralize }}</h5>
+						</div>
+					</div>
+
 					<h6 class='justify-text'>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-						esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-						cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-						id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+						{{ tour.description|linebreaksbr }}
 					</h6>
-					<h4>Precio: $30.000</h4>
+
+					<div class="w3-row">
+						<div class="w3-col s12">
+							<h5><strong>Min. passengers per reservation:</strong> {{ tour.min_pax_number }} ppl.</h5>
+						</div>
+					</div>
+
+					<h5 class="w3-margin-top"><strong>Categories:</strong></h5>
+					<h4>
+						<span class="w3-tag w3-blue w3-round">
+							<a  href="{% url 'raidchileapp:search_all_tours' %}">All Tours</a>
+						</span>
+					{% for cat in tour.categories.all %}
+					<span class="w3-tag w3-blue w3-round w3-margin-top">
+						<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+					</span>
+					{% endfor %}
+					</h4>
 				</div>
+				<!--  Tour features and categories  -->
 				<div class="w3-col s12 l6 w3-margin-bottom">
-					<h2>Incluye</h2>
+					<h2>Pricing</h2>
 					<hr class="better-hr">
+					<h6>If you book at least two(2) Full-Day and one(1) Half-Day tours, you'll only pay sale prices!</h6>
+					<div class="w3-row">
+						<div class="w3-col s1 w3-container"></div>
+						<div class="w3-col s10">
+							<table class="w3-margin-top w3-table w3-centered w3-hoverable w3-white w3-border w3-bordered">
+								<thead>
+									<tr class="w3-red">
+										<th>Prices in $CLP</th>
+										<th>Adults</th>
+										<th>Children</th>
+									</tr>
+								</thead>
+								<tr>
+									<th>Regular</th>
+									<td>${{ tour.adult_reg_price }}</td>
+									<td>${{ tour.children_reg_price }}</td>
+								</tr>
+								<tr>
+									<th>Sale</th>
+									<td>${{ tour.adult_sale_price }}</td>
+									<td>${{ tour.children_sale_price }}</td>
+								</tr>
+							</table>
+					</div>
+					</div>
+					<h5 class="w3-padding-large"><strong>Price includes:</strong></h5>
 					<div class="w3-row-padding">
-						<div class="w3-half w3-margin-bottom">
-							<i class="fa fa-bus fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Transporte</h5>
-						</div>
-						<div class="w3-half w3-margin-bottom">
-							<i class="fa fa-cutlery fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Comidas</h5>
-						</div>
-						<div class="w3-half w3-margin-bottom">
-							<i class="fa fa-glass fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Bar</h5>
-						</div>
-						<div class="w3-half w3-margin-bottom">
-							<i class="fa fa-bed fa-2x fa-fw"></i><h5 class="w3-show-inline-block">Hospedaje</h5>
-						</div>
+						{% for feature in tour.features.all %}
+							<div class="w3-half w3-margin-bottom">
+								<i class="fa {{ feature.icon }} fa-2x fa-fw"></i><h5 class="w3-show-inline-block">{{ feature.name }}</h5>
+							</div>
+						{% empty %}
+							<div class="w3-center w3-padding-64">
+								<h6><em>We're sorry, there are no features available for this tour right now.</em></h6>
+							</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
 
-			<!-- Contact and Reservarion buttons -->
+			<!--  Reservation mini form -->
 			<div class="w3-row w3-margin-bottom">
 				<div class="w3-right">
-					<a class="w3-button w3-xlarge w3-bold w3-black w3-margin" href="">Contacto</a>
-					<a class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-4 w3-margin" href="">Reservar</a>
+					<a class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin" href="">Book Now</a>
 				</div>
 			</div>
 
@@ -79,8 +127,8 @@
 			<div class="w3-row w3-margin-bottom">
 				<div class="w3-col l1 w3-container"></div> <!-- Offset empty column -->
 				<div class="w3-col l10">
-					<div class="w3-container w3-red">
-						<h3>Comentarios</h3>
+					<div class="w3-container w3-pale-red">
+						<h3>Comments</h3>
 					</div>
 					<div class="w3-container w3-white ">
 						<!-- Sample comment 1 -->

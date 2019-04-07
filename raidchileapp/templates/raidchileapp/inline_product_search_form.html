@@ -1,27 +1,13 @@
 {% if search_form %}
-<form action="" method="GET">
+<form action="{% url 'raidchileapp:search_all_tours' %}" method="GET">
 	<div class="w3-row-padding">
-		<div class="w3-col m4">
-			<label class="w3-hide-medium"><i class="fa fa-search-plus"></i> Términos de Busqueda</label>
-			<label class="w3-hide-large w3-hide-small"><i class="fa fa-search-plus"></i> Busqueda</label>
+		<div class="w3-col s10">
+			<label><i class="fa fa-search-plus"></i> Search Terms</label>
 			{{ search_form.search_terms }}
 		</div>
-		<div class="w3-col m2">
-			<label class="w3-hide-medium"><i class="fa fa-calendar-o "></i> Fecha de Reserva</label>
-			<label class="w3-hide-large w3-hide-small"><i class="fa fa-calendar-o "></i> Fecha</label>
-			{{ search_form.reservation_date }}
-		</div>
-		<div class="w3-col m2">
-			<label><i class="fa fa-male"></i> Adultos</label>
-			{{ search_form.adult_qty }}
-		</div>
-		<div class="w3-col m2">
-			<label><i class="fa fa-child"></i> Niños</label>
-			{{ search_form.kids_qty }}
-		</div>
-		<div class="w3-col m2 w3-center">
+		<div class="w3-col s2 w3-center">
 			<div class="bot-margin-23"></div>
-			<button type="submit" class="w3-button w3-block w3-black"><i class="fa fa-search fa-fw"></i> Buscar</button>
+			<button type="submit" class="w3-button w3-block w3-black"><i class="fa fa-search fa-fw"></i> Search</button>
 		</div>
 	</div>
 </form>
