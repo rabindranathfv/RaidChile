@@ -49,6 +49,10 @@ button.searchbar-btn {
 textarea.no-resize{
 	resize: none;
 }
+
+.pointer-cursor{
+	cursor:pointer
+}
 /*  ==========   Tour Details content Styles   ==========  */
 
 .hidden{

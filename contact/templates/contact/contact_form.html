@@ -1,4 +1,6 @@
-<form class="w3-padding-16" action="" method="POST">
+{% include "contact/messages.html" %}
+
+<form class="w3-padding-16" action="{% url 'contact:form_submit' %}" method="POST">
 	{% csrf_token %}
 	<div class="w3-row-padding">
 		<div class="w3-col s12 w3-margin-bottom">

@@ -30,7 +30,7 @@ class ContactMessage(models.Model):
 	)
 
 	class Meta:
-		ordering = ('created_at',)
+		ordering = ('-created_at',)
 		verbose_name = 'contact message'
 		verbose_name_plural = 'contact messages'
 
