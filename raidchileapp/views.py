@@ -1,8 +1,10 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
+from contact.forms import ContactForm
+
 from .models import Category, Feature, Location, Tour, TourImage
-from .forms import CommentForm, ContactForm, SearchForm
+from .forms import CommentForm, SearchForm
 
 ##################################
 def tour_filter_search(request, queryset, search_form):
