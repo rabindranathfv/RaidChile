@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class ContactMessage(models.Model):
@@ -36,3 +37,8 @@ class ContactMessage(models.Model):
 
 	def __str__(self):
 		return self.full_name + ' - ' + self.created_at.strftime("%d/%m/%Y %I:%M %p")
+
+	def get_admin_url(self):
+		info = (self._meta.app_label, self._meta.model_name)
+		admin_url = reverse('admin:%s_%s_change' % info, args=(self.pk,))
+		return admin_url
