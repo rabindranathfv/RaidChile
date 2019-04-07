@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
-from contact.forms import ContactForm
+from contact.forms import ContactForm2
 
 from .models import Category, Feature, Location, Tour, TourImage
 from .forms import CommentForm, SearchForm
@@ -39,7 +39,7 @@ def tour_filter_search(request, queryset, search_form):
 
 ##################################
 def home(request):
-	contact_form = ContactForm()
+	contact_form = ContactForm2()
 	search_form = SearchForm()
 	categories = Category.objects.all()[:4] # First 4 categories
 	context = {

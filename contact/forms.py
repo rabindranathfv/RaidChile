@@ -4,9 +4,10 @@ from django.core.validators import RegexValidator
 from .models import ContactMessage
 
 class ContactForm2(forms.ModelForm):
-	
+
 	phone_number = forms.CharField(
 		label='Phone',
+		required=False,
 		max_length=100,
 		validators=[RegexValidator(
 			'^(\+*\d+)+$',
@@ -50,6 +51,7 @@ class ContactForm2(forms.ModelForm):
 				}
 			)
 		}
+
 
 class ContactForm(forms.Form):
 	full_name = forms.CharField(

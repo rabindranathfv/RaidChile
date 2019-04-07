@@ -28,3 +28,11 @@ class ContactMessage(models.Model):
 		auto_now=True,
 		verbose_name='updated at'
 	)
+
+	class Meta:
+		ordering = ('created_at',)
+		verbose_name = 'contact message'
+		verbose_name_plural = 'contact messages'
+
+	def __str__(self):
+		return self.full_name + ' - ' + self.created_at.strftime("%d/%m/%Y %I:%M %p")
