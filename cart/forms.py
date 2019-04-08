@@ -3,13 +3,24 @@ from django.utils.translation import ugettext as _
 
 
 class CartAddProductForm(forms.Form):
-	adults_quantity = forms.IntegerField(
+	adult_quantity = forms.IntegerField(
 		label=_('Adults'),
-		min_value=1
+		min_value=1,
+		widget= forms.NumberInput(
+			attrs={
+				'class': 'w3-input w3-border'
+			}
+		)
 	)
 	children_quantity = forms.IntegerField(
 		label=_('Children'),
-		min_value=0
+		initial=0,
+		min_value=0,
+		widget= forms.NumberInput(
+			attrs={
+				'class': 'w3-input w3-border'
+			}
+		)
 	)
 	update = forms.BooleanField(
 		required=False,
