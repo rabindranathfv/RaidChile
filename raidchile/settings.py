@@ -12,6 +12,19 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from decouple import config
 
+from django.contrib.messages import constants as message_constants
+
+# Show debug level messages too
+MESSAGE_LEVEL = message_constants.DEBUG
+
+# Messages class tags. Define the colors according to the thype of message.
+MESSAGE_TAGS = {
+    message_constants.DEBUG: 'w3-light-gray w3-border-black w3-text-dark-gray',
+    message_constants.INFO: 'w3-pale-blue w3-border-blue w3-text-blue',
+    message_constants.SUCCESS: 'w3-pale-green w3-border-green w3-text-green ',
+    message_constants.WARNING: 'w3-sand w3-border-orange w3-text-orange',
+    message_constants.ERROR: 'w3-pale-red w3-border-red w3-text-red',
+}
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -34,6 +47,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'raidchileapp',
+    'contact',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,3 +141,11 @@ STATIC_URL = '/static/'
 # User uploaded media directories and urls
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'tours/')
+
+
+# Email configuration
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')

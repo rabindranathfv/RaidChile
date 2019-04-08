@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-	path('', include('raidchileapp.urls')),
-	path('admin/', admin.site.urls),
+    path('', include('raidchileapp.urls')),
+    path('contact/', include('contact.urls')),
+    path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Development server way of serving media files
