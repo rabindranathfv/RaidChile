@@ -5,7 +5,7 @@ from .models import ContactMessage
 
 class ContactForm(forms.ModelForm):
 
-	phone_number = forms.CharField(
+	phone = forms.CharField(
 		label='Phone',
 		required=False,
 		max_length=100,
