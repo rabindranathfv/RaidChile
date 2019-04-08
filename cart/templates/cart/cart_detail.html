@@ -1,0 +1,86 @@
+{% extends "raidchileapp/base.html" %}
+{% load static %}
+
+{% block page_title %} Your Pending Reservations {% endblock page_title %}
+
+{% block content %}
+
+	<div class="w3-container w3-center">
+		<h2>Your Pending Reservations : {{ cart|length }} Tour{{ cart|length|pluralize }}</h2>
+		<h6>If you book at least two(2) Full-Day and one(1) Half-Day tours, you'll only pay sale prices!</h6>
+	</div>
+	<div class="w3-container w3-padding-64">
+		<table class="w3-margin-top w3-table-all">
+			<thead>
+				<tr class="w3-red">
+					<th>Tour</th>
+					<th>Passengers</th>
+					<th>Remove</th>
+					<th>Pricing</th>
+					<th>SalePricing</th>
+					<th>Total Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in cart %}
+					{% with product=item.product  %}
+					<tr>
+						<!-- Tour name -->
+						<td>{{ product.name }}</td>
+						<!-- Tour passengers quantities form -->
+						<td>
+							<form action="{% url 'cart:cart_add' product.id %}" method="POST">
+								{% csrf_token %}
+								{{ item.update_quantity_form.adult_quantity }}
+								{{ item.update_quantity_form.children_quantity }}
+								{{ item.update_quantity_form.update }}
+								<input type="submit" value="Update" class="w3-btn w3-blue">
+							</form>
+						</td>
+						<!-- Remove tour -->
+						<td>
+							<a href="{% url 'cart:cart_remove' product.id %}">Remove</a>
+						</td>
+						<!-- Tour regular prices -->
+						<td>
+							<div class="w3-row">${{ item.adult_reg_price }}</div>
+							<div class="w3-row">${{ item.children_reg_price }}</div>
+						</td>
+						<!-- Tour sale prices -->
+						<td>
+							<div class="w3-row">${{ item.adult_sale_price }}</div>
+							<div class="w3-row">${{ item.children_sale_price }}</div>
+						</td>
+						<!-- Tour total prices -->
+						<td>
+							{% if cart|length > 2%}
+								${{ item.total_sale_price }}
+							{% else %}
+								${{ item.total_reg_price }}
+							{% endif %}
+						</td>
+					</tr>
+					{% endwith %}
+				{% endfor %}
+				<tr class="w3-red">
+					<td><b>Total</b></td>
+					<td colspan="4"></td>
+					<td colspan="num">
+						{% if cart|length > 2%}
+							<b>${{ cart.get_total_sale_price }}</b>
+						{% else %}
+							<b>${{ cart.get_total_reg_price }}</b>
+						{% endif %}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="w3-row w3-margin-top">
+			<a href="" class="w3-btn w3-large w3-blue w3-right w3-border w3-margin-right">Confirm Reservations</a>
+			<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-btn w3-large w3-white w3-border w3-right w3-margin-right">Search More Tours</a>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block extra_js %}{% endblock extra_js %}

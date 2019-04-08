@@ -152,4 +152,4 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Necessary settings for shopping cart by session
-CART_SESSION_ID = ‘cart’
+CART_SESSION_ID = 'cart'
