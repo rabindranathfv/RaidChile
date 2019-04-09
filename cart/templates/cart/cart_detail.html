@@ -44,24 +44,36 @@
 									</div>
 							</form>
 						</td>
-						<!-- Tour regular prices -->
-						<td class="middle-algn">
+						<!-- Tour  prices -->
+						<td class="middle-algn number-font">
+
 							<div class="w3-cell w3-cell-bottom">
-								<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}: ${{ item.adult_reg_price }}</div>
-								<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}: ${{ item.children_reg_price }}</div>
+								<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
+								{% if not cart.is_sale %}
+									<div class="w3-row">${{ item.adult_reg_price }}</div>
+								{% else %}
+									<div class="w3-row"><del class="w3-text-gray">${{ item.adult_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.adult_sale_price }}</span></div>
+								{% endif %}
+								<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
+								{% if not cart.is_sale %}
+									<div class="w3-row">${{ item.children_reg_price }}</div>
+								{% else %}
+									<div class="w3-row"><del class="w3-text-gray">${{ item.children_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.children_sale_price }}</span></div>
+								{% endif %}
 							</div>
 						</td>
 						<!-- Tour total prices -->
-						<td class="middle-algn">
-							{% if cart|length > 2%}
-								${{ item.total_sale_price }}
+						<td class="middle-algn number-font">
+							{% if not cart.is_sale %}
+								<h6 class="number-font">${{ item.total_reg_price }}</h6>
 							{% else %}
-								${{ item.total_reg_price }}
+								<del class="w3-text-gray">${{ item.total_reg_price }}</del>
+								<h6 class="w3-text-green number-font"><i class="fa fa-fw fa-mail-reply fa-rotate-180"></i>${{ item.total_sale_price }}</h6>
 							{% endif %}
 						</td>
 						<!-- Remove tour -->
 						<td class="middle-algn">
-							<a href="{% url 'cart:cart_remove' product.id %}">Remove</a>
+							<a href="{% url 'cart:cart_remove' product.id %}"><i class="fa fa-fw fa-trash"></i>Remove</a>
 						</td>
 					</tr>
 					{% endwith %}
@@ -72,14 +84,14 @@
 					</td>
 				</tr>
 				{% endfor %}
-				<tr class="w3-red">
-					<td><b>Total</b></td>
+				<tr class="w3-red w3-large">
 					<td colspan="2"></td>
-					<td colspan="num">
-						{% if cart|length > 2%}
-							<b > ${{ cart.get_total_sale_price }}</b>
+					<td style="text-align: right;"><b>Total</b></td>
+					<td class="number-font" colspan="num">
+						{% if cart.is_sale %}
+							 ${{ cart.get_total_sale_price }}
 						{% else %}
-							<b>${{ cart.get_total_reg_price }}</b>
+							${{ cart.get_total_reg_price }}
 						{% endif %}
 					</td>
 					<td colspan="1"></td>

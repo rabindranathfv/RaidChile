@@ -13,6 +13,9 @@ class Cart(object):
 		if not cart:
 			cart = self.session[settings.CART_SESSION_ID] = {}
 		self.cart = cart
+		self.half_days = 0
+		self.full_days = 0
+
 
 	# Method to add a product to the cart
 	# In this case the product will be a tour.
@@ -49,13 +52,22 @@ class Cart(object):
 			del self.cart[product_id]
 			self.save()
 
+
 	# Method to describe how to iterate across all the items in the cart.
 	# Calculating its regular and sale price given the actual adult and children quantities.
 	def __iter__(self):
 		product_ids = self.cart.keys()
 		products = Tour.objects.filter(id__in=product_ids)
+		self.half_days = 0
+		self.full_days = 0
 		for product in products:
 			self.cart[str(product.id)]['product'] = product
+			if product.tour_type == 'HALF':
+				self.half_days += 1
+			elif product.tour_type == 'FULL':
+				self.full_days += 1
+		print ('HALF DAYS: ', self.half_days)
+		print ('FULL DAYS: ', self.full_days)
 
 		for item in self.cart.values():
 			item['adult_reg_price'] = Decimal(item['adult_reg_price'])
@@ -77,6 +89,12 @@ class Cart(object):
 	# Method to calculate the total sale price of the cart items.
 	def get_total_sale_price(self):
 		return sum(Decimal(item['adult_sale_price']) * item['adult_qty'] + Decimal(item['children_sale_price']) * item['children_qty'] for item in self.cart.values())
+
+	# Return whether the current cart contents qualify as a sale
+	def is_sale(self):
+		if (self.full_days > 2) or (self.full_days == 2 and self.half_days > 0):
+			return True
+		return False
 
 	def clear(self):
 		del self.session[settings.CART_SESSION_ID]
