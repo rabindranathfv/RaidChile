@@ -1,0 +1,35 @@
+Thank you for Confirming your Tour Reservations!
+
+Hi, this is an automatic message from Chile Raids.
+Tour Reservation Order #{{ order.id }}
+You have confirmed the following tour reservations:
+
+{% for item in order.items.all %}
+	Tour name: {{ item.product.name }}
+		For {{ item.adult_quantity }} Adult{{ item.adult_quantity|pluralize }}{% if item.children_quantity > 0 %} and {{ item.children_quantity }} Child{{ item.children_quantity|pluralize:'ren' }}{% endif %}.
+
+{% endfor %}
+
+Total: $ {{ order.get_total_cost }} (CLP).
+The planned date for the first tour was: {{ order.trip_date|date:'d/m/Y' }}
+
+You provided the following contact information:
+
+	Full name: {{ order.full_name }}
+	Email:{{ order.email }}
+{% if order.phone %}
+	Phone: {{ order.phone }}
+{% endif %}
+	Message: 
+	{{ order.message }}
+
+
+If you have any questions you can contact us at:
+
+	{{ contact_url }}
+
+If your question is about this message, please provide us with your reservation number in the message.
+
+
+Regards,
+Chile Raids

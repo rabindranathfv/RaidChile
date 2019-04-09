@@ -13,6 +13,7 @@ def form_submit(request):
 	if request.POST :
 		if form.is_valid():
 			contact_msg = form.save()
+			# Get parameters for email template rendering
 			contact_msg_full_admin_url = 'http://' + request.get_host() + contact_msg.get_admin_url()
 			context = {
 				'contact_msg': contact_msg,

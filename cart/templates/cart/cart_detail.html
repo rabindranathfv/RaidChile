@@ -49,20 +49,20 @@
 							</form>
 						</td>
 						<!-- Tour  prices -->
-						<td class="middle-algn number-font">
+						<td class="middle-algn">
 
 							<div class="w3-cell w3-cell-bottom">
 								<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
 								{% if not cart.is_sale %}
-									<div class="w3-row">${{ item.adult_reg_price }}</div>
+									<div class="w3-row number-font">${{ item.adult_reg_price }}</div>
 								{% else %}
-									<div class="w3-row"><del class="w3-text-gray">${{ item.adult_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.adult_sale_price }}</span></div>
+									<div class="w3-row number-font"><del class="w3-text-gray">${{ item.adult_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.adult_sale_price }}</span></div>
 								{% endif %}
 								<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
 								{% if not cart.is_sale %}
-									<div class="w3-row">${{ item.children_reg_price }}</div>
+									<div class="w3-row number-font">${{ item.children_reg_price }}</div>
 								{% else %}
-									<div class="w3-row"><del class="w3-text-gray">${{ item.children_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.children_sale_price }}</span></div>
+									<div class="w3-row number-font"><del class="w3-text-gray">${{ item.children_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.children_sale_price }}</span></div>
 								{% endif %}
 							</div>
 						</td>

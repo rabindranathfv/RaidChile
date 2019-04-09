@@ -1,0 +1,41 @@
+{% autoescape off %}
+
+<h2>Thank you for Confirming your Tour Reservations!</h2>
+
+<p>Hi, this is an automatic message from Chile Raids.</p>
+<h3>Tour Reservation Order #{{ order.id }}</h3>
+<p>You have confirmed the following tour reservations:</p>
+<hr>
+
+{% for item in order.items.all %}
+<h4 style="margin-bottom: 5px;">Tour name: {{ item.product.name }}</h4>
+<p style="padding-left: 20px; margin-top: 5px;">
+	For {{ item.adult_quantity }} Adult{{ item.adult_quantity|pluralize }}{% if item.children_quantity > 0 %} and {{ item.children_quantity }} Child{{ item.children_quantity|pluralize:'ren' }}{% endif %}.
+</p>
+<hr>
+{% endfor %}
+
+<h3>Total: <strong>$ {{ order.get_total_cost }} (CLP).</strong></h3>
+<p> The planned date for the first tour was: <strong style="letter-spacing: 1px;">{{ order.trip_date|date:'d/m/Y' }}</strong></p> 
+
+<p>You provided the following contact information:</p>
+
+<p><strong>Full name:</strong> {{ order.full_name }}</p>
+<p><strong>Email:</strong> {{ order.email }}</p>
+{% if order.phone %}
+	<p><strong>Phone:</strong> {{ order.phone }}</p>
+{% endif %}
+<p><strong>Message:</strong> {{ order.message|linebreaksbr }}</p>
+
+<p>
+	If you have any questions you can contact us at:<br>
+	<br>
+	<a href="{{ contact_url }}" style="padding-left: 15px; font-size: 16px">{{ contact_url }}</a><br>
+	<br>
+	If your question is about this message, please provide us with your reservation number in the message.
+</p>
+<br>
+
+Regards,<br>
+<h4>Chile Raids</h4><br>
+{% endautoescape %}
