@@ -54,12 +54,6 @@
 						{{ tour.description|linebreaksbr }}
 					</h6>
 
-					<div class="w3-row">
-						<div class="w3-col s12">
-							<h5><strong>Min. passengers per reservation:</strong> {{ tour.min_pax_number }} ppl.</h5>
-						</div>
-					</div>
-
 					<h5 class="w3-margin-top"><strong>Categories:</strong></h5>
 					<h4>
 						<span class="w3-tag w3-blue w3-round">
@@ -90,13 +84,13 @@
 								</thead>
 								<tr>
 									<th>Regular</th>
-									<td>${{ tour.adult_reg_price }}</td>
-									<td>${{ tour.children_reg_price }}</td>
+									<td class="number-font">${{ tour.adult_reg_price }}</td>
+									<td class="number-font">${{ tour.children_reg_price }}</td>
 								</tr>
 								<tr>
 									<th>Sale</th>
-									<td>${{ tour.adult_sale_price }}</td>
-									<td>${{ tour.children_sale_price }}</td>
+									<td class="number-font">${{ tour.adult_sale_price }}</td>
+									<td class="number-font">${{ tour.children_sale_price }}</td>
 								</tr>
 							</table>
 					</div>
@@ -117,9 +111,32 @@
 			</div>
 
 			<!--  Reservation mini form -->
+			<div class="w3-row">
+				<div class="w3-col l6 w3-container"></div>
+				<div class="w3-col l6 w3-padding">
+					<h5><strong>Min. passengers per reservation:</strong> {{ tour.min_pax_number }} ppl.</h5>
+				</div>
+			</div>
 			<div class="w3-row w3-margin-bottom">
-				<div class="w3-right">
-					<a class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin" href="">Book Now</a>
+				<div class="w3-col l6 w3-container"></div>
+				<div class="w3-col l6 w3-container">
+					<form action="{% url 'cart:cart_add' tour.id %}" method="POST">
+						{% csrf_token %}
+						{{ cart_product_form.update }}
+						<div class="w3-row">
+							<div class="w3-third w3-padding-small">
+								{{ cart_product_form.adult_quantity.label }}
+								{{ cart_product_form.adult_quantity }}
+							</div>
+							<div class="w3-third w3-padding-small">
+								{{ cart_product_form.children_quantity.label }}
+								{{ cart_product_form.children_quantity }}
+							</div>
+							<div class="w3-third w3-center">
+								<button type="submit" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin">Reserve Now</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 

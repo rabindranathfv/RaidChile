@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
+from cart.forms import CartAddProductForm
 from contact.forms import ContactForm
 
 from .models import Category, Feature, Location, Tour, TourImage
@@ -54,10 +55,17 @@ def home(request):
 
 def tour_details(request, id, slug):
 	tour = get_object_or_404(Tour, id=id, slug=slug, available=True)
+	# Initialize the cart_add_ Product form with the minimun number of passengers
+	cart_product_form = CartAddProductForm(
+		initial={
+			'adult_quantity': tour.min_pax_number,
+		}
+	)
 	comment_form = CommentForm()
 	context = {
 		'tour': tour,
 		'comment_form': comment_form,
+		'cart_product_form' : cart_product_form,
 	}
 	return render(request, "raidchileapp/tour_details.html", context)
 
@@ -84,16 +92,10 @@ def tour_search_by_category(request, category_slug):
 	categories = Category.objects.all()
 	category = get_object_or_404(Category, slug=category_slug)
 	tours = Tour.objects.filter(available=True, categories__in=[category.id])
-	print ("HOLA!!")
-	print (tours)
-	print (category, category.id)
+
 	# If there are querystring parameters present in the url, proceed to filter tours.
 	if request.GET:
 		tours = tour_filter_search(request, tours, search_form)
-
-	print ("HOLA!!")
-	print (tours)
-	print (category)
 
 	context = {
 		'tours': tours,

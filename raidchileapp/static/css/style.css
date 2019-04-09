@@ -96,3 +96,17 @@ ul#id_locations{
 	list-style-type: none;
 	padding-left: 0px;
 }
+
+/*  ==========   Cart Details Styles   ==========  */
+
+.middle-algn{
+	vertical-align: middle !important;
+}
+
+.pax-cell{
+	width: 250px;
+}
+
+.number-font{
+	font-family: serif !important;
+}

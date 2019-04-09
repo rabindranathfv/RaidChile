@@ -52,7 +52,7 @@
 							<!-- Tour title -->
 							<h4>{{ tour.name }}</h4>
 							<!-- Tour adult sale prices -->
-							<h6 class="w3-opacity">From ${{ tour.adult_sale_price }}</h6>
+							<h6 class="w3-opacity">From <span class="number-font">${{ tour.adult_sale_price }}</span></h6>
 							<!-- Features Icons -->
 							<p class="w3-large">
 								{% for feature in tour.features.all %}
