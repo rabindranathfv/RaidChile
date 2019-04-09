@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'raidchileapp',
     'contact',
     'cart',
-    'orders'
+    'orders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
