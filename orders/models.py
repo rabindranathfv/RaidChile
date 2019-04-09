@@ -45,10 +45,16 @@ class Order(models.Model):
 	def __str__(self):
 		return 'Reservation Order {}'.format(self.id)
 
+	def is_sale(self):
+		return True
+		# half_days = self.items.filter( product__tour_type='HALF').count()
+		# full_days = self.items.filter( product__tour_type='FULL').count()
+		# if (full_days > 2) or (full_days == 2 and half_days > 0):
+		# 	return True
+		# return False
+
 	def get_total_cost(self):
-		half_days = self.items.filter( product__tour_type='HALF').count()
-		full_days = self.items.filter( product__tour_type='FULL').count()
-		if (full_days > 2) or (full_days == 2 and half_days > 0):
+		if self.is_sale:
 			# return sale price
 			return sum(item.get_sale_cost() for item in self.items.all())
 		# return regular price
