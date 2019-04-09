@@ -9,6 +9,6 @@
 
 	<a href="{% url 'raidchileapp:home' %}#contact" class="w3-bar-item w3-button w3-mobile">Contact</a>
 
-	<a href="{% url 'cart:cart_detail' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-medium">Reservations</a>
-	<a href="{% url 'cart:cart_detail' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-small w3-hide-large">Reservations</a>
+	<a href="{% url 'cart:cart_detail' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-medium">Reservations ({{ cart|length }})</a>
+	<a href="{% url 'cart:cart_detail' %}" class="w3-bar-item w3-button w3-right w3-pale-red w3-mobile w3-hide-small w3-hide-large">Reservations ({{ cart|length }})</a>
 </div>
