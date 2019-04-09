@@ -110,3 +110,7 @@ ul#id_locations{
 .number-font{
 	font-family: serif !important;
 }
+
+.disabled-pointer{
+	cursor: not-allowed;
+}

@@ -4,5 +4,6 @@ from . import views
 app_name = 'orders'
 
 urlpatterns = [
-	url(r'^confirm/$', views.order_create, name='order_create')
+	url(r'^confirm/$', views.order_create, name='order_create'),
+	url(r'^confirm/success/$', views.order_create_success, name='order_create_success')
 ]

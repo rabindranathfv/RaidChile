@@ -11,7 +11,25 @@
 	<div class="w3-container w3-padding-32">
 		<div class="w3-content w3-card-2 w3-white">
 			<!-- Contact Information  -->
+			{% if form.errors %}
+				<div class="w3-padding">
+					{% for field in form %}
+						{% for error in field.errors %}
+							<div class="w3-panel w3-round w3-border w3-pale-red w3-border-red w3-text-red w3-display-container w3-animate-left" role="alert">
+								<span onclick = "this.parentElement.style.display='none'" class="w3-padding close-btn pointer-cursor w3-xlarge w3-display-right" aria-label="Close">
+									&times;
+								</span>
+								<p>{{ error|escape }}</p>
+							</div>
+							<div class="alert alert-danger">
+							<strong></strong>
+							</div>
+						{% endfor %}
+					{% endfor %}
+				</div>
+			{% endif %}
 			<form class="w3-padding-16" action="{% url 'orders:order_create' %}" method="POST">
+
 				{% csrf_token %}
 				<div class="w3-row-padding">
 					<div class="w3-half w3-margin-bottom">
@@ -35,8 +53,8 @@
 					</div>
 				</div>
 				<div class="w3-row-padding">
-					<div class="w3-half w3-margin-bottom">
-						<button type="submit" class="w3-button w3-black w3-padding-large"><i class="fa fa-send fa-fw"></i> Confirm</button>
+					<div class="w3-rest w3-padding-small w3-margin-bottom">
+						<button type="submit" class="w3-button w3-black w3-padding-large w3-right"><i class="fa fa-send fa-fw"></i> Confirm</button>
 					</div>
 				</div>
 			</form>

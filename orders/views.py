@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from cart.cart import Cart
 
@@ -8,8 +8,9 @@ from .forms import OrderCreateForm
 # Create an reservation order to persist the user confirmed reservations into the database
 def order_create(request):
 	cart = Cart(request)
+	form = OrderCreateForm(request.POST or None)
+
 	if request.method == 'POST':
-		form = OrderCreateForm(request.POST)
 		if form.is_valid():
 			print ('FORM IS VALID')
 			order = form.save()
@@ -26,7 +27,11 @@ def order_create(request):
 					children_quantity=item['children_qty']
 				)
 			cart.clear()
-		return render(request, 'orders/order_create_success.html', {'order': order})
-	else:
-		form = OrderCreateForm()
+			# Send email to the reserver's email address
+			return redirect('orders:order_create_success')
+
 	return render(request, 'orders/order_create.html', {'form': form})
+
+
+def order_create_success(request):
+	return render(request, 'orders/order_create_success.html')
