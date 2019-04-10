@@ -34,7 +34,7 @@ def order_create(request):
 				)
 			cart.clear()
 			# Get parameters for email template rendering
-			contact_url = 'http://' + request.get_host() + reverse('raidchileapp:home') + "#contact"
+			contact_url = self.request.scheme + '://' + request.get_host() + reverse('raidchileapp:home') + "#contact"
 			context = {
 				'order': order,
 				'contact_url': contact_url,

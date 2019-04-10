@@ -240,7 +240,7 @@ class TourImage(models.Model):
 		max_length=150,
 		db_index=True,
 		verbose_name='alternative text',
-		help_text='Description of the image.'
+		help_text='Image title.'
 	)
 	image = models.ImageField(
 		upload_to="tours_images/%Y/%m/%d",

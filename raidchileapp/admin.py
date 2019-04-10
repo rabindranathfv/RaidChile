@@ -47,8 +47,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 	# Method to display icon image tag inside django admin
 	def image_tag(self, obj):
-		img_full_url = 'http://' + str(self.request.get_host()) + obj.image.image.url
-		html_img = '<img src="%s" style="width: 60%%;" />'% ( img_full_url )
+		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.image.image.url
+		html_img = '<img src="%s" style="max-width: 100%%; max-height: 400px" />'% ( img_full_url )
 		return mark_safe(html_img)
 
 admin.site.register(Category, CategoryAdmin)
@@ -122,6 +122,27 @@ admin.site.register(Location, LocationAdmin)
 
 class GalleryInline(admin.TabularInline):
 	model = TourImage.tours.through
+	extra = 0
+	verbose_name = 'Tour image'
+	verbose_name_plural = 'Tour images'
+	fields = [
+		'tourimage',
+		'image_thumbnail',
+	]
+	readonly_fields = ['image_thumbnail',]
+
+	def get_queryset(self, request):
+		qs = super(GalleryInline, self).get_queryset(request)
+		self.request = request
+		return qs
+
+	# Method to display icon image tag inside django admin
+	def image_thumbnail(self, obj):
+		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.tourimage.image.url
+		html_img = '<img src="%s" style="max-height: 200px" />'% ( img_full_url )
+		return mark_safe(html_img)
+
+
 
 
 class TourAdmin(admin.ModelAdmin):
@@ -135,13 +156,50 @@ class TourAdmin(admin.ModelAdmin):
 		'updated_at',
 	]
 	list_editable = ['available']
-	#fields
+	fields = [
+		(
+			'updated_at',
+			'created_at'
+		),
+		'available',
+		(
+			'name',
+			'slug'
+		),
+		'locations',
+		'categories',
+		'features',
+		(
+			'tour_type',
+			'duration',
+			'min_pax_number'
+		),
+		(
+			'adult_reg_price',
+			'children_reg_price'
+		),
+		(
+			'adult_sale_price',
+			'children_sale_price'
+		),
+		'description',
+	]
 	search_fields = [
 		'name',
 		'categories__name',
 	]
+	readonly_fields = [
+		'created_at',
+		'updated_at',
+	]
+	autocomplete_fields = [
+		'locations',
+		'categories',
+		'features',
+	]
 	prepopulated_fields = {'slug': ('name',)}
 	inlines = [GalleryInline]
+
 
 admin.site.register(Tour, TourAdmin)
 
@@ -155,7 +213,36 @@ class TourImageAdmin(admin.ModelAdmin):
 		'alternative',
 		'updated_at',
 	]
-	inlines = [GalleryInline]
-	exclude = ('tours',)
+	fields = [
+		(
+			'updated_at',
+			'created_at'
+		),
+		(
+			'image',
+			'alternative',
+		),
+		'image_tag',
+		'tours',
+	]
+	search_fields = ['alternative', 'tours__name']
+	readonly_fields = [
+		'created_at',
+		'updated_at',
+		'image_tag',
+	]
+	autocomplete_fields = ['tours',]
+
+	def get_queryset(self, request):
+		qs = super(TourImageAdmin, self).get_queryset(request)
+		self.request = request
+		return qs
+
+	# Method to display icon image tag inside django admin
+	def image_tag(self, obj):
+		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.image.url
+		html_img = '<img src="%s" style="max-width: 100%%; max-height: 400px" />'% ( img_full_url )
+		return mark_safe(html_img)
+
 
 admin.site.register(TourImage, TourImageAdmin)
