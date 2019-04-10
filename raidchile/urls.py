@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('raidchileapp.urls')),
     path('contact/', include('contact.urls')),
     path('cart/', include('cart.urls')),
+    path('reservations/', include('orders.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Development server way of serving media files

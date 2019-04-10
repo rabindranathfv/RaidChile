@@ -1,5 +1,8 @@
+from decimal import Decimal
+
 from django.db import models
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 # Create your models here.
 # Vertical distribution is for better 'git diff' readability
@@ -26,6 +29,16 @@ class Category(models.Model):
 		blank=True,
 		max_length=200,
 		verbose_name='short description'
+	)
+	combo = models.BooleanField(
+		default=False,
+		verbose_name='Is it tour combo?'
+	)
+	combo_discount = models.DecimalField(
+		default = Decimal(0),
+		max_digits=10,
+		decimal_places=2,
+		verbose_name='combo discount'
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
@@ -76,6 +89,15 @@ class Feature(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	# Method to display icon image tag inside django admin
+	def icon_image(self):
+		icon_class= 'fa-eye'
+		if self.icon.strip().startswith('fa'):
+			icon_class = self.icon.strip()
+		return mark_safe('<i class="fa %s fa-3x"></i>' % (icon_class))
+
+	icon_image.short_description = 'Icon image'
 
 
 
@@ -218,7 +240,7 @@ class TourImage(models.Model):
 		max_length=150,
 		db_index=True,
 		verbose_name='alternative text',
-		help_text='Description of the image.'
+		help_text='Image title.'
 	)
 	image = models.ImageField(
 		upload_to="tours_images/%Y/%m/%d",
