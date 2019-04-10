@@ -42,7 +42,7 @@ def tour_filter_search(request, queryset, search_form):
 def home(request):
 	contact_form = ContactForm(request.POST or None)
 	search_form = SearchForm()
-	categories = Category.objects.filter(available=True)[:4] # First 4 categories
+	categories = Category.objects.filter(available=True, combo=True)[:4] # First 4 categories
 
 	context = {
 		'categories': categories,
