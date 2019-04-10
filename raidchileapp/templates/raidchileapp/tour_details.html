@@ -77,20 +77,20 @@
 							<table class="w3-margin-top w3-table w3-centered w3-hoverable w3-white w3-border w3-bordered">
 								<thead>
 									<tr class="w3-red">
-										<th>Prices in $CLP</th>
+										<th>Prices</th>
 										<th>Adults</th>
 										<th>Children</th>
 									</tr>
 								</thead>
 								<tr>
 									<th>Regular</th>
-									<td class="number-font">${{ tour.adult_reg_price }}</td>
-									<td class="number-font">${{ tour.children_reg_price }}</td>
+									<td>CLP<span class="number-font"> {{ tour.adult_reg_price }}</span></td>
+									<td>CLP<span class="number-font"> {{ tour.children_reg_price }}</span></td>
 								</tr>
 								<tr>
 									<th>Sale</th>
-									<td class="number-font">${{ tour.adult_sale_price }}</td>
-									<td class="number-font">${{ tour.children_sale_price }}</td>
+									<td>CLP<span class="number-font"> {{ tour.adult_sale_price }}</span></td>
+									<td>CLP<span class="number-font"> {{ tour.children_sale_price }}</span></td>
 								</tr>
 							</table>
 					</div>

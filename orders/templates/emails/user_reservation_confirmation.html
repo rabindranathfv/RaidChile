@@ -15,7 +15,7 @@
 <hr>
 {% endfor %}
 
-<h3>Total: <strong>$ {{ order.get_total_cost }} (CLP).</strong></h3>
+<h3>Total: <strong>CLP {{ order.get_total_cost }}.</strong></h3>
 <p> The planned date for the first tour was: <strong style="letter-spacing: 1px;">{{ order.trip_date|date:'d/m/Y' }}</strong></p> 
 
 <p>You provided the following contact information:</p>

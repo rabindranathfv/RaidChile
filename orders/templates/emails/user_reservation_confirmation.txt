@@ -10,7 +10,7 @@ You have confirmed the following tour reservations:
 
 {% endfor %}
 
-Total: $ {{ order.get_total_cost }} (CLP).
+Total: CLP {{ order.get_total_cost }}.
 The planned date for the first tour was: {{ order.trip_date|date:'d/m/Y' }}
 
 You provided the following contact information:

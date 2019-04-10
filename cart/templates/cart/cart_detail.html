@@ -54,25 +54,25 @@
 							<div class="w3-cell w3-cell-bottom">
 								<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
 								{% if not cart.is_sale %}
-									<div class="w3-row number-font">${{ item.adult_reg_price }}</div>
+									<div class="w3-row number-font">CLP {{ item.adult_reg_price }}</div>
 								{% else %}
-									<div class="w3-row number-font"><del class="w3-text-gray">${{ item.adult_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.adult_sale_price }}</span></div>
+									<div class="w3-row number-font"><del class="w3-text-gray">CLP {{ item.adult_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">CLP {{ item.adult_sale_price }}</span></div>
 								{% endif %}
 								<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
 								{% if not cart.is_sale %}
-									<div class="w3-row number-font">${{ item.children_reg_price }}</div>
+									<div class="w3-row number-font">CLP {{ item.children_reg_price }}</div>
 								{% else %}
-									<div class="w3-row number-font"><del class="w3-text-gray">${{ item.children_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.children_sale_price }}</span></div>
+									<div class="w3-row number-font"><del class="w3-text-gray">CLP {{ item.children_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">CLP {{ item.children_sale_price }}</span></div>
 								{% endif %}
 							</div>
 						</td>
 						<!-- Tour total prices -->
 						<td class="middle-algn number-font">
 							{% if not cart.is_sale %}
-								<h6 class="number-font">${{ item.total_reg_price }}</h6>
+								<h6 class="number-font">CLP {{ item.total_reg_price }}</h6>
 							{% else %}
-								<del class="w3-text-gray">${{ item.total_reg_price }}</del>
-								<h6 class="w3-text-green number-font"><i class="fa fa-fw fa-mail-reply fa-rotate-180"></i>${{ item.total_sale_price }}</h6>
+								<del class="w3-text-gray">CLP {{ item.total_reg_price }}</del>
+								<h6 class="w3-text-green number-font"><i class="fa fa-fw fa-mail-reply fa-rotate-180"></i>CLP {{ item.total_sale_price }}</h6>
 							{% endif %}
 						</td>
 						<!-- Remove tour -->
@@ -93,9 +93,9 @@
 					<td style="text-align: right;"><b>Total</b></td>
 					<td class="number-font" colspan="num">
 						{% if cart.is_sale %}
-							 ${{ cart.get_total_sale_price }}
+							 CLP {{ cart.get_total_sale_price }}
 						{% else %}
-							${{ cart.get_total_reg_price }}
+							CLP {{ cart.get_total_reg_price }}
 						{% endif %}
 					</td>
 					<td colspan="1"></td>

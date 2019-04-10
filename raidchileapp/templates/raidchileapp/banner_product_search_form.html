@@ -2,11 +2,11 @@
 <form action="{% url 'raidchileapp:search_all_tours' %}" method="GET">
 	<div class="w3-row-padding" style="margin:8px -16px;">
 		<div class="w3-half w3-margin-bottom">
-			<label><i class="fa fa-money"></i><i class="fa fa-level-up fa-fw"></i> Min. Price ($CLP) </label>
+			<label><i class="fa fa-money"></i><i class="fa fa-level-up fa-fw"></i> Min. Price (CLP) </label>
 			{{ search_form.min_price }}
 		</div>
 		<div class="w3-half">
-			<label><i class="fa fa-money"></i><i class="fa fa-level-down fa-fw"></i> Max. Price ($CLP)</label>
+			<label><i class="fa fa-money"></i><i class="fa fa-level-down fa-fw"></i> Max. Price (CLP)</label>
 			{{ search_form.max_price }}
 		</div>
 	</div>

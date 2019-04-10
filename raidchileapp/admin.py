@@ -10,21 +10,25 @@ class CategoryAdmin(admin.ModelAdmin):
 		'name',
 		'slug',
 		'combo',
+		'available',
 		'updated_at',
 	]
 	list_filter = ['updated_at',]
+	list_editable = ['available',]
 	fields = [
 		(
 			'updated_at',
 			'created_at'
 		),
+		'available',
 		(
 			'name',
 			'slug'
 		),
 		(
 			'combo_discount',
-			'combo'
+			'combo',
+
 		),
 		'short_desc',
 		'image',

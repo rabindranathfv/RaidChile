@@ -42,7 +42,7 @@ def tour_filter_search(request, queryset, search_form):
 def home(request):
 	contact_form = ContactForm(request.POST or None)
 	search_form = SearchForm()
-	categories = Category.objects.all()[:4] # First 4 categories
+	categories = Category.objects.filter(available=True)[:4] # First 4 categories
 
 	context = {
 		'categories': categories,
@@ -72,7 +72,8 @@ def tour_details(request, id, slug):
 
 def search_all_tours(request):
 	search_form = SearchForm(request.GET or None)
-	categories = Category.objects.all()
+	categories = Category.objects.filter(combo=False, available=True)
+	combos = Category.objects.filter(combo=True, available=True)
 	tours = Tour.objects.filter(available=True)
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
@@ -89,8 +90,8 @@ def search_all_tours(request):
 
 def tour_search_by_category(request, category_slug):
 	search_form = SearchForm(request.GET or None)
-	categories = Category.objects.all()
-	category = get_object_or_404(Category, slug=category_slug)
+	categories = Category.objects.filter(available=True)
+	category = get_object_or_404(Category, slug=category_slug, available=True)
 	tours = Tour.objects.filter(available=True, categories__in=[category.id])
 
 	# If there are querystring parameters present in the url, proceed to filter tours.

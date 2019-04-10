@@ -56,7 +56,7 @@ class Order(models.Model):
 	# Return formated data for django admin.
 	def total(self):
 		result = self.get_total_cost()
-		return mark_safe('<span style="font-size: 20px">$ {:,.2f}</span>'.format(result))
+		return mark_safe('<span style="font-size: 20px">CLP {:,.2f}</span>'.format(result))
 
 	def get_total_cost(self, sale=False):
 		if sale: #self.is_sale()
@@ -115,7 +115,7 @@ class OrderItem(models.Model):
 	def total_price(self):
 		print ('Calculating total price of: ', self) ## WITHOUT THIS LINE THE OBJECT ISN'T QUERIED AND AN ERROR OCCURS
 		result = self.get_reg_cost()
-		return mark_safe('<span style="font-size: 14px">$ {:,.2f}</span>'.format(result))
+		return mark_safe('<span style="font-size: 14px">CLP {:,.2f}</span>'.format(result))
 
 	def get_reg_cost(self):
 		return self.adult_reg_price * self.adult_quantity + self.children_reg_price * self.children_quantity
