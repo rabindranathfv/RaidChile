@@ -58,6 +58,11 @@ class OrderAdmin(admin.ModelAdmin):
 			'paid'
 		),
 	]
+	search_fields = [
+		'full_name',
+		'email',
+		'id',
+	]
 	readonly_fields = [
 		'created_at',
 		'updated_at',

@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -27,6 +29,16 @@ class Category(models.Model):
 		blank=True,
 		max_length=200,
 		verbose_name='short description'
+	)
+	combo = models.BooleanField(
+		default=False,
+		verbose_name='Is it tour combo?'
+	)
+	combo_discount = models.DecimalField(
+		default = Decimal(0),
+		max_digits=10,
+		decimal_places=2,
+		verbose_name='combo discount'
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
@@ -78,6 +90,7 @@ class Feature(models.Model):
 	def __str__(self):
 		return self.name
 
+	# Method to display icon image tag inside django admin
 	def icon_image(self):
 		icon_class= 'fa-eye'
 		if self.icon.strip().startswith('fa'):

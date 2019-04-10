@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
+
 from .models import Category, Feature, Location, Tour, TourImage
 
 # Register your models here.
@@ -7,15 +9,47 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_display = [
 		'name',
 		'slug',
+		'combo',
 		'updated_at',
 	]
-	list_filter = [
-		'name',
+	list_filter = ['updated_at',]
+	fields = [
+		(
+			'updated_at',
+			'created_at'
+		),
+		(
+			'name',
+			'slug'
+		),
+		(
+			'combo_discount',
+			'combo'
+		),
+		'short_desc',
+		'image',
+		'image_tag',
+	]
+	search_fields = ['name']
+	readonly_fields = [
+		'created_at',
 		'updated_at',
+		'image_tag',
 	]
 	prepopulated_fields = {
 		'slug': ('name',),
 	}
+
+	def get_queryset(self, request):
+		qs = super(CategoryAdmin, self).get_queryset(request)
+		self.request = request
+		return qs
+
+	# Method to display icon image tag inside django admin
+	def image_tag(self, obj):
+		img_full_url = 'http://' + str(self.request.get_host()) + obj.image.image.url
+		html_img = '<img src="%s" style="width: 60%%;" />'% ( img_full_url )
+		return mark_safe(html_img)
 
 admin.site.register(Category, CategoryAdmin)
 
