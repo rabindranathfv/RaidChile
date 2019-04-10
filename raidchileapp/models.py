@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 # Create your models here.
 # Vertical distribution is for better 'git diff' readability
@@ -76,6 +77,14 @@ class Feature(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def icon_image(self):
+		icon_class= 'fa-eye'
+		if self.icon.strip().startswith('fa'):
+			icon_class = self.icon.strip()
+		return mark_safe('<i class="fa %s fa-3x"></i>' % (icon_class))
+
+	icon_image.short_description = 'Icon image'
 
 
 

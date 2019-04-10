@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.safestring import mark_safe
 
 from raidchileapp.models import Tour
 
@@ -28,7 +29,7 @@ class Order(models.Model):
 	)
 	paid = models.BooleanField(
 		default=False,
-		verbose_name='is this order paid for?'
+		verbose_name='paid?'
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
@@ -46,14 +47,19 @@ class Order(models.Model):
 		return 'Reservation Order {}'.format(self.id)
 
 	def is_sale(self):
-		half_days = self.items.filter( product__tour_type='HALF').count()
-		full_days = self.items.filter( product__tour_type='FULL').count()
-		if (full_days > 2) or (full_days == 2 and half_days > 0):
-			return True
+		# half_days = self.items.filter( product__tour_type='HALF').count()
+		# full_days = self.items.filter( product__tour_type='FULL').count()
+		# if (full_days > 2) or (full_days == 2 and half_days > 0):
+		# 	return True
 		return False
 
-	def get_total_cost(self):
-		if self.is_sale():
+	# Return formated data for django admin.
+	def total(self):
+		result = self.get_total_cost()
+		return mark_safe('<span style="font-size: 20px">$ {:,.2f}</span>'.format(result))
+
+	def get_total_cost(self, sale=False):
+		if sale: #self.is_sale()
 			# return sale price
 			return sum(item.get_sale_cost() for item in self.items.all())
 		# return regular price
@@ -104,6 +110,12 @@ class OrderItem(models.Model):
 
 	def __str__(self):
 		return 'Order Nº{} - Item:{}'.format(self.order.id, self.product.name)
+
+	# Return formated data for django admin.
+	def total_price(self):
+		print ('Calculating total price of: ', self) ## WITHOUT THIS LINE THE OBJECT ISN'T QUERIED AND AN ERROR OCCURS
+		result = self.get_reg_cost()
+		return mark_safe('<span style="font-size: 14px">$ {:,.2f}</span>'.format(result))
 
 	def get_reg_cost(self):
 		return self.adult_reg_price * self.adult_quantity + self.children_reg_price * self.children_quantity
