@@ -1,8 +1,23 @@
 <div class="w3-container w3-border-right w3-hide-small w3-animate-top" id="filters-sidebar">
-	<div class="w3-center">
-		<button type="submit" for="search-form" class="w3-button w3-block w3-dark-gray w3-margin-top w3-hide-small"><i class="fa fa-sliders fa-fw"></i> Apply </button>
-	</div>
 	<!-- Filters start from here -->
+	{% if combos.exists %}
+		<!-- Tour Combos -->
+	<div class="w3-border-bottom">
+		<h5>Tour Combos</h5>
+		<div class="w3-row w3-margin-bottom">
+			{% for combo in combos %}
+				{% if combo != category %}
+					<a class="w3-text-blue" href="{{ combo.get_absolute_url }}">{{ combo.name }}</a><br>
+				{% else %}
+					<span class="w3-text-blue"><strong>{{ combo.name }}</strong></span><br>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+
+	{% if categories.exists %}
+	<!-- Categories -->
 	<div class="w3-border-bottom">
 		<h5>Categories</h5>
 		<div class="w3-row w3-margin-bottom">
@@ -20,7 +35,9 @@
 			{% endfor %}
 		</div>
 	</div>
+	{% endif %}
 
+	{% if not category.combo %}
 	<div class="w3-border-bottom">
 		<h5>Locations</h5>
 		{{ search_form.locations }}
@@ -41,6 +58,7 @@
 			</div>
 		</div>
 	</div>
+
 	<!--
 	<div class="w3-border-bottom">
 		<h5>Passengers</h5>
@@ -57,11 +75,11 @@
 		</div>
 	</div>
 	-->
+	<div class="w3-center">
+		<button type="submit" for="search-form" class="w3-button w3-block w3-dark-gray w3-margin-top"><i class="fa fa-sliders fa-fw"></i> Apply </button>
+	</div>
 
-
-
-	<button type="submit" for="search-form" class="w3-button w3-block w3-dark-gray w3-margin-top w3-hide-medium w3-hide-large"><i class="fa fa-sliders fa-fw"></i> Apply </button>
-
+	{% endif %}
 	<div class="w3-container w3-padding-64 w3-hide-small"></div> <!-- Fill space so footer won't cut sidebar -->
 </div>
 <div class="w3-center">

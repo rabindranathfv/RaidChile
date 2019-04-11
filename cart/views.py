@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.views.decorators.http import require_POST
 
 from raidchileapp.models import Tour
@@ -20,6 +20,22 @@ def cart_add(request, product_id):
 			children_qty=cd['children_quantity'],
 			update_quantity=cd['update']
 		)
+	return redirect('cart:cart_detail')
+
+@require_POST
+def cart_add_combo(request, combo_slug):
+	cart = Cart(request)
+	products = get_list_or_404(Tour, categories__slug=combo_slug)
+	form = CartAddProductForm(request.POST)
+	if form.is_valid():
+		for product in products:
+			cd = form.cleaned_data
+			cart.add(
+				product=product,
+				adult_qty=cd['adult_quantity'],
+				children_qty=cd['children_quantity'],
+				update_quantity=cd['update']
+			)
 	return redirect('cart:cart_detail')
 
 

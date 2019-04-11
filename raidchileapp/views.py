@@ -80,9 +80,11 @@ def search_all_tours(request):
 	if request.GET:
 		tours = tour_filter_search(request, tours, search_form)
 
+
 	context = {
 		'tours': tours,
 		'categories': categories,
+		'combos': combos,
 		'search_form': search_form,
 	}
 	return render(request, "raidchileapp/tour_search.html", context)
@@ -90,20 +92,33 @@ def search_all_tours(request):
 
 def tour_search_by_category(request, category_slug):
 	search_form = SearchForm(request.GET or None)
-	categories = Category.objects.filter(available=True)
+	categories = Category.objects.filter(combo=False, available=True)
+	combos = Category.objects.filter(combo=True, available=True)
 	category = get_object_or_404(Category, slug=category_slug, available=True)
 	tours = Tour.objects.filter(available=True, categories__in=[category.id])
 
+	# Initialize reservation miniform
+	cart_product_form = CartAddProductForm(
+		initial={
+			'adult_quantity': 4,
+		}
+	)
 	# If there are querystring parameters present in the url, proceed to filter tours.
-	if request.GET:
+	if request.GET and not category.combo:
 		tours = tour_filter_search(request, tours, search_form)
 
 	context = {
 		'tours': tours,
 		'category': category,
+		'combos': combos,
 		'categories': categories,
 		'search_form': search_form,
+		'cart_product_form' : cart_product_form,
 	}
+	# If the category is a combo, don't display the filters or search bar.
+	if category.combo :
+		return render(request, "raidchileapp/tour_combo.html", context)
+
 	return render(request, "raidchileapp/tour_search.html", context)
 
 
