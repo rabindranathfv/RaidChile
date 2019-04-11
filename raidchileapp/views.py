@@ -1,5 +1,7 @@
-from django.db.models import Q
+from django.db.models import Q, Prefetch
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
+
 
 from cart.forms import CartAddProductForm
 from contact.forms import ContactForm
@@ -55,6 +57,12 @@ def home(request):
 
 def tour_details(request, id, slug):
 	tour = get_object_or_404(Tour, id=id, slug=slug, available=True)
+
+	# tour = Tour.objects.filter(id=id, slug=slug, available=True).prefetch_related('images', 'categories','features')
+	# if not tour.exists():
+	# 	raise Http404("No such tour exists!")
+	# tour = tour.first()
+
 	# Initialize the cart_add_ Product form with the minimun number of passengers
 	cart_product_form = CartAddProductForm(
 		initial={
@@ -67,6 +75,7 @@ def tour_details(request, id, slug):
 		'comment_form': comment_form,
 		'cart_product_form' : cart_product_form,
 	}
+
 	return render(request, "raidchileapp/tour_details.html", context)
 
 

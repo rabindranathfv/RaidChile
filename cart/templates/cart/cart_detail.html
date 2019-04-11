@@ -53,27 +53,14 @@
 
 							<div class="w3-cell w3-cell-bottom">
 								<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
-								{% if not cart.is_sale %}
-									<div class="w3-row number-font">CLP {{ item.adult_reg_price }}</div>
-								{% else %}
-									<div class="w3-row number-font"><del class="w3-text-gray">CLP {{ item.adult_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">CLP {{ item.adult_sale_price }}</span></div>
-								{% endif %}
+								<div class="w3-row number-font">CLP {{ item.adult_reg_price }}</div>
 								<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
-								{% if not cart.is_sale %}
-									<div class="w3-row number-font">CLP {{ item.children_reg_price }}</div>
-								{% else %}
-									<div class="w3-row number-font"><del class="w3-text-gray">CLP {{ item.children_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">CLP {{ item.children_sale_price }}</span></div>
-								{% endif %}
+								<div class="w3-row number-font">CLP {{ item.children_reg_price }}</div>
 							</div>
 						</td>
 						<!-- Tour total prices -->
 						<td class="middle-algn number-font">
-							{% if not cart.is_sale %}
-								<h6 class="number-font">CLP {{ item.total_reg_price }}</h6>
-							{% else %}
-								<del class="w3-text-gray">CLP {{ item.total_reg_price }}</del>
-								<h6 class="w3-text-green number-font"><i class="fa fa-fw fa-mail-reply fa-rotate-180"></i>CLP {{ item.total_sale_price }}</h6>
-							{% endif %}
+							<h6 class="number-font">CLP {{ item.total_reg_price }}</h6>
 						</td>
 						<!-- Remove tour -->
 						<td class="middle-algn">
@@ -88,22 +75,43 @@
 					</td>
 				</tr>
 				{% endfor %}
-				<tr class="w3-red w3-large">
+				<tr class="w3-pale-red w3-large w3-text-dark-grey">
+					<td style="text-align: right;" class="middle-algn"><b>Sub-Total</b></td>
 					<td colspan="2"></td>
-					<td style="text-align: right;"><b>Total</b></td>
-					<td class="number-font" colspan="num">
-						{% if cart.is_sale %}
-							 CLP {{ cart.get_total_sale_price }}
-						{% else %}
-							CLP {{ cart.get_total_reg_price }}
-						{% endif %}
+					<td class="number-font middle-algn" colspan="num">
+						CLP ######.##
+					</td>
+					<td colspan="1"></td>
+				</tr>
+				{% if cart.combo_id %}
+				<tr class="w3-pale-blue w3-large w3-text-dark-grey">
+					<td style="text-align: right;" class="middle-algn"><b>Combo #1 Discount</b></td>
+					<td colspan="2" class="w3-small middle-algn">
+						<ul class="small-tour-ul">
+							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</li>
+							<li>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</li>
+							<li>sed do eiusmod tempor incididunt ut </li>
+						</ul>
+					</td>
+					<td class="number-font middle-algn" colspan="num">
+						CLP -######.##
+					</td>
+					<td colspan="1"></td>
+				</tr>
+				{% endif %}
+				<tr class="w3-red w3-large">
+					<td style="text-align: right;" class="middle-algn"><b>Total</b></td>
+					<td colspan="2"></td>
+					<td class="number-font middle-algn" colspan="num">
+						CLP ######.##
 					</td>
 					<td colspan="1"></td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="w3-row w3-margin-bottom">
-			<a {% if cart %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-black w3-right w3-margin-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %}">Confirm Reservations</a>
+			<a {% if cart.items %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-black w3-right w3-margin-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %}">Confirm Reservations</a>
 		</div>
 	</div>
 

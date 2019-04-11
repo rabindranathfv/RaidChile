@@ -132,11 +132,11 @@ class CategoryAdminForm(forms.ModelForm):
 	def save(self, commit=True):
 		category = super(CategoryAdminForm, self).save(commit=False)
 
-		if commit:
-			category.save()
+		#if commit:
+		category.save()
 
-		if category.pk:
-			category.tours.set(self.cleaned_data['tours'])
-			self.save_m2m()
+		#if category.pk:
+		category.tours.set(self.cleaned_data['tours'])
+		self.save_m2m()
 
 		return category

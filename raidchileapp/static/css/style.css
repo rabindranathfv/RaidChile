@@ -117,8 +117,14 @@ ul#id_locations{
 
 .number-font{
 	font-family: sans-serif !important;
+	text-align: right !important;
 }
 
 .disabled-pointer{
 	cursor: not-allowed;
+}
+
+.small-tour-ul{
+	margin: 0px;
+	padding-left: 20px;
 }

@@ -60,7 +60,7 @@
 							<a  href="{% url 'raidchileapp:search_all_tours' %}">All Tours</a>
 						</span>
 					{% for cat in tour.categories.all %}
-					<span class="w3-tag w3-blue w3-round w3-margin-top">
+					<span class="w3-tag {% if cat.combo %}w3-green{% else %}w3-blue{% endif %} w3-round w3-margin-top">
 						<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
 					</span>
 					{% endfor %}
