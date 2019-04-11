@@ -33,16 +33,18 @@
 									{% csrf_token %}
 									{{ cart_product_form.update }}
 									<div class="w3-row">
-										<div class="w3-third w3-padding-small">
+										<div class="w3-col s6 m4 w3-padding-small">
 											{{ cart_product_form.adult_quantity.label }}
 											{{ cart_product_form.adult_quantity }}
 										</div>
-										<div class="w3-third w3-padding-small">
+										<div class="w3-col s6 m4 w3-padding-small">
 											{{ cart_product_form.children_quantity.label }}
 											{{ cart_product_form.children_quantity }}
 										</div>
 										<div class="w3-third w3-center">
-											<button type="submit" for="cart_add_form" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin">Reserve Now</button>
+											<button type="submit" for="cart_add_form" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin w3-hide-small w3-hide-medium">Reserve Now</button>
+											<!-- Mobile button -->
+											<button type="submit" for="cart_add_form" class="w3-button w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin-left mytop-m w3-hide-large">Reserve Now!</button>
 										</div>
 									</div>
 								</form>

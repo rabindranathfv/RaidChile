@@ -9,7 +9,7 @@ $( document ).ready(function(){
 	});
 
 	// Back to the top button function
-	$("#top-btns button").click(function(){
+	$("button.top-btns").click(function(){
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	});
 
