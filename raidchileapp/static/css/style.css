@@ -33,6 +33,7 @@ body,h1,h2,h3,h4,h5,h6 {
 	text-justify: inter-word;
 }
 
+
 .width30{
 	width: 30px;
 }
@@ -53,6 +54,36 @@ textarea.no-resize{
 .pointer-cursor{
 	cursor:pointer
 }
+
+	/* For phones: */
+.home-gallery-image{
+	min-height: 400px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
+.home-gallery-desc{
+	margin-top: 5px;
+	height: 45px;
+	width: 100%;
+	overflow-y: scroll;
+}
+
+@media only screen and (min-width: 601px) {
+	/* For tablets: */
+	.home-gallery-image{
+		min-height: 250px;
+	}
+}
+
+@media only screen and (min-width: 993px) {
+	/* For desktop: */
+	.home-gallery-image{
+		min-height: 400px;
+	}
+}
+
 /*  ==========   Tour Details content Styles   ==========  */
 
 .hidden{

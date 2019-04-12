@@ -20,16 +20,17 @@
 		<div class="w3-row-padding w3-padding-16">
 			{% for cat in categories %}
 				<div class="w3-half w3-margin-bottom">
-					<img src="{{ cat.image.image.url }}" alt="{{ cat.image.alternative }}" class="full-width-img">
+					<div class="home-gallery-image w3-white w3-hide-small" style="background: url('{{ cat.image.image.url }}')"></div>
+					<img src="{{ cat.image.image.url }}" alt="{{ cat.image.alternative }}" class="full-width-img w3-hide-medium w3-hide-large">
 					<div class="w3-container w3-white w3-card-2">
-						<h3>{{ cat.name }}</h3>
-
-						<p>{{ cat.short_desc }}</p>
-
-						<h4 class="w3-margin-bottom"><em>{{ cat.tours.count }} Tour{{ cat.tours.count|pluralize }}</em></h4>
-
 						<div class="w3-center">
-							<a class="w3-button w3-black w3-margin-bottom w3-padding-large" href="{% url 'raidchileapp:tour_search_by_category' cat.slug %}">See category</a>
+							<h3>{{ cat.name }}</h3>
+
+							<p class="home-gallery-desc">{{ cat.short_desc }}</p>
+
+							<h4 class="w3-margin-bottom"><em>{{ cat.tours.count }} Tour{{ cat.tours.count|pluralize }}</em></h4>
+
+							<a class="w3-button w3-black w3-margin-bottom w3-padding-large" href="{% url 'raidchileapp:tour_search_by_category' cat.slug %}">See details</a>
 						</div>
 
 					</div>
