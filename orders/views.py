@@ -1,9 +1,13 @@
+from decimal import Decimal
+
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, send_mail
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
 
 from cart.cart import Cart
+from raidchileapp.models import Category
 
 from .models import OrderItem
 from .forms import OrderCreateForm
@@ -20,6 +24,11 @@ def order_create(request):
 		if form.is_valid():
 			print ('FORM IS VALID')
 			order = form.save()
+			subtotal = Decimal(0)
+			discount = Decimal(0)
+			combo = False
+			if cart['combo_id']:
+				combo = Category.objects.filter(id=cart['combo_id'], available=True).first()
 			# Create an reservation per tour in the cart
 			for item in cart:
 				OrderItem.objects.create(
@@ -32,12 +41,20 @@ def order_create(request):
 					adult_quantity=item['adult_qty'],
 					children_quantity=item['children_qty']
 				)
-			cart.clear()
+				# calculate regular subtotal and combo discount.
+			subtotal += Decimal(item['adult_qty']) * item['adult_reg_price'] + Decimal(item['children_qty']) * item['children_reg_price']
+			if combo:
+				discount += Decimal(item['adult_qty'] + item['children_qty']) * combo.combo_discount
+
 			# Get parameters for email template rendering
-			contact_url = self.request.scheme + '://' + request.get_host() + reverse('raidchileapp:home') + "#contact"
+			contact_url = request.scheme + '://' + request.get_host() + reverse('raidchileapp:home') + "#contact"
 			context = {
 				'order': order,
+				'combo': combo,
 				'contact_url': contact_url,
+				'subtotal': subtotal,
+				'discount': discount,
+				'total': subtotal-discount,
 			}
 			email_text = render_to_string('emails/user_reservation_confirmation.txt', context)
 			email_html = render_to_string('emails/user_reservation_confirmation.html', context)
@@ -45,15 +62,17 @@ def order_create(request):
 			# Send email to the reserver's email address
 			subject = 'Tour Reservations Confirmed! - Chile Raids'
 			email_from = settings.EMAIL_HOST_USER
-			recipient_list = [ order.email, ] ## RESERVER'S EMAIL ADDRESS GOES HERE.
+			email_to = [ order.email, ] ## RESERVER'S EMAIL ADDRESS GOES HERE.
+			email_bcc = list(User.objects.filter(groups__name='Emails', is_staff=True).values_list('email', flat=True))
 
-			send_mail(
-				subject,				#Subject
-				email_text,				#Message_text
-				email_from,				#Email Sender Address
-				recipient_list,			#Email Receiver Address
-				html_message=email_html,#Message_HTML
-			)
+			# Create the email, and attach the HTML version as well.
+			msg = EmailMultiAlternatives(subject, email_text, email_from, email_to, bcc=email_bcc)
+			msg.attach_alternative(email_html, "text/html")
+
+			msg.send()
+			#Clear the session based cart
+			cart.clear()
+
 			return redirect('orders:order_create_success')
 
 	return render(request, 'orders/order_create.html', {'form': form})

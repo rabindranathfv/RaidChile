@@ -50,7 +50,9 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
 	cart = Cart(request)
-	combo = Category.objects.filter(id=cart['combo_id'], available=True).first()
+	combo = False
+	if cart['combo_id']:
+		combo = Category.objects.filter(id=cart['combo_id'], available=True).first()
 	subtotal = Decimal(0)
 	discount = Decimal(0)
 	for item in cart:
