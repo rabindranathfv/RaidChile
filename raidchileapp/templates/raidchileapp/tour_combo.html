@@ -10,9 +10,8 @@
 {% url 'raidchileapp:tour_search_by_category' category.slug as cat_url %}
 
 	<!-- Image header -->
-	<div class="w3-container w3-padding-large combo-header">
+	<div class="w3-container w3-padding-large combo-header" style="background:url('{{ category.image.image.url }}')"></div>
 
-	</div>
 	<!--  Content wrapper row (Contains sidebar and search results)  -->
 	<div class="w3-row w3-white">
 		<div class="w3-col m3 l2">

@@ -129,8 +129,20 @@ ul#id_locations{
 }
 
 .combo-header{
-	height: 130px;
+	min-height: 130px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
 }
+
+.search-header{
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
 
 .mytop-m{
 	margin-top: 27px;
