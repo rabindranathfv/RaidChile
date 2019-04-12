@@ -70,28 +70,28 @@
 				<div class="w3-col s12 l6 w3-margin-bottom">
 					<h2>Pricing</h2>
 					<hr class="better-hr">
-					<h6>If you book at least two(2) Full-Day and one(1) Half-Day tours, you'll only pay sale prices!</h6>
+					<h6>If you reserve all the tours in a combo you'll get a discount per passenger!</h6>
 					<div class="w3-row">
 						<div class="w3-col s1 w3-container"></div>
 						<div class="w3-col s10">
 							<table class="w3-margin-top w3-table w3-centered w3-hoverable w3-white w3-border w3-bordered">
 								<thead>
 									<tr class="w3-red">
-										<th>Prices</th>
+										<th></th>
 										<th>Adults</th>
 										<th>Children</th>
 									</tr>
 								</thead>
 								<tr>
-									<th>Regular</th>
+									<th>Prices</th>
 									<td>CLP<span class="number-font"> {{ tour.adult_reg_price }}</span></td>
 									<td>CLP<span class="number-font"> {{ tour.children_reg_price }}</span></td>
 								</tr>
-								<tr>
+								<!--<tr>
 									<th>Sale</th>
 									<td>CLP<span class="number-font"> {{ tour.adult_sale_price }}</span></td>
 									<td>CLP<span class="number-font"> {{ tour.children_sale_price }}</span></td>
-								</tr>
+								</tr>-->
 							</table>
 					</div>
 					</div>
@@ -120,9 +120,10 @@
 			<div class="w3-row w3-margin-bottom">
 				<div class="w3-col l6 w3-container"></div>
 				<div class="w3-col l6 w3-container">
-					<form action="{% url 'cart:cart_add' tour.id %}" method="POST">
+					<form action="{% url 'cart:cart_add' tour.id %}" method="POST" id="cart_add_form">
 						{% csrf_token %}
 						{{ cart_product_form.update }}
+						<p class="min_pax_error w3-text-red" style="display: none;"><b>The minimum number of passengers must be greater or equal to {{ tour.min_pax_number }}!</b></p>
 						<div class="w3-row">
 							<div class="w3-third w3-padding-small">
 								{{ cart_product_form.adult_quantity.label }}
@@ -133,7 +134,8 @@
 								{{ cart_product_form.children_quantity }}
 							</div>
 							<div class="w3-third w3-center">
-								<button type="submit" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin">Reserve Now</button>
+								<button type="submit" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin" id="submit-reserve">Reserve Now</button>
+								<div style="display: none;" class="min_pax">{{ tour.min_pax_number }}</div>
 							</div>
 						</div>
 					</form>

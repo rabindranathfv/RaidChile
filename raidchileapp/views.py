@@ -1,7 +1,6 @@
-from django.db.models import Q, Prefetch
+from django.db.models import Q, Prefetch, Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
-
 
 from cart.forms import CartAddProductForm
 from contact.forms import ContactForm
@@ -105,11 +104,16 @@ def tour_search_by_category(request, category_slug):
 	combos = Category.objects.filter(combo=True, available=True)
 	category = get_object_or_404(Category, slug=category_slug, available=True)
 	tours = Tour.objects.filter(available=True, categories__in=[category.id])
+	min_pax = None
+
+	# Calculate minimun passenger of combo = larges amount of all tours.
+	if category.combo:
+		min_pax = tours.aggregate(Max('min_pax_number'))
 
 	# Initialize reservation miniform
 	cart_product_form = CartAddProductForm(
 		initial={
-			'adult_quantity': 4,
+			'adult_quantity': min_pax['min_pax_number__max'],
 		}
 	)
 	# If there are querystring parameters present in the url, proceed to filter tours.
@@ -123,6 +127,7 @@ def tour_search_by_category(request, category_slug):
 		'categories': categories,
 		'search_form': search_form,
 		'cart_product_form' : cart_product_form,
+		'min_pax': min_pax['min_pax_number__max'],
 	}
 	# If the category is a combo, don't display the filters or search bar.
 	if category.combo :

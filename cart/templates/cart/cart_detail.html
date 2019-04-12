@@ -7,7 +7,7 @@
 
 	<div class="w3-container w3-center w3-margin-top">
 		<h2>Your Pending Reservations : {{ cart|length }} Tour{{ cart|length|pluralize }}</h2>
-		<h6>If you book at least two(2) Full-Day and one(1) Half-Day tours, you'll only pay sale prices!</h6>
+		<h6>If you reserve all the tours in a combo you'll get a discount per passenger!</h6>
 	</div>
 
 	<div class="w3-container w3-padding-32">
@@ -18,10 +18,10 @@
 			<thead>
 				<tr class="w3-red">
 					<th>Tour</th>
-					<th>Passengers</th>
-					<th>Prices</th>
-					<th>Total Price</th>
-					<th>Remove</th>
+					<th class="w3-center">Passengers</th>
+					<th class="w3-center">Prices</th>
+					<th class="w3-center">Total Price</th>
+					<th class="w3-center">Remove</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,38 +32,37 @@
 						<td class="middle-algn"><h6><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6></td>
 						<!-- Tour passengers quantities form -->
 						<td class="pax-cell">
-							<form action="{% url 'cart:cart_add' product.id %}" method="POST">
+							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
 								{% csrf_token %}
 								{{ item.update_quantity_form.update }}
-									<div class="w3-cell w3-mobile">
-										{{ item.update_quantity_form.adult_quantity.label }}
-										{{ item.update_quantity_form.adult_quantity }}
-									</div>
-									<div class="w3-cell w3-mobile">
-										{{ item.update_quantity_form.children_quantity.label }}
-										{{ item.update_quantity_form.children_quantity }}
-									</div>
-									<div class="w3-cell w3-mobile w3-cell-bottom">
-										<input type="submit" value="Update" class="w3-button w3-border w3-blue">
-									</div>
+								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;"><b>Minimum {{ product.min_pax_number }} Passengers!</b></p>
+								<div class="w3-cell w3-mobile">
+									{{ item.update_quantity_form.adult_quantity.label }}
+									{{ item.update_quantity_form.adult_quantity }}
+								</div>
+								<div class="w3-cell w3-mobile">
+									{{ item.update_quantity_form.children_quantity.label }}
+									{{ item.update_quantity_form.children_quantity }}
+								</div>
+								<div class="w3-cell w3-mobile w3-cell-bottom">
+									<input type="submit" value="Update" class="w3-button w3-border w3-blue submit-reserve">
+									<div style="display: none;" class="min_pax">{{ product.min_pax_number }}</div>
+								</div>
 							</form>
 						</td>
 						<!-- Tour  prices -->
-						<td class="middle-algn">
-
-							<div class="w3-cell w3-cell-bottom">
-								<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
-								<div class="w3-row number-font">CLP {{ item.adult_reg_price }}</div>
-								<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
-								<div class="w3-row number-font">CLP {{ item.children_reg_price }}</div>
-							</div>
+						<td class="middle-algn w3-center">
+							<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
+							<div class="w3-row number-font w3-small">CLP {{ item.adult_reg_price }}</div>
+							<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
+							<div class="w3-row number-font w3-small">CLP {{ item.children_reg_price }}</div>
 						</td>
 						<!-- Tour total prices -->
 						<td class="middle-algn number-font">
-							<h6 class="number-font">CLP {{ item.total_reg_price }}</h6>
+							<h6 class="number-font w3-medium">CLP {{ item.total_reg_price }}</h6>
 						</td>
 						<!-- Remove tour -->
-						<td class="middle-algn">
+						<td class="middle-algn w3-center">
 							<a href="{% url 'cart:cart_remove' product.id %}"><i class="fa fa-fw fa-trash"></i>Remove</a>
 						</td>
 					</tr>
@@ -116,7 +115,7 @@
 			</tbody>
 		</table>
 		<div class="w3-row w3-margin-bottom">
-			<a {% if cart.items %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-black w3-right w3-margin-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %}">Confirm Reservations</a>
+			<a {% if cart.items %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-blue w3-right w3-margin-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %}">Confirm Reservations <i class="fa fa-mail-forward"></i></a>
 		</div>
 	</div>
 

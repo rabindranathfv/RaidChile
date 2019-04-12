@@ -25,12 +25,14 @@
 					<h2> {{ category.name }} </h2>
 					{% if category.combo %}
 						<h3> {{ category.short_desc }} </h3>
+						<h5> Minimun passengers: {{ min_pax }} ppl. </h5>
 						<div class="w3-row">
 							<div class="w3-col s1 m2 l4 w3-container"></div>
 							<div class="w3-col s10 m8 l4 ">
 								<form action="{% url 'cart:cart_add_combo' category.slug %}" method="POST" id="cart_add_form">
 									{% csrf_token %}
 									{{ cart_product_form.update }}
+									<p class="min_pax_error w3-small w3-text-red" style="display: none;"><b>The minimum number of passengers must be greater or equal to {{ min_pax }}!</b></p>
 									<div class="w3-row">
 										<div class="w3-col s6 m4 w3-padding-small">
 											{{ cart_product_form.adult_quantity.label }}
@@ -41,9 +43,10 @@
 											{{ cart_product_form.children_quantity }}
 										</div>
 										<div class="w3-third w3-center">
-											<button type="submit" for="cart_add_form" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin w3-hide-small w3-hide-medium">Reserve Now</button>
+											<button type="submit" for="cart_add_form" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin w3-hide-small w3-hide-medium" id="submit-reserve">Reserve Now</button>
 											<!-- Mobile button -->
-											<button type="submit" for="cart_add_form" class="w3-button w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin-left mytop-m w3-hide-large">Reserve Now!</button>
+											<button type="submit" for="cart_add_form" class="w3-button w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin-left mytop-m w3-hide-large" id="submit-reserve">Reserve Now!</button>
+											<div style="display: none;" class="min_pax">{{ min_pax }}</div>
 										</div>
 									</div>
 								</form>
