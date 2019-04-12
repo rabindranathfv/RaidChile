@@ -156,6 +156,10 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # Necessary settings for shopping cart by session
 CART_SESSION_ID = 'cart'
 
+# Google's ReCaptcha Settings.
+RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')
+RECAPTCHA_WEBSITE_KEY = config('RECAPTCHA_WEBSITE_KEY')
+
 # Logging settings show queries on the console for now.
 # LOGGING = {
 #     'version': 1,
