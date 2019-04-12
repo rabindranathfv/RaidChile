@@ -58,12 +58,14 @@
 			<div class="w3-row-padding w3-margin-top">
 				{% for tour in tours %}
 					<div class="w3-col m6 l4 w3-margin-bottom">
-						<img src="{{ tour.images.all.first.image.url }}" alt="{{ tour.images.all.first.alternative }}" class="full-width-img">
+						<div class="search-gallery-image w3-white w3-hide-small" style="background: url('{{ tour.images.all.first.image.url }}')"></div>
+						<img src="{{ tour.images.all.first.image.url }}" alt="{{ tour.images.all.first.alternative }}" class="full-width-img w3-hide-medium w3-hide-large">
 						<div class="w3-container w3-white w3-card-2">
 							<!-- Tour title -->
-							<h4>{{ tour.name }}</h4>
+							<h5 class="search-gallery-title">{{ tour.name }}</h5>
 							<!-- Tour adult sale prices -->
 							<h6 class="w3-opacity">From CLP<span class="number-font"> {{ tour.adult_sale_price }}</span></h6>
+							<h6>{{ tour.get_tour_type_display }} Tour: {{ tour.duration }} Hours</h6>
 							<!-- Features Icons -->
 							<p class="w3-large">
 								{% for feature in tour.features.all %}

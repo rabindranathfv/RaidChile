@@ -67,7 +67,7 @@ textarea.no-resize{
 	margin-top: 5px;
 	height: 45px;
 	width: 100%;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 @media only screen and (min-width: 601px) {
@@ -134,6 +134,34 @@ ul#id_locations{
 
 .mytop-m{
 	margin-top: 27px;
+}
+
+	/* For phones: */
+.search-gallery-image{
+	min-height: 400px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
+.search-gallery-title{
+	height: 55px;
+	width: 100%;
+	overflow-y: auto;
+}
+
+@media only screen and (min-width: 601px) {
+	/* For tablets: */
+	.search-gallery-image{
+		min-height: 190px;
+	}
+}
+
+@media only screen and (min-width: 993px) {
+	/* For desktop: */
+	.search-gallery-image{
+		min-height: 240px;
+	}
 }
 
 /*  ==========   Cart Details Styles   ==========  */
