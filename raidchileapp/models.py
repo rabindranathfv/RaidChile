@@ -201,11 +201,13 @@ class Tour(models.Model):
 		verbose_name='children\'s regular price'
 	)
 	adult_sale_price = models.DecimalField(
+		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
 		verbose_name='adults\' sale price'
 	)
 	children_sale_price = models.DecimalField(
+		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
 		verbose_name='children\'s sale price'

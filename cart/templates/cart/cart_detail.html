@@ -79,32 +79,37 @@
 					<td style="text-align: right;" class="middle-algn"><b>Sub-Total</b></td>
 					<td colspan="2"></td>
 					<td class="number-font middle-algn" colspan="num">
-						CLP ######.##
+						CLP {{ subtotal }}
 					</td>
 					<td colspan="1"></td>
 				</tr>
-				{% if cart.combo_id %}
-				<tr class="w3-pale-blue w3-large w3-text-dark-grey">
-					<td style="text-align: right;" class="middle-algn"><b>Combo #1 Discount</b></td>
-					<td colspan="2" class="w3-small middle-algn">
-						<ul class="small-tour-ul">
-							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</li>
-							<li>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</li>
-							<li>sed do eiusmod tempor incididunt ut </li>
-						</ul>
-					</td>
-					<td class="number-font middle-algn" colspan="num">
-						CLP -######.##
-					</td>
-					<td colspan="1"></td>
-				</tr>
+
+				{% if combo %}
+				<!-- Combo Discount row -->
+					{% with tours=combo.tours.all %}
+					<tr class="w3-pale-blue w3-large w3-text-dark-grey">
+						<td style="text-align: right;" class="middle-algn"><b>{{ combo.name }} Discount</b></td>
+						<td colspan="2" class="w3-small middle-algn">
+							<ul class="small-tour-ul">
+								{% for tour in tours %}
+									<li>{{ tour.name }}</li>
+								{% endfor %}
+							</ul>
+						</td>
+						<td class="number-font middle-algn" colspan="num">
+							CLP -{{ discount }}
+						</td>
+						<td colspan="1" class="w3-small middle-algn">
+							(CLP {{ combo.combo_discount }} per passenger)
+						</td>
+					</tr>
+					{% endwith %}
 				{% endif %}
 				<tr class="w3-red w3-large">
 					<td style="text-align: right;" class="middle-algn"><b>Total</b></td>
 					<td colspan="2"></td>
 					<td class="number-font middle-algn" colspan="num">
-						CLP ######.##
+						CLP {{ total }}
 					</td>
 					<td colspan="1"></td>
 				</tr>
