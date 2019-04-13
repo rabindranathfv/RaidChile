@@ -30,6 +30,10 @@ class Category(models.Model):
 		max_length=200,
 		verbose_name='short description'
 	)
+	available = models.BooleanField(
+		default=True,
+		verbose_name='available'
+	)
 	combo = models.BooleanField(
 		default=False,
 		verbose_name='Is it tour combo?'
@@ -51,8 +55,8 @@ class Category(models.Model):
 
 	class Meta:
 		ordering = ('name', )
-		verbose_name = 'category'
-		verbose_name_plural = 'categories'
+		verbose_name = 'Category / Combo'
+		verbose_name_plural = 'Categories / Combos'
 
 	def __str__(self):
 		return self.name
@@ -197,11 +201,13 @@ class Tour(models.Model):
 		verbose_name='children\'s regular price'
 	)
 	adult_sale_price = models.DecimalField(
+		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
 		verbose_name='adults\' sale price'
 	)
 	children_sale_price = models.DecimalField(
+		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
 		verbose_name='children\'s sale price'

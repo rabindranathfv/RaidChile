@@ -9,33 +9,44 @@ $( document ).ready(function(){
 	});
 
 	// Back to the top button function
-	$("#top-btns button").click(function(){
+	$("button.top-btns").click(function(){
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	});
 
-	/*
-	var maxHeight = 0;
+	// Validate that the passengers total number is higher than the minimun
+	$('#id_adult_quantity, #id_children_quantity').on('input', function() {
+		console.log("Firing validation of min passengers.")
+		var min_pax = parseInt( $(this).closest("form").find("div.min_pax").text() );
+		var adult_qty = parseInt( $(this).closest("form").find("#id_adult_quantity").val() );
+		var children_qty = parseInt( $(this).closest("form").find("#id_children_quantity").val() );
 
-	console.log("Firing resizing!")
-	$("div.w3-col div.w3-card-2, div.w3-half div.w3-card-2").each(function() {
-		if ($(this).height() > maxHeight)
-		{
-			maxHeight = $(this).height();
+		// Validate that the passengers total number is higher than the minimun
+		if (adult_qty + children_qty < min_pax){
+			// Display warning and disable reserve button
+			$(this).closest("form").find("p.min_pax_error").show();
+			$(this).closest("form").find("#submit-reserve, .submit-reserve").prop( "disabled", true );
+		}else{
+			$(this).closest("form").find("p.min_pax_error").hide();
+			$(this).closest("form").find("#submit-reserve, .submit-reserve").prop( "disabled", false );
 		}
 	});
-	//set all specific classes to highest value from previous loop variable
-	$("div.w3-col div.w3-card-2, div.w3-half div.w3-card-2").each(function() {
-		$(this).css("height", maxHeight);
-	});*/
 
-	// Method to remove empty fields from GET forms.
-	/*
-	$("#search-form").submit(function() {
-		$(this).find(":input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
-		return true; // Ensure form still submits
-	});*/
+	// Validate that the passengers total number is higher than the minimun or don't submit the form
+	$('#cart_add_form, form.cart_add_form').submit(function() {
+		var min_pax = parseInt( $(this).find("div.min_pax").text() );
+		var adult_qty = parseInt( $(this).find("#id_adult_quantity").val() );
+		var children_qty = parseInt( $(this).find("#id_children_quantity").val() );
 
-	// Un-disable form fields when page loads, in case they click back after submission
-	//$("#search-form").find(":input").removeAttr("disabled");
-
+		// Validate that the passengers total number is higher than the minimun
+		if (adult_qty + children_qty < min_pax){
+			// Display warning and disable reserve button
+			$(this).find("p.min_pax_error").show();
+			$(this).find("#submit-reserve, .submit-reserve").prop( "disabled", true );
+			return false;
+		}else{
+			$(this).find("p.min_pax_error").hide();
+			$(this).find("#submit-reserve, .submit-reserve").prop( "disabled", false );
+			return true;
+		}
+	});
 });

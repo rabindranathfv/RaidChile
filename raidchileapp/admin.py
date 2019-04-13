@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from .models import Category, Feature, Location, Tour, TourImage
+from .forms import CategoryAdminForm
 
 # Register your models here.
 
@@ -10,25 +11,30 @@ class CategoryAdmin(admin.ModelAdmin):
 		'name',
 		'slug',
 		'combo',
+		'available',
 		'updated_at',
 	]
 	list_filter = ['updated_at',]
+	list_editable = ['available',]
 	fields = [
 		(
 			'updated_at',
 			'created_at'
 		),
+		'available',
 		(
 			'name',
 			'slug'
 		),
 		(
 			'combo_discount',
-			'combo'
+			'combo',
+
 		),
 		'short_desc',
 		'image',
 		'image_tag',
+		'tours'
 	]
 	search_fields = ['name']
 	readonly_fields = [
@@ -39,6 +45,7 @@ class CategoryAdmin(admin.ModelAdmin):
 	prepopulated_fields = {
 		'slug': ('name',),
 	}
+	form = CategoryAdminForm
 
 	def get_queryset(self, request):
 		qs = super(CategoryAdmin, self).get_queryset(request)
@@ -231,7 +238,7 @@ class TourImageAdmin(admin.ModelAdmin):
 		'updated_at',
 		'image_tag',
 	]
-	autocomplete_fields = ['tours',]
+	filter_horizontal = ['tours',]
 
 	def get_queryset(self, request):
 		qs = super(TourImageAdmin, self).get_queryset(request)

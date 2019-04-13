@@ -2,8 +2,10 @@ from decimal import Decimal
 
 from django import forms
 from django.conf import settings
+from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.utils.translation import ugettext_lazy as _
 
-from .models import Location
+from .models import Location, Tour, Category
 
 # Create the forms here
 class SearchForm(forms.Form):
@@ -105,3 +107,36 @@ class CommentForm(forms.Form):
 														'cols': 50,
 														'class': 'w3-input w3-padding-16 w3-border no-resize'})
 							)
+
+########################## ADMIN FORMS ########################
+class CategoryAdminForm(forms.ModelForm):
+	tours = forms.ModelMultipleChoiceField(
+		queryset=Tour.objects.all(),
+		required=False,
+		widget=FilteredSelectMultiple(
+			verbose_name='Tours',
+			is_stacked=False
+		)
+	)
+
+	class Meta:
+		model = Category
+		fields = ['tours']
+
+	def __init__(self, *args, **kwargs):
+		super(CategoryAdminForm, self).__init__(*args, **kwargs)
+
+		if self.instance and self.instance.pk:
+			self.fields['tours'].initial = self.instance.tours.all()
+
+	def save(self, commit=True):
+		category = super(CategoryAdminForm, self).save(commit=False)
+
+		#if commit:
+		category.save()
+
+		#if category.pk:
+		category.tours.set(self.cleaned_data['tours'])
+		self.save_m2m()
+
+		return category

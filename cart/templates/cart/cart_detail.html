@@ -7,21 +7,24 @@
 
 	<div class="w3-container w3-center w3-margin-top">
 		<h2>Your Pending Reservations : {{ cart|length }} Tour{{ cart|length|pluralize }}</h2>
-		<h6>If you book at least two(2) Full-Day and one(1) Half-Day tours, you'll only pay sale prices!</h6>
+		<h6>If you reserve all the tours in a combo you'll get a discount per passenger!</h6>
 	</div>
 
-	<div class="w3-container w3-padding-32">
+	<div class="w3-container w3-padding-32" style="padding-top: 0px !important;">
 		<div class="w3-row">
-			<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-button w3-padding-large w3-white w3-border w3-right w3-margin-right">Add more tours <i class="fa fa-angle-double-right"></i></a>
+			<div class="w3-col l3">
+				<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-button w3-padding-large w3-white w3-border w3-left w3-hide-small w3-hide-medium w3-block"><i class="fa fa-reply fa-fw"></i> Add more tours</a>
+			</div>
 		</div>
-		<table class="w3-margin-top w3-table-all">
+		<!-- Table only displays in large screens -->
+		<table class="w3-margin-top w3-table-all w3-hide-small w3-hide-medium">
 			<thead>
 				<tr class="w3-red">
 					<th>Tour</th>
-					<th>Passengers</th>
-					<th>Prices</th>
-					<th>Total Price</th>
-					<th>Remove</th>
+					<th class="w3-center">Passengers</th>
+					<th class="w3-center">Prices</th>
+					<th class="w3-center">Total Price</th>
+					<th class="w3-center">Remove</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,52 +35,38 @@
 						<td class="middle-algn"><h6><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6></td>
 						<!-- Tour passengers quantities form -->
 						<td class="pax-cell">
-							<form action="{% url 'cart:cart_add' product.id %}" method="POST">
+							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
 								{% csrf_token %}
 								{{ item.update_quantity_form.update }}
-									<div class="w3-cell w3-mobile">
-										{{ item.update_quantity_form.adult_quantity.label }}
-										{{ item.update_quantity_form.adult_quantity }}
-									</div>
-									<div class="w3-cell w3-mobile">
-										{{ item.update_quantity_form.children_quantity.label }}
-										{{ item.update_quantity_form.children_quantity }}
-									</div>
-									<div class="w3-cell w3-mobile w3-cell-bottom">
-										<input type="submit" value="Update" class="w3-button w3-border w3-blue">
-									</div>
+								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;"><b>Minimum {{ product.min_pax_number }} Passengers!</b></p>
+								<div class="w3-cell w3-mobile">
+									{{ item.update_quantity_form.adult_quantity.label }}
+									{{ item.update_quantity_form.adult_quantity }}
+								</div>
+								<div class="w3-cell w3-mobile">
+									{{ item.update_quantity_form.children_quantity.label }}
+									{{ item.update_quantity_form.children_quantity }}
+								</div>
+								<div class="w3-cell w3-mobile w3-cell-bottom">
+									<input type="submit" value="Update" class="w3-button w3-border w3-blue submit-reserve">
+									<div style="display: none;" class="min_pax">{{ product.min_pax_number }}</div>
+								</div>
 							</form>
 						</td>
 						<!-- Tour  prices -->
-						<td class="middle-algn">
-
-							<div class="w3-cell w3-cell-bottom">
-								<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
-								{% if not cart.is_sale %}
-									<div class="w3-row number-font">${{ item.adult_reg_price }}</div>
-								{% else %}
-									<div class="w3-row number-font"><del class="w3-text-gray">${{ item.adult_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.adult_sale_price }}</span></div>
-								{% endif %}
-								<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
-								{% if not cart.is_sale %}
-									<div class="w3-row number-font">${{ item.children_reg_price }}</div>
-								{% else %}
-									<div class="w3-row number-font"><del class="w3-text-gray">${{ item.children_reg_price }}</del><i class="fa fa-fw fa-chevron-right w3-text-green"></i><span class="w3-text-green">${{ item.children_sale_price }}</span></div>
-								{% endif %}
-							</div>
+						<td class="middle-algn w3-center">
+							<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
+							<div class="w3-row number-font w3-small">CLP {{ item.adult_reg_price }}</div>
+							<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
+							<div class="w3-row number-font w3-small">CLP {{ item.children_reg_price }}</div>
 						</td>
 						<!-- Tour total prices -->
 						<td class="middle-algn number-font">
-							{% if not cart.is_sale %}
-								<h6 class="number-font">${{ item.total_reg_price }}</h6>
-							{% else %}
-								<del class="w3-text-gray">${{ item.total_reg_price }}</del>
-								<h6 class="w3-text-green number-font"><i class="fa fa-fw fa-mail-reply fa-rotate-180"></i>${{ item.total_sale_price }}</h6>
-							{% endif %}
+							<h6 class="number-font w3-medium">CLP {{ item.total_reg_price }}</h6>
 						</td>
 						<!-- Remove tour -->
-						<td class="middle-algn">
-							<a href="{% url 'cart:cart_remove' product.id %}"><i class="fa fa-fw fa-trash"></i>Remove</a>
+						<td class="middle-algn w3-center">
+							<a href="{% url 'cart:cart_remove' product.id %}" class="w3-hover-text-red"><i class="fa fa-fw fa-trash"></i>Remove</a>
 						</td>
 					</tr>
 					{% endwith %}
@@ -88,22 +77,160 @@
 					</td>
 				</tr>
 				{% endfor %}
-				<tr class="w3-red w3-large">
+				<tr class="w3-pale-red w3-text-dark-grey">
+					<td style="text-align: right;" class="middle-algn"><b>Sub-Total</b></td>
 					<td colspan="2"></td>
-					<td style="text-align: right;"><b>Total</b></td>
-					<td class="number-font" colspan="num">
-						{% if cart.is_sale %}
-							 ${{ cart.get_total_sale_price }}
-						{% else %}
-							${{ cart.get_total_reg_price }}
-						{% endif %}
+					<td class="number-font middle-algn" colspan="num">
+						CLP {{ subtotal }}
+					</td>
+					<td colspan="1"></td>
+				</tr>
+
+				{% if combo %}
+				<!-- Combo Discount row -->
+					{% with tours=combo.tours.all %}
+					<tr class="w3-pale-blue w3-text-dark-grey">
+						<td style="text-align: right;" class="middle-algn"><b>{{ combo.name }} Discount</b></td>
+						<td colspan="2" class="w3-small middle-algn">
+							<ul class="small-tour-ul">
+								{% for tour in tours %}
+									<li>{{ tour.name }}</li>
+								{% endfor %}
+							</ul>
+						</td>
+						<td class="number-font middle-algn" colspan="num">
+							CLP -{{ discount }}
+						</td>
+						<td colspan="1" class="w3-small middle-algn">
+							(CLP {{ combo.combo_discount }} per passenger)
+						</td>
+					</tr>
+					{% endwith %}
+				{% endif %}
+				<tr class="w3-red">
+					<td style="text-align: right;" class="middle-algn"><b>Total</b></td>
+					<td colspan="2"></td>
+					<td class="number-font middle-algn" colspan="num">
+						CLP {{ total }}
 					</td>
 					<td colspan="1"></td>
 				</tr>
 			</tbody>
 		</table>
+		<!-- This div only displays in small or medium screens -->
+		<div class="w3-hide-large">
+		{% for item in cart %}
+			{% with product=item.product %}
+				<!-- Cart item cards -->
+				<div class="w3-container w3-border-top w3-border-left w3-border-right w3-white w3-card">
+					<div class="w3-row w3-padding-16">
+						<div class="w3-twothird">
+							<h5 style="padding-top: 16px;"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h5>
+							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
+								{% csrf_token %}
+								{{ item.update_quantity_form.update }}
+								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;"><b>Minimum {{ product.min_pax_number }} Passengers!</b></p>
+
+								<!-- Adult's Price-->
+								{{ item.update_quantity_form.adult_quantity.label }}
+								<div class="w3-row">
+									<div class="w3-col s4">
+										{{ item.update_quantity_form.adult_quantity }}
+									</div>
+									<div class="w3-col s1 w3-center">
+										<h6>X</h6>
+									</div>
+									<div class="w3-col s7">
+										<h6 class="number-font w3-medium w3-left">CLP {{ item.adult_reg_price }}</h6>
+									</div>
+								</div>
+								<!-- Childrens Price-->
+								{{ item.update_quantity_form.children_quantity.label }}
+								<div class="w3-row">
+									<div class="w3-col s4">
+										{{ item.update_quantity_form.children_quantity }}
+									</div>
+									<div class="w3-col s1 w3-center">
+										<h6>X</h6>
+									</div>
+									<div class="w3-col s7">
+										<h6 class="number-font w3-medium w3-left">CLP {{ item.children_reg_price }}</h6>
+									</div>
+								</div>
+								<div class="w3-row w3-padding-16 w3-margin-bottom">
+									<div class="w3-col s4">
+										<input type="submit" value="Update" class="w3-button w3-block w3-border w3-blue submit-reserve">
+										<div style="display: none;" class="min_pax">{{ product.min_pax_number }}</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="w3-third w3-center">
+							<h4 style="margin-bottom: 0px;">Total Price</h4>
+							<h5 class="number-font" style="margin-top: 0px;">CLP {{ item.total_reg_price }}</h5>
+							<h6 class="w3-padding-16"><a href="{% url 'cart:cart_remove' product.id %}" class="w3-hover-text-red"><i class="fa fa-fw fa-trash"></i>Remove</a></h6>
+						</div>
+					</div>
+					
+				</div>
+				{% endwith %}
+		{% endfor %}
+			<!-- Subtotal -->
+			<div class="w3-container w3-border-top w3-border-left w3-border-right w3-pale-red w3-card w3-text-dark-grey">
+				<div class="w3-row">
+					<div class="w3-col s5">
+						<h4><b>Sub-Total</b></h4>
+					</div>
+					<div class="w3-col s7">
+						<h5 class="number-font w3-right">CLP {{ subtotal }}</h5>
+					</div>
+				</div>
+			</div>
+			{% if combo %}
+				<!-- Combo Discount -->
+				{% with tours=combo.tours.all %}
+				<div class="w3-container w3-border-top w3-border-left w3-border-right w3-pale-blue w3-card w3-text-dark-grey">
+					<div class="w3-row">
+						<div class="w3-col s5">
+							<h4><b>{{ combo.name }} Discount</b></h4>
+							<ul class="small-tour-ul w3-small w3-margin-bottom">
+								{% for tour in tours %}
+									<li>{{ tour.name }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+						<div class="w3-col s7">
+							<h5 class="number-font w3-right">CLP -{{ discount }}</h5>
+							<div class="w3-row">
+								<h4 class="w3-small w3-right">(CLP {{ combo.combo_discount }} per passenger)</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endwith %}
+			{% endif %}
+			<!-- Total -->
+			<div class="w3-container w3-border-top w3-border-left w3-border-right w3-red w3-card">
+				<div class="w3-row">
+					<div class="w3-col s5">
+						<h4><b>Total</b></h4>
+					</div>
+					<div class="w3-col s7">
+						<h5 class="number-font w3-right">CLP {{ total }}</h5>
+
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="w3-row w3-margin-bottom">
-			<a {% if cart %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-black w3-right w3-margin-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %}">Confirm Reservations</a>
+			<div class="w3-col s12 m5 l9">
+				<div class="w3-container"></div>
+				<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-button w3-padding-large w3-white w3-border w3-hide-large w3-block w3-margin-top"><i class="fa fa-reply fa-fw"></i> Add more tours</a>
+			</div>
+			<div class="w3-col m2 w3-container w3-hide-small w3-hide-large"></div>
+			<div class="w3-col s12 m5 l3">
+				<a {% if cart.items %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-blue w3-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %} w3-block">Confirm Reservations <i class="fa fa-mail-forward fa-fw"></i></a>
+			</div>
 		</div>
 	</div>
 
