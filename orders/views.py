@@ -42,9 +42,9 @@ def order_create(request):
 					children_quantity=item['children_qty']
 				)
 				# calculate regular subtotal and combo discount.
-			subtotal += Decimal(item['adult_qty']) * item['adult_reg_price'] + Decimal(item['children_qty']) * item['children_reg_price']
-			if combo:
-				discount += Decimal(item['adult_qty'] + item['children_qty']) * combo.combo_discount
+				subtotal += Decimal(item['adult_qty']) * item['adult_reg_price'] + Decimal(item['children_qty']) * item['children_reg_price']
+				if combo:
+					discount += Decimal(item['adult_qty'] + item['children_qty']) * combo.combo_discount
 
 			# Get parameters for email template rendering
 			contact_url = request.scheme + '://' + request.get_host() + reverse('raidchileapp:home') + "#contact"
