@@ -5,18 +5,19 @@
 	<div class="w3-border-bottom">
 		<h5>Tour Combos</h5>
 		<div class="w3-row w3-margin-bottom">
-			{% for combo in combos %}
+			{% with sets=combos.all %}
+			{% for combo in sets %}
 				{% if combo != category %}
 					<a class="w3-text-blue" href="{{ combo.get_absolute_url }}">{{ combo.name }}</a><br>
 				{% else %}
 					<span class="w3-text-blue"><strong>{{ combo.name }}</strong></span><br>
 				{% endif %}
 			{% endfor %}
+			{% endwith %}
 		</div>
 	</div>
 	{% endif %}
 
-	{% if categories.exists %}
 	<!-- Categories -->
 	<div class="w3-border-bottom">
 		<h5>Categories</h5>
@@ -26,16 +27,19 @@
 			{% else %}
 				<span class="w3-text-blue"><strong>All Tours</strong></span><br>
 			{% endif %}
-			{% for cat in categories %}
-				{% if cat != category %}
-					<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a><br>
-				{% else %}
-					<span class="w3-text-blue"><strong>{{ cat.name }}</strong></span><br>
-				{% endif %}
-			{% endfor %}
+			{% if categories.exists %}
+				{% with cats=categories.all %}
+					{% for cat in cats %}
+						{% if cat != category %}
+							<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a><br>
+						{% else %}
+							<span class="w3-text-blue"><strong>{{ cat.name }}</strong></span><br>
+						{% endif %}
+					{% endfor %}
+				{% endwith %}
+			{% endif %}
 		</div>
 	</div>
-	{% endif %}
 
 	{% if not category.combo %}
 	<div class="w3-border-bottom">

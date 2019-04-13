@@ -90,11 +90,11 @@ def search_all_tours(request):
 	search_form = SearchForm(request.GET or None)
 	categories = Category.objects.filter(combo=False, available=True)
 	combos = Category.objects.filter(combo=True, available=True)
-	tours = Tour.objects.filter(available=True)
+	tours = Tour.objects.filter(available=True).prefetch_related('features', 'images')
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
 	if request.GET:
-		tours = tour_filter_search(request, tours, search_form).prefetch_related('features', 'images')
+		tours = tour_filter_search(request, tours, search_form)
 
 	context = {
 		'tours': tours,
@@ -110,7 +110,7 @@ def tour_search_by_category(request, category_slug):
 	categories = Category.objects.filter(combo=False, available=True)
 	combos = Category.objects.filter(combo=True, available=True)
 	category = get_object_or_404(Category, slug=category_slug, available=True)
-	tours = Tour.objects.filter(available=True, categories__in=[category.id])
+	tours = Tour.objects.filter(available=True, categories__in=[category.id]).prefetch_related('features', 'images')
 	min_pax = None
 
 	# Calculate minimun passenger of combo = larges amount of all tours.
