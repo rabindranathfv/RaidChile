@@ -1,4 +1,4 @@
-from django.db.models import Q, Prefetch, Max
+from django.db.models import Count, Q, Prefetch, Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
@@ -14,6 +14,14 @@ def tour_filter_search(request, queryset, search_form):
 	# Delete non-form and empty fields from the get request.
 	form_fields = search_form.fields.keys()
 	filter_parameters = { k:v for k,v in request.GET.items() if k in form_fields and k != 'locations' and v }
+
+	## Adding primitive search function by word coincidence:
+	search_words = None
+	if filter_parameters['search_terms']:
+		search_words = filter_parameters['search_terms'].split(" ", 5)
+		for word in search_words:
+			queryset = queryset.filter(name__icontains=word)
+
 
 	if 'locations' in request.GET.keys():
 		# Using getlist to obtain the multiple choices
@@ -43,7 +51,7 @@ def tour_filter_search(request, queryset, search_form):
 def home(request):
 	contact_form = ContactForm(request.POST or None)
 	search_form = SearchForm()
-	categories = Category.objects.filter(available=True, combo=True)[:4] # First 4 categories
+	categories = Category.objects.filter(available=True, combo=True).annotate(Count('tour')).prefetch_related('image')[:4] # First 4 categories
 
 	context = {
 		'categories': categories,
@@ -86,8 +94,7 @@ def search_all_tours(request):
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
 	if request.GET:
-		tours = tour_filter_search(request, tours, search_form)
-
+		tours = tour_filter_search(request, tours, search_form).prefetch_related('features', 'images')
 
 	context = {
 		'tours': tours,
@@ -110,12 +117,6 @@ def tour_search_by_category(request, category_slug):
 	if category.combo:
 		min_pax = tours.aggregate(Max('min_pax_number'))
 
-	# Initialize reservation miniform
-	cart_product_form = CartAddProductForm(
-		initial={
-			'adult_quantity': min_pax['min_pax_number__max'],
-		}
-	)
 	# If there are querystring parameters present in the url, proceed to filter tours.
 	if request.GET and not category.combo:
 		tours = tour_filter_search(request, tours, search_form)
@@ -126,11 +127,19 @@ def tour_search_by_category(request, category_slug):
 		'combos': combos,
 		'categories': categories,
 		'search_form': search_form,
-		'cart_product_form' : cart_product_form,
-		'min_pax': min_pax['min_pax_number__max'],
 	}
+
+
 	# If the category is a combo, don't display the filters or search bar.
 	if category.combo :
+		context['min_pax'] = min_pax['min_pax_number__max']
+		# Initialize reservation miniform
+		cart_product_form = CartAddProductForm(
+			initial={
+				'adult_quantity': min_pax['min_pax_number__max'],
+			}
+		)
+		context['cart_product_form'] = cart_product_form
 		return render(request, "raidchileapp/tour_combo.html", context)
 
 	return render(request, "raidchileapp/tour_search.html", context)
