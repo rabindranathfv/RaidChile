@@ -11,7 +11,7 @@
 
 <form action="{% if category %}{{ cat_url }}{% else %}{{ all_url }}{% endif %}" method="GET" id="search-form">
 	<!-- Search Bar Section -->
-	<div class="w3-container combo-header" style="background:url('{% if category %}{{ category.image.image.url }}{% else %}{% static 'img/hotel.jpg' %}{% endif %}')">
+	<div class="w3-container combo-header" style="background:url('{% if category %}{{ category.image.image.url }}{% else %}{% static 'img/banner-img.jpg' %}{% endif %}')">
 		<div class="w3-row w3-margin-top">
 			<div class="w3-col m1 w3-container"></div>
 			<div class="w3-col s12 m10">
@@ -59,7 +59,7 @@
 							<!-- Tour title -->
 							<h5 class="search-gallery-title">{{ tour.name }}</h5>
 							<!-- Tour adult sale prices -->
-							<h6 class="w3-opacity">From CLP<span class="number-font"> {{ tour.adult_sale_price }}</span></h6>
+							<h6 class="w3-opacity">From CLP<span class="number-font"> {{ tour.adult_reg_price }}</span></h6>
 							<h6>{{ tour.get_tour_type_display }} Tour: {{ tour.duration }} Hours</h6>
 							<!-- Features Icons -->
 							<p class="w3-large">
