@@ -154,6 +154,7 @@ class GalleryInline(admin.TabularInline):
 
 class TourAdmin(admin.ModelAdmin):
 	list_display = [
+	    'id',
 		'name',
 		'available',
 		'updated_at',
@@ -162,7 +163,7 @@ class TourAdmin(admin.ModelAdmin):
 		'available',
 		'updated_at',
 	]
-	list_editable = ['available']
+	list_editable = ['name', 'available']
 	fields = [
 		(
 			'updated_at',

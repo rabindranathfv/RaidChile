@@ -65,6 +65,7 @@ textarea.no-resize{
 	/* For phones: */
 .home-gallery-image{
 	min-height: 400px;
+	line-height: 400px;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
@@ -81,6 +82,7 @@ textarea.no-resize{
 	/* For tablets: */
 	.home-gallery-image{
 		min-height: 250px;
+		line-height: 250px;
 	}
 }
 
@@ -88,6 +90,7 @@ textarea.no-resize{
 	/* For desktop: */
 	.home-gallery-image{
 		min-height: 400px;
+		line-height: 400px;
 	}
 }
 
@@ -158,6 +161,7 @@ ul#id_locations{
 	/* For phones: */
 .search-gallery-image{
 	min-height: 400px;
+	line-height: 400px;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
@@ -173,6 +177,7 @@ ul#id_locations{
 	/* For tablets: */
 	.search-gallery-image{
 		min-height: 190px;
+		line-height: 190px;
 	}
 }
 
@@ -180,6 +185,7 @@ ul#id_locations{
 	/* For desktop: */
 	.search-gallery-image{
 		min-height: 240px;
+		line-height: 240px;
 	}
 }
 
