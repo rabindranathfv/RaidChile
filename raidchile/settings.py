@@ -40,7 +40,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rafaelv.pythonanywhere.com']
 
 
 # Application definition
@@ -144,7 +144,7 @@ STATIC_URL = '/static/'
 
 # User uploaded media directories and urls
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'tours/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 # Email configuration
