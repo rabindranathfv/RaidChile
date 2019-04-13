@@ -17,7 +17,8 @@ def tour_filter_search(request, queryset, search_form):
 
 	## Adding primitive search function by word coincidence:
 	search_words = None
-	if filter_parameters['search_terms']:
+
+	if filter_parameters.get('search_terms', None):
 		search_words = filter_parameters['search_terms'].split(" ", 5)
 		for word in search_words:
 			queryset = queryset.filter(name__icontains=word)
