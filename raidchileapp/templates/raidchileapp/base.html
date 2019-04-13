@@ -1,0 +1,45 @@
+<!doctype html>
+
+{% load static %}
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="RocketLabs">
+		<title>{% block page_title %}{% endblock page_title %}| Chile Raids</title>
+
+		<!--   Bootstrap 4 CSS    -->
+		<!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"> -->
+		<!--   W3 CSS    -->
+		<link rel="stylesheet" href="{% static 'css/w3.css' %}" type="text/css">
+		<!--   Font-Awesome CSS    -->
+		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+		<!--   Importing Fonts   -->
+		<!--<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
+		<!--   jQueryUI 1.12.1 CSS    -->
+		<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+		<!--   Custom CSS    -->
+		<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+	</head>
+
+	<body class="w3-light-grey">
+		<!-- Webpage navbar goes here (if applicable)-->
+		{% include "raidchileapp/navbar.html" %}
+
+		<!-- Webpage content goes inside this block -->
+		{% block content %}{% endblock content %}
+
+		<!-- Webpage footer goes here-->
+		{% include "raidchileapp/footer.html" %}
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery, Popper.js and Bootstrap JS in a bundle file, and jQueryUI 1.12.1 -->
+		<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+		<!--<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> -->
+		<script src="{% static 'js/jquery-ui-1.12.1.min.js' %}"></script>
+		<script src="{% static 'js/behaviour.js' %}" ></script>
+		<!-- Google's ReCaptcha Script -->
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+		{% block extra_js %}{% endblock extra_js %}
+	</body>
+</html>

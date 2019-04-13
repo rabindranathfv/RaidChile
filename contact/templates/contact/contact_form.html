@@ -1,0 +1,30 @@
+{% include "contact/messages.html" %}
+
+<form class="w3-padding-16" action="{% url 'contact:form_submit' %}" method="POST">
+	{% csrf_token %}
+	<div class="w3-row-padding">
+		<div class="w3-col s12 w3-margin-bottom">
+			{{ contact_form.full_name }}
+		</div>
+	</div>
+	<div class="w3-row-padding">
+		<div class="w3-half w3-margin-bottom">
+			{{ contact_form.email }}
+		</div>
+		<div class="w3-half w3-margin-bottom">
+			{{ contact_form.phone }}
+		</div>
+	</div>
+	<div class="w3-row-padding">
+		<div class="w3-col s12 w3-margin-bottom">
+			{{ contact_form.message }}
+		</div>
+	</div>
+	<div class="w3-row-padding w3-center">
+		<div class="g-recaptcha" style="display: inline-block;" data-sitekey="6LdT850UAAAAAEkg5Pf3oTlUwb-sjkaX0GbTC_hh"></div>
+		<!-- Google's Recaptcha Widget -->
+	</div>
+	<div class="w3-row-padding w3-center">
+		<button type="submit" class="w3-button w3-black w3-padding-large w3-margin-right"><i class="fa fa-send fa-fw"></i> Send Message</button>
+	</div>
+</form>

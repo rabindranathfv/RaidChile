@@ -1,0 +1,181 @@
+{% extends "raidchileapp/base.html" %}
+{% load static %}
+
+{% block page_title %} Home {% endblock page_title %}
+
+{% block content %}
+
+	<!-- Main banner/header with form goes here -->
+	{% include "raidchileapp/main_banner_w_form.html" %}
+
+	<!-- Page content -->
+	<div class="w3-content home-content">
+
+		<div class="w3-container w3-margin-top" id="tours">
+			<h3>Tour Categories</h3>
+			<p>Insertemos acá un slogan interesante que represente los servicios de Chile Raids (In english).</p>
+		</div>
+
+		<!-- Product Gallery in Rows -->
+		<div class="w3-row-padding w3-padding-16">
+			{% for cat in categories %}
+				<div class="w3-half w3-margin-bottom">
+					<div class="home-gallery-image w3-white w3-hide-small" style="background: url('{{ cat.image.image.url }}')"></div>
+					<img src="{{ cat.image.image.url }}" alt="{{ cat.image.alternative }}" class="full-width-img w3-hide-medium w3-hide-large">
+					<div class="w3-container w3-white w3-card-2">
+						<div class="w3-center">
+							<h3>{{ cat.name }}</h3>
+
+							<p class="home-gallery-desc">{{ cat.short_desc }}</p>
+
+							<h4 class="w3-margin-bottom"><em>{{ categories.tour__count }} Tour{{ categories.tour__count|pluralize }}</em></h4>
+
+							<a class="w3-button w3-black w3-margin-bottom w3-padding-large" href="{% url 'raidchileapp:tour_search_by_category' cat.slug %}">See details</a>
+						</div>
+
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+		<!-- Transport Section (commented out until it is discussed again )-->
+		<!--<div class="w3-container w3-row-padding w3-white w3-margin-bottom" id="transport">
+
+			<h3>Servicios de Transporte</h3>
+			<p>También ofrecemos diferentes medios de transporte para movilizar a su grupo.</p>
+
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/plane.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Aviones</h4>
+					<h6 class="w3-opacity">Desde CLP 299</h6>
+					<h6>De 10 a 40 personas</h6>
+				</div>
+			</div>
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/chile_boat.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Botes</h4>
+					<h6 class="w3-opacity">Desde CLP 199</h6>
+					<h6>De 10 a 25 personas</h6>
+				</div>
+			</div>
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/chile_taxis.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Taxis</h4>
+					<h6 class="w3-opacity">Desde CLP 99</h6>
+					<h6>De 1 a 5 personas</h6>
+				</div>
+			</div>
+			<div class="w3-col s6 l3 w3-margin-bottom">
+				<img src="{% static 'img/busses.jpg' %}" alt="Norway" class="full-width-img">
+				<div class="w3-container w3-card-2">
+					<h4>Autobuses</h4>
+					<h6 class="w3-opacity">Desde CLP 79</h6>
+					<h6>De 6 a 30 personas</h6>
+				</div>
+			</div>
+		</div> -->
+
+		<!-- About Section -->
+		<div class="w3-row-padding" id="about">
+			<div class="w3-col l4">
+				<h3>About us</h3>
+				<h6 class='justify-text'>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+					esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+					cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+					id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+				</h6>
+				<p>We accept: <i class="fa fa-credit-card fa-2x"></i> <i class="fa fa-cc-mastercard fa-2x"></i> <i class="fa fa-cc-amex fa-2x"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal fa-2x"></i></p>
+			</div>
+			<div class="w3-col l8">
+				<!-- Image of location/map -->
+				<img src="{% static 'img/map.jpg' %}" class="w3-image w3-greyscale" class="full-width-img">
+			</div>
+		</div>
+
+		<div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
+			<div class="w3-third"><i class="fa fa-map-marker w3-text-red"></i> Santiago, Chile</div>
+			<div class="w3-third"><i class="fa fa-phone w3-text-red"></i> Phone: +56 9 151515</div>
+			<div class="w3-third"><i class="fa fa-envelope w3-text-red"></i> Email: mail@mail.com</div>
+		</div>
+		<!-- END About Section -->
+
+		<!-- Additional services or offers -->
+		<div class="w3-panel w3-red w3-leftbar w3-padding-16">
+			<div class="w3-row">
+				<div class="w3-col s2 m1 w3-center">
+					<i class="fa fa-info w3-blue w3-padding w3-margin-right"></i>
+				</div>
+				<div class="w3-col s10 m11">
+					<h5> For private tours, please contact us to negotiate pricing and conditions. Thank you.</h5>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-container">
+			<h3>Tours Locations</h3>
+			<h6>You can find a tour in any of these beautiful locations and more:</h6>
+		</div>
+
+		<div class="w3-row-padding w3-padding-16 w3-text-white w3-large">
+			<div class="w3-half w3-margin-bottom">
+				<div class="w3-display-container">
+					<img src="{% static 'img/cinqueterre.jpg' %}" alt="Cinque Terre" class="full-width-img">
+					<span class="w3-display-bottomleft w3-padding">Santiago</span>
+				</div>
+			</div>
+			<div class="w3-half">
+				<div class="w3-row-padding" style="margin:0 -16px">
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/newyork2.jpg' %}" alt="New York" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">Valle Nevado</span>
+						</div>
+					</div>
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/sanfran.jpg' %}" alt="San Francisco" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">Ferellones</span>
+						</div>
+					</div>
+				</div>
+				<div class="w3-row-padding" style="margin:0 -16px">
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/pisa.jpg' %}" alt="Pisa" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">Valle de Casablanca</span>
+						</div>
+					</div>
+					<div class="w3-half w3-margin-bottom">
+						<div class="w3-display-container">
+							<img src="{% static 'img/paris.jpg' %}" alt="Paris" class="full-width-img">
+							<span class="w3-display-bottomleft w3-padding">Valparaiso</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Contanc us Section -->
+		{% if contact_form %}
+		<div class="w3-container" id="contact">
+			<h2>Contact Us</h2>
+			<p>If you have any questions, do not hesitate to ask them.</p>
+			<i class="fa fa-map-marker w3-text-red width30"></i> Santiago, Chile<br>
+			<i class="fa fa-phone w3-text-red width30"></i> Phone: +56 9 151515<br>
+			<i class="fa fa-envelope w3-text-red width30"> </i> Email: mail@mail.com<br>
+			<!-- Contact Form fields and submit button -->
+			{% include "contact/contact_form.html" %}
+		</div>
+		{% endif %}
+
+		<!-- End page content -->
+	</div>
+{% endblock content %}

@@ -1,0 +1,92 @@
+{% extends "raidchileapp/base.html" %}
+{% load static %}
+
+{% block page_title %}{% if category %} {{ category.name }} {% else %} Tour Combos {% endif %} {% endblock page_title %}
+
+{% block content %}
+
+{# Setting url variables #}
+{% url 'raidchileapp:search_all_tours' as all_url %}
+{% url 'raidchileapp:tour_search_by_category' category.slug as cat_url %}
+
+	<!-- Image header -->
+	<div class="w3-container w3-padding-large combo-header" style="background:url('{{ category.image.image.url }}')"></div>
+
+	<!--  Content wrapper row (Contains sidebar and search results)  -->
+	<div class="w3-row w3-white">
+		<div class="w3-col m3 l2">
+			<!-- Filter Search Sidebar goes here-->
+			{% include "raidchileapp/search_sidebar.html" %}
+		</div>
+		<div class="w3-col m9 l10">
+			<!--  Search result rows  -->
+			<div class="w3-center">
+				{% if category %}
+					<h2> {{ category.name }} </h2>
+					{% if category.combo %}
+						<h3> {{ category.short_desc }} </h3>
+						<h5> Minimun passengers: {{ min_pax }} ppl. </h5>
+						<div class="w3-row">
+							<div class="w3-col s1 m2 l4 w3-container"></div>
+							<div class="w3-col s10 m8 l4 ">
+								<form action="{% url 'cart:cart_add_combo' category.slug %}" method="POST" id="cart_add_form">
+									{% csrf_token %}
+									{{ cart_product_form.update }}
+									<p class="min_pax_error w3-small w3-text-red" style="display: none;"><b>The minimum number of passengers must be greater or equal to {{ min_pax }}!</b></p>
+									<div class="w3-row">
+										<div class="w3-col s6 m4 w3-padding-small">
+											{{ cart_product_form.adult_quantity.label }}
+											{{ cart_product_form.adult_quantity }}
+										</div>
+										<div class="w3-col s6 m4 w3-padding-small">
+											{{ cart_product_form.children_quantity.label }}
+											{{ cart_product_form.children_quantity }}
+										</div>
+										<div class="w3-third w3-center">
+											<button type="submit" for="cart_add_form" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin w3-hide-small w3-hide-medium" id="submit-reserve">Reserve Now</button>
+											<!-- Mobile button -->
+											<button type="submit" for="cart_add_form" class="w3-button w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin-left mytop-m w3-hide-large" id="submit-reserve">Reserve Now!</button>
+											<div style="display: none;" class="min_pax">{{ min_pax }}</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					{% endif %}
+				{% else %}
+					<h2> Tour Combo </h2>
+				{% endif %}
+			</div>
+			<div class="w3-row-padding w3-margin-top">
+				{% for tour in tours %}
+					<div class="w3-col m6 l4 w3-margin-bottom">
+						<div class="search-gallery-image w3-white w3-hide-small" style="background: url('{{ tour.images.all.first.image.url }}')"></div>
+						<img src="{{ tour.images.all.first.image.url }}" alt="{{ tour.images.all.first.alternative }}" class="full-width-img w3-hide-medium w3-hide-large">
+						<div class="w3-container w3-white w3-card-2">
+							<!-- Tour title -->
+							<h5 class="search-gallery-title">{{ tour.name }}</h5>
+							<!-- Tour adult sale prices -->
+							<h6 class="w3-opacity">From CLP<span class="number-font"> {{ tour.adult_sale_price }}</span></h6>
+							<h6>{{ tour.get_tour_type_display }} Tour: {{ tour.duration }} Hours</h6>
+							<!-- Features Icons -->
+							<p class="w3-large">
+								{% for feature in tour.features.all %}
+								<i class="fa {{ feature.icon }}"></i>
+								{% endfor %}
+							</p>
+							<!-- Tour details button -->
+							<a class="w3-button w3-block w3-black w3-margin-bottom" href="{{ tour.get_absolute_url }}">See more...</a>
+						</div>
+					</div>
+				{% empty %}
+					<div class="w3-col s12 w3-center w3-padding-64">
+						<i class="w3-text-dark-gray fa fa-frown-o fa-5x"></i>
+						<h4><em>We're sorry, there are no matching tours available for this combo right now.</em></h4>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}
+
+{% block extra_js %}{% endblock extra_js %}

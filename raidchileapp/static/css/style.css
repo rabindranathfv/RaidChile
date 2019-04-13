@@ -1,0 +1,201 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Raleway'), local('Raleway-Regular'), url(../fonts/Raleway-Regular.ttf) format('truetype');
+}
+
+body,h1,h2,h3,h4,h5,h6 {
+	font-family: 'Raleway', Arial, Helvetica, sans-serif;
+}
+
+/*  ==========   Header Styles   ==========  */
+
+.main-banner{
+	max-width: 1500px;
+}
+.banner-img {
+	min-width: 1000px;
+}
+
+/*  ==========   Home page content Styles   ==========  */
+
+.home-content{
+	max-width: 1532px;
+}
+
+.full-width-img{
+	width: 100%;
+}
+
+.justify-text{
+	text-align: justify;
+	text-justify: inter-word;
+}
+
+
+.width30{
+	width: 30px;
+}
+
+.bot-margin-23{
+	margin-bottom: 23px;
+}
+
+button.searchbar-btn {
+	border-left: none !important; /* Prevent double borders */
+	cursor: pointer;
+}
+
+textarea.no-resize{
+	resize: none;
+}
+
+.pointer-cursor{
+	cursor:pointer
+}
+
+	/* For phones: */
+.home-gallery-image{
+	min-height: 400px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
+.home-gallery-desc{
+	margin-top: 5px;
+	height: 45px;
+	width: 100%;
+	overflow-y: auto;
+}
+
+@media only screen and (min-width: 601px) {
+	/* For tablets: */
+	.home-gallery-image{
+		min-height: 250px;
+	}
+}
+
+@media only screen and (min-width: 993px) {
+	/* For desktop: */
+	.home-gallery-image{
+		min-height: 400px;
+	}
+}
+
+/*  ==========   Tour Details content Styles   ==========  */
+
+.hidden{
+	display: none;
+}
+
+.slideshow-slide{
+
+}
+
+.slide-thumbnail{
+	width: 100%;
+	cursor:pointer;
+}
+
+.slideshow-area{
+	max-width: 800px
+}
+
+.better-hr{
+	border: 1px solid #AAA;
+}
+
+/*  ==========   Comment section Styles   ==========  */
+
+.comment-box{
+	max-width: 1024px;
+}
+
+.comment-right-padding{
+	padding-right: 16px;
+}
+
+.avatar-mwidth{
+	max-width: 96px;
+}
+
+/*  ==========   Search section Styles   ==========  */
+
+ul#id_locations{
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+.combo-header{
+	min-height: 130px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
+.search-header{
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
+
+.mytop-m{
+	margin-top: 27px;
+}
+
+	/* For phones: */
+.search-gallery-image{
+	min-height: 400px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
+.search-gallery-title{
+	height: 55px;
+	width: 100%;
+	overflow-y: auto;
+}
+
+@media only screen and (min-width: 601px) {
+	/* For tablets: */
+	.search-gallery-image{
+		min-height: 190px;
+	}
+}
+
+@media only screen and (min-width: 993px) {
+	/* For desktop: */
+	.search-gallery-image{
+		min-height: 240px;
+	}
+}
+
+/*  ==========   Cart Details Styles   ==========  */
+
+.middle-algn{
+	vertical-align: middle !important;
+}
+
+.pax-cell{
+	width: 250px;
+}
+
+.number-font{
+	font-family: sans-serif !important;
+	text-align: center !important;
+}
+
+.disabled-pointer{
+	cursor: not-allowed;
+}
+
+.small-tour-ul{
+	margin: 0px;
+	padding-left: 20px;
+}

@@ -1,0 +1,22 @@
+Hi, this is an automatic alert from Chile Raids.
+
+A new contact message was sent by an user:
+
+Full name: {{ contact_msg.full_name }}
+Email: {{ contact_msg.email }}
+{% if contact_msg.phone %}
+Phone: {{ contact_msg.phone }}
+{% endif %}
+Message:{{ contact_msg.message|linebreaks }}
+
+
+If you want to see this message inside the Chile Raids Admin site, please copy and paste the following link into your browser's url bar:
+
+{{ contact_msg_full_admin_url }}
+
+
+Please do NOT reply to this automated message.
+
+
+Cheers,
+Chile Raids Admin Site.

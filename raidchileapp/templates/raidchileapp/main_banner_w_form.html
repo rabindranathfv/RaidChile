@@ -1,0 +1,14 @@
+{% load static %}
+<!-- Main Header/Banner -->
+<header class="w3-display-container w3-content main-banner">
+	<img class="w3-image banner-img" src="{% static 'img/hotel.jpg' %}" alt="The Hotel" width="1500" height="800">
+	<div class="w3-display-left w3-padding w3-col l6 m8">
+		<div class="w3-container w3-red">
+			<h2><i class="fa fa-bus w3-margin-right"></i>Tour Search</h2>
+		</div>
+		<div class="w3-container w3-white w3-padding-16">
+			<!-- Product(Tours) search form fields and submit button -->
+			{% include "raidchileapp/banner_product_search_form.html" %}
+		</div>
+	</div>
+</header>

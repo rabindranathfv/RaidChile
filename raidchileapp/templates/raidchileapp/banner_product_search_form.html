@@ -1,0 +1,22 @@
+{% if search_form %}
+<form action="{% url 'raidchileapp:search_all_tours' %}" method="GET">
+	<div class="w3-row-padding" style="margin:8px -16px;">
+		<div class="w3-half w3-margin-bottom">
+			<label><i class="fa fa-money"></i><i class="fa fa-level-up fa-fw"></i> Min. Price (CLP) </label>
+			{{ search_form.min_price }}
+		</div>
+		<div class="w3-half">
+			<label><i class="fa fa-money"></i><i class="fa fa-level-down fa-fw"></i> Max. Price (CLP)</label>
+			{{ search_form.max_price }}
+		</div>
+	</div>
+	<div class="w3-row w3-padding" style="margin:8px -16px;">
+		<div class="w3-col s9">
+			{{ search_form.search_terms }}
+		</div>
+		<div class="w3-col s3">
+			<button type="submit" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search fa-fw"></i> <span class="w3-hide-small">Search</span></button>
+		</div>
+	</div>
+</form>
+{% endif %}
