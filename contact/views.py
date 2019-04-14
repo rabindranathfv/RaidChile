@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from .forms import ContactForm
 # Create your views here.
@@ -32,8 +33,6 @@ def is_captcha_valid(request):
 
 
 
-
-
 def form_submit(request):
 	form = ContactForm(request.POST or None)
 	if request.POST :
@@ -49,8 +48,8 @@ def form_submit(request):
 					'contact_msg': contact_msg,
 					'contact_msg_full_admin_url': contact_msg_full_admin_url,
 				}
-				email_text = render_to_string('emails/new_contact_admin_alert.txt', context)
 				email_html = render_to_string('emails/new_contact_admin_alert.html', context)
+				email_text = strip_tags(email_html)
 				# Obtain the recipients list from the user group called "Emails"
 				recipients_list = list(User.objects.filter(groups__name='Emails', is_staff=True).values_list('email', flat=True))
 				print (recipients_list)

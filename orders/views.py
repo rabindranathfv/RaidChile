@@ -5,6 +5,7 @@ from django.core.mail import EmailMultiAlternatives, send_mail
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from cart.cart import Cart
 from raidchileapp.models import Category
@@ -56,8 +57,9 @@ def order_create(request):
 				'discount': discount,
 				'total': subtotal-discount,
 			}
-			email_text = render_to_string('emails/user_reservation_confirmation.txt', context)
+
 			email_html = render_to_string('emails/user_reservation_confirmation.html', context)
+			email_text = strip_tags(email_html)
 
 			# Send email to the reserver's email address
 			subject = 'Tour Reservations Confirmed! - Chile Raids'
