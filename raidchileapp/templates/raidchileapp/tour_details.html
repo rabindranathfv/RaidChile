@@ -1,5 +1,6 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block page_title %} {{ tour.name }} {% endblock page_title %}
 
@@ -84,13 +85,13 @@
 								</thead>
 								<tr>
 									<th>Prices</th>
-									<td>CLP<span class="number-font"> {{ tour.adult_reg_price }}</span></td>
-									<td>CLP<span class="number-font"> {{ tour.children_reg_price }}</span></td>
+									<td><span class="number-font">CLP {{ tour.adult_reg_price|intcomma }}</span></td>
+									<td><span class="number-font">CLP {{ tour.children_reg_price|intcomma }}</span></td>
 								</tr>
 								<!--<tr>
 									<th>Sale</th>
-									<td>CLP<span class="number-font"> {{ tour.adult_sale_price }}</span></td>
-									<td>CLP<span class="number-font"> {{ tour.children_sale_price }}</span></td>
+									<td>CLP<span class="number-font"> {{ tour.adult_sale_price|intcomma }}</span></td>
+									<td>CLP<span class="number-font"> {{ tour.children_sale_price|intcomma }}</span></td>
 								</tr>-->
 							</table>
 					</div>

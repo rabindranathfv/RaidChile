@@ -1,5 +1,6 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block page_title %} Your Pending Reservations {% endblock page_title %}
 
@@ -56,13 +57,13 @@
 						<!-- Tour  prices -->
 						<td class="middle-algn w3-center">
 							<div class="w3-row">{{ item.update_quantity_form.adult_quantity.label }}:</div>
-							<div class="w3-row number-font w3-small">CLP {{ item.adult_reg_price }}</div>
+							<div class="w3-row number-font w3-small">CLP {{ item.adult_reg_price|intcomma }}</div>
 							<div class="w3-row">{{ item.update_quantity_form.children_quantity.label }}:</div>
-							<div class="w3-row number-font w3-small">CLP {{ item.children_reg_price }}</div>
+							<div class="w3-row number-font w3-small">CLP {{ item.children_reg_price|intcomma }}</div>
 						</td>
 						<!-- Tour total prices -->
 						<td class="middle-algn number-font">
-							<h6 class="number-font w3-medium">CLP {{ item.total_reg_price }}</h6>
+							<h6 class="number-font w3-medium">CLP {{ item.total_reg_price|intcomma }}</h6>
 						</td>
 						<!-- Remove tour -->
 						<td class="middle-algn w3-center">
@@ -81,7 +82,7 @@
 					<td style="text-align: right;" class="middle-algn"><b>Sub-Total</b></td>
 					<td colspan="2"></td>
 					<td class="number-font middle-algn" colspan="num">
-						CLP {{ subtotal }}
+						CLP {{ subtotal|intcomma }}
 					</td>
 					<td colspan="1"></td>
 				</tr>
@@ -99,10 +100,10 @@
 							</ul>
 						</td>
 						<td class="number-font middle-algn" colspan="num">
-							CLP -{{ discount }}
+							CLP -{{ discount|intcomma }}
 						</td>
 						<td colspan="1" class="w3-small middle-algn">
-							(CLP {{ combo.combo_discount }} per passenger)
+							(CLP {{ combo.combo_discount|intcomma }} per passenger)
 						</td>
 					</tr>
 					{% endwith %}
@@ -111,7 +112,7 @@
 					<td style="text-align: right;" class="middle-algn"><b>Total</b></td>
 					<td colspan="2"></td>
 					<td class="number-font middle-algn" colspan="num">
-						CLP {{ total }}
+						CLP {{ total|intcomma }}
 					</td>
 					<td colspan="1"></td>
 				</tr>
@@ -141,7 +142,7 @@
 										<h6>X</h6>
 									</div>
 									<div class="w3-col s7">
-										<h6 class="number-font w3-medium w3-left">CLP {{ item.adult_reg_price }}</h6>
+										<h6 class="number-font w3-medium w3-left">CLP {{ item.adult_reg_price|intcomma }}</h6>
 									</div>
 								</div>
 								<!-- Childrens Price-->
@@ -154,7 +155,7 @@
 										<h6>X</h6>
 									</div>
 									<div class="w3-col s7">
-										<h6 class="number-font w3-medium w3-left">CLP {{ item.children_reg_price }}</h6>
+										<h6 class="number-font w3-medium w3-left">CLP {{ item.children_reg_price|intcomma }}</h6>
 									</div>
 								</div>
 								<div class="w3-row w3-padding-16 w3-margin-bottom">
@@ -167,7 +168,7 @@
 						</div>
 						<div class="w3-third w3-center">
 							<h4 style="margin-bottom: 0px;">Total Price</h4>
-							<h5 class="number-font" style="margin-top: 0px;">CLP {{ item.total_reg_price }}</h5>
+							<h5 class="number-font" style="margin-top: 0px;">CLP {{ item.total_reg_price|intcomma }}</h5>
 							<h6 class="w3-padding-16"><a href="{% url 'cart:cart_remove' product.id %}" class="w3-hover-text-red"><i class="fa fa-fw fa-trash"></i>Remove</a></h6>
 						</div>
 					</div>
@@ -182,7 +183,7 @@
 						<h4><b>Sub-Total</b></h4>
 					</div>
 					<div class="w3-col s7">
-						<h5 class="number-font w3-right">CLP {{ subtotal }}</h5>
+						<h5 class="number-font w3-right">CLP {{ subtotal|intcomma }}</h5>
 					</div>
 				</div>
 			</div>
@@ -200,9 +201,9 @@
 							</ul>
 						</div>
 						<div class="w3-col s7">
-							<h5 class="number-font w3-right">CLP -{{ discount }}</h5>
+							<h5 class="number-font w3-right">CLP -{{ discount|intcomma }}</h5>
 							<div class="w3-row">
-								<h4 class="w3-small w3-right">(CLP {{ combo.combo_discount }} per passenger)</h4>
+								<h4 class="w3-small w3-right">(CLP {{ combo.combo_discount|intcomma }} per passenger)</h4>
 							</div>
 						</div>
 					</div>
@@ -216,7 +217,7 @@
 						<h4><b>Total</b></h4>
 					</div>
 					<div class="w3-col s7">
-						<h5 class="number-font w3-right">CLP {{ total }}</h5>
+						<h5 class="number-font w3-right">CLP {{ total|intcomma }}</h5>
 
 					</div>
 				</div>
