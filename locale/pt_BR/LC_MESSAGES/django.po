@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-15 11:34-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: raidchile/settings.py:144
+msgid "English"
+msgstr "Inglês"
+
+#: raidchile/settings.py:145
+msgid "Spanish"
+msgstr "Espanhol"
+
+#: raidchile/settings.py:146
+msgid "Brazilian Portuguese"
+msgstr "Português do Brasil"
+
+#: raidchile/urls.py:23
+msgid "Main Menu"
+msgstr "Menu Principal"
+
+#: raidchile/urls.py:24 raidchile/urls.py:25
+msgid "Chile Raids - Administration"
+msgstr "Chile Raids - Administração"

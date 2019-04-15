@@ -1,20 +1,29 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 
-{% block page_title %} Your Pending Reservations {% endblock page_title %}
+{% block page_title %} {% trans "Your Pending Reservations" %} {% endblock page_title %}
 
 {% block content %}
 
 	<div class="w3-container w3-center w3-margin-top">
-		<h2>Your Pending Reservations : {{ cart|length }} Tour{{ cart|length|pluralize }}</h2>
-		<h6>If you reserve all the tours in a combo you'll get a discount per passenger!</h6>
+		<h2>
+		{% blocktrans count cart_l=cart|length trimmed %}
+		Your Pending Reservation: {{ cart_l }} Tour
+		{% plural %}
+		Your Pending Reservations: {{ cart_l }} Tours
+		{% endblocktrans %}
+		</h2>
+		<h6>{% trans "If you reserve all the tours in a combo you'll get a discount per passenger!" %}</h6>
 	</div>
 
 	<div class="w3-container w3-padding-32" style="padding-top: 0px !important;">
 		<div class="w3-row">
 			<div class="w3-col l3">
-				<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-button w3-padding-large w3-white w3-border w3-left w3-hide-small w3-hide-medium w3-block"><i class="fa fa-reply fa-fw"></i> Add more tours</a>
+				<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-button w3-padding-large w3-white w3-border w3-left w3-hide-small w3-hide-medium w3-block">
+					<i class="fa fa-reply fa-fw"></i> {% trans "Add more tours" %}
+				</a>
 			</div>
 		</div>
 		<!-- Table only displays in large screens -->
@@ -22,10 +31,10 @@
 			<thead>
 				<tr class="w3-red">
 					<th>Tour</th>
-					<th class="w3-center">Passengers</th>
-					<th class="w3-center">Prices</th>
-					<th class="w3-center">Total Price</th>
-					<th class="w3-center">Remove</th>
+					<th class="w3-center">{% trans "Passengers" %}</th>
+					<th class="w3-center">{% trans "Prices" %}</th>
+					<th class="w3-center">{% trans "Total Price" %}</th>
+					<th class="w3-center">{% trans "Remove" %}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,7 +48,15 @@
 							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
 								{% csrf_token %}
 								{{ item.update_quantity_form.update }}
-								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;"><b>Minimum {{ product.min_pax_number }} Passengers!</b></p>
+								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;">
+									<b>
+									{% blocktrans count min_pax_n=product.min_pax_number trimmed %}
+									Minimum {{ min_pax_n }} Passenger!
+									{% plural %}
+									Minimum {{ min_pax_n }} Passengers!
+									{% endblocktrans %}
+									</b>
+								</p>
 								<div class="w3-cell w3-mobile">
 									{{ item.update_quantity_form.adult_quantity.label }}
 									{{ item.update_quantity_form.adult_quantity }}
@@ -49,7 +66,7 @@
 									{{ item.update_quantity_form.children_quantity }}
 								</div>
 								<div class="w3-cell w3-mobile w3-cell-bottom">
-									<input type="submit" value="Update" class="w3-button w3-border w3-blue submit-reserve">
+									<input type="submit" value="{% trans 'Update' %}" class="w3-button w3-border w3-blue submit-reserve">
 									<div style="display: none;" class="min_pax">{{ product.min_pax_number }}</div>
 								</div>
 							</form>
@@ -67,19 +84,21 @@
 						</td>
 						<!-- Remove tour -->
 						<td class="middle-algn w3-center">
-							<a href="{% url 'cart:cart_remove' product.id %}" class="w3-hover-text-red"><i class="fa fa-fw fa-trash"></i>Remove</a>
+							<a href="{% url 'cart:cart_remove' product.id %}" class="w3-hover-text-red">
+								<i class="fa fa-fw fa-trash"></i>{% trans "Remove" %}
+							</a>
 						</td>
 					</tr>
 					{% endwith %}
 				{% empty %}
 				<tr>
 					<td class="w3-center w3-padding-32 w3-opacity-min" colspan="6">
-						<h3>You have no tour reservations yet!</h3>
+						<h3>{% trans "You have no tour reservations yet!" %}</h3>
 					</td>
 				</tr>
 				{% endfor %}
 				<tr class="w3-pale-red w3-text-dark-grey">
-					<td style="text-align: right;" class="middle-algn"><b>Sub-Total</b></td>
+					<td style="text-align: right;" class="middle-algn"><b>{% trans "Sub-Total" %}</b></td>
 					<td colspan="2"></td>
 					<td class="number-font middle-algn" colspan="num">
 						CLP {{ subtotal|intcomma }}
@@ -91,7 +110,9 @@
 				<!-- Combo Discount row -->
 					{% with tours=combo.tours.all %}
 					<tr class="w3-pale-blue w3-text-dark-grey">
-						<td style="text-align: right;" class="middle-algn"><b>{{ combo.name }} Discount</b></td>
+						<td style="text-align: right;" class="middle-algn">
+							<b>{% blocktrans with combo_name=combo.name %}{{ combo_name }} Discount{% endblocktrans %}</b>
+						</td>
 						<td colspan="2" class="w3-small middle-algn">
 							<ul class="small-tour-ul">
 								{% for tour in tours %}
@@ -103,13 +124,13 @@
 							CLP -{{ discount|intcomma }}
 						</td>
 						<td colspan="1" class="w3-small middle-algn">
-							(CLP {{ combo.combo_discount|intcomma }} per passenger)
+							({% blocktrans with combo_discount=combo.combo_discount|intcomma %}CLP {{ combo_discount }} per passenger{% endblocktrans %})
 						</td>
 					</tr>
 					{% endwith %}
 				{% endif %}
 				<tr class="w3-red">
-					<td style="text-align: right;" class="middle-algn"><b>Total</b></td>
+					<td style="text-align: right;" class="middle-algn"><b>{% trans "Total" %}</b></td>
 					<td colspan="2"></td>
 					<td class="number-font middle-algn" colspan="num">
 						CLP {{ total|intcomma }}
@@ -130,7 +151,15 @@
 							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
 								{% csrf_token %}
 								{{ item.update_quantity_form.update }}
-								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;"><b>Minimum {{ product.min_pax_number }} Passengers!</b></p>
+								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;">
+									<b>
+									{% blocktrans count min_pax_n=product.min_pax_number trimmed %}
+									Minimum {{ min_pax_n }} Passenger!
+									{% plural %}
+									Minimum {{ min_pax_n }} Passengers!
+									{% endblocktrans %}
+									</b>
+								</p>
 
 								<!-- Adult's Price-->
 								{{ item.update_quantity_form.adult_quantity.label }}
@@ -160,16 +189,20 @@
 								</div>
 								<div class="w3-row w3-padding-16 w3-margin-bottom">
 									<div class="w3-col s4">
-										<input type="submit" value="Update" class="w3-button w3-block w3-border w3-blue submit-reserve">
+										<input type="submit" value="{% trans 'Update' %}" class="w3-button w3-block w3-border w3-blue submit-reserve">
 										<div style="display: none;" class="min_pax">{{ product.min_pax_number }}</div>
 									</div>
 								</div>
 							</form>
 						</div>
 						<div class="w3-third w3-center">
-							<h4 style="margin-bottom: 0px;">Total Price</h4>
+							<h4 style="margin-bottom: 0px;">{% trans "Total Price" %}</h4>
 							<h5 class="number-font" style="margin-top: 0px;">CLP {{ item.total_reg_price|intcomma }}</h5>
-							<h6 class="w3-padding-16"><a href="{% url 'cart:cart_remove' product.id %}" class="w3-hover-text-red"><i class="fa fa-fw fa-trash"></i>Remove</a></h6>
+							<h6 class="w3-padding-16">
+								<a href="{% url 'cart:cart_remove' product.id %}" class="w3-hover-text-red">
+									<i class="fa fa-fw fa-trash"></i>{% trans "Remove" %}
+								</a>
+							</h6>
 						</div>
 					</div>
 					
@@ -180,7 +213,7 @@
 			<div class="w3-container w3-border-top w3-border-left w3-border-right w3-pale-red w3-card w3-text-dark-grey">
 				<div class="w3-row">
 					<div class="w3-col s5">
-						<h4><b>Sub-Total</b></h4>
+						<h4><b>{% trans "Sub-Total" %}</b></h4>
 					</div>
 					<div class="w3-col s7">
 						<h5 class="number-font w3-right">CLP {{ subtotal|intcomma }}</h5>
@@ -193,7 +226,9 @@
 				<div class="w3-container w3-border-top w3-border-left w3-border-right w3-pale-blue w3-card w3-text-dark-grey">
 					<div class="w3-row">
 						<div class="w3-col s5">
-							<h4><b>{{ combo.name }} Discount</b></h4>
+							<h4>
+								<b>{% blocktrans with combo_name=combo.name %}{{ combo_name }} Discount{% endblocktrans %}</b>
+							</h4>
 							<ul class="small-tour-ul w3-small w3-margin-bottom">
 								{% for tour in tours %}
 									<li>{{ tour.name }}</li>
@@ -203,7 +238,9 @@
 						<div class="w3-col s7">
 							<h5 class="number-font w3-right">CLP -{{ discount|intcomma }}</h5>
 							<div class="w3-row">
-								<h4 class="w3-small w3-right">(CLP {{ combo.combo_discount|intcomma }} per passenger)</h4>
+								<h4 class="w3-small w3-right">
+								({% blocktrans with combo_discount=combo.combo_discount|intcomma %}CLP {{ combo_discount }} per passenger{% endblocktrans %})
+							</h4>
 							</div>
 						</div>
 					</div>
@@ -214,7 +251,7 @@
 			<div class="w3-container w3-border-top w3-border-left w3-border-right w3-red w3-card">
 				<div class="w3-row">
 					<div class="w3-col s5">
-						<h4><b>Total</b></h4>
+						<h4><b>{% trans "Total" %}</b></h4>
 					</div>
 					<div class="w3-col s7">
 						<h5 class="number-font w3-right">CLP {{ total|intcomma }}</h5>
@@ -226,15 +263,18 @@
 		<div class="w3-row w3-margin-bottom">
 			<div class="w3-col s12 m5 l9">
 				<div class="w3-container"></div>
-				<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-button w3-padding-large w3-white w3-border w3-hide-large w3-block w3-margin-top"><i class="fa fa-reply fa-fw"></i> Add more tours</a>
+				<a href="{% url 'raidchileapp:search_all_tours' %}" class="w3-button w3-padding-large w3-white w3-border w3-hide-large w3-block w3-margin-top">
+					<i class="fa fa-reply fa-fw"></i> {% trans "Add more tours" %}
+				</a>
 			</div>
 			<div class="w3-col m2 w3-container w3-hide-small w3-hide-large"></div>
 			<div class="w3-col s12 m5 l3">
-				<a {% if cart.items %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-blue w3-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %} w3-block">Confirm Reservations <i class="fa fa-mail-forward fa-fw"></i></a>
+				<a {% if cart.items %}href="{% url 'orders:order_create' %}"{% endif %} class="w3-button w3-padding-large w3-blue w3-right w3-margin-top {% if not cart %}w3-opacity-min disabled-pointer{% endif %} w3-block">
+					{% trans "Confirm Reservations" %} <i class="fa fa-mail-forward fa-fw"></i>
+				</a>
 			</div>
 		</div>
 	</div>
-
 {% endblock content %}
 
 {% block extra_js %}{% endblock extra_js %}
