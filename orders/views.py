@@ -5,13 +5,21 @@ from django.core.mail import EmailMultiAlternatives, send_mail
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
+from django.utils import translation
 from django.utils.html import strip_tags
+from django.utils.translation import gettext as _
 
 from cart.cart import Cart
 from raidchileapp.models import Category
 
 from .models import OrderItem
 from .forms import OrderCreateForm
+
+
+def get_email_html_translated(language, template, context):
+	with translation.override(language):
+		return render_to_string(template, context)
+
 
 # Create an reservation order to persist the user confirmed reservations into the database
 def order_create(request):
@@ -23,7 +31,7 @@ def order_create(request):
 	form = OrderCreateForm(request.POST or None)
 	if request.method == 'POST':
 		if form.is_valid():
-			print ('FORM IS VALID')
+			#print ('FORM IS VALID')
 			order = form.save()
 			subtotal = Decimal(0)
 			discount = Decimal(0)
@@ -47,6 +55,7 @@ def order_create(request):
 				if combo:
 					discount += Decimal(item['adult_qty'] + item['children_qty']) * combo.combo_discount
 
+			## Send an email to the reserver in their browsing language.
 			# Get parameters for email template rendering
 			contact_url = request.scheme + '://' + request.get_host() + reverse('raidchileapp:home') + "#contact"
 			context = {
@@ -57,24 +66,41 @@ def order_create(request):
 				'discount': discount,
 				'total': subtotal-discount,
 			}
-
 			email_html = render_to_string('emails/user_reservation_confirmation.html', context)
 			email_text = strip_tags(email_html)
-
-			# Send email to the reserver's email address
-			subject = 'Tour Reservations Confirmed! - Chile Raids'
+			#print (email_text)
+			subject = _('Tour Reservations Confirmed! - Chile Raids')
 			email_from = settings.EMAIL_HOST_USER
 			email_to = [ order.email, ] ## RESERVER'S EMAIL ADDRESS GOES HERE.
-			email_bcc = list(User.objects.filter(groups__name='Emails', is_staff=True).values_list('email', flat=True))
+			admin_emails = list(User.objects.filter(groups__name='Emails', is_staff=True).values_list('email', flat=True))
 
 			# Create the email, and attach the HTML version as well.
-			msg = EmailMultiAlternatives(subject, email_text, email_from, email_to, bcc=email_bcc)
+			msg = EmailMultiAlternatives(subject, email_text, email_from, email_to)
 			msg.attach_alternative(email_html, "text/html")
-
 			msg.send()
-			#Clear the session based cart
-			cart.clear()
 
+			## Send an email to the admins(if any) in forced Spanish language.
+			if admin_emails:
+				subject2 = 'An User Has Confirmed New Tour Reservations - Chile Raids'
+				order_admin_url = request.scheme + '://' + request.get_host() + order.get_admin_url()
+				cur_language = translation.get_language()
+				try:
+					translation.activate('es')
+					subject2 = _('An User Has Confirmed New Tour Reservations - Chile Raids')
+					order_admin_url = request.scheme + '://' + request.get_host() + order.get_admin_url()
+				finally:
+					translation.activate(cur_language)
+				## Parse admin html forcing spanish language
+				context['order_admin_url'] = order_admin_url
+				email_html = get_email_html_translated('es','emails/admin_reservation_confirmation.html', context)
+				email_text = strip_tags(email_html)
+				#print (email_text)
+				msg2 = EmailMultiAlternatives(subject2, email_text, email_from, admin_emails)
+				msg2.attach_alternative(email_html, "text/html")
+				msg2.send()
+
+			#Clear the session based cart and redirect to success page
+			cart.clear()
 			return redirect('orders:order_create_success')
 
 	return render(request, 'orders/order_create.html', {'form': form})

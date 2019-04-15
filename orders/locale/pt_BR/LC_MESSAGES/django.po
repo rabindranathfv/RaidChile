@@ -1,0 +1,310 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-15 16:28-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: orders/admin.py:10
+msgid "Tour reservation"
+msgstr ""
+
+#: orders/admin.py:11
+msgid "Tour reservations"
+msgstr ""
+
+#: orders/apps.py:7 orders/models.py:50
+msgid "orders"
+msgstr ""
+
+#: orders/forms.py:13
+msgid "Planned Date: e.g. DD/MM/YYYY"
+msgstr ""
+
+#: orders/forms.py:32 orders/templates/emails/order_contents.html:29
+msgid "Full name"
+msgstr ""
+
+#: orders/forms.py:38 orders/templates/emails/order_contents.html:30
+msgid "Email"
+msgstr ""
+
+#: orders/forms.py:44
+msgid "Phone: e.g.+0123456789"
+msgstr ""
+
+#: orders/forms.py:50 orders/templates/emails/order_contents.html:32
+msgid "Message"
+msgstr ""
+
+#: orders/models.py:15
+msgid "full name"
+msgstr ""
+
+#: orders/models.py:19
+msgid "email"
+msgstr ""
+
+#: orders/models.py:24
+msgid "phone"
+msgstr ""
+
+#: orders/models.py:29
+msgid "message"
+msgstr ""
+
+#: orders/models.py:32
+msgid "estimated first tour's date"
+msgstr ""
+
+#: orders/models.py:36
+msgid "paid?"
+msgstr ""
+
+#: orders/models.py:40
+msgid "created at"
+msgstr ""
+
+#: orders/models.py:44
+msgid "updated at"
+msgstr ""
+
+#: orders/models.py:49
+msgid "order"
+msgstr ""
+
+#: orders/models.py:53
+msgid "Reservation Order #"
+msgstr ""
+
+#: orders/models.py:85
+msgid "reservation order"
+msgstr ""
+
+#: orders/models.py:92
+msgid "tour"
+msgstr ""
+
+#: orders/models.py:97
+msgid "adults' regular price"
+msgstr ""
+
+#: orders/models.py:102
+msgid "children's regular price"
+msgstr ""
+
+#: orders/models.py:107
+msgid "adults' sale price"
+msgstr ""
+
+#: orders/models.py:112
+msgid "children's sale price"
+msgstr ""
+
+#: orders/models.py:116
+msgid "adults"
+msgstr ""
+
+#: orders/models.py:120
+msgid "children"
+msgstr ""
+
+#: orders/models.py:124
+msgid "Order #"
+msgstr ""
+
+#: orders/models.py:125
+msgid " - Item:"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:2
+msgid "A New Reservation Order has been Confirmed by an User!"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:4
+#: orders/templates/emails/user_reservation_confirmation.html:4
+msgid "Hi, this is an automatic message from Chile Raids"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:5
+#: orders/templates/emails/user_reservation_confirmation.html:5
+#, python-format
+msgid "Tour Reservation Order #%(order_id)s"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:6
+msgid "The confirmed order has the following tour reservations"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:10
+msgid ""
+"If you want to see this order inside the Chile Raids Admin site, please use "
+"the following link"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:16
+msgid "Please do NOT reply to this automated message"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:18
+#: orders/templates/emails/user_reservation_confirmation.html:20
+msgid "Cheers,"
+msgstr ""
+
+#: orders/templates/emails/admin_reservation_confirmation.html:19
+msgid "Chile Raids Admin Site"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:3
+#, python-format
+msgid "Tour name: %(p_name)s"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:5
+msgid "For"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:6
+#, python-format
+msgid "%(adult_q)s Adult X CLP %(adult_p)s."
+msgid_plural "%(adult_q)s Adults X CLP %(adult_p)s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: orders/templates/emails/order_contents.html:9
+#, python-format
+msgid "%(children_q)s Child X CLP %(children_p)s."
+msgid_plural "%(children_q)s Children X CLP %(children_p)s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: orders/templates/emails/order_contents.html:13
+#, python-format
+msgid "Tour Total: CLP %(item_p)s"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:16
+msgid "Sub-Total"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:17
+msgid "Combo Discount"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:17
+msgid "per passenger"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:23
+msgid "Total"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:25
+msgid "The planned date for the first tour was"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:27
+msgid "This was the provided contact information"
+msgstr ""
+
+#: orders/templates/emails/order_contents.html:31
+msgid "Phone"
+msgstr ""
+
+#: orders/templates/emails/user_reservation_confirmation.html:2
+#: orders/templates/orders/order_create_success.html:12
+msgid "Thank you for Confirming your Tour Reservations!"
+msgstr ""
+
+#: orders/templates/emails/user_reservation_confirmation.html:6
+msgid "You have confirmed the following tour reservations"
+msgstr ""
+
+#: orders/templates/emails/user_reservation_confirmation.html:11
+msgid ""
+"If you have any questions, do NOT reply to this automated message, instead "
+"you can contact us at"
+msgstr ""
+
+#: orders/templates/emails/user_reservation_confirmation.html:15
+msgid ""
+"If your doubt or question is about this reservation order, please provide us "
+"with your reservation number in the message"
+msgstr ""
+
+#: orders/templates/emails/user_reservation_confirmation.html:18
+msgid "If you did not made this reservation order please disregard this email"
+msgstr ""
+
+#: orders/templates/emails/user_reservation_confirmation.html:21
+msgid "Chile Raids"
+msgstr ""
+
+#: orders/templates/orders/order_create.html:5
+msgid "Confirm your Reservations"
+msgstr ""
+
+#: orders/templates/orders/order_create.html:10
+#, python-format
+msgid "Confirming Reservation of %(cart_l)s Tour"
+msgid_plural "Confirming Reservations of %(cart_l)s Tours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: orders/templates/orders/order_create.html:16
+msgid ""
+"To confirm your pending reservations please fill the following form with "
+"your contact information and the planned date for the first tour."
+msgstr ""
+
+#: orders/templates/orders/order_create.html:18
+msgid ""
+"If you have any questions or special conditions you can type them in the "
+"message box"
+msgstr ""
+
+#: orders/templates/orders/order_create.html:29
+msgid "Close"
+msgstr ""
+
+#: orders/templates/orders/order_create.html:67
+msgid "Confirm"
+msgstr ""
+
+#: orders/templates/orders/order_create_success.html:5
+msgid "Your Reservations were Confirmed!"
+msgstr ""
+
+#: orders/templates/orders/order_create_success.html:15
+msgid ""
+"An email has been sent to your email address with the full details of this "
+"reservation order. We'll process the information given and proceed to "
+"contact you as soon as posible to notify payment details and answer any "
+"questions you might have. We would like to provide you our best possible "
+"service."
+msgstr ""
+
+#: orders/templates/orders/order_create_success.html:20
+msgid "Go Back"
+msgstr ""
+
+#: orders/views.py:72
+msgid "Tour Reservations Confirmed! - Chile Raids"
+msgstr ""
+
+#: orders/views.py:89
+msgid "An User Has Confirmed New Tour Reservations - Chile Raids"
+msgstr ""

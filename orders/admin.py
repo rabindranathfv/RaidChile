@@ -1,14 +1,14 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
+
 from .models import Order, OrderItem
-
-
 
 
 class OrderItemInline(admin.TabularInline):
 	model = OrderItem
 	extra = 0
-	verbose_name = 'Tour reservation'
-	verbose_name_plural = 'Tour reservations'
+	verbose_name = _('Tour reservation')
+	verbose_name_plural = _('Tour reservations')
 	#raw_id_fields = ['product']
 
 	fields = [
@@ -32,12 +32,10 @@ class OrderAdmin(admin.ModelAdmin):
 		'paid',
 		'total',
 		'created_at',
-		'updated_at'
 	]
 	list_filter = [
 		'paid',
 		'created_at',
-		'updated_at'
 	]
 	fields = [
 		(

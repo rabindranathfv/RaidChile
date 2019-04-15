@@ -1,20 +1,23 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block page_title %} Your Pending Reservations {% endblock page_title %}
+{% block page_title %} {% trans "Your Reservations were Confirmed!" %} {% endblock page_title %}
 
 {% block content %}
 	<div class="w3-container w3-padding-64">
 		<div class="w3-content w3-card-2 w3-white w3-padding">
 			<!-- Order Creation Success Message  -->
 			<div class="w3-center">
-				<h2>Thank you for Confirming your Reservations!</h2>
+				<h2>{% trans "Thank you for Confirming your Tour Reservations!" %}</h2>
 			</div>
 			<h5 class="w3-padding-large w3-center">
+				{% blocktrans trimmed %}
 				An email has been sent to your email address with the full details of this reservation order. We'll process the information given and proceed to contact you as soon as posible to notify payment details and answer any questions you might have. We would like to provide you our best possible service.
+				{% endblocktrans %}
 			</h5>
 			<div class="w3-center">
-				<a class="w3-button w3-black w3-padding-large w3-margin-bottom w3-margin-top" href="{% url 'raidchileapp:home' %}">Go Back <i class="fa fa-reply"></i></a>
+				<a class="w3-button w3-black w3-padding-large w3-margin-bottom w3-margin-top" href="{% url 'raidchileapp:home' %}">{% trans "Go Back" %} <i class="fa fa-reply"></i></a>
 			</div>
 		</div>
 	</div>

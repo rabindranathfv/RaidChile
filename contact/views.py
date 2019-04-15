@@ -67,10 +67,10 @@ def form_submit(request):
 				#render_to_string('emails/new_contact_admin_alert.html', context)
 				email_html = get_email_html_translated('es','emails/new_contact_admin_alert.html', context)
 				email_text = strip_tags(email_html)
-				print (email_text)
+				#print (email_text)
 				# Obtain the recipients list from the user group called "Emails"
 				recipients_list = list(User.objects.filter(groups__name='Emails', is_staff=True).values_list('email', flat=True))
-				print (recipients_list)
+				#print (recipients_list)
 
 				email_from = settings.EMAIL_HOST_USER
 

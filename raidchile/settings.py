@@ -52,8 +52,8 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'raidchileapp',
     'contact.apps.ContactConfig',
-    'cart',
-    'orders',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
