@@ -13,6 +13,7 @@ import os
 from decouple import config
 
 from django.contrib.messages import constants as message_constants
+from django.utils.translation import gettext_lazy as _
 
 # Show debug level messages too
 MESSAGE_LEVEL = message_constants.DEBUG
@@ -50,7 +51,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'raidchileapp',
-    'contact',
+    'contact.apps.ContactConfig',
     'cart',
     'orders',
     'django.contrib.humanize',
@@ -65,6 +66,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # cache middleware goes here.
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -136,6 +139,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    ('pt-BR', _('Brazilian Portuguese')),
+]
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% include "contact/messages.html" %}
 
 <form class="w3-padding-16" action="{% url 'contact:form_submit' %}" method="POST">
@@ -25,6 +27,6 @@
 		<!-- Google's Recaptcha Widget -->
 	</div>
 	<div class="w3-row-padding w3-center">
-		<button type="submit" class="w3-button w3-black w3-padding-large w3-margin-right"><i class="fa fa-send fa-fw"></i> Send Message</button>
+		<button type="submit" class="w3-button w3-black w3-padding-large w3-margin-right"><i class="fa fa-send fa-fw"></i>{% trans "Send Message" %}</button>
 	</div>
 </form>

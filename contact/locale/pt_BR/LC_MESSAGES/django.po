@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-14 20:03-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: contact/apps.py:7
+msgid "Contact"
+msgstr "Contacto"
+
+#: contact/forms.py:10 contact/templates/emails/new_contact_admin_alert.html:8
+msgid "Phone"
+msgstr "Telefone"
+
+#: contact/forms.py:15
+msgid "Phone: e.g.+0123456789"
+msgstr "Telefone: ej.+0123456789"
+
+#: contact/forms.py:32 contact/templates/emails/new_contact_admin_alert.html:6
+msgid "Full name"
+msgstr "Nome Completo"
+
+#: contact/forms.py:38 contact/templates/emails/new_contact_admin_alert.html:7
+msgid "Email"
+msgstr "Endereço de email"
+
+#: contact/forms.py:44 contact/templates/emails/new_contact_admin_alert.html:9
+msgid "Message"
+msgstr "Mensagem"
+
+#: contact/models.py:10
+msgid "full name"
+msgstr "nome completo"
+
+#: contact/models.py:14
+msgid "email"
+msgstr "endereço de email"
+
+#: contact/models.py:19
+msgid "phone"
+msgstr "telefone"
+
+#: contact/models.py:23
+msgid "message"
+msgstr "mensagem"
+
+#: contact/models.py:27
+msgid "created at"
+msgstr "criado em"
+
+#: contact/models.py:31
+msgid "updated at"
+msgstr "atualizado"
+
+#: contact/models.py:36
+msgid "contact message"
+msgstr "mensagem de contacto"
+
+#: contact/models.py:37
+msgid "contact messages"
+msgstr "mensagens de contato"
+
+#: contact/templates/contact/contact_form.html:30
+msgid "Send Message"
+msgstr "Enviar Mensagem"
+
+#: contact/templates/contact/messages.html:8
+msgid "Close"
+msgstr "Fechar"
+
+#: contact/templates/emails/new_contact_admin_alert.html:4
+msgid ""
+"Hi, this is an automatic alert from Chile Raids. A new contact message was "
+"sent by an user"
+msgstr ""
+
+#: contact/templates/emails/new_contact_admin_alert.html:11
+msgid ""
+"If you want to see this message inside the Chile Raids Admin site, please "
+"use the following link"
+msgstr ""
+
+#: contact/templates/emails/new_contact_admin_alert.html:16
+msgid "Please do NOT reply to this automated message"
+msgstr ""
+
+#: contact/templates/emails/new_contact_admin_alert.html:18
+msgid "Cheers,"
+msgstr ""
+
+#: contact/templates/emails/new_contact_admin_alert.html:19
+msgid "Chile Raids Admin Site"
+msgstr ""
+
+#: contact/views.py:58
+msgid "New Contact Message - Chile Raids"
+msgstr ""
+
+#: contact/views.py:85
+msgid ""
+"Your contact message was sent successfully! We'll contact you as soon as "
+"possible."
+msgstr ""
+
+#: contact/views.py:87
+msgid "Invalid reCAPTCHA. Please try again."
+msgstr ""
