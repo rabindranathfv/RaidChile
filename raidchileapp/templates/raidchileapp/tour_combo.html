@@ -1,7 +1,7 @@
 {% extends "raidchileapp/base.html" %}
-{% load static %}
+{% load static %}{% load i18n %}
 
-{% block page_title %}{% if category %} {{ category.name }} {% else %} Tour Combos {% endif %} {% endblock page_title %}
+{% block page_title %}{% if category %} {{ category.name }} {% else %} {% trans "Tour Combos" %} {% endif %} {% endblock page_title %}
 
 {% block content %}
 
@@ -25,14 +25,20 @@
 					<h2> {{ category.name }} </h2>
 					{% if category.combo %}
 						<h3> {{ category.short_desc }} </h3>
-						<h5> Minimun passengers: {{ min_pax }} ppl. </h5>
+						<h5>
+							{% blocktrans count min_pax=min_pax %}Minimun passengers: {{ min_pax }} person.{% plural %}Minimun passengers: {{ min_pax }} people.{% endblocktrans %}
+						</h5>
 						<div class="w3-row">
 							<div class="w3-col s1 m2 l4 w3-container"></div>
 							<div class="w3-col s10 m8 l4 ">
 								<form action="{% url 'cart:cart_add_combo' category.slug %}" method="POST" id="cart_add_form">
 									{% csrf_token %}
 									{{ cart_product_form.update }}
-									<p class="min_pax_error w3-small w3-text-red" style="display: none;"><b>The minimum number of passengers must be greater or equal to {{ min_pax }}!</b></p>
+									<p class="min_pax_error w3-small w3-text-red" style="display: none;">
+										<b>
+											{% blocktrans %}{{ min_pax }} is the minimum number of passengers!{% endblocktrans %}
+										</b>
+									</p>
 									<div class="w3-row">
 										<div class="w3-col s6 m4 w3-padding-small">
 											{{ cart_product_form.adult_quantity.label }}
@@ -43,9 +49,9 @@
 											{{ cart_product_form.children_quantity }}
 										</div>
 										<div class="w3-third w3-center">
-											<button type="submit" for="cart_add_form" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin w3-hide-small w3-hide-medium" id="submit-reserve">Reserve Now</button>
+											<button type="submit" for="cart_add_form" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin w3-hide-small w3-hide-medium" id="submit-reserve">{% trans "Reserve Now" %}</button>
 											<!-- Mobile button -->
-											<button type="submit" for="cart_add_form" class="w3-button w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin-left mytop-m w3-hide-large" id="submit-reserve">Reserve Now!</button>
+											<button type="submit" for="cart_add_form" class="w3-button w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin-left mytop-m w3-hide-large" id="submit-reserve">{% trans "Reserve Now!" %}</button>
 											<div style="display: none;" class="min_pax">{{ min_pax }}</div>
 										</div>
 									</div>
@@ -54,7 +60,7 @@
 						</div>
 					{% endif %}
 				{% else %}
-					<h2> Tour Combo </h2>
+					<h2> {% trans "Tour Combo" %} </h2>
 				{% endif %}
 			</div>
 			<!-- Include the search result rows -->

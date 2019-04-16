@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.db import models
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 # Vertical distribution is for better 'git diff' readability
@@ -10,7 +11,7 @@ class Category(models.Model):
 	name = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name='name'
+		verbose_name=_('name')
 	)
 	slug = models.SlugField(
 		max_length=150,
@@ -23,40 +24,41 @@ class Category(models.Model):
 		null=True,
 		related_name='categories',
 		related_query_name='category',
-		on_delete=models.SET_NULL
+		on_delete=models.SET_NULL,
+		verbose_name=_('image')
 	)
 	short_desc = models.TextField(
 		blank=True,
 		max_length=200,
-		verbose_name='short description'
+		verbose_name=_('short description')
 	)
 	available = models.BooleanField(
 		default=True,
-		verbose_name='available'
+		verbose_name=_('available')
 	)
 	combo = models.BooleanField(
 		default=False,
-		verbose_name='Is it tour combo?'
+		verbose_name=_('Is it tour combo?')
 	)
 	combo_discount = models.DecimalField(
 		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
-		verbose_name='combo discount'
+		verbose_name=_('combo discount')
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
-		verbose_name='created at'
+		verbose_name=_('created at')
 	)
 	updated_at = models.DateTimeField(
 		auto_now=True,
-		verbose_name='updated at'
+		verbose_name=_('updated at')
 	)
 
 	class Meta:
 		ordering = ('name', )
-		verbose_name = 'Category / Combo'
-		verbose_name_plural = 'Categories / Combos'
+		verbose_name = _('Category / Combo')
+		verbose_name_plural = _('Categories / Combos')
 
 	def __str__(self):
 		return self.name
@@ -70,26 +72,26 @@ class Feature(models.Model):
 	name = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name='name'
+		verbose_name=_('name')
 	)
 	icon = models.CharField(max_length=150,
 		default="fa-eye",
-		help_text='String from Font Awesome icons e.g. "fa-eye"',
-		verbose_name='icon'
+		help_text=_('String from Font Awesome icons e.g. "fa-eye"'),
+		verbose_name=_('icon')
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
-		verbose_name='created at'
+		verbose_name=_('created at')
 	)
 	updated_at = models.DateTimeField(
 		auto_now=True,
-		verbose_name='updated at'
+		verbose_name=_('updated at')
 	)
 
 	class Meta:
 		ordering = ('name', )
-		verbose_name = 'feature'
-		verbose_name_plural = 'features'
+		verbose_name = _('feature')
+		verbose_name_plural = _('features')
 
 	def __str__(self):
 		return self.name
@@ -101,7 +103,7 @@ class Feature(models.Model):
 			icon_class = self.icon.strip()
 		return mark_safe('<i class="fa %s fa-3x"></i>' % (icon_class))
 
-	icon_image.short_description = 'Icon image'
+	icon_image.short_description = _('Icon image')
 
 
 
@@ -109,28 +111,28 @@ class Location(models.Model):
 	name = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name='name'
+		verbose_name=_('name')
 	)
 	region = models.CharField(
 		max_length=150,
 		db_index=True,
 		blank=True,
-		verbose_name='region',
-		help_text='Helps users to search by coincidence.'
+		verbose_name=_('region'),
+		help_text=_('Helps users to search by coincidence.')
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
-		verbose_name='created at'
+		verbose_name=_('created at')
 	)
 	updated_at = models.DateTimeField(
 		auto_now=True,
-		verbose_name='updated at'
+		verbose_name=_('updated at')
 	)
 
 	class Meta:
 		ordering = ('name', )
-		verbose_name = 'location'
-		verbose_name_plural = 'locations'
+		verbose_name = _('location')
+		verbose_name_plural = _('locations')
 
 	def __str__(self):
 		return self.name
@@ -139,41 +141,44 @@ class Location(models.Model):
 
 class Tour(models.Model):
 	TOUR_TYPE_CHOICES = (
-		('HALF', 'Half-Day'),
-		('FULL', 'Full-Day')
+		('HALF', _('Half-Day')),
+		('FULL', _('Full-Day'))
 	)
 
 	name = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name='name'
+		verbose_name=_('name')
 	)
 	locations = models.ManyToManyField(
 		Location,
 		blank=True,
 		related_name='tours',
-		related_query_name='tour'
+		related_query_name='tour',
+		verbose_name=_('locations')
 	)
 	categories = models.ManyToManyField(
 		Category,
 		blank=True,
 		related_name='tours',
 		related_query_name='tour',
+		verbose_name=_('categories')
 	)
 	features = models.ManyToManyField(
 		Feature,
 		blank=True,
 		related_name='tours',
-		related_query_name='tour'
+		related_query_name='tour',
+		verbose_name=_('features')
 	)
 	available = models.BooleanField(
 		default=True,
-		verbose_name='available'
+		verbose_name=_('available')
 	)
 	tour_type = models.CharField(
 		choices=TOUR_TYPE_CHOICES,
 		max_length=4,
-		verbose_name='type of tour'
+		verbose_name=_('type of tour')
 	)
 	slug = models.SlugField(
 		max_length=150,
@@ -181,50 +186,50 @@ class Tour(models.Model):
 		db_index=True
 	)
 	description = models.TextField(
-		verbose_name='tour description'
+		verbose_name=_('tour description')
 	)
 	duration = models.PositiveSmallIntegerField(
-		verbose_name='duration (in hours)'
+		verbose_name=_('duration (in hours)')
 	)
 	min_pax_number = models.PositiveSmallIntegerField(
 		default=1,
-		verbose_name='minimum passenger number'
+		verbose_name=_('minimum passenger number')
 	)
 	adult_reg_price = models.DecimalField(
 		max_digits=10,
 		decimal_places=2,
-		verbose_name='adults\' regular price'
+		verbose_name=_('adults\' regular price')
 	)
 	children_reg_price = models.DecimalField(
 		max_digits=10,
 		decimal_places=2,
-		verbose_name='children\'s regular price'
+		verbose_name=_('children\'s regular price')
 	)
 	adult_sale_price = models.DecimalField(
 		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
-		verbose_name='adults\' sale price'
+		verbose_name=_('adults\' sale price')
 	)
 	children_sale_price = models.DecimalField(
 		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
-		verbose_name='children\'s sale price'
+		verbose_name=_('children\'s sale price')
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
-		verbose_name='created at'
+		verbose_name=_('created at')
 	)
 	updated_at = models.DateTimeField(
 		auto_now=True,
-		verbose_name='updated at'
+		verbose_name=_('updated at')
 	)
 
 	class Meta:
 		ordering = ('name', )
-		verbose_name = 'tour'
-		verbose_name_plural = 'tours'
+		verbose_name = _('tour')
+		verbose_name_plural = _('tours')
 		indexes = [ models.Index(fields=['id', 'slug']),]
 
 	def __str__(self):
@@ -245,26 +250,26 @@ class TourImage(models.Model):
 	alternative = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name='alternative text',
-		help_text='Image title.'
+		verbose_name=_('alternative text'),
+		help_text=_('Image title.')
 	)
 	image = models.ImageField(
 		upload_to="tours_images/%Y/%m/%d",
-		verbose_name='image'
+		verbose_name=_('image')
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
-		verbose_name='created at'
+		verbose_name=_('created at')
 	)
 	updated_at = models.DateTimeField(
 		auto_now=True,
-		verbose_name='updated at'
+		verbose_name=_('updated at')
 	)
 
 	class Meta:
 		ordering = ('alternative', )
-		verbose_name = 'tour image'
-		verbose_name_plural = 'tour images'
+		verbose_name = _('tour image')
+		verbose_name_plural = _('tour images')
 
 	def __str__(self):
 		return self.alternative

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 15:38-0400\n"
+"POT-Creation-Date: 2019-04-15 18:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Reservación de tour"
 msgid "Tour reservations"
 msgstr "Reservaciones de tour"
 
-#: orders/apps.py:7 orders/models.py:49
+#: orders/apps.py:7 orders/models.py:50
 msgid "orders"
 msgstr "órdenes"
 
@@ -34,11 +34,11 @@ msgstr "órdenes"
 msgid "Planned Date: e.g. DD/MM/YYYY"
 msgstr "Fecha Planeada: ej. DD/MM/YYYY"
 
-#: orders/forms.py:32 orders/templates/emails/order_contents.html:42
+#: orders/forms.py:32 orders/templates/emails/order_contents.html:29
 msgid "Full name"
 msgstr "Nombre Completo"
 
-#: orders/forms.py:38 orders/templates/emails/order_contents.html:43
+#: orders/forms.py:38 orders/templates/emails/order_contents.html:30
 msgid "Email"
 msgstr "Correo Electrónico"
 
@@ -46,110 +46,110 @@ msgstr "Correo Electrónico"
 msgid "Phone: e.g.+0123456789"
 msgstr "Teléfono: ej. +0123456789"
 
-#: orders/forms.py:50 orders/templates/emails/order_contents.html:45
+#: orders/forms.py:50 orders/templates/emails/order_contents.html:32
 msgid "Message"
 msgstr "Mensaje"
 
-#: orders/models.py:14
+#: orders/models.py:15
 msgid "full name"
 msgstr "nombre completo"
 
-#: orders/models.py:18
+#: orders/models.py:19
 msgid "email"
 msgstr "correo electrónico"
 
-#: orders/models.py:23
+#: orders/models.py:24
 msgid "phone"
 msgstr "teléfono"
 
-#: orders/models.py:28
+#: orders/models.py:29
 msgid "message"
 msgstr "mensaje"
 
-#: orders/models.py:31
+#: orders/models.py:32
 msgid "estimated first tour's date"
 msgstr "fecha estimada del primer tour"
 
-#: orders/models.py:35
+#: orders/models.py:36
 msgid "paid?"
 msgstr "¿Pagada?"
 
-#: orders/models.py:39
+#: orders/models.py:40
 msgid "created at"
 msgstr "creado en"
 
-#: orders/models.py:43
+#: orders/models.py:44
 msgid "updated at"
 msgstr "actualizado en"
 
-#: orders/models.py:48
+#: orders/models.py:49
 msgid "order"
 msgstr "órden"
 
-#: orders/models.py:52
+#: orders/models.py:53
 msgid "Reservation Order #"
 msgstr "Órden de Reservación #"
 
-#: orders/models.py:84
+#: orders/models.py:85
 msgid "reservation order"
 msgstr "órden de reservación"
 
-#: orders/models.py:91
+#: orders/models.py:92
 msgid "tour"
 msgstr "tour"
 
-#: orders/models.py:96
+#: orders/models.py:97
 msgid "adults' regular price"
 msgstr "precio regular de adultos"
 
-#: orders/models.py:101
+#: orders/models.py:102
 msgid "children's regular price"
 msgstr "precio regular de niños"
 
-#: orders/models.py:106
+#: orders/models.py:107
 msgid "adults' sale price"
 msgstr "precio oferta de adultos"
 
-#: orders/models.py:111
+#: orders/models.py:112
 msgid "children's sale price"
 msgstr "precio oferta de niños"
 
-#: orders/models.py:115
+#: orders/models.py:116
 msgid "adults"
 msgstr "adultos"
 
-#: orders/models.py:119
+#: orders/models.py:120
 msgid "children"
 msgstr "niños"
 
-#: orders/models.py:123
+#: orders/models.py:124
 msgid "Order #"
 msgstr "Órden #"
 
-#: orders/models.py:124
+#: orders/models.py:125
 msgid " - Item:"
 msgstr " - Artículo:"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:4
+#: orders/templates/emails/admin_reservation_confirmation.html:2
 msgid "A New Reservation Order has been Confirmed by an User!"
 msgstr "Una Nueva Órden de Reservación ha sido Confirmada por un Usuario"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:6
-#: orders/templates/emails/user_reservation_confirmation.html:6
+#: orders/templates/emails/admin_reservation_confirmation.html:4
+#: orders/templates/emails/user_reservation_confirmation.html:4
 msgid "Hi, this is an automatic message from Chile Raids"
 msgstr "Hola, esto es un mensaje automatizado de Chile Raids"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:7
-#: orders/templates/emails/user_reservation_confirmation.html:7
+#: orders/templates/emails/admin_reservation_confirmation.html:5
+#: orders/templates/emails/user_reservation_confirmation.html:5
 #, python-format
 msgid "Tour Reservation Order #%(order_id)s"
 msgstr "Órden de Reservación de Tours #%(order_id)s"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:8
+#: orders/templates/emails/admin_reservation_confirmation.html:6
 msgid "The confirmed order has the following tour reservations"
 msgstr "La órden confirmada tiene los siguientes tours reservados"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:12
+#: orders/templates/emails/admin_reservation_confirmation.html:10
 msgid ""
 "If you want to see this order inside the Chile Raids Admin site, please use "
 "the following link"
@@ -157,85 +157,85 @@ msgstr ""
 "Si desea ver esta órden dentro del Sitio Administrativo de Chile Raids, por "
 "favor utilice el siguiente enlace"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:18
+#: orders/templates/emails/admin_reservation_confirmation.html:16
 msgid "Please do NOT reply to this automated message"
 msgstr "Por favor, NO responda a este mensaje automatizado"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:20
-#: orders/templates/emails/user_reservation_confirmation.html:23
+#: orders/templates/emails/admin_reservation_confirmation.html:18
+#: orders/templates/emails/user_reservation_confirmation.html:20
 msgid "Cheers,"
 msgstr "Saludos,"
 
-#: orders/templates/emails/admin_reservation_confirmation.html:21
+#: orders/templates/emails/admin_reservation_confirmation.html:19
 msgid "Chile Raids Admin Site"
 msgstr "Sitio Administrativo de Chile Raids"
 
-#: orders/templates/emails/order_contents.html:6
+#: orders/templates/emails/order_contents.html:3
 #, python-format
 msgid "Tour name: %(p_name)s"
 msgstr "Nombre del Tour: %(p_name)s"
 
-#: orders/templates/emails/order_contents.html:8
+#: orders/templates/emails/order_contents.html:5
 msgid "For"
 msgstr "Para"
 
-#: orders/templates/emails/order_contents.html:9
+#: orders/templates/emails/order_contents.html:6
 #, python-format
 msgid "%(adult_q)s Adult X CLP %(adult_p)s."
 msgid_plural "%(adult_q)s Adults X CLP %(adult_p)s."
 msgstr[0] "%(adult_q)s Adulto X CLP %(adult_p)s."
 msgstr[1] "%(adult_q)s Adultos X CLP %(adult_p)s."
 
-#: orders/templates/emails/order_contents.html:16
+#: orders/templates/emails/order_contents.html:9
 #, python-format
 msgid "%(children_q)s Child X CLP %(children_p)s."
 msgid_plural "%(children_q)s Children X CLP %(children_p)s."
 msgstr[0] "%(children_q)s Niño X CLP %(children_p)s."
 msgstr[1] "%(children_q)s Niños X CLP %(children_p)s."
 
-#: orders/templates/emails/order_contents.html:23
+#: orders/templates/emails/order_contents.html:13
 #, python-format
 msgid "Tour Total: CLP %(item_p)s"
 msgstr "Total de Tour: CLP %(item_p)s"
 
-#: orders/templates/emails/order_contents.html:26
+#: orders/templates/emails/order_contents.html:16
 msgid "Sub-Total"
 msgstr "Sub-Total"
 
-#: orders/templates/emails/order_contents.html:27
+#: orders/templates/emails/order_contents.html:17
 msgid "Combo Discount"
 msgstr "Descuento por Combo"
 
-#: orders/templates/emails/order_contents.html:27
+#: orders/templates/emails/order_contents.html:17
 msgid "per passenger"
 msgstr "por pasajero"
 
-#: orders/templates/emails/order_contents.html:37
+#: orders/templates/emails/order_contents.html:23
 msgid "Total"
 msgstr "Total"
 
-#: orders/templates/emails/order_contents.html:38
+#: orders/templates/emails/order_contents.html:25
 msgid "The planned date for the first tour was"
 msgstr "La fecha planificada para el primer tour es"
 
-#: orders/templates/emails/order_contents.html:40
+#: orders/templates/emails/order_contents.html:27
 msgid "This was the provided contact information"
 msgstr "Esta fue la información de contacto ingresada"
 
-#: orders/templates/emails/order_contents.html:44
+#: orders/templates/emails/order_contents.html:31
 msgid "Phone"
 msgstr "Teléfono"
 
-#: orders/templates/emails/user_reservation_confirmation.html:4
+#: orders/templates/emails/user_reservation_confirmation.html:2
 #: orders/templates/orders/order_create_success.html:12
 msgid "Thank you for Confirming your Tour Reservations!"
 msgstr "¡Gracias por Confirmar sus Reservaciones de Tours!"
 
-#: orders/templates/emails/user_reservation_confirmation.html:8
+#: orders/templates/emails/user_reservation_confirmation.html:6
 msgid "You have confirmed the following tour reservations"
 msgstr "Usted ha confirmado las siguientes reservaciones de tours"
 
-#: orders/templates/emails/user_reservation_confirmation.html:13
+#: orders/templates/emails/user_reservation_confirmation.html:11
 msgid ""
 "If you have any questions, do NOT reply to this automated message, instead "
 "you can contact us at"
@@ -243,7 +243,7 @@ msgstr ""
 "Si usted tiene cualquier pregunta o duda, NO responda a este mensaje  "
 "automatizado, en su lugar puede contactarnos en"
 
-#: orders/templates/emails/user_reservation_confirmation.html:17
+#: orders/templates/emails/user_reservation_confirmation.html:15
 msgid ""
 "If your doubt or question is about this reservation order, please provide us "
 "with your reservation number in the message"
@@ -251,12 +251,12 @@ msgstr ""
 "Si su duda o pregunta es sobre esta órden de reservación, por favor incluya  "
 "el número de su reservación en el mensaje"
 
-#: orders/templates/emails/user_reservation_confirmation.html:21
+#: orders/templates/emails/user_reservation_confirmation.html:18
 msgid "If you did not made this reservation order please disregard this email"
 msgstr ""
 "Si usted no realizó esta orden de reservación, por favor ignore este correo"
 
-#: orders/templates/emails/user_reservation_confirmation.html:24
+#: orders/templates/emails/user_reservation_confirmation.html:21
 msgid "Chile Raids"
 msgstr "Chile Raids"
 
@@ -265,6 +265,7 @@ msgid "Confirm your Reservations"
 msgstr "Confirmar sus Reservaciones"
 
 #: orders/templates/orders/order_create.html:10
+#, python-format
 msgid "Confirming Reservation of %(cart_l)s Tour"
 msgid_plural "Confirming Reservations of %(cart_l)s Tours"
 msgstr[0] "Confirmar Reservación de %(cart_l)s Tour"

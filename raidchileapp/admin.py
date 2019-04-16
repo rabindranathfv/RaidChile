@@ -154,7 +154,7 @@ class GalleryInline(admin.TabularInline):
 
 class TourAdmin(admin.ModelAdmin):
 	list_display = [
-	    'id',
+		'id',
 		'name',
 		'available',
 		'updated_at',

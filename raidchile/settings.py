@@ -50,7 +50,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'raidchileapp',
+    'raidchileapp.apps.RaidchileappConfig',
     'contact.apps.ContactConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',

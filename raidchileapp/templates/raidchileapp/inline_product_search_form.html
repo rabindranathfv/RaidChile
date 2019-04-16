@@ -1,13 +1,14 @@
+{% load i18n %}
 {% if search_form %}
 <form action="{% url 'raidchileapp:search_all_tours' %}" method="GET">
 	<div class="w3-row-padding">
 		<div class="w3-col s10">
-			<label><i class="fa fa-search-plus"></i> Search Terms</label>
+			<label><i class="fa fa-search-plus"></i> {% trans "Search Terms" %}</label>
 			{{ search_form.search_terms }}
 		</div>
 		<div class="w3-col s2 w3-center">
 			<div class="bot-margin-23"></div>
-			<button type="submit" class="w3-button w3-block w3-black"><i class="fa fa-search fa-fw"></i> Search</button>
+			<button type="submit" class="w3-button w3-block w3-black"><i class="fa fa-search fa-fw"></i> {% trans "Search" %}</button>
 		</div>
 	</div>
 </form>
