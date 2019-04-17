@@ -30,12 +30,9 @@
 						<img src="{{ img_url }}" alt="{{ img_alt }}" class="full-width-img w3-hide-medium w3-hide-large">
 						<div class="w3-container w3-white w3-card-2">
 							<div class="w3-center">
-								{% if LANGUAGE_CODE == 'es' %}<h3>{{ cat.name_es }}</h3>
-								{% elif LANGUAGE_CODE == 'en' %}<h3>{{ cat.name_en }}</h3>
-								{% elif LANGUAGE_CODE == 'pt-br' %}<h3>{{ cat.name_pt_BR }}</h3>
-								{% endif %}
+								<h3>{{ cat }}</h3>
 
-								<p class="home-gallery-desc">{{ cat.short_desc }}</p>
+								<p class="home-gallery-desc">{{ cat.get_short_desc }}</p>
 
 								<h4 class="w3-margin-bottom"><em>{{ cat.tour__count }} Tour{{ cat.tour__count|pluralize }}</em></h4>
 								<a class="w3-button w3-black w3-margin-bottom w3-padding-large"

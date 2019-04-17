@@ -42,7 +42,7 @@
 					{% with product=item.product %}
 					<tr>
 						<!-- Tour name -->
-						<td class="middle-algn"><h6><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6></td>
+						<td class="middle-algn"><h6><a href="{{ product.get_absolute_url }}">{{ product }}</a></h6></td>
 						<!-- Tour passengers quantities form -->
 						<td class="pax-cell">
 							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
@@ -116,7 +116,7 @@
 						<td colspan="2" class="w3-small middle-algn">
 							<ul class="small-tour-ul">
 								{% for tour in tours %}
-									<li>{{ tour.name }}</li>
+									<li>{{ tour }}</li>
 								{% endfor %}
 							</ul>
 						</td>
@@ -147,7 +147,7 @@
 				<div class="w3-container w3-border-top w3-border-left w3-border-right w3-white w3-card">
 					<div class="w3-row w3-padding-16">
 						<div class="w3-twothird">
-							<h5 style="padding-top: 16px;"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h5>
+							<h5 style="padding-top: 16px;"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h5>
 							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
 								{% csrf_token %}
 								{{ item.update_quantity_form.update }}
@@ -227,11 +227,11 @@
 					<div class="w3-row">
 						<div class="w3-col s5">
 							<h4>
-								<b>{% blocktrans with combo_name=combo.name %}{{ combo_name }} Discount{% endblocktrans %}</b>
+								<b>{% blocktrans with combo_name=combo %}{{ combo_name }} Discount{% endblocktrans %}</b>
 							</h4>
 							<ul class="small-tour-ul w3-small w3-margin-bottom">
 								{% for tour in tours %}
-									<li>{{ tour.name }}</li>
+									<li>{{ tour }}</li>
 								{% endfor %}
 							</ul>
 						</div>

@@ -105,6 +105,15 @@ class Category(models.Model):
 		else:
 			return self.name_en
 
+	def get_short_desc(self):
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return self.short_desc_es
+		elif cur_language == 'pt-br':
+			return self.short_desc_pt_BR
+		else:
+			return self.short_desc_en
+
 	def get_absolute_url(self):
 		cur_language = translation.get_language()
 		if cur_language == 'es':
@@ -209,10 +218,21 @@ class Tour(models.Model):
 		('FULL', _('Full-Day'))
 	)
 
-	name = models.CharField(
+
+	name_en = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name=_('name')
+		verbose_name=_('name (in English)')
+	)
+	name_es = models.CharField(
+		max_length=150,
+		db_index=True,
+		verbose_name=_('name (in Spanish)')
+	)
+	name_pt_BR = models.CharField(
+		max_length=150,
+		db_index=True,
+		verbose_name=_('name (in Portuguese)')
 	)
 	locations = models.ManyToManyField(
 		Location,
@@ -244,13 +264,32 @@ class Tour(models.Model):
 		max_length=4,
 		verbose_name=_('type of tour')
 	)
-	slug = models.SlugField(
+	slug_en = models.SlugField(
 		max_length=150,
 		unique=True ,
-		db_index=True
+		db_index=True,
+		verbose_name=_('slug (in English)')
 	)
-	description = models.TextField(
-		verbose_name=_('tour description')
+	slug_es= models.SlugField(
+		max_length=150,
+		unique=True ,
+		db_index=True,
+		verbose_name=_('slug (in Spanish)')
+	)
+	slug_pt_BR= models.SlugField(
+		max_length=150,
+		unique=True ,
+		db_index=True,
+		verbose_name=_('slug (in Portuguese)')
+	)
+	description_en = models.TextField(
+		verbose_name=_('tour description (in English)')
+	)
+	description_es = models.TextField(
+		verbose_name=_('tour description (in Spanish)')
+	)
+	description_pt_BR = models.TextField(
+		verbose_name=_('tour description (in Portuguese)')
 	)
 	duration = models.PositiveSmallIntegerField(
 		verbose_name=_('duration (in hours)')
@@ -291,16 +330,36 @@ class Tour(models.Model):
 	)
 
 	class Meta:
-		ordering = ('name', )
-		verbose_name = _('tour')
-		verbose_name_plural = _('tours')
-		indexes = [ models.Index(fields=['id', 'slug']),]
+		ordering = ('name_es', )
+		verbose_name = _('Tour')
+		verbose_name_plural = _('Tours')
 
 	def __str__(self):
-		return self.name
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return self.name_es
+		elif cur_language == 'pt-br':
+			return self.name_pt_BR
+		else:
+			return self.name_en
+
+	def get_description(self):
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return self.description_es
+		elif cur_language == 'pt-br':
+			return self.description_pt_BR
+		else:
+			return self.description_en
 
 	def get_absolute_url(self):
-		return reverse('raidchileapp:tour_details', args=[self.id, self.slug])
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return reverse('raidchileapp:tour_details', args=[self.id, self.slug_es])
+		elif cur_language == 'pt-br':
+			return reverse('raidchileapp:tour_details', args=[self.id, self.slug_pt_BR])
+		else:
+			return reverse('raidchileapp:tour_details', args=[self.id, self.slug_en])
 
 
 

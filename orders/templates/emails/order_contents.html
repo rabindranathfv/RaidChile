@@ -1,6 +1,6 @@
 {% load humanize %}{% load i18n %}{% autoescape off %}<hr>
 {% with items=order.items.all %}{% for item in items %}
-<h4 style="margin-bottom: 5px;">{% blocktrans with p_name=item.product.name %}Tour name: {{ p_name }}{% endblocktrans %}</h4>
+<h4 style="margin-bottom: 5px;">{% blocktrans with p_name=item.product %}Tour name: {{ p_name }}{% endblocktrans %}</h4>
 <p style="padding-left: 20px; margin-top: 5px;">
 	{% trans "For" %}:<br>
 	{% blocktrans count adult_q=item.adult_quantity with adult_p=item.adult_reg_price|intcomma trimmed %}
@@ -17,7 +17,7 @@
 <h3>{% trans "Combo Discount" %}: CLP -{{ discount|intcomma }} (CLP {{ combo.combo_discount|intcomma }} {% trans "per passenger" %}).</h3>
 <h3 style="margin-bottom: 10px;">{{ combo }}:</h3>
 {% with tours=combo.tours.all %}<ul style="margin-top: 10px;">{% for tour in tours %}
-<li>{{ tour.name }}</li>
+<li>{{ tour }}</li>
 {% endfor %}</ul>
 {% endwith %}{% endif %}
 <h2>{% trans "Total" %}: <strong>CLP {{ total|intcomma }}.</strong></h2>

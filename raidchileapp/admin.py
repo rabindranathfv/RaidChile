@@ -167,11 +167,9 @@ class GalleryInline(admin.TabularInline):
 
 
 
-
 class TourAdmin(admin.ModelAdmin):
 	list_display = [
-		'id',
-		'name',
+		'name_es',
 		'available',
 		'updated_at',
 	]
@@ -179,7 +177,7 @@ class TourAdmin(admin.ModelAdmin):
 		'available',
 		'updated_at',
 	]
-	list_editable = ['name', 'available']
+	list_editable = ['available']
 	fields = [
 		(
 			'updated_at',
@@ -187,8 +185,16 @@ class TourAdmin(admin.ModelAdmin):
 		),
 		'available',
 		(
-			'name',
-			'slug'
+			'name_es',
+			'slug_es'
+		),
+		(
+			'name_en',
+			'slug_en'
+		),
+		(
+			'name_pt_BR',
+			'slug_pt_BR'
 		),
 		'locations',
 		'categories',
@@ -206,11 +212,13 @@ class TourAdmin(admin.ModelAdmin):
 			'adult_sale_price',
 			'children_sale_price'
 		),
-		'description',
+		'description_es',
+		'description_en',
+		'description_pt_BR',
 	]
 	search_fields = [
-		'name',
-		'categories__name',
+		'name_es',
+		'categories__name_es',
 	]
 	readonly_fields = [
 		'created_at',
@@ -221,7 +229,11 @@ class TourAdmin(admin.ModelAdmin):
 		'categories',
 		'features',
 	]
-	prepopulated_fields = {'slug': ('name',)}
+	prepopulated_fields = {
+		'slug_es': ('name_es',),
+		'slug_en': ('name_en',),
+		'slug_pt_BR': ('name_pt_BR',),
+	}
 	inlines = [GalleryInline]
 
 
@@ -242,14 +254,14 @@ class TourImageAdmin(admin.ModelAdmin):
 			'updated_at',
 			'created_at'
 		),
+		'image_tag',
+		'image',
 		'alternative_es',
 		'alternative_en',
 		'alternative_pt_BR',
-		'image',
-		'image_tag',
 		'tours',
 	]
-	search_fields = ['alternative_es', 'tours__name']
+	search_fields = ['alternative_es', 'tours__name_es']
 	readonly_fields = [
 		'created_at',
 		'updated_at',

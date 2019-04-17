@@ -20,11 +20,17 @@ def tour_filter_search(request, queryset, search_form):
 	## Adding primitive search function by word coincidence:
 	search_words = None
 
+	# If there are search terms, filter tours by their title (depends on the language)
 	if filter_parameters.get('search_terms', None):
 		search_words = filter_parameters['search_terms'].split(" ", 5)
+		cur_language = translation.get_language()
 		for word in search_words:
-			queryset = queryset.filter(name__icontains=word)
-
+			if cur_language == 'es':
+				queryset = queryset.filter(name_es__icontains=word)
+			elif cur_language == 'pt-br':
+				queryset = queryset.filter(name_pt_BR__icontains=word)
+			else:
+				queryset = queryset.filter(name_en__icontains=word)
 
 	if 'locations' in request.GET.keys():
 		# Using getlist to obtain the multiple choices
@@ -66,8 +72,17 @@ def home(request):
 
 
 def tour_details(request, id, slug):
-	tour = get_object_or_404(Tour, id=id, slug=slug, available=True)
-
+	try:
+		tour = Tour.objects.get(
+			Q(available=True) &
+			Q(id=id) & (
+				Q(slug_es=slug) |
+				Q(slug_en=slug) |
+				Q(slug_pt_BR=slug)
+			)
+		)
+	except Tour.DoesNotExist:
+		raise Http404("No Tour matches the given query.")
 	# Initialize the cart_add_ Product form with the minimun number of passengers
 	cart_product_form = CartAddProductForm(
 		initial={
