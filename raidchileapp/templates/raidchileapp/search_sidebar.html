@@ -1,4 +1,5 @@
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <div class="w3-container w3-border-right w3-hide-small w3-animate-top" id="filters-sidebar">
 	<!-- Filters start from here -->
 	{% if combos.exists %}
@@ -9,9 +10,11 @@
 			{% with sets=combos.all %}
 			{% for combo in sets %}
 				{% if combo != category %}
-					<a class="w3-text-blue" href="{{ combo.get_absolute_url }}">{{ combo.name }}</a><br>
+					<a class="w3-text-blue" href="{{ combo.get_absolute_url }}">
+					{{ combo }}
+					</a><br>
 				{% else %}
-					<span class="w3-text-blue"><strong>{{ combo.name }}</strong></span><br>
+					<span class="w3-text-blue"><strong>{{ combo }}</strong></span><br>
 				{% endif %}
 			{% endfor %}
 			{% endwith %}
@@ -32,9 +35,9 @@
 				{% with cats=categories.all %}
 					{% for cat in cats %}
 						{% if cat != category %}
-							<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a><br>
+							<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat }}</a><br>
 						{% else %}
-							<span class="w3-text-blue"><strong>{{ cat.name }}</strong></span><br>
+							<span class="w3-text-blue"><strong>{{ cat }}</strong></span><br>
 						{% endif %}
 					{% endfor %}
 				{% endwith %}

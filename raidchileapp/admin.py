@@ -1,15 +1,17 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 from .models import Category, Feature, Location, Tour, TourImage
 from .forms import CategoryAdminForm
 
 # Register your models here.
 
+
+
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = [
-		'name',
-		'slug',
+		'name_es',
 		'combo',
 		'available',
 		'updated_at',
@@ -21,29 +23,40 @@ class CategoryAdmin(admin.ModelAdmin):
 			'updated_at',
 			'created_at'
 		),
-		'available',
 		(
-			'name',
-			'slug'
+			'available',
+			'combo'
 		),
 		(
-			'combo_discount',
-			'combo',
-
+			'name_es',
+			'slug_es'
 		),
-		'short_desc',
+		'short_desc_es',
+		(
+			'name_en',
+			'slug_en'
+		),
+		'short_desc_en',
+		(
+			'name_pt_BR',
+			'slug_pt_BR'
+		),
+		'short_desc_pt_BR',
+		'combo_discount',
 		'image',
 		'image_tag',
 		'tours'
 	]
-	search_fields = ['name']
+	search_fields = ['name_es']
 	readonly_fields = [
 		'created_at',
 		'updated_at',
 		'image_tag',
 	]
 	prepopulated_fields = {
-		'slug': ('name',),
+		'slug_es': ('name_es',),
+		'slug_en': ('name_en',),
+		'slug_pt_BR': ('name_pt_BR',),
 	}
 	form = CategoryAdminForm
 
@@ -57,6 +70,7 @@ class CategoryAdmin(admin.ModelAdmin):
 		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.image.image.url
 		html_img = '<img src="%s" style="max-width: 100%%; max-height: 400px" />'% ( img_full_url )
 		return mark_safe(html_img)
+
 
 admin.site.register(Category, CategoryAdmin)
 

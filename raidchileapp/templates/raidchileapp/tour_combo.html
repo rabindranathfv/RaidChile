@@ -1,14 +1,14 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
-{% block page_title %}{% if category %} {{ category.name }} {% else %} {% trans "Tour Combos" %} {% endif %} {% endblock page_title %}
+{% block page_title %}{% if category %} {{ category }} {% else %} {% trans "Tour Combos" %} {% endif %} {% endblock page_title %}
 
 {% block content %}
-
-{# Setting url variables #}
-{% url 'raidchileapp:search_all_tours' as all_url %}
-{% url 'raidchileapp:tour_search_by_category' category.slug as cat_url %}
-
+{% if LANGUAGE_CODE == 'es' %}{% url 'cart:cart_add_combo' category.slug_es as add_url %}
+{% elif LANGUAGE_CODE == 'en' %}{% url 'cart:cart_add_combo' category.slug_en as add_url %}
+{% elif LANGUAGE_CODE == 'pt-br' %}{% url 'cart:cart_add_combo' category.slug_pt_BR as add_url %}
+{% endif %}
 	<!-- Image header -->
 	<div class="w3-container w3-padding-large combo-header" style="background:url('{{ category.image.image.url }}')"></div>
 
@@ -22,16 +22,21 @@
 			<!--  Search result rows  -->
 			<div class="w3-center">
 				{% if category %}
-					<h2> {{ category.name }} </h2>
+					<h2> {{ category }} </h2>
 					{% if category.combo %}
-						<h3> {{ category.short_desc }} </h3>
+						<h3>
+							{% if LANGUAGE_CODE == 'es' %}{{ category.short_desc_es }}
+							{% elif LANGUAGE_CODE == 'en' %}{{ category.short_desc_en }}
+							{% elif LANGUAGE_CODE == 'pt-br' %}{{ category.short_desc_pt_BR }}
+							{% endif %}
+						</h3>
 						<h5>
 							{% blocktrans count min_pax=min_pax %}Minimun passengers: {{ min_pax }} person.{% plural %}Minimun passengers: {{ min_pax }} people.{% endblocktrans %}
 						</h5>
 						<div class="w3-row">
 							<div class="w3-col s1 m2 l4 w3-container"></div>
 							<div class="w3-col s10 m8 l4 ">
-								<form action="{% url 'cart:cart_add_combo' category.slug %}" method="POST" id="cart_add_form">
+								<form action="{{ add_url }}" method="POST" id="cart_add_form">
 									{% csrf_token %}
 									{{ cart_product_form.update }}
 									<p class="min_pax_error w3-small w3-text-red" style="display: none;">

@@ -2,21 +2,43 @@ from decimal import Decimal
 
 from django.db import models
 from django.urls import reverse
+from django.utils import translation
 from django.utils.safestring import mark_safe
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 # Vertical distribution is for better 'git diff' readability
 class Category(models.Model):
-	name = models.CharField(
+	name_en = models.CharField(
 		max_length=150,
-		db_index=True,
-		verbose_name=_('name')
+		verbose_name=_('name (in English)')
 	)
-	slug = models.SlugField(
+	name_es = models.CharField(
+		max_length=150,
+		verbose_name=_('name (in Spanish)')
+	)
+	name_pt_BR = models.CharField(
+		max_length=150,
+		verbose_name=_('name (in Portuguese)')
+	)
+	slug_en = models.SlugField(
 		max_length=150,
 		unique=True ,
-		db_index=True
+		db_index=True,
+		verbose_name=_('slug (in English)')
+	)
+	slug_es= models.SlugField(
+		max_length=150,
+		unique=True ,
+		db_index=True,
+		verbose_name=_('slug (in Spanish)')
+	)
+	slug_pt_BR= models.SlugField(
+		max_length=150,
+		unique=True ,
+		db_index=True,
+		verbose_name=_('slug (in Portuguese)')
 	)
 	image = models.ForeignKey(
 		'TourImage',
@@ -27,10 +49,23 @@ class Category(models.Model):
 		on_delete=models.SET_NULL,
 		verbose_name=_('image')
 	)
-	short_desc = models.TextField(
+	short_desc_en = models.TextField(
 		blank=True,
 		max_length=200,
-		verbose_name=_('short description')
+		verbose_name=_('short description (in English)'),
+		help_text=_('Only necessary if it\'s a combo.')
+	)
+	short_desc_es = models.TextField(
+		blank=True,
+		max_length=200,
+		verbose_name=_('short description (in Spanish)'),
+		help_text=_('Only necessary if it\'s a combo.')
+	)
+	short_desc_pt_BR = models.TextField(
+		blank=True,
+		max_length=200,
+		verbose_name=_('short description (in Portuguese)'),
+		help_text=_('Only necessary if it\'s a combo.')
 	)
 	available = models.BooleanField(
 		default=True,
@@ -56,15 +91,28 @@ class Category(models.Model):
 	)
 
 	class Meta:
-		ordering = ('name', )
+		ordering = ('-created_at', )
 		verbose_name = _('Category / Combo')
 		verbose_name_plural = _('Categories / Combos')
 
 	def __str__(self):
-		return self.name
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return self.name_es
+		elif cur_language == 'pt-br':
+			return self.name_pt_BR
+		else:
+			return self.name_en
 
 	def get_absolute_url(self):
-		return reverse('raidchileapp:tour_search_by_category', args=[self.slug])
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return reverse('raidchileapp:tour_search_by_category', args=[self.slug_es])
+		elif cur_language == 'pt-br':
+			return reverse('raidchileapp:tour_search_by_category', args=[self.slug_pt_BR])
+		else:
+			return reverse('raidchileapp:tour_search_by_category', args=[self.slug_en])
+
 
 
 

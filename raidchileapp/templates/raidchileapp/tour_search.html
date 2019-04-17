@@ -1,13 +1,17 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
-{% block page_title %}{% if category %} {{ category.name }} {% else %} {% trans "All Tours" %} {% endif %} {% endblock page_title %}
+{% block page_title %}{% if category %} {{ category }} {% else %} {% trans "All Tours" %} {% endif %} {% endblock page_title %}
 
 {% block content %}
 
 {# Setting url variables #}
 {% url 'raidchileapp:search_all_tours' as all_url %}
-{% url 'raidchileapp:tour_search_by_category' category.slug as cat_url %}
+{% if LANGUAGE_CODE == 'es' %}{% url 'raidchileapp:tour_search_by_category' category.slug_es as cat_url %}
+{% elif LANGUAGE_CODE == 'en' %}{% url 'raidchileapp:tour_search_by_category' category.slug_en as cat_url %}
+{% elif LANGUAGE_CODE == 'pt-br' %}{% url 'raidchileapp:tour_search_by_category' category.slug_pt_BR as cat_url %}
+{% endif %}
 
 <form action="{% if category %}{{ cat_url }}{% else %}{{ all_url }}{% endif %}" method="GET" id="search-form">
 	<!-- Search Bar Section -->
@@ -39,7 +43,7 @@
 			<!--  Search result rows  -->
 			<div class="w3-center">
 				{% if category %}
-					<h2> {{ category.name }} </h2>
+					<h2> {{ category }} </h2>
 				{% else %}
 					<h2> {% trans "All Tours" %} </h2>
 				{% endif %}

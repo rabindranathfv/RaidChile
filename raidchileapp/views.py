@@ -1,6 +1,7 @@
 from django.db.models import Count, Q, Prefetch, Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
+from django.utils import translation
 from django.utils.translation import gettext as _
 
 from cart.forms import CartAddProductForm
@@ -106,13 +107,23 @@ def tour_search_by_category(request, category_slug):
 	search_form = SearchForm(request.GET or None)
 	categories = Category.objects.filter(combo=False, available=True)
 	combos = Category.objects.filter(combo=True, available=True)
-	category = get_object_or_404(Category, slug=category_slug, available=True)
+	try:
+		category = Category.objects.get(
+			Q(available=True) & (
+				Q(slug_es=category_slug) |
+				Q(slug_en=category_slug) |
+				Q(slug_pt_BR=category_slug)
+			)
+		)
+	except Category.DoesNotExist:
+		raise Http404("No Category matches the given query.")
 	tours = Tour.objects.filter(available=True, categories__in=[category.id]).prefetch_related('features', 'images')
 	min_pax = None
 
 	# Calculate minimun passenger of combo = larges amount of all tours.
 	if category.combo:
 		min_pax = tours.aggregate(Max('min_pax_number'))
+
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
 	if request.GET and not category.combo:
@@ -129,27 +140,14 @@ def tour_search_by_category(request, category_slug):
 
 	# If the category is a combo, don't display the filters or search bar.
 	if category.combo :
-		context['min_pax'] = min_pax['min_pax_number__max']
+		context['min_pax'] = min_pax['min_pax_number__max'] or 0
 		# Initialize reservation miniform
 		cart_product_form = CartAddProductForm(
 			initial={
-				'adult_quantity': min_pax['min_pax_number__max'],
+				'adult_quantity': min_pax['min_pax_number__max'] or 0,
 			}
 		)
 		context['cart_product_form'] = cart_product_form
 		return render(request, "raidchileapp/tour_combo.html", context)
 
-	return render(request, "raidchileapp/tour_search.html", context)
-
-
-# Template testing views
-def tour_details_dummy(request):
-	comment_form = CommentForm()
-	context = {'comment_form': comment_form}
-	return render(request, "raidchileapp/tour_details.html", context)
-
-
-def tour_search_dummy(request):
-	search_form = SearchForm()
-	context = {'search_form': search_form }
 	return render(request, "raidchileapp/tour_search.html", context)

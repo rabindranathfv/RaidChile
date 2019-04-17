@@ -15,7 +15,7 @@
 {% endfor %}{% endwith %}
 {% if combo %}<h3>{% trans "Sub-Total" %}: <strong>CLP {{ subtotal|intcomma }}.</strong></h3>
 <h3>{% trans "Combo Discount" %}: CLP -{{ discount|intcomma }} (CLP {{ combo.combo_discount|intcomma }} {% trans "per passenger" %}).</h3>
-<h3 style="margin-bottom: 10px;">{{ combo.name }}:</h3>
+<h3 style="margin-bottom: 10px;">{{ combo }}:</h3>
 {% with tours=combo.tours.all %}<ul style="margin-top: 10px;">{% for tour in tours %}
 <li>{{ tour.name }}</li>
 {% endfor %}</ul>

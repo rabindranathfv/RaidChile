@@ -1,6 +1,8 @@
 from decimal import Decimal
 
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from django.db.models import Q
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
 from raidchileapp.models import Category, Tour
@@ -27,7 +29,16 @@ def cart_add(request, product_id):
 @require_POST
 def cart_add_combo(request, combo_slug):
 	cart = Cart(request)
-	products = get_list_or_404(Tour, categories__slug=combo_slug)
+	products = Tour.objects.filter(
+		Q(available=True) & (
+			Q(categories__slug_es=combo_slug) |
+			Q(categories__slug_en=combo_slug) |
+			Q(categories__slug_pt_BR=combo_slug)
+		)
+	)
+	if not products:
+		raise Http404("No Tour matches the given query.")
+
 	form = CartAddProductForm(request.POST)
 	if form.is_valid():
 		for product in products:
