@@ -77,7 +77,7 @@ admin.site.register(Category, CategoryAdmin)
 
 class FeatureAdmin(admin.ModelAdmin):
 	list_display = [
-		'name',
+		'name_es',
 		'icon',
 		'updated_at',
 	]
@@ -88,13 +88,15 @@ class FeatureAdmin(admin.ModelAdmin):
 			'updated_at',
 			'created_at'
 		),
-		'name',
+		'name_es',
+		'name_en',
+		'name_pt_BR',
 		(
 			'icon',
 			'icon_image'
 		),
 	]
-	search_fields = ['name']
+	search_fields = ['name_es']
 	readonly_fields = [
 		'created_at',
 		'updated_at',

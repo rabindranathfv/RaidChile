@@ -117,10 +117,20 @@ class Category(models.Model):
 
 
 class Feature(models.Model):
-	name = models.CharField(
+	name_en = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name=_('name')
+		verbose_name=_('name (in English)')
+	)
+	name_es = models.CharField(
+		max_length=150,
+		db_index=True,
+		verbose_name=_('name (in Spanish)')
+	)
+	name_pt_BR = models.CharField(
+		max_length=150,
+		db_index=True,
+		verbose_name=_('name (in Portuguese)')
 	)
 	icon = models.CharField(max_length=150,
 		default="fa-eye",
@@ -137,12 +147,18 @@ class Feature(models.Model):
 	)
 
 	class Meta:
-		ordering = ('name', )
+		ordering = ('-created_at', )
 		verbose_name = _('feature')
 		verbose_name_plural = _('features')
 
 	def __str__(self):
-		return self.name
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return self.name_es
+		elif cur_language == 'pt-br':
+			return self.name_pt_BR
+		else:
+			return self.name_en
 
 	# Method to display icon image tag inside django admin
 	def icon_image(self):
@@ -150,7 +166,6 @@ class Feature(models.Model):
 		if self.icon.strip().startswith('fa'):
 			icon_class = self.icon.strip()
 		return mark_safe('<i class="fa %s fa-3x"></i>' % (icon_class))
-
 	icon_image.short_description = _('Icon image')
 
 
