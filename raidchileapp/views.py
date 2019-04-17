@@ -51,10 +51,10 @@ def tour_filter_search(request, queryset, search_form):
 		queryset = queryset.filter(locations__in=filter_parameters['locations'])
 	# Min Price
 	if filter_parameters.get('min_price', None):
-		queryset = queryset.filter(Q(adult_reg_price__gte=filter_parameters['min_price']) | Q(adult_sale_price__gte=filter_parameters['min_price']))
+		queryset = queryset.filter(Q(adult_reg_price__gte=filter_parameters['min_price']))# | Q(adult_sale_price__gte=filter_parameters['min_price']))
 	# Max Price
 	if filter_parameters.get('max_price', None):
-		queryset = queryset.filter(Q(adult_reg_price__lte=filter_parameters['max_price']) | Q(adult_sale_price__lte=filter_parameters['max_price']))
+		queryset = queryset.filter(Q(adult_reg_price__lte=filter_parameters['max_price']))# | Q(adult_sale_price__lte=filter_parameters['max_price']))
 
 	return queryset
 
