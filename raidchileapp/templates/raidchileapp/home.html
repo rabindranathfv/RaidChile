@@ -21,7 +21,7 @@
 		<div class="w3-row-padding w3-padding-16">
 			{% for cat in categories %}
 				<div class="w3-half w3-margin-bottom">
-					{% with img_url=cat.image.image.url img_alt=cat.image.alternative %}
+					{% with img_url=cat.image.image.url img_alt=cat.image %}
 						<div class="home-gallery-image w3-white w3-hide-small w3-center" style="background: url('{{ img_url }}')">
 							{% if not img_url %}
 								<i class="fa fa-photo fa-5x w3-opacity-max"></i>

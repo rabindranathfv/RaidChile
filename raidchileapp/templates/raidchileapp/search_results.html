@@ -2,7 +2,7 @@
 <div class="w3-row-padding w3-margin-top">
 	{% for tour in tours %}
 		<div class="w3-col m6 l4 w3-margin-bottom">
-			{% with img_url=tour.images.first.image.url img_alt=tour.images.all.first.alternative %}
+			{% with img_url=tour.images.first.image.url img_alt=tour.images.first %}
 				<div class="search-gallery-image w3-white w3-hide-small w3-center" style="background: url('{{ img_url }}')">
 					{% if not img_url %}
 						<i class="fa fa-photo fa-5x w3-opacity-max"></i>

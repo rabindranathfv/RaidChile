@@ -79,7 +79,8 @@ class Category(models.Model):
 		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
-		verbose_name=_('combo discount')
+		verbose_name=_('combo discount'),
+		help_text=_('Per passenger.')
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
@@ -310,11 +311,21 @@ class TourImage(models.Model):
 		related_name='images',
 		related_query_name='image'
 	)
-	alternative = models.CharField(
+	alternative_en = models.CharField(
+		max_length=150,
+		verbose_name=_('alternative text (in English)'),
+		help_text=_('Image description in English.')
+	)
+	alternative_es = models.CharField(
 		max_length=150,
 		db_index=True,
-		verbose_name=_('alternative text'),
-		help_text=_('Image title.')
+		verbose_name=_('alternative text (in Spanish)'),
+		help_text=_('Image description in Spanish.')
+	)
+	alternative_pt_BR = models.CharField(
+		max_length=150,
+		verbose_name=_('alternative text (in Portuguese)'),
+		help_text=_('Image description in Portuguese.')
 	)
 	image = models.ImageField(
 		upload_to="tours_images/%Y/%m/%d",
@@ -330,9 +341,15 @@ class TourImage(models.Model):
 	)
 
 	class Meta:
-		ordering = ('alternative', )
+		ordering = ('-created_at', )
 		verbose_name = _('tour image')
 		verbose_name_plural = _('tour images')
 
 	def __str__(self):
-		return self.alternative
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return self.alternative_es
+		elif cur_language == 'pt-br':
+			return self.alternative_pt_BR
+		else:
+			return self.alternative_en

@@ -146,8 +146,8 @@ admin.site.register(Location, LocationAdmin)
 class GalleryInline(admin.TabularInline):
 	model = TourImage.tours.through
 	extra = 0
-	verbose_name = 'Tour image'
-	verbose_name_plural = 'Tour images'
+	verbose_name = _('Tour Image')
+	verbose_name_plural = _('Tour Images')
 	fields = [
 		'tourimage',
 		'image_thumbnail',
@@ -230,11 +230,11 @@ admin.site.register(Tour, TourAdmin)
 
 class TourImageAdmin(admin.ModelAdmin):
 	list_display = [
-		'alternative',
+		'alternative_es',
+		'image_thumbnail',
 		'updated_at',
 	]
 	list_filter = [
-		'alternative',
 		'updated_at',
 	]
 	fields = [
@@ -242,14 +242,14 @@ class TourImageAdmin(admin.ModelAdmin):
 			'updated_at',
 			'created_at'
 		),
-		(
-			'image',
-			'alternative',
-		),
+		'alternative_es',
+		'alternative_en',
+		'alternative_pt_BR',
+		'image',
 		'image_tag',
 		'tours',
 	]
-	search_fields = ['alternative', 'tours__name']
+	search_fields = ['alternative_es', 'tours__name']
 	readonly_fields = [
 		'created_at',
 		'updated_at',
@@ -268,5 +268,10 @@ class TourImageAdmin(admin.ModelAdmin):
 		html_img = '<img src="%s" style="max-width: 100%%; max-height: 400px" />'% ( img_full_url )
 		return mark_safe(html_img)
 
+		# Method to display icon image tag inside django admin
+	def image_thumbnail(self, obj):
+		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.image.url
+		html_img = '<img src="%s" style="max-height: 200px" />'% ( img_full_url )
+		return mark_safe(html_img)
 
 admin.site.register(TourImage, TourImageAdmin)
