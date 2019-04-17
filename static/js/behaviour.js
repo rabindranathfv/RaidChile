@@ -13,6 +13,12 @@ $( document ).ready(function(){
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	});
 
+	// Making the languague choices drowpdown interactive and look right.
+	$('#language-switch').click(function(){
+		$(this).toggleClass('extended-switch');
+		$('#language-choices').toggle()
+	});
+
 	// Validate that the passengers total number is higher than the minimun
 	$('#id_adult_quantity, #id_children_quantity').on('input', function() {
 		console.log("Firing validation of min passengers.")

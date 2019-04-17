@@ -9,6 +9,55 @@ body,h1,h2,h3,h4,h5,h6 {
 	font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
+/*  ==========   Language Switcher Styles   ==========  */
+
+
+
+#language-switch{
+	outline : none;
+}
+
+.retracted-switch{
+	border-radius: 20px 20px 20px 20px !important;
+}
+
+.extended-switch{
+	border-radius: 20px 20px 0px 0px !important;
+}
+
+/* For mobile: */
+#language-choices{
+	border-radius: 0px 0px 20px 20px !important;
+	padding-bottom: 8px !important;
+}
+
+.lang-flag-img{
+	width: 35px;
+}
+
+.languages-container{
+	position: fixed;
+	top: 90px;
+	right: 5px;
+	z-index: 100;
+}
+
+@media only screen and (min-width: 601px) {
+	/* For tablets and desktop: */
+	#language-choices{
+		padding-bottom: 12px !important;
+	}
+
+	.lang-flag-img{
+		width: 45px;
+	}
+
+	.languages-container{
+		top: 70px;
+		right: 5px;
+	}
+}
+
 /*  ==========   Header Styles   ==========  */
 
 .main-banner{
