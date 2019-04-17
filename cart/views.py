@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.urls import reverse
+from django.utils import translation
 
 from raidchileapp.models import Category, Tour
 
@@ -88,4 +90,17 @@ def cart_detail(request):
 		'discount': discount,
 		'total': subtotal-discount,
 	}
+
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = reverse('cart:cart_detail')
+		translation.activate('en')
+		context['redirect_url_en'] = reverse('cart:cart_detail')
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = reverse('cart:cart_detail')
+	finally:
+		translation.activate(cur_language)
+
 	return render(request, 'cart/cart_detail.html', context)

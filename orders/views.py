@@ -5,6 +5,7 @@ from django.core.mail import EmailMultiAlternatives, send_mail
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils import translation
 from django.utils.html import strip_tags
 from django.utils.translation import gettext as _
@@ -103,8 +104,33 @@ def order_create(request):
 			cart.clear()
 			return redirect('orders:order_create_success')
 
-	return render(request, 'orders/order_create.html', {'form': form})
+	context = {'form': form}
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = reverse('orders:order_create')
+		translation.activate('en')
+		context['redirect_url_en'] = reverse('orders:order_create')
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = reverse('orders:order_create')
+	finally:
+		translation.activate(cur_language)
+
+	return render(request, 'orders/order_create.html', context)
 
 
 def order_create_success(request):
-	return render(request, 'orders/order_create_success.html')
+	context = dict()
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = reverse('orders:order_create_success')
+		translation.activate('en')
+		context['redirect_url_en'] = reverse('orders:order_create_success')
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = reverse('orders:order_create_success')
+	finally:
+		translation.activate(cur_language)
+	return render(request, 'orders/order_create_success.html', context)

@@ -27,6 +27,9 @@
 		<!-- Webpage navbar goes here (if applicable)-->
 		{% include "raidchileapp/navbar.html" %}
 
+		<!-- Webpage languague switcher goes here (if applicable)-->
+		{% include "raidchileapp/language_vertical_switcher.html" %}
+
 		<!-- Webpage content goes inside this block -->
 		{% block content %}{% endblock content %}
 
@@ -38,6 +41,7 @@
 		<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 		<!--<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> -->
 		<script src="{% static 'js/jquery-ui-1.12.1.min.js' %}"></script>
+		<script src="{% static 'js/language_switcher.js' %}" ></script>
 		<script src="{% static 'js/behaviour.js' %}" ></script>
 		<!-- Google's ReCaptcha Script -->
 		<script src='https://www.google.com/recaptcha/api.js'></script>

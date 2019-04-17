@@ -147,6 +147,7 @@ LANGUAGES = [
     ('pt-br', _('Brazilian Portuguese')),
 ]
 
+LANGUAGE_COOKIE_NAME = 'ChileRaids_language'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

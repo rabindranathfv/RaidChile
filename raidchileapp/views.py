@@ -1,8 +1,10 @@
 from django.db.models import Count, Q, Prefetch, Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.utils import translation
 from django.utils.translation import gettext as _
+
 
 from cart.forms import CartAddProductForm
 from contact.forms import ContactForm
@@ -65,8 +67,20 @@ def home(request):
 	context = {
 		'categories': categories,
 		'contact_form': contact_form,
-		'search_form': search_form
+		'search_form': search_form,
 	}
+
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = reverse('raidchileapp:home')
+		translation.activate('en')
+		context['redirect_url_en'] = reverse('raidchileapp:home')
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = reverse('raidchileapp:home')
+	finally:
+		translation.activate(cur_language)
 
 	return render(request, "raidchileapp/home.html", context)
 
@@ -96,6 +110,18 @@ def tour_details(request, id, slug):
 		'cart_product_form' : cart_product_form,
 	}
 
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = tour.get_absolute_url()
+		translation.activate('en')
+		context['redirect_url_en'] = tour.get_absolute_url()
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = tour.get_absolute_url()
+	finally:
+		translation.activate(cur_language)
+
 	return render(request, "raidchileapp/tour_details.html", context)
 
 
@@ -115,6 +141,19 @@ def search_all_tours(request):
 		'combos': combos,
 		'search_form': search_form,
 	}
+
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = reverse('raidchileapp:search_all_tours')
+		translation.activate('en')
+		context['redirect_url_en'] = reverse('raidchileapp:search_all_tours')
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = reverse('raidchileapp:search_all_tours')
+	finally:
+		translation.activate(cur_language)
+
 	return render(request, "raidchileapp/tour_search.html", context)
 
 
@@ -151,6 +190,18 @@ def tour_search_by_category(request, category_slug):
 		'categories': categories,
 		'search_form': search_form,
 	}
+
+		# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = category.get_absolute_url()
+		translation.activate('en')
+		context['redirect_url_en'] = category.get_absolute_url()
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = category.get_absolute_url()
+	finally:
+		translation.activate(cur_language)
 
 
 	# If the category is a combo, don't display the filters or search bar.

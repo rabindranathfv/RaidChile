@@ -9,6 +9,35 @@ body,h1,h2,h3,h4,h5,h6 {
 	font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
+/*  ==========   Language Switcher Styles   ==========  */
+
+.languages-container{
+	position: fixed;
+	top: 70px;
+	right: 5px;
+	z-index: 100;
+}
+
+.lang-flag-img{
+	width: 45px;
+}
+
+#language-switch{
+	outline : none;
+}
+
+.retracted-switch{
+	border-radius: 20px 20px 20px 20px !important;
+}
+
+.extended-switch{
+	border-radius: 20px 20px 0px 0px !important;
+}
+#language-choices{
+	border-radius: 0px 0px 20px 20px !important;
+	padding-bottom: 12px !important;
+}
+
 /*  ==========   Header Styles   ==========  */
 
 .main-banner{

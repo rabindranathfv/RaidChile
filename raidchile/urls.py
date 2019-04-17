@@ -32,5 +32,5 @@ urlpatterns = i18n_patterns(
     path('reservations/', include('orders.urls')),
     path('admin/', admin.site.urls),
     # If no prefix is given, use the default language
-    prefix_default_language=False
+    prefix_default_language=True
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Development server way of serving media files

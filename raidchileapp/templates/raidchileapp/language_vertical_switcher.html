@@ -1,0 +1,35 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+
+
+<div class="languages-container">
+	<button id="language-switch" class="w3-button w3-bar-item w3-light-gray w3-border retracted-switch">
+		<img src="{% if LANGUAGE_CODE == 'es' %}{% static 'img/ES-Flag-icon.png' %}
+		{% elif LANGUAGE_CODE == 'en' %}{% static 'img/US-Flag-icon.png' %}
+		{% elif LANGUAGE_CODE == 'pt-br' %}{% static 'img/BR-Flag-icon.png' %}
+		{% endif %}"
+		class="lang-flag-img">
+	</button>
+	<div id="language-choices" class="w3-bar-block w3-light-gray w3-border w3-animate-down" style="display: none;">
+		<!-- Spanish -->
+		{% if LANGUAGE_CODE != 'es' %}
+		<a href="{{ redirect_url_es }}" class="w3-bar-item w3-button">
+			<img src="{% static 'img/ES-Flag-icon.png' %}" class="lang-flag-img">
+		</a>
+		{% endif %}
+		<!-- English -->
+		{% if LANGUAGE_CODE != 'en' %}
+		<a href="{{ redirect_url_en }}" class="w3-bar-item w3-button">
+			<img src="{% static 'img/US-Flag-icon.png' %}" class="lang-flag-img">
+		</a>
+		{% endif %}
+		<!-- Brazilian Portuguese -->
+		{% if LANGUAGE_CODE != 'pt-br' %}
+		<a href="{{ redirect_url_pt_BR }}" class="w3-bar-item w3-button">
+			<img src="{% static 'img/BR-Flag-icon.png' %}" class="lang-flag-img">
+		</a>
+		{% endif %}
+	</div>
+</div>
