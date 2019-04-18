@@ -355,23 +355,30 @@ class Tour(Product):
 	# For the type of product to be tour when saving a tour.
 	def save(self, *args, **kwargs):
 		self.product_type = 'TOUR'
+		old = Tour.objects.filter(id=getattr(self,'id',None)).first()
+		# If object already saved in DB
+		if old:
+			old = {'adult_reg_price': old.adult_reg_price, 'children_reg_price': old.children_reg_price}
+			combos = self.combos.all()
+			super().save(*args, **kwargs)  # Call the "real" save() method to save the prices.
+			# If adult regular price changed, update all the combos' prices this tour is part of.
+			if old['adult_reg_price'] != self.adult_reg_price:
+				for combo in combos:
+					prices = combo.tours.all().aggregate(
+						adult_price=models.Sum('adult_reg_price') ,
+					)
+					combo.adult_reg_price = prices['adult_price'] or Decimal(0)
+					combo.save()
+			# If children regular price changed, update all the combos' prices this tour is part of.
+			if old['children_reg_price'] != self.children_reg_price:
+				for combo in combos:
+					prices = combo.tours.all().aggregate(
+						children_price=models.Sum('children_reg_price')
+					)
+					combo.children_reg_price = prices['children_price'] or Decimal(0)
+					combo.save()
 		super().save(*args, **kwargs)  # Call the "real" save() method.
 
-# Setting a post-save Signal
-# After saving a tour if it's part of any combos, update their regular prices.
-def signal_reflect_price_in_combo(sender, instance, **kwargs):
-	tour = instance
-	combos = tour.combos.all()
-	for combo in combos:
-		prices = combo.tours.all().aggregate(
-			adult_price=models.Sum('adult_reg_price') ,
-			children_price=models.Sum('children_reg_price')
-		)
-		combo.adult_reg_price = prices['adult_price'] or Decimal(0)
-		combo.children_reg_price = prices['children_price'] or Decimal(0)
-		combo.save()
-
-models.signals.post_save.connect(signal_reflect_price_in_combo, sender=Tour)
 
 
 class Combo(Product):
