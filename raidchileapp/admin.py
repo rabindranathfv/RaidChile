@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
-from .models import Category, Feature, Location, Tour, TourImage
+from .models import Category, Feature, Location, Tour, Combo, TourImage
 from .forms import CategoryAdminForm
 
 # Register your models here.
@@ -12,7 +12,6 @@ from .forms import CategoryAdminForm
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = [
 		'name_es',
-		'combo',
 		'available',
 		'updated_at',
 	]
@@ -25,24 +24,19 @@ class CategoryAdmin(admin.ModelAdmin):
 		),
 		(
 			'available',
-			'combo'
 		),
 		(
 			'name_es',
 			'slug_es'
 		),
-		'short_desc_es',
 		(
 			'name_en',
 			'slug_en'
 		),
-		'short_desc_en',
 		(
 			'name_pt_BR',
 			'slug_pt_BR'
 		),
-		'short_desc_pt_BR',
-		'combo_discount',
 		'image',
 		'image_tag',
 		'tours'
@@ -65,14 +59,14 @@ class CategoryAdmin(admin.ModelAdmin):
 		self.request = request
 		return qs
 
-	# Method to display icon image tag inside django admin
+	# Method to display image tag inside django admin
 	def image_tag(self, obj):
 		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.image.image.url
 		html_img = '<img src="%s" style="max-width: 100%%; max-height: 400px" />'% ( img_full_url )
 		return mark_safe(html_img)
 
-
 admin.site.register(Category, CategoryAdmin)
+
 
 
 class FeatureAdmin(admin.ModelAdmin):
@@ -109,8 +103,8 @@ class FeatureAdmin(admin.ModelAdmin):
 			'all': ('css/font-awesome.min.css',)
 		}
 
-
 admin.site.register(Feature, FeatureAdmin)
+
 
 
 class LocationAdmin(admin.ModelAdmin):
@@ -143,6 +137,7 @@ class LocationAdmin(admin.ModelAdmin):
 admin.site.register(Location, LocationAdmin)
 
 
+
 class GalleryInline(admin.TabularInline):
 	model = TourImage.tours.through
 	extra = 0
@@ -152,6 +147,7 @@ class GalleryInline(admin.TabularInline):
 		'tourimage',
 		'image_thumbnail',
 	]
+	autocomplete_fields = ['tourimage',]
 	readonly_fields = ['image_thumbnail',]
 
 	def get_queryset(self, request):
@@ -164,7 +160,6 @@ class GalleryInline(admin.TabularInline):
 		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.tourimage.image.url
 		html_img = '<img src="%s" style="max-height: 200px" />'% ( img_full_url )
 		return mark_safe(html_img)
-
 
 
 class TourAdmin(admin.ModelAdmin):
@@ -200,7 +195,7 @@ class TourAdmin(admin.ModelAdmin):
 		'categories',
 		'features',
 		(
-			'tour_type',
+			'duration_type',
 			'duration',
 			'min_pax_number'
 		),
@@ -221,6 +216,7 @@ class TourAdmin(admin.ModelAdmin):
 		'categories__name_es',
 	]
 	readonly_fields = [
+		'product_type',
 		'created_at',
 		'updated_at',
 	]
@@ -236,8 +232,86 @@ class TourAdmin(admin.ModelAdmin):
 	}
 	inlines = [GalleryInline]
 
-
 admin.site.register(Tour, TourAdmin)
+
+
+
+class ComboAdmin(admin.ModelAdmin):
+	list_display = [
+		'name_es',
+		'available',
+		'updated_at',
+	]
+	list_filter = [
+		'available',
+		'updated_at',
+	]
+	list_editable = ['available']
+	fields = [
+		(
+			'updated_at',
+			'created_at'
+		),
+		'available',
+		(
+			'name_es',
+			'slug_es'
+		),
+		(
+			'name_en',
+			'slug_en'
+		),
+		(
+			'name_pt_BR',
+			'slug_pt_BR'
+		),
+		'categories',
+		(
+			'min_pax_number'
+		),
+		(
+			'adult_reg_price',
+			'children_reg_price'
+		),
+		(
+			'adult_sale_price',
+			'children_sale_price'
+		),
+		'tours',
+		'description_es',
+		'description_en',
+		'description_pt_BR',
+		'image',
+		'image_tag',
+	]
+	search_fields = [
+		'name_es',
+		'categories__name_es',
+	]
+	readonly_fields = [
+		'created_at',
+		'updated_at',
+		'image_tag',
+	]
+	autocomplete_fields = [
+		'categories',
+		'image',
+	]
+	filter_horizontal = ['tours',]
+	prepopulated_fields = {
+		'slug_es': ('name_es',),
+		'slug_en': ('name_en',),
+		'slug_pt_BR': ('name_pt_BR',),
+	}
+
+	# Method to display image tag inside django admin
+	def image_tag(self, obj):
+		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.image.image.url
+		html_img = '<img src="%s" style="max-width: 100%%; max-height: 400px" />'% ( img_full_url )
+		return mark_safe(html_img)
+
+admin.site.register(Combo, ComboAdmin)
+
 
 
 class TourImageAdmin(admin.ModelAdmin):

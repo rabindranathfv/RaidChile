@@ -49,38 +49,9 @@ class Category(models.Model):
 		on_delete=models.SET_NULL,
 		verbose_name=_('image')
 	)
-	short_desc_en = models.TextField(
-		blank=True,
-		max_length=200,
-		verbose_name=_('short description (in English)'),
-		help_text=_('Only necessary if it\'s a combo.')
-	)
-	short_desc_es = models.TextField(
-		blank=True,
-		max_length=200,
-		verbose_name=_('short description (in Spanish)'),
-		help_text=_('Only necessary if it\'s a combo.')
-	)
-	short_desc_pt_BR = models.TextField(
-		blank=True,
-		max_length=200,
-		verbose_name=_('short description (in Portuguese)'),
-		help_text=_('Only necessary if it\'s a combo.')
-	)
 	available = models.BooleanField(
 		default=True,
 		verbose_name=_('available')
-	)
-	combo = models.BooleanField(
-		default=False,
-		verbose_name=_('Is it tour combo?')
-	)
-	combo_discount = models.DecimalField(
-		default = Decimal(0),
-		max_digits=10,
-		decimal_places=2,
-		verbose_name=_('combo discount'),
-		help_text=_('Per passenger.')
 	)
 	created_at = models.DateTimeField(
 		auto_now_add=True,
@@ -92,9 +63,9 @@ class Category(models.Model):
 	)
 
 	class Meta:
-		ordering = ('-created_at', )
-		verbose_name = _('Category / Combo')
-		verbose_name_plural = _('Categories / Combos')
+		ordering = ('name_es', )
+		verbose_name = _('Category')
+		verbose_name_plural = _('Categories')
 
 	def __str__(self):
 		cur_language = translation.get_language()
@@ -105,15 +76,6 @@ class Category(models.Model):
 		else:
 			return self.name_en
 
-	def get_short_desc(self):
-		cur_language = translation.get_language()
-		if cur_language == 'es':
-			return self.short_desc_es
-		elif cur_language == 'pt-br':
-			return self.short_desc_pt_BR
-		else:
-			return self.short_desc_en
-
 	def get_absolute_url(self):
 		cur_language = translation.get_language()
 		if cur_language == 'es':
@@ -122,7 +84,6 @@ class Category(models.Model):
 			return reverse('raidchileapp:tour_search_by_category', args=[self.slug_pt_BR])
 		else:
 			return reverse('raidchileapp:tour_search_by_category', args=[self.slug_en])
-
 
 
 
@@ -212,13 +173,11 @@ class Location(models.Model):
 
 
 
-class Tour(models.Model):
-	TOUR_TYPE_CHOICES = (
-		('HALF', _('Half-Day')),
-		('FULL', _('Full-Day'))
+class Product(models.Model):
+	PRODUCT_CHOICES = (
+		('TOUR', _('Tour')),
+		('COMBO', _('Combo'))
 	)
-
-
 	name_en = models.CharField(
 		max_length=150,
 		db_index=True,
@@ -234,35 +193,16 @@ class Tour(models.Model):
 		db_index=True,
 		verbose_name=_('name (in Portuguese)')
 	)
-	locations = models.ManyToManyField(
-		Location,
-		blank=True,
-		related_name='tours',
-		related_query_name='tour',
-		verbose_name=_('locations')
-	)
 	categories = models.ManyToManyField(
 		Category,
 		blank=True,
-		related_name='tours',
-		related_query_name='tour',
+		related_name='products',
+		related_query_name='product',
 		verbose_name=_('categories')
-	)
-	features = models.ManyToManyField(
-		Feature,
-		blank=True,
-		related_name='tours',
-		related_query_name='tour',
-		verbose_name=_('features')
 	)
 	available = models.BooleanField(
 		default=True,
 		verbose_name=_('available')
-	)
-	tour_type = models.CharField(
-		choices=TOUR_TYPE_CHOICES,
-		max_length=4,
-		verbose_name=_('type of tour')
 	)
 	slug_en = models.SlugField(
 		max_length=150,
@@ -282,28 +222,35 @@ class Tour(models.Model):
 		db_index=True,
 		verbose_name=_('slug (in Portuguese)')
 	)
+	product_type = models.CharField(
+		choices=PRODUCT_CHOICES,
+		max_length=5,
+		verbose_name=_('type of product')
+	)
 	description_en = models.TextField(
-		verbose_name=_('tour description (in English)')
+		verbose_name=_('description (in English)'),
+		help_text=_('Long if tour. Short if Combo.')
 	)
 	description_es = models.TextField(
-		verbose_name=_('tour description (in Spanish)')
+		verbose_name=_('description (in Spanish)'),
+		help_text=_('Long if tour. Short if Combo.')
 	)
 	description_pt_BR = models.TextField(
-		verbose_name=_('tour description (in Portuguese)')
-	)
-	duration = models.PositiveSmallIntegerField(
-		verbose_name=_('duration (in hours)')
+		verbose_name=_('description (in Portuguese)'),
+		help_text=_('Long if tour. Short if Combo.')
 	)
 	min_pax_number = models.PositiveSmallIntegerField(
 		default=1,
 		verbose_name=_('minimum passenger number')
 	)
 	adult_reg_price = models.DecimalField(
+		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
 		verbose_name=_('adults\' regular price')
 	)
 	children_reg_price = models.DecimalField(
+		default = Decimal(0),
 		max_digits=10,
 		decimal_places=2,
 		verbose_name=_('children\'s regular price')
@@ -328,12 +275,6 @@ class Tour(models.Model):
 		auto_now=True,
 		verbose_name=_('updated at')
 	)
-
-	class Meta:
-		ordering = ('name_es', )
-		verbose_name = _('Tour')
-		verbose_name_plural = _('Tours')
-
 	def __str__(self):
 		cur_language = translation.get_language()
 		if cur_language == 'es':
@@ -352,6 +293,56 @@ class Tour(models.Model):
 		else:
 			return self.description_en
 
+	# Easily set all the prices of a product to the given price.
+	def set_all_prices(self, price):
+		price = Decimal(price)
+		self.adult_reg_price = price
+		self.adult_sale_price = price
+		self.children_reg_price = price
+		self.children_sale_price = price
+
+
+class Tour(Product):
+	TOUR_DURATION_CHOICES = (
+		('HALF', _('Half-Day')),
+		('FULL', _('Full-Day'))
+	)
+	locations = models.ManyToManyField(
+		Location,
+		blank=True,
+		related_name='tours',
+		related_query_name='tour',
+		verbose_name=_('locations')
+	)
+	features = models.ManyToManyField(
+		Feature,
+		blank=True,
+		related_name='tours',
+		related_query_name='tour',
+		verbose_name=_('features')
+	)
+	duration_type = models.CharField(
+		choices=TOUR_DURATION_CHOICES,
+		max_length=4,
+		verbose_name=_('type of tour')
+	)
+	duration = models.PositiveSmallIntegerField(
+		verbose_name=_('duration (in hours)')
+	)
+
+	class Meta:
+		ordering = ('-created_at', )
+		verbose_name = _('Tour')
+		verbose_name_plural = _('Tours')
+
+	# Return the name of the product using the logic implemented in the parent class
+	def __str__(self):
+		return super().__str__()
+
+	# Return the description of the product using the logic implemented in the parent class
+	def get_description(self):
+		return super().get_description()
+
 	def get_absolute_url(self):
 		cur_language = translation.get_language()
 		if cur_language == 'es':
@@ -361,7 +352,81 @@ class Tour(models.Model):
 		else:
 			return reverse('raidchileapp:tour_details', args=[self.id, self.slug_en])
 
+	# For the type of product to be tour when saving a tour.
+	def save(self, *args, **kwargs):
+		self.product_type = 'TOUR'
+		super().save(*args, **kwargs)  # Call the "real" save() method.
 
+# Setting a post-save Signal
+# After saving a tour if it's part of any combos, update their regular prices.
+def signal_reflect_price_in_combo(sender, instance, **kwargs):
+	tour = instance
+	combos = tour.combos.all()
+	for combo in combos:
+		prices = combo.tours.all().aggregate(
+			adult_price=models.Sum('adult_reg_price') ,
+			children_price=models.Sum('children_reg_price')
+		)
+		combo.adult_reg_price = prices['adult_price'] or Decimal(0)
+		combo.children_reg_price = prices['children_price'] or Decimal(0)
+		combo.save()
+
+models.signals.post_save.connect(signal_reflect_price_in_combo, sender=Tour)
+
+
+class Combo(Product):
+	tours = models.ManyToManyField(
+		Tour,
+		related_name='combos',
+		related_query_name='combo',
+		verbose_name=_('Tours included in the combo')
+	)
+	image = models.ForeignKey(
+		'TourImage',
+		blank=True,
+		null=True,
+		related_name='combos',
+		related_query_name='combo',
+		on_delete=models.SET_NULL,
+		verbose_name=_('image'),
+		help_text=_('Appears in the homepage.')
+	)
+	class Meta:
+		ordering = ('-created_at', )
+		verbose_name = _('Tour Combo')
+		verbose_name_plural = _('Tour Combos')
+
+	# Return the name of the product using the logic implemented in the parent class
+	def __str__(self):
+		return super().__str__()
+
+	# Return the description of the product using the logic implemented in the parent class
+	def get_description(self):
+		return super().get_description()
+
+	# For the type of product to be combo when saving a combo.
+	def save(self, *args, **kwargs):
+		self.product_type = 'COMBO'
+		super().save(*args, **kwargs)  # Call the "real" save() method.
+
+# Setting a m2m post-save Signal
+# After saving a combo and whenever their tours change, calculate and set the combo's prices.
+def signal_combo_m2m_price_calculate(signal, sender, **kwargs):
+	combo = kwargs['instance']
+	print ("SENDER", sender)
+	print ("KWARGS_PK_SET,", kwargs['pk_set'])
+	if kwargs['pk_set']:
+		prices = combo.tours.all().aggregate(
+			adult_price=models.Sum('adult_reg_price') ,
+			children_price=models.Sum('children_reg_price')
+		)
+		combo.adult_reg_price = prices['adult_price'] or Decimal(0)
+		combo.adult_sale_price = prices['adult_price'] or Decimal(0)
+		combo.children_reg_price = prices['children_price'] or Decimal(0)
+		combo.children_sale_price = prices['children_price'] or Decimal(0)
+		combo.save()
+
+models.signals.m2m_changed.connect(signal_combo_m2m_price_calculate, Combo.tours.through)
 
 class TourImage(models.Model):
 	tours = models.ManyToManyField(
