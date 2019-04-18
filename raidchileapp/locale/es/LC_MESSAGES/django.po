@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 18:36-0400\n"
+"POT-Creation-Date: 2019-04-17 18:53-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: raidchileapp/admin.py:149
+msgid "Tour Image"
+msgstr "Imagen de Tour"
+
+#: raidchileapp/admin.py:150
+msgid "Tour Images"
+msgstr "Imágenes de Tour"
 
 #: raidchileapp/apps.py:7
 msgid "main application"
@@ -31,7 +39,7 @@ msgid "Search..."
 msgstr "Buscar..."
 
 #: raidchileapp/forms.py:24
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:47
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:50
 msgid "Locations"
 msgstr "Ubicaciones"
 
@@ -43,156 +51,219 @@ msgstr "Precio Mínimo"
 msgid "Maximum Price"
 msgstr "Precio Máximo"
 
-#: raidchileapp/forms.py:79
+#: raidchileapp/forms.py:79 raidchileapp/models.py:335
 msgid "Tours"
 msgstr "Tours"
 
-#: raidchileapp/models.py:14 raidchileapp/models.py:75
-#: raidchileapp/models.py:114 raidchileapp/models.py:151
-msgid "name"
-msgstr "nombre"
+#: raidchileapp/models.py:15 raidchileapp/models.py:133
+#: raidchileapp/models.py:225
+msgid "name (in English)"
+msgstr "nombre (en inglés)"
 
-#: raidchileapp/models.py:28 raidchileapp/models.py:258
+#: raidchileapp/models.py:19 raidchileapp/models.py:138
+#: raidchileapp/models.py:230
+msgid "name (in Spanish)"
+msgstr "nombre (en español)"
+
+#: raidchileapp/models.py:23 raidchileapp/models.py:143
+#: raidchileapp/models.py:235
+msgid "name (in Portuguese)"
+msgstr "nombre (en portugués)"
+
+#: raidchileapp/models.py:29 raidchileapp/models.py:271
+msgid "slug (in English)"
+msgstr "slug (en inglés)"
+
+#: raidchileapp/models.py:35 raidchileapp/models.py:277
+msgid "slug (in Spanish)"
+msgstr "slug (en español)"
+
+#: raidchileapp/models.py:41 raidchileapp/models.py:283
+msgid "slug (in Portuguese)"
+msgstr "slug (en portugués)"
+
+#: raidchileapp/models.py:50 raidchileapp/models.py:391
 msgid "image"
 msgstr "imagen"
 
-#: raidchileapp/models.py:33
-msgid "short description"
-msgstr "descripción corta"
+#: raidchileapp/models.py:55
+msgid "short description (in English)"
+msgstr "descripción corta (en inglés)"
 
-#: raidchileapp/models.py:37 raidchileapp/models.py:176
+#: raidchileapp/models.py:56 raidchileapp/models.py:62
+#: raidchileapp/models.py:68
+msgid "Only necessary if it's a combo."
+msgstr "Es necesaria si es un combo."
+
+#: raidchileapp/models.py:61
+msgid "short description (in Spanish)"
+msgstr "descripción corta (en español)"
+
+#: raidchileapp/models.py:67
+msgid "short description (in Portuguese)"
+msgstr "descripción corta (en portugués)"
+
+#: raidchileapp/models.py:72 raidchileapp/models.py:260
 msgid "available"
 msgstr "disponible"
 
-#: raidchileapp/models.py:41
+#: raidchileapp/models.py:76
 msgid "Is it tour combo?"
 msgstr "¿Es un combo de tours?"
 
-#: raidchileapp/models.py:47
+#: raidchileapp/models.py:82
 msgid "combo discount"
 msgstr "descuento de combo"
 
-#: raidchileapp/models.py:51 raidchileapp/models.py:84
-#: raidchileapp/models.py:125 raidchileapp/models.py:222
-#: raidchileapp/models.py:262
+#: raidchileapp/models.py:83
+msgid "Per passenger."
+msgstr "Por pasajero."
+
+#: raidchileapp/models.py:87 raidchileapp/models.py:152
+#: raidchileapp/models.py:198 raidchileapp/models.py:325
+#: raidchileapp/models.py:395
 msgid "created at"
 msgstr "creado en"
 
-#: raidchileapp/models.py:55 raidchileapp/models.py:88
-#: raidchileapp/models.py:129 raidchileapp/models.py:226
-#: raidchileapp/models.py:266
+#: raidchileapp/models.py:91 raidchileapp/models.py:156
+#: raidchileapp/models.py:202 raidchileapp/models.py:329
+#: raidchileapp/models.py:399
 msgid "updated at"
 msgstr "actualizado en"
 
-#: raidchileapp/models.py:60
+#: raidchileapp/models.py:96
 msgid "Category / Combo"
 msgstr "Categoría / Combo"
 
-#: raidchileapp/models.py:61
+#: raidchileapp/models.py:97
 msgid "Categories / Combos"
 msgstr "Categorías / Combos"
 
-#: raidchileapp/models.py:79
+#: raidchileapp/models.py:147
 msgid "String from Font Awesome icons e.g. \"fa-eye\""
 msgstr "Código de ícono de Font Awesome ej.\"fa-eye\""
 
-#: raidchileapp/models.py:80
+#: raidchileapp/models.py:148
 msgid "icon"
 msgstr "ícono"
 
-#: raidchileapp/models.py:93
+#: raidchileapp/models.py:161
 msgid "feature"
 msgstr "característica"
 
-#: raidchileapp/models.py:94 raidchileapp/models.py:172
+#: raidchileapp/models.py:162 raidchileapp/models.py:256
 msgid "features"
 msgstr "características"
 
-#: raidchileapp/models.py:106
+#: raidchileapp/models.py:179
 msgid "Icon image"
 msgstr "Imagen de Ícono"
 
-#: raidchileapp/models.py:120
+#: raidchileapp/models.py:187
+msgid "name"
+msgstr "nombre"
+
+#: raidchileapp/models.py:193
 msgid "region"
 msgstr "región"
 
-#: raidchileapp/models.py:121
+#: raidchileapp/models.py:194
 msgid "Helps users to search by coincidence."
 msgstr "Ayuda a los usuarios a buscar por coincidencia"
 
-#: raidchileapp/models.py:134
+#: raidchileapp/models.py:207
 msgid "location"
 msgstr "ubicación"
 
-#: raidchileapp/models.py:135 raidchileapp/models.py:158
+#: raidchileapp/models.py:208 raidchileapp/models.py:242
 msgid "locations"
 msgstr "ubicaciones"
 
-#: raidchileapp/models.py:144
+#: raidchileapp/models.py:217
 msgid "Half-Day"
 msgstr "Half-Day"
 
-#: raidchileapp/models.py:145
+#: raidchileapp/models.py:218
 msgid "Full-Day"
 msgstr "Full-Day"
 
-#: raidchileapp/models.py:165
+#: raidchileapp/models.py:249
 msgid "categories"
 msgstr "categorías"
 
-#: raidchileapp/models.py:181
+#: raidchileapp/models.py:265
 msgid "type of tour"
 msgstr "tipo de tour"
 
-#: raidchileapp/models.py:189
-msgid "tour description"
-msgstr "descripción del tour"
+#: raidchileapp/models.py:286
+msgid "tour description (in English)"
+msgstr "descripción del tour (en inglés)"
 
-#: raidchileapp/models.py:192
+#: raidchileapp/models.py:289
+msgid "tour description (in Spanish)"
+msgstr "descripción del tour  (en español)"
+
+#: raidchileapp/models.py:292
+msgid "tour description (in Portuguese)"
+msgstr "descripción del tour (en portugués)"
+
+#: raidchileapp/models.py:295
 msgid "duration (in hours)"
 msgstr "duración (en horas)"
 
-#: raidchileapp/models.py:196
+#: raidchileapp/models.py:299
 msgid "minimum passenger number"
 msgstr "número mínimo de pasajeros"
 
-#: raidchileapp/models.py:201
+#: raidchileapp/models.py:304
 msgid "adults' regular price"
 msgstr "precio regular de adultos"
 
-#: raidchileapp/models.py:206
+#: raidchileapp/models.py:309
 msgid "children's regular price"
 msgstr "precio regular de niños"
 
-#: raidchileapp/models.py:212
+#: raidchileapp/models.py:315
 msgid "adults' sale price"
 msgstr "precio oferta de adultos"
 
-#: raidchileapp/models.py:218
+#: raidchileapp/models.py:321
 msgid "children's sale price"
 msgstr "precio oferta de niños"
 
-#: raidchileapp/models.py:231
-msgid "tour"
-msgstr "tour"
+#: raidchileapp/models.py:334
+msgid "Tour"
+msgstr "Tour"
 
-#: raidchileapp/models.py:232
-msgid "tours"
-msgstr "tours"
+#: raidchileapp/models.py:375
+msgid "alternative text (in English)"
+msgstr "texto alternativo (en inglés)"
 
-#: raidchileapp/models.py:253
-msgid "alternative text"
-msgstr "texto alternativo"
+#: raidchileapp/models.py:376
+msgid "Image description in English."
+msgstr "Descripción de la imagen en inglés."
 
-#: raidchileapp/models.py:254
-msgid "Image title."
-msgstr "descripción de imagen"
+#: raidchileapp/models.py:381
+msgid "alternative text (in Spanish)"
+msgstr "texto alternativo (en español)"
 
-#: raidchileapp/models.py:271
+#: raidchileapp/models.py:382
+msgid "Image description in Spanish."
+msgstr "Descripción de la imagen en español."
+
+#: raidchileapp/models.py:386
+msgid "alternative text (in Portuguese)"
+msgstr "texto alternativo (en portugés)"
+
+#: raidchileapp/models.py:387
+msgid "Image description in Portuguese."
+msgstr "Descripción de la imagen en portugués."
+
+#: raidchileapp/models.py:404
 msgid "tour image"
 msgstr "imagen de tour"
 
-#: raidchileapp/models.py:272
+#: raidchileapp/models.py:405
 msgid "tour images"
 msgstr "imágenes de tour"
 
@@ -206,7 +277,7 @@ msgstr "Precio Máx. (CLP)"
 
 #: raidchileapp/templates/raidchileapp/banner_product_search_form.html:19
 #: raidchileapp/templates/raidchileapp/inline_product_search_form.html:11
-#: raidchileapp/templates/raidchileapp/tour_search.html:24
+#: raidchileapp/templates/raidchileapp/tour_search.html:28
 msgid "Search"
 msgstr "Buscar"
 
@@ -223,17 +294,17 @@ msgstr "También nos pueden encontrar en"
 msgid "To Top"
 msgstr "Al Tope"
 
-#: raidchileapp/templates/raidchileapp/home.html:4
+#: raidchileapp/templates/raidchileapp/home.html:5
 msgid "Home"
 msgstr "Inicio"
 
-#: raidchileapp/templates/raidchileapp/home.html:15
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:7
-#: raidchileapp/templates/raidchileapp/tour_combo.html:4
+#: raidchileapp/templates/raidchileapp/home.html:16
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:8
+#: raidchileapp/templates/raidchileapp/tour_combo.html:5
 msgid "Tour Combos"
 msgstr "Combos de Tours"
 
-#: raidchileapp/templates/raidchileapp/home.html:16
+#: raidchileapp/templates/raidchileapp/home.html:17
 msgid ""
 "Affordable Tour packages designed to allow you to experience a wonderful "
 "Chilean adventure."
@@ -241,21 +312,21 @@ msgstr ""
 "Paquetes de tours a precios accesibles diseñados para brindarte una "
 "maravillosa aventura por Chile."
 
-#: raidchileapp/templates/raidchileapp/home.html:38
+#: raidchileapp/templates/raidchileapp/home.html:42
 msgid "See details"
 msgstr "Ver detalles"
 
-#: raidchileapp/templates/raidchileapp/home.html:46
+#: raidchileapp/templates/raidchileapp/home.html:50
 msgid "We're sorry, there are no tour combos available right now."
 msgstr "Lo sentimos, no existen combos disponibles en este momento."
 
-#: raidchileapp/templates/raidchileapp/home.html:55
+#: raidchileapp/templates/raidchileapp/home.html:59
 #: raidchileapp/templates/raidchileapp/navbar.html:8
 #: raidchileapp/templates/raidchileapp/navbar.html:9
 msgid "About us"
 msgstr "Conócenos"
 
-#: raidchileapp/templates/raidchileapp/home.html:57
+#: raidchileapp/templates/raidchileapp/home.html:61
 msgid ""
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
 "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
@@ -267,16 +338,16 @@ msgid ""
 "dolore magna aliqua. Ut enim ad minim veniam."
 msgstr ""
 
-#: raidchileapp/templates/raidchileapp/home.html:68
+#: raidchileapp/templates/raidchileapp/home.html:72
 msgid "We accept"
 msgstr "Aceptamos"
 
-#: raidchileapp/templates/raidchileapp/home.html:78
-#: raidchileapp/templates/raidchileapp/home.html:145
+#: raidchileapp/templates/raidchileapp/home.html:82
+#: raidchileapp/templates/raidchileapp/home.html:149
 msgid "Phone"
 msgstr "Teléfono"
 
-#: raidchileapp/templates/raidchileapp/home.html:90
+#: raidchileapp/templates/raidchileapp/home.html:94
 msgid ""
 "For private tours, please contact us to negotiate pricing and conditions. "
 "Thank you."
@@ -284,20 +355,20 @@ msgstr ""
 "Para tours privados, por favor contáctenos para negociar las condiciones y "
 "los precios. Gracias."
 
-#: raidchileapp/templates/raidchileapp/home.html:96
+#: raidchileapp/templates/raidchileapp/home.html:100
 msgid "Tours Locations"
 msgstr "Ubicaciones de Tours"
 
-#: raidchileapp/templates/raidchileapp/home.html:97
+#: raidchileapp/templates/raidchileapp/home.html:101
 msgid "You can find a tour in any of these beautiful locations and more:"
 msgstr ""
 "Podrá conseguir un tour en cualquiera de estas bellas ubicaciones y más:"
 
-#: raidchileapp/templates/raidchileapp/home.html:142
+#: raidchileapp/templates/raidchileapp/home.html:146
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: raidchileapp/templates/raidchileapp/home.html:143
+#: raidchileapp/templates/raidchileapp/home.html:147
 msgid "If you have any questions, do not hesitate to ask them."
 msgstr "Si tiene alguna pregunta, no dude en preguntarnos."
 
@@ -343,53 +414,53 @@ msgstr ""
 msgid "Please try with a different category, combo or filters"
 msgstr "Por favor intente con otra categoría, combo o filtros diferentes"
 
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:24
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:27
 #: raidchileapp/templates/raidchileapp/tour_details.html:57
 msgid "Categories"
 msgstr "Categorías"
 
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:27
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:29
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:30
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:32
 #: raidchileapp/templates/raidchileapp/tour_details.html:60
-#: raidchileapp/templates/raidchileapp/tour_search.html:4
-#: raidchileapp/templates/raidchileapp/tour_search.html:44
+#: raidchileapp/templates/raidchileapp/tour_search.html:5
+#: raidchileapp/templates/raidchileapp/tour_search.html:48
 msgid "All Tours"
 msgstr "Todos los Tours"
 
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:52
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:55
 msgid "Price"
 msgstr "Precio"
 
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:66
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:69
 msgid "Apply"
 msgstr "Aplicar"
 
-#: raidchileapp/templates/raidchileapp/search_sidebar.html:73
+#: raidchileapp/templates/raidchileapp/search_sidebar.html:76
 msgid "Filters"
 msgstr "Filtros"
 
-#: raidchileapp/templates/raidchileapp/tour_combo.html:29
+#: raidchileapp/templates/raidchileapp/tour_combo.html:34
 #, python-format
 msgid "Minimun passengers: %(min_pax)s person."
 msgid_plural "Minimun passengers: %(min_pax)s people."
 msgstr[0] "Pasajeros mínimos: %(min_pax)s persona."
 msgstr[1] "Pasajeros mínimos: %(min_pax)s personas."
 
-#: raidchileapp/templates/raidchileapp/tour_combo.html:39
+#: raidchileapp/templates/raidchileapp/tour_combo.html:44
 #, python-format
 msgid "%(min_pax)s is the minimum number of passengers!"
 msgstr "¡El número mínimo de pasajeros es %(min_pax)s!"
 
-#: raidchileapp/templates/raidchileapp/tour_combo.html:52
+#: raidchileapp/templates/raidchileapp/tour_combo.html:57
 #: raidchileapp/templates/raidchileapp/tour_details.html:145
 msgid "Reserve Now"
 msgstr "Reservar"
 
-#: raidchileapp/templates/raidchileapp/tour_combo.html:54
+#: raidchileapp/templates/raidchileapp/tour_combo.html:59
 msgid "Reserve Now!"
 msgstr "¡Reservar!"
 
-#: raidchileapp/templates/raidchileapp/tour_combo.html:63
+#: raidchileapp/templates/raidchileapp/tour_combo.html:68
 msgid "Tour Combo"
 msgstr "Combo de Tours"
 
@@ -412,6 +483,7 @@ msgid "Duration"
 msgstr "Duración"
 
 #: raidchileapp/templates/raidchileapp/tour_details.html:49
+#, python-format
 msgid "%(tour_duration)s Hour"
 msgid_plural "%(tour_duration)s Hours"
 msgstr[0] "%(tour_duration)s Hora"
@@ -450,7 +522,10 @@ msgstr ""
 "Lo sentimos, no existen características disponibles para este tour en estos "
 "momentos"
 
-#: raidchileapp/templates/raidchileapp/tour_details.html:116
+#: raidchileapp/templates/raidchileapp/tour_details.html:119
+msgid "Min. passengers per reservation"
+msgstr "Pasajeros mín. por reservación"
+
 #: raidchileapp/templates/raidchileapp/tour_details.html:120
 #, python-format
 msgid "%(min_pass)s person."
@@ -458,11 +533,8 @@ msgid_plural "%(min_pass)s people."
 msgstr[0] "%(min_pass)s persona."
 msgstr[1] "%(min_pass)s personas."
 
-#: raidchileapp/templates/raidchileapp/tour_details.html:119
-msgid "Min. passengers per reservation"
-msgstr "Pasajeros mín. por reservación"
-
 #: raidchileapp/templates/raidchileapp/tour_details.html:132
 #, python-format
 msgid "%(tour_min_pax)s is the minimum number of passengers!"
 msgstr "¡El número mínimo de pasajeros es %(tour_min_pax)s!"
+

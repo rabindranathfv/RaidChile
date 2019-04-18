@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 18:36-0400\n"
+"POT-Creation-Date: 2019-04-17 18:53-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -318,10 +318,10 @@ msgstr ""
 msgid "Go Back"
 msgstr "Regresar"
 
-#: orders/views.py:72
+#: orders/views.py:73
 msgid "Tour Reservations Confirmed! - Chile Raids"
 msgstr "¡Reservaciones de Tours Confirmadas! - Chile Raids"
 
-#: orders/views.py:89
+#: orders/views.py:90
 msgid "An User Has Confirmed New Tour Reservations - Chile Raids"
 msgstr "Usuario ha Confirmado Nuevas Resevaciones de Tours - Chile Raids"
