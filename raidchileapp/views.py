@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from cart.forms import CartAddProductForm
 from contact.forms import ContactForm
 
-from .models import Category, Feature, Location, Tour, TourImage
+from .models import Category, Feature, Location, Tour, Combo, TourImage
 from .forms import CommentForm, SearchForm
 
 ##################################
@@ -62,10 +62,10 @@ def tour_filter_search(request, queryset, search_form):
 def home(request):
 	contact_form = ContactForm(request.POST or None)
 	search_form = SearchForm()
-	categories = Category.objects.filter(available=True, combo=True).annotate(Count('tour')).prefetch_related('image')[:4] # First 4 categories
+	combos = Combo.objects.filter(available=True).annotate(Count('tours')).prefetch_related('image')[:4] # First 4 combos
 
 	context = {
-		'categories': categories,
+		'combos': combos,
 		'contact_form': contact_form,
 		'search_form': search_form,
 	}
