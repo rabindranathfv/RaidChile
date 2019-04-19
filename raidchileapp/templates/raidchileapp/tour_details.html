@@ -43,7 +43,7 @@
 					<hr class="better-hr">
 					<div class="w3-row">
 						<div class="w3-half">
-							<h5><strong>{% trans "Type" %}:</strong> {{ tour.get_tour_type_display }}</h5>
+							<h5><strong>{% trans "Type" %}:</strong> {{ tour.get_duration_type_display }}</h5>
 						</div>
 						<div class="w3-half">
 							<h5><strong>{% trans "Duration" %}:</strong> {% blocktrans count tour_duration=tour.duration %}{{ tour_duration }} Hour{% plural %}{{ tour_duration }} Hours{% endblocktrans %}</h5>
@@ -70,7 +70,7 @@
 				<div class="w3-col s12 l6 w3-margin-bottom">
 					<h2>{% trans "Pricing" %}</h2>
 					<hr class="better-hr">
-					<h6>{% trans "If you reserve all the tours in a combo you'll get a discount per passenger!" %}</h6>
+					<h6>{% trans "If you reserve this tour as part of a combo you'll get a discount per passenger!" %}</h6>
 					<div class="w3-row">
 						<div class="w3-col s1 w3-container"></div>
 						<div class="w3-col s10">
@@ -93,7 +93,7 @@
 									<td>CLP<span class="number-font"> {{ tour.children_sale_price|intcomma }}</span></td>
 								</tr>-->
 							</table>
-					</div>
+						</div>
 					</div>
 					<h5 class="w3-padding-large"><strong>{% trans "Price includes:" %}</strong></h5>
 					<div class="w3-row-padding">

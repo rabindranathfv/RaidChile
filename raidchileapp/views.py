@@ -14,7 +14,7 @@ from .models import Category, Feature, Location, Tour, Combo, TourImage
 from .forms import CommentForm, SearchForm
 
 ##################################
-def tour_filter_search(request, queryset, search_form):
+def tour_filter_search(request, queryset, search_form, sale_price_filter=False):
 	# Verify querystring parameters integrity.
 	# Delete non-form and empty fields from the get request.
 	form_fields = search_form.fields.keys()
@@ -43,27 +43,30 @@ def tour_filter_search(request, queryset, search_form):
 	# Constraint: Max price > min price else swap them.
 	min_price = Decimal(filter_parameters.get('min_price', 0))
 	max_price = Decimal(filter_parameters.get('max_price', 0))
-	print ('FILTER PARAMETERS1: ', filter_parameters)
 	if (min_price and max_price) and (max_price < min_price):
 		min_price, max_price = max_price, min_price
 		filter_parameters['min_price'], filter_parameters['max_price'] = filter_parameters['max_price'], filter_parameters['min_price']
 
-	print ('FILTER PARAMETERS2: ', filter_parameters)
 	# Filtering tours depending on existing filter parameters
 	# Locations
 	if filter_parameters.get('locations', None):
 		queryset = queryset.filter(locations__in=filter_parameters['locations'])
 	# Min Price
 	if filter_parameters.get('min_price', None):
-		queryset = queryset.filter(Q(adult_reg_price__gte=min_price))# | Q(adult_sale_price__gte=filter_parameters['min_price']))
-		print("MINPRICE QUERYSET:", queryset)
+		if sale_price_filter:
+			queryset = queryset.filter(Q(adult_sale_price__gte=min_price))
+		else:
+			queryset = queryset.filter(Q(adult_reg_price__gte=min_price))
+
 	# Max Price
 	if filter_parameters.get('max_price', None):
-		queryset = queryset.filter(Q(adult_reg_price__lte=max_price))# | Q(adult_sale_price__lte=filter_parameters['max_price']))
-		print("MAXPRICE QUERYSET:", queryset)
+		if sale_price_filter:
+			queryset = queryset.filter(Q(adult_sale_price__lte=max_price))
+		else:
+			queryset = queryset.filter(Q(adult_reg_price__lte=max_price))
 	return queryset
 
-##################################
+##################################  Views  ##################################
 def home(request):
 	contact_form = ContactForm(request.POST or None)
 	search_form = SearchForm()
@@ -175,15 +178,9 @@ def tour_search_by_category(request, category_slug):
 	except Category.DoesNotExist:
 		raise Http404("No Category matches the given query.")
 	tours = Tour.objects.filter(available=True, categories__in=[category.id]).prefetch_related('features', 'images')
-	min_pax = None
-
-	# Calculate minimun passenger of combo = larges amount of all tours.
-	if category.combo:
-		min_pax = tours.aggregate(Max('min_pax_number'))
-
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
-	if request.GET and not category.combo:
+	if request.GET:
 		tours = tour_filter_search(request, tours, search_form)
 
 	context = {
@@ -206,25 +203,73 @@ def tour_search_by_category(request, category_slug):
 	finally:
 		translation.activate(cur_language)
 
-
-	# If the category is a combo, don't display the filters or search bar.
-	if category.combo :
-		context['min_pax'] = min_pax['min_pax_number__max'] or 0
-		# Initialize reservation miniform
-		cart_product_form = CartAddProductForm(
-			initial={
-				'adult_quantity': min_pax['min_pax_number__max'] or 0,
-			}
-		)
-		context['cart_product_form'] = cart_product_form
-		return render(request, "raidchileapp/tour_combo.html", context)
-
 	return render(request, "raidchileapp/tour_search.html", context)
 
 
 def combo_details(request, id, slug):
-	pass
+	try:
+		combo = Combo.objects.prefetch_related('tours').get(
+			Q(available=True) &
+			Q(id=id) & (
+				Q(slug_es=slug) |
+				Q(slug_en=slug) |
+				Q(slug_pt_BR=slug)
+			)
+		)
+	except Combo.DoesNotExist:
+		raise Http404("No Tour Combo matches the given query.")
+	# Initialize the cart_add_ Product form with the minimun number of passengers
+	cart_product_form = CartAddProductForm(
+		initial={
+			'adult_quantity': combo.min_pax_number,
+		}
+	)
+
+	context = {
+		'combo': combo,
+		'cart_product_form' : cart_product_form,
+	}
+
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = combo.get_absolute_url()
+		translation.activate('en')
+		context['redirect_url_en'] = combo.get_absolute_url()
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = combo.get_absolute_url()
+	finally:
+		translation.activate(cur_language)
+
+	return render(request, "raidchileapp/combo_details.html", context)
 
 
 def search_all_combos(request):
-	pass
+	search_form = SearchForm(request.GET or None)
+	categories = Category.objects.filter(available=True)
+	combos = Combo.objects.filter(available=True).prefetch_related('image')
+
+	if request.GET:
+		combos = tour_filter_search(request, combos, search_form, sale_price_filter=True)
+
+	context = {
+		'type': 'combo',
+		'combos': combos.annotate(Count('tours')),
+		'categories': categories,
+		'search_form': search_form,
+	}
+
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = reverse('raidchileapp:search_all_combos')
+		translation.activate('en')
+		context['redirect_url_en'] = reverse('raidchileapp:search_all_combos')
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = reverse('raidchileapp:search_all_combos')
+	finally:
+		translation.activate(cur_language)
+
+	return render(request, "raidchileapp/combo_search.html", context)

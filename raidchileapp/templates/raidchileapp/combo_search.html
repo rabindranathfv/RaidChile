@@ -1,0 +1,49 @@
+{% extends "raidchileapp/base.html" %}
+{% load static %}{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block page_title %}{% if category %} {{ category }} {% else %} {% trans "All Tours" %} {% endif %} {% endblock page_title %}
+
+{% block content %}
+
+<form action="{% url 'raidchileapp:search_all_combos' %}" method="GET" id="search-form">
+	<!-- Search Bar Section -->
+	<div class="w3-container combo-header" style="background:url('{% if category %}{{ category.image.image.url }}{% else %}{% static 'img/banner-img.jpg' %}{% endif %}')">
+		<div class="w3-row w3-margin-top">
+			<div class="w3-col m1 w3-container"></div>
+			<div class="w3-col s12 m10">
+				<div class="w3-panel w3-white w3-card-4 w3-padding-large">
+					<div class="w3-row">
+						<div class="w3-col s9 m9 l10">
+							{{ search_form.search_terms }}
+						</div>
+						<div class="w3-col s3 m3 l2">
+							<button type="submit" for="search-form" class="w3-button w3-block w3-dark-grey w3-border searchbar-btn"><i class="fa fa-search"></i> <span class="w3-hide-small">{% trans "Search" %}</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  Content wrapper row (Contains sidebar and search results)  -->
+	<div class="w3-row w3-white">
+		<div class="w3-col m3 l2">
+			<!-- Filter Search Sidebar goes here-->
+			{% include "raidchileapp/search_sidebar.html" %}
+		</div>
+		<div class="w3-col m9 l10">
+			<!--  Search result rows  -->
+			<div class="w3-center">
+				<h2> {% trans "All Tour Combos" %} </h2>
+			</div>
+
+			<!-- Include the search result rows -->
+			{% include "raidchileapp/combo_search_results.html" %}
+
+		</div>
+	</div>
+</form>
+{% endblock content %}
+
+{% block extra_js %}{% endblock extra_js %}
