@@ -16,8 +16,8 @@
 				<!-- Tour adult sale prices -->
 				<h6 class="w3-opacity">{% trans "From" %} <span class="number-font">CLP {{ tour.adult_reg_price|intcomma }}</span></h6>
 				<h6>
-				{% blocktrans with tour_type=tour.get_tour_type_display tour_duration=tour.duration trimmed %}
-					{{ tour_type }} Tour: {{ tour_duration }} Hours
+				{% blocktrans with duration_type=tour.get_duration_type_display tour_duration=tour.duration trimmed %}
+					{{ duration_type }} Tour: {{ tour_duration }} Hours
 				{% endblocktrans %}
 				</h6>
 				<!-- Features Icons -->

@@ -1,10 +1,11 @@
+from decimal import Decimal
+
 from django.db.models import Count, Q, Prefetch, Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils import translation
 from django.utils.translation import gettext as _
-
 
 from cart.forms import CartAddProductForm
 from contact.forms import ContactForm
@@ -40,22 +41,26 @@ def tour_filter_search(request, queryset, search_form):
 
 	# Validating parameters data type and constraints
 	# Constraint: Max price > min price else swap them.
-	min_price = filter_parameters.get('min_price', None)
-	max_price = filter_parameters.get('max_price', None)
+	min_price = Decimal(filter_parameters.get('min_price', 0))
+	max_price = Decimal(filter_parameters.get('max_price', 0))
+	print ('FILTER PARAMETERS1: ', filter_parameters)
 	if (min_price and max_price) and (max_price < min_price):
+		min_price, max_price = max_price, min_price
 		filter_parameters['min_price'], filter_parameters['max_price'] = filter_parameters['max_price'], filter_parameters['min_price']
 
+	print ('FILTER PARAMETERS2: ', filter_parameters)
 	# Filtering tours depending on existing filter parameters
 	# Locations
 	if filter_parameters.get('locations', None):
 		queryset = queryset.filter(locations__in=filter_parameters['locations'])
 	# Min Price
 	if filter_parameters.get('min_price', None):
-		queryset = queryset.filter(Q(adult_reg_price__gte=filter_parameters['min_price']))# | Q(adult_sale_price__gte=filter_parameters['min_price']))
+		queryset = queryset.filter(Q(adult_reg_price__gte=min_price))# | Q(adult_sale_price__gte=filter_parameters['min_price']))
+		print("MINPRICE QUERYSET:", queryset)
 	# Max Price
 	if filter_parameters.get('max_price', None):
-		queryset = queryset.filter(Q(adult_reg_price__lte=filter_parameters['max_price']))# | Q(adult_sale_price__lte=filter_parameters['max_price']))
-
+		queryset = queryset.filter(Q(adult_reg_price__lte=max_price))# | Q(adult_sale_price__lte=filter_parameters['max_price']))
+		print("MAXPRICE QUERYSET:", queryset)
 	return queryset
 
 ##################################
@@ -127,8 +132,7 @@ def tour_details(request, id, slug):
 
 def search_all_tours(request):
 	search_form = SearchForm(request.GET or None)
-	categories = Category.objects.filter(combo=False, available=True)
-	combos = Category.objects.filter(combo=True, available=True)
+	categories = Category.objects.filter(available=True)
 	tours = Tour.objects.filter(available=True).prefetch_related('features', 'images')
 
 	# If there are querystring parameters present in the url, proceed to filter tours.
@@ -136,9 +140,9 @@ def search_all_tours(request):
 		tours = tour_filter_search(request, tours, search_form)
 
 	context = {
+		'type': 'tour',
 		'tours': tours,
 		'categories': categories,
-		'combos': combos,
 		'search_form': search_form,
 	}
 
@@ -160,7 +164,6 @@ def search_all_tours(request):
 def tour_search_by_category(request, category_slug):
 	search_form = SearchForm(request.GET or None)
 	categories = Category.objects.filter(combo=False, available=True)
-	combos = Category.objects.filter(combo=True, available=True)
 	try:
 		category = Category.objects.get(
 			Q(available=True) & (
@@ -184,9 +187,9 @@ def tour_search_by_category(request, category_slug):
 		tours = tour_filter_search(request, tours, search_form)
 
 	context = {
+		'type': 'tour',
 		'tours': tours,
 		'category': category,
-		'combos': combos,
 		'categories': categories,
 		'search_form': search_form,
 	}
@@ -217,3 +220,11 @@ def tour_search_by_category(request, category_slug):
 		return render(request, "raidchileapp/tour_combo.html", context)
 
 	return render(request, "raidchileapp/tour_search.html", context)
+
+
+def combo_details(request, id, slug):
+	pass
+
+
+def search_all_combos(request):
+	pass

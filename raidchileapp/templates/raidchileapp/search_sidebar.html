@@ -2,30 +2,17 @@
 {% get_current_language as LANGUAGE_CODE %}
 <div class="w3-container w3-border-right w3-hide-small w3-animate-top" id="filters-sidebar">
 	<!-- Filters start from here -->
-	{% if combos.exists %}
-		<!-- Tour Combos -->
-	<div class="w3-border-bottom">
-		<h5>{% trans "Tour Combos" %}</h5>
-		<div class="w3-row w3-margin-bottom">
-			{% with sets=combos.all %}
-			{% for combo in sets %}
-				{% if combo != category %}
-					<a class="w3-text-blue" href="{{ combo.get_absolute_url }}">
-					{{ combo }}
-					</a><br>
-				{% else %}
-					<span class="w3-text-blue"><strong>{{ combo }}</strong></span><br>
-				{% endif %}
-			{% endfor %}
-			{% endwith %}
-		</div>
-	</div>
-	{% endif %}
 
 	<!-- Categories -->
 	<div class="w3-border-bottom">
 		<h5>{% trans "Categories" %}</h5>
 		<div class="w3-row w3-margin-bottom">
+			{% if type != 'combo' %}
+				<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_combos' %}">{% trans "All Combos" %}</a><br>
+			{% else %}
+				<span class="w3-text-blue"><strong>{% trans "All Combos" %}</strong></span><br>
+			{% endif %}
+
 			{% if category %}
 				<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a><br>
 			{% else %}
@@ -45,7 +32,6 @@
 		</div>
 	</div>
 
-	{% if not category.combo %}
 	<div class="w3-border-bottom">
 		<h5>{% trans "Locations" %}</h5>
 		{{ search_form.locations }}
@@ -69,7 +55,6 @@
 		<button type="submit" for="search-form" class="w3-button w3-block w3-dark-gray w3-margin-top"><i class="fa fa-sliders fa-fw"></i> {% trans "Apply" %}</button>
 	</div>
 
-	{% endif %}
 	<div class="w3-container w3-padding-64 w3-hide-small"></div> <!-- Fill space so footer won't cut sidebar -->
 </div>
 <div class="w3-center">

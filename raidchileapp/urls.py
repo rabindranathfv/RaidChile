@@ -20,4 +20,6 @@ urlpatterns = [
 	path('tours/', views.search_all_tours, name='search_all_tours'),
 	path('tours/<slug:category_slug>/', views.tour_search_by_category, name='tour_search_by_category'),
 	path('tours/<int:id>/<slug:slug>/', views.tour_details, name='tour_details'),
+	path('combos/', views.search_all_combos, name='search_all_combos'),
+	path('combos/<int:id>/<slug:slug>/', views.combo_details, name='combo_details'),
 ]

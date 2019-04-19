@@ -227,6 +227,13 @@ class Product(models.Model):
 		max_length=5,
 		verbose_name=_('type of product')
 	)
+	locations = models.ManyToManyField(
+		Location,
+		blank=True,
+		related_name='products',
+		related_query_name='product',
+		verbose_name=_('locations')
+	)
 	description_en = models.TextField(
 		verbose_name=_('description (in English)'),
 		help_text=_('Long if tour. Short if Combo.')
@@ -306,13 +313,6 @@ class Tour(Product):
 	TOUR_DURATION_CHOICES = (
 		('HALF', _('Half-Day')),
 		('FULL', _('Full-Day'))
-	)
-	locations = models.ManyToManyField(
-		Location,
-		blank=True,
-		related_name='tours',
-		related_query_name='tour',
-		verbose_name=_('locations')
 	)
 	features = models.ManyToManyField(
 		Feature,
@@ -406,6 +406,15 @@ class Combo(Product):
 	# Return the name of the product using the logic implemented in the parent class
 	def __str__(self):
 		return super().__str__()
+
+	def get_absolute_url(self):
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return reverse('raidchileapp:combo_details', args=[self.id, self.slug_es])
+		elif cur_language == 'pt-br':
+			return reverse('raidchileapp:combo_details', args=[self.id, self.slug_pt_BR])
+		else:
+			return reverse('raidchileapp:combo_details', args=[self.id, self.slug_en])
 
 	# Return the description of the product using the logic implemented in the parent class
 	def get_description(self):
