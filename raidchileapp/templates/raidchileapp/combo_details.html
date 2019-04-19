@@ -95,7 +95,7 @@
 							{% trans "Min. passengers per reservation" %}:
 						</strong> {% blocktrans count min_pass=combo.min_pax_number %}{{ min_pass }} person.{% plural %}{{ min_pass }} people.{% endblocktrans %}
 					</h5>
-					<form action="{% url 'cart:cart_add' combo.id %}" method="POST" id="cart_add_form">
+					<form action="{% url 'cart:cart_add_combo' combo.id %}" method="POST" id="cart_add_form">
 						{% csrf_token %}
 						{{ cart_product_form.update }}
 						<p class="min_pax_error w3-text-red" style="display: none;">

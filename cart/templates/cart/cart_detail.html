@@ -9,11 +9,11 @@
 
 	<div class="w3-container w3-center w3-margin-top">
 		<h2>
-		{% blocktrans count cart_l=cart|length trimmed %}
-		Your Pending Reservation: {{ cart_l }} Tour
-		{% plural %}
-		Your Pending Reservations: {{ cart_l }} Tours
-		{% endblocktrans %}
+			{% blocktrans count cart_l=cart|length trimmed %}
+			Your Pending Reservation: {{ cart_l }} Tour
+			{% plural %}
+			Your Pending Reservations: {{ cart_l }} Tours
+			{% endblocktrans %}
 		</h2>
 		<h6>{% trans "If you reserve all the tours in a combo you'll get a discount per passenger!" %}</h6>
 	</div>
@@ -26,6 +26,9 @@
 				</a>
 			</div>
 		</div>
+
+		{% include "contact/messages.html" %}
+
 		<!-- Table only displays in large screens -->
 		<table class="w3-margin-top w3-table-all w3-hide-small w3-hide-medium">
 			<thead>
@@ -42,10 +45,27 @@
 					{% with product=item.product %}
 					<tr>
 						<!-- Tour name -->
-						<td class="middle-algn"><h6><a href="{{ product.get_absolute_url }}">{{ product }}</a></h6></td>
+						<td class="middle-algn">
+						{% if product.product_type == 'TOUR' %}
+							<h6><a href="{{ product.get_absolute_url }}">{{ product }}</a></h6>
+						{% else %}
+							<h5><strong><a href="{{ product.combo.get_absolute_url }}">{{ product }}</a></strong></h5>
+							{% with tours=product.combo.tours.all %}
+								<ul class="small-tour-ul w3-small w3-margin-bottom">
+								{% for tour in tours %}
+									<li>
+										<h6>
+											<a href="{{ tour.get_absolute_url }}">{{ tour }}</a>
+										</h6>
+									</li>
+								{% endfor %}
+								</ul>
+							{% endwith%}
+						{% endif %}
+						</td>
 						<!-- Tour passengers quantities form -->
 						<td class="pax-cell">
-							<form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart_add_form">
+							<form action="{% if product.product_type == 'TOUR' %}{% url 'cart:cart_add' product.id %}{% else %}{% url 'cart:cart_add_combo' product.id %}{% endif %}" method="POST" class="cart_add_form">
 								{% csrf_token %}
 								{{ item.update_quantity_form.update }}
 								<p class="min_pax_error w3-small w3-text-red" style="display: none; margin: 0px auto;">
@@ -113,19 +133,11 @@
 						<td style="text-align: right;" class="middle-algn">
 							<b>{% blocktrans with combo_name=combo %}{{ combo_name }} Discount{% endblocktrans %}</b>
 						</td>
-						<td colspan="2" class="w3-small middle-algn">
-							<ul class="small-tour-ul">
-								{% for tour in tours %}
-									<li>{{ tour }}</li>
-								{% endfor %}
-							</ul>
-						</td>
+						<td colspan="2" class="w3-small middle-algn"></td>
 						<td class="number-font middle-algn" colspan="num">
 							CLP -{{ discount|intcomma }}
 						</td>
-						<td colspan="1" class="w3-small middle-algn">
-							({% blocktrans with combo_discount=combo.combo_discount|intcomma %}CLP {{ combo_discount }} per passenger{% endblocktrans %})
-						</td>
+						<td colspan="1" class="w3-small middle-algn"></td>
 					</tr>
 					{% endwith %}
 				{% endif %}
