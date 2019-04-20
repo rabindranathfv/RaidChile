@@ -222,6 +222,20 @@ ul#id_locations{
 	overflow-y: auto;
 }
 
+.combo-gallery-title{
+	height: 35px;
+	width: 100%;
+	overflow-y: auto;
+}
+
+.combo-detail-tour-image{
+	min-height: 400px;
+	line-height: 400px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
 @media only screen and (min-width: 601px) {
 	/* For tablets: */
 	.search-gallery-image{
