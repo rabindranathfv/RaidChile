@@ -165,6 +165,7 @@ class GalleryInline(admin.TabularInline):
 class TourAdmin(admin.ModelAdmin):
 	list_display = [
 		'name_es',
+		'id',
 		'available',
 		'updated_at',
 	]
@@ -239,6 +240,7 @@ admin.site.register(Tour, TourAdmin)
 class ComboAdmin(admin.ModelAdmin):
 	list_display = [
 		'name_es',
+		'id',
 		'available',
 		'updated_at',
 	]

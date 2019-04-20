@@ -50,12 +50,12 @@ def form_submit(request):
 				contact_msg = form.save()
 				# Get parameters for email template rendering (forcing Spanish language)
 				# Send an email to admin's email (Forcing the email's language to Spanish)
-				subject = 'New Contact Message - Chile Raids'
+				subject = 'New Contact Message - Chile Raid'
 				contact_msg_full_admin_url = request.scheme + '://' + request.get_host() + contact_msg.get_admin_url()
 				cur_language = translation.get_language()
 				try:
 					translation.activate('es')
-					subject = _('New Contact Message - Chile Raids')
+					subject = _('New Contact Message - Chile Raid')
 					contact_msg_full_admin_url = request.scheme + '://' + request.get_host() + contact_msg.get_admin_url()
 				finally:
 					translation.activate(cur_language)

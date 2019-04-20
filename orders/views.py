@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import translation
@@ -11,7 +11,7 @@ from django.utils.html import strip_tags
 from django.utils.translation import gettext as _
 
 from cart.cart import Cart
-from raidchileapp.models import Category
+from raidchileapp.models import Combo
 
 from .models import OrderItem
 from .forms import OrderCreateForm
@@ -38,8 +38,8 @@ def order_create(request):
 			discount = Decimal(0)
 			combo = False
 			if cart['combo_id']:
-				combo = Category.objects.filter(id=cart['combo_id'], available=True).first()
-			# Create an reservation per tour in the cart
+				combo = get_object_or_404(Combo, id=cart['combo_id'], available=True)
+			# Create a reservation order item per tour in the cart
 			for item in cart:
 				OrderItem.objects.create(
 					order = order,
@@ -51,10 +51,10 @@ def order_create(request):
 					adult_quantity=item['adult_qty'],
 					children_quantity=item['children_qty']
 				)
-				# calculate regular subtotal and combo discount.
+				# calculate regular subtotal and combo discountes price of applicable.
 				subtotal += Decimal(item['adult_qty']) * item['adult_reg_price'] + Decimal(item['children_qty']) * item['children_reg_price']
 				if combo:
-					discount += Decimal(item['adult_qty'] + item['children_qty']) * combo.combo_discount
+					discount += Decimal(item['adult_qty']) * (item['adult_reg_price'] - item['adult_sale_price']) + Decimal(item['children_qty']) * (item['children_reg_price'] - item['children_sale_price'])
 
 			## Send an email to the reserver in their browsing language.
 			# Get parameters for email template rendering
@@ -70,7 +70,7 @@ def order_create(request):
 			email_html = render_to_string('emails/user_reservation_confirmation.html', context)
 			email_text = strip_tags(email_html)
 			#print (email_text)
-			subject = _('Tour Reservations Confirmed! - Chile Raids')
+			subject = _('Tour Reservations Confirmed! - Chile Raid')
 			email_from = settings.EMAIL_HOST_USER
 			email_to = [ order.email, ] ## RESERVER'S EMAIL ADDRESS GOES HERE.
 			admin_emails = list(User.objects.filter(groups__name='Emails', is_staff=True).values_list('email', flat=True))
@@ -82,12 +82,12 @@ def order_create(request):
 
 			## Send an email to the admins(if any) in forced Spanish language.
 			if admin_emails:
-				subject2 = 'An User Has Confirmed New Tour Reservations - Chile Raids'
+				subject2 = 'An User Has Confirmed New Tour Reservations - Chile Raid'
 				order_admin_url = request.scheme + '://' + request.get_host() + order.get_admin_url()
 				cur_language = translation.get_language()
 				try:
 					translation.activate('es')
-					subject2 = _('An User Has Confirmed New Tour Reservations - Chile Raids')
+					subject2 = _('An User Has Confirmed New Tour Reservations - Chile Raid')
 					order_admin_url = request.scheme + '://' + request.get_host() + order.get_admin_url()
 				finally:
 					translation.activate(cur_language)

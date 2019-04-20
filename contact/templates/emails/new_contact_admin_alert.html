@@ -1,14 +1,14 @@
 {% load i18n %}
 {% autoescape off %}
 
-<p>{% blocktrans %}Hi, this is an automatic alert from Chile Raids. A new contact message was sent by an user{% endblocktrans %}:</p>
+<p>{% blocktrans %}Hi, this is an automatic alert from Chile Raid. A new contact message was sent by an user{% endblocktrans %}:</p>
 
 <p><strong>{% trans "Full name" %}:</strong> {{ contact_msg.full_name }}</p>
 <p><strong>{% trans "Email" %}:</strong> {{ contact_msg.email }}</p>
 {% if contact_msg.phone %}<p><strong>{% trans "Phone" %}:</strong> {{ contact_msg.phone }}</p>{% endif %}
 <p><strong>{% trans "Message" %}:</strong> {{ contact_msg.message|linebreaksbr }}</p>
 
-<p>{% trans "If you want to see this message inside the Chile Raids Admin site, please use the following link" %}:<br>
+<p>{% trans "If you want to see this message inside the Chile Raid's Admin site, please use the following link" %}:<br>
 <br>
 <a href="{{ contact_msg_full_admin_url }}">{{ contact_msg_full_admin_url }}</a>
 </p>
@@ -16,5 +16,5 @@
 <p>{% trans "Please do NOT reply to this automated message" %}.</p>
 
 {% trans "Cheers," %}<br>
-{% trans "Chile Raids Admin Site" %}.<br>
+{% trans "Chile Raid's Admin Site" %}.<br>
 {% endautoescape %}

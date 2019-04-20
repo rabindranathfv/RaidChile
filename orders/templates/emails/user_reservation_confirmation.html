@@ -1,7 +1,7 @@
 {% load humanize %} {% load i18n %} {% autoescape off %}
 <h2>{% trans "Thank you for Confirming your Tour Reservations!" %}</h2>
 
-<p>{% trans "Hi, this is an automatic message from Chile Raids" %}.</p>
+<p>{% trans "Hi, this is an automatic message from Chile Raid" %}.</p>
 <h3>{% blocktrans with order_id=order.id %}Tour Reservation Order #{{ order_id }}{% endblocktrans %}</h3>
 <p>{% trans "You have confirmed the following tour reservations" %}:</p>
 
@@ -18,5 +18,5 @@
 <h4>{% trans "If you did not made this reservation order please disregard this email" %}.</h4>
 
 {% trans "Cheers," %}<br>
-<h4>{% trans "Chile Raids" %}.</h4><br>
+<h4>{% trans "Chile Raid" %}.</h4><br>
 {% endautoescape %}

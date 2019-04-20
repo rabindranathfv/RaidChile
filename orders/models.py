@@ -1,11 +1,12 @@
 from django.conf import settings
+from django.contrib.humanize.templatetags.humanize import intcomma
 from django.db import models
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
-from raidchileapp.models import Tour
+from raidchileapp.models import Product
 
 
 class Order(models.Model):
@@ -63,17 +64,23 @@ class Order(models.Model):
 	def is_sale(self):
 		return False
 
+	def has_combo(self):
+		return self.items.filter(product__product_type="COMBO").exists()
+
 	# Return formated data for django admin.
 	def total(self):
-		result = self.get_total_cost()
-		return mark_safe('<span style="font-size: 20px">CLP {:,.2f}</span>'.format(result))
+		result = intcomma(self.get_total_cost())
+		return mark_safe('<span style="font-size: 20px">CLP {}</span>'.format(result))
 
 	def get_total_cost(self, sale=False):
-		if sale: #self.is_sale()
-			# return sale price
-			return sum(item.get_sale_cost() for item in self.items.all())
-		# return regular price
-		return sum(item.get_reg_cost() for item in self.items.all())
+		result = 0
+		for item in self.items.all():
+			if item.product.product_type == 'COMBO':
+				result += item.get_sale_cost()
+			else:
+				result += item.get_reg_cost()
+		return result
+
 
 
 class OrderItem(models.Model):
@@ -85,11 +92,11 @@ class OrderItem(models.Model):
 		verbose_name=_('reservation order')
 	)
 	product = models.ForeignKey(
-		Tour,
+		Product,
 		related_name='reservations',
 		related_query_name='reservation',
 		on_delete=models.PROTECT,
-		verbose_name=_('tour')
+		verbose_name=_('product')
 	)
 	adult_reg_price = models.DecimalField(
 		max_digits=10,
@@ -123,14 +130,18 @@ class OrderItem(models.Model):
 	def __str__(self):
 		part1= _('Order #')
 		part2 = _(' - Item:')
-		return str(format_lazy('{p1}{id}{p2}{name}', p1=part1, id=self.order.id, p2=part2, name=self.product.name))
+		return str(format_lazy('{p1}{id}{p2}{name}', p1=part1, id=self.order.id, p2=part2, name=self.product))
 		#return 'Order #{} - Item:{}'.format(self.order.id, self.product.name)
 
 	# Return formated data for django admin.
 	def total_price(self):
-		print ('Calculating total price of: ', self) ## WITHOUT THIS LINE THE OBJECT ISN'T QUERIED AND AN ERROR OCCURS
-		result = self.get_reg_cost()
-		return mark_safe('<span style="font-size: 14px">CLP {:,.2f}</span>'.format(result))
+		#print ('Calculating total price of: ', self) ## WITHOUT THIS LINE THE OBJECT ISN'T QUERIED AND AN ERROR OCCURS
+		result = 0
+		if self.product.product_type == 'COMBO':
+			result = intcomma(self.get_sale_cost())
+		else:
+			result = intcomma(self.get_reg_cost())
+		return mark_safe('<span style="font-size: 14px">CLP {}</span>'.format(result))
 
 	def get_reg_cost(self):
 		return self.adult_reg_price * self.adult_quantity + self.children_reg_price * self.children_quantity

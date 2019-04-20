@@ -21,8 +21,8 @@ from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 
 admin.site.index_title = _('Main Menu')
-admin.site.site_header = _('Chile Raids - Administration')
-admin.site.site_title = _('Chile Raids - Administration')
+admin.site.site_header = _('Chile Raid - Administration')
+admin.site.site_title = _('Chile Raid - Administration')
 
 
 urlpatterns = i18n_patterns(

@@ -1,25 +1,31 @@
 {% load humanize %}{% load i18n %}{% autoescape off %}<hr>
+
+
 {% with items=order.items.all %}{% for item in items %}
-<h4 style="margin-bottom: 5px;">{% blocktrans with p_name=item.product %}Tour name: {{ p_name }}{% endblocktrans %}</h4>
-<p style="padding-left: 20px; margin-top: 5px;">
-	{% trans "For" %}:<br>
-	{% blocktrans count adult_q=item.adult_quantity with adult_p=item.adult_reg_price|intcomma trimmed %}
-		{{ adult_q }} Adult X CLP {{ adult_p }}.{% plural %}{{ adult_q }} Adults X CLP {{ adult_p }}.{% endblocktrans %}<br>
-	{% if item.children_quantity > 0 %}
-		{% blocktrans count children_q=item.children_quantity with children_p=item.children_reg_price|intcomma trimmed %}
-		{{ children_q }} Child X CLP {{ children_p }}.{% plural %}{{ children_q }} Children X CLP {{ children_p }}.{% endblocktrans %}
-	{% endif %}
-</p>
-<h4>{% blocktrans with item_p=item.get_reg_cost|intcomma  trimmed %}Tour Total: CLP {{ item_p }}{% endblocktrans %}</h4>
-<hr>
+{% if item.product.product_type == 'TOUR' %}
+	<h4 style="margin-bottom: 5px;">{% blocktrans with p_name=item.product %}Tour name: {{ p_name }}{% endblocktrans %}</h4>
+{% else %}
+	<h4 style="margin-bottom: 5px;"><strong>{{ item.product }}</strong></h4>
+	<h4 style="margin-bottom: 5px;">Tours:</h4>
+	<ul>{% with combo_tours=item.product.combo.tours.all %}{% for tour in combo_tours %}
+		<li>{{ tour }}</li>
+	{% endfor %}{% endwith %}</ul>
+{% endif %}
+	<p style="padding-left: 20px; margin-top: 5px;">
+		{% trans "For" %}:<br>
+		{% blocktrans count adult_q=item.adult_quantity with adult_p=item.adult_reg_price|intcomma trimmed %}
+			{{ adult_q }} Adult X CLP {{ adult_p }}.{% plural %}{{ adult_q }} Adults X CLP {{ adult_p }}.{% endblocktrans %}<br>
+		{% if item.children_quantity > 0 %}
+			{% blocktrans count children_q=item.children_quantity with children_p=item.children_reg_price|intcomma trimmed %}
+			{{ children_q }} Child X CLP {{ children_p }}.{% plural %}{{ children_q }} Children X CLP {{ children_p }}.{% endblocktrans %}
+		{% endif %}
+	</p>
+	<h4>{% blocktrans with item_p=item.get_reg_cost|intcomma  trimmed %}Tour Total: CLP {{ item_p }}{% endblocktrans %}</h4>
+	<hr>
 {% endfor %}{% endwith %}
+
 {% if combo %}<h3>{% trans "Sub-Total" %}: <strong>CLP {{ subtotal|intcomma }}.</strong></h3>
-<h3>{% trans "Combo Discount" %}: CLP -{{ discount|intcomma }} (CLP {{ combo.combo_discount|intcomma }} {% trans "per passenger" %}).</h3>
-<h3 style="margin-bottom: 10px;">{{ combo }}:</h3>
-{% with tours=combo.tours.all %}<ul style="margin-top: 10px;">{% for tour in tours %}
-<li>{{ tour }}</li>
-{% endfor %}</ul>
-{% endwith %}{% endif %}
+<h3>{% trans "Combo Discount" %}: CLP -{{ discount|intcomma }}.</h3>{% endif %}
 <h2>{% trans "Total" %}: <strong>CLP {{ total|intcomma }}.</strong></h2>
 
 <p>{% trans "The planned date for the first tour was" %}: <strong style="letter-spacing: 1px;">{{ order.trip_date|date:'d/m/Y' }}</strong></p> 
