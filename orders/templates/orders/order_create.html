@@ -7,11 +7,17 @@
 {% block content %}
 	<div class="w3-container w3-center w3-margin-top">
 		<h2>
-			{% blocktrans count cart_l=cart|length trimmed %}
-			Confirming Reservation of {{ cart_l }} Tour
-			{% plural %}
-			Confirming Reservations of {{ cart_l }} Tours
-			{% endblocktrans %}
+			{% if not combo %}
+				{% blocktrans count cart_l=cart|length trimmed %}
+				Confirming Reservation of {{ cart_l }} Tour
+				{% plural %}
+				Confirming Reservations of {{ cart_l }} Tours
+				{% endblocktrans %}
+			{% else %}
+				{% blocktrans with cart_l=combo.tours.count trimmed %}
+					Confirming Reservation of 1 Combo of {{ cart_l }} Tours
+				{% endblocktrans %}
+			{% endif %}
 		</h2>
 		<h6>{% blocktrans trimmed %}
 			To confirm your pending reservations please fill the following form with your contact information and the planned date for the first tour.{% endblocktrans %}<br>

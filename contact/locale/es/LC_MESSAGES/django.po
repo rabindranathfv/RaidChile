@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-17 18:53-0400\n"
+"POT-Creation-Date: 2019-04-20 17:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,19 +84,19 @@ msgstr "Cerrar"
 
 #: contact/templates/emails/new_contact_admin_alert.html:4
 msgid ""
-"Hi, this is an automatic alert from Chile Raids. A new contact message was "
+"Hi, this is an automatic alert from Chile Raid. A new contact message was "
 "sent by an user"
 msgstr ""
-"Hola, esta es una alerta automatica de Chile Raids. Un nuevo mensaje de "
+"Hola, esta es una alerta automatica de Chile Raid. Un nuevo mensaje de "
 "contacto ha sido enviado por un usuario"
 
 #: contact/templates/emails/new_contact_admin_alert.html:11
 msgid ""
-"If you want to see this message inside the Chile Raids Admin site, please "
+"If you want to see this message inside the Chile Raid's Admin site, please "
 "use the following link"
 msgstr ""
-"Si desea ver este mensaje dentro del sitio administrativo de Chile Raids, "
-"por favor utilice el siguiente enlace"
+"Si desea ver este mensaje dentro del sitio administrativo de Chile Raid, por "
+"favor utilice el siguiente enlace"
 
 #: contact/templates/emails/new_contact_admin_alert.html:16
 msgid "Please do NOT reply to this automated message"
@@ -107,12 +107,12 @@ msgid "Cheers,"
 msgstr "Saludos,"
 
 #: contact/templates/emails/new_contact_admin_alert.html:19
-msgid "Chile Raids Admin Site"
-msgstr "Sitio Administrativo de Chile Raids"
+msgid "Chile Raid's Admin Site"
+msgstr "Sitio Administrativo de Chile Raid"
 
 #: contact/views.py:58
-msgid "New Contact Message - Chile Raids"
-msgstr "Nuevo Mensaje de Contacto - Chile Raids"
+msgid "New Contact Message - Chile Raid"
+msgstr "Nuevo Mensaje de Contacto - Chile Raid"
 
 #: contact/views.py:85
 msgid ""

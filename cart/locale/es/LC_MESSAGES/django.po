@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-17 18:53-0400\n"
+"POT-Creation-Date: 2019-04-20 17:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,83 +34,97 @@ msgstr "Niños"
 msgid "Your Pending Reservations"
 msgstr "Sus Reservaciones Pendientes"
 
-#: cart/templates/cart/cart_detail.html:12
+#: cart/templates/cart/cart_detail.html:13
 #, python-format
 msgid "Your Pending Reservation: %(cart_l)s Tour"
 msgid_plural "Your Pending Reservations: %(cart_l)s Tours"
 msgstr[0] "Su Reservación Pendiente: %(cart_l)s Tour"
 msgstr[1] "Sus Reservaciones Pendientes: %(cart_l)s Tours"
 
-#: cart/templates/cart/cart_detail.html:18
-msgid ""
-"If you reserve all the tours in a combo you'll get a discount per passenger!"
-msgstr ""
-"¡Si usted reserva todos los tours de un combo obtendrá un descuento por cada "
-"pasajero!"
+#: cart/templates/cart/cart_detail.html:19
+#, python-format
+msgid "Your Pending Reservation: 1 Combo of %(cart_l)s Tours"
+msgstr "Su Reservación Pendiente: 1 Combo de %(cart_l)s Tour"
 
-#: cart/templates/cart/cart_detail.html:25
-#: cart/templates/cart/cart_detail.html:267
+#: cart/templates/cart/cart_detail.html:24
+msgid "If you reserve a combo you'll get a discount per passenger!"
+msgstr "¡Si usted reserva un combo obtendrá un descuento por cada pasajero!"
+
+#: cart/templates/cart/cart_detail.html:31
+#: cart/templates/cart/cart_detail.html:292
 msgid "Add more tours"
 msgstr "Agregar más tours"
 
-#: cart/templates/cart/cart_detail.html:34
+#: cart/templates/cart/cart_detail.html:43
 msgid "Passengers"
 msgstr "Pasajeros"
 
-#: cart/templates/cart/cart_detail.html:35
+#: cart/templates/cart/cart_detail.html:44
 msgid "Prices"
 msgstr "Precios"
 
-#: cart/templates/cart/cart_detail.html:36
-#: cart/templates/cart/cart_detail.html:199
+#: cart/templates/cart/cart_detail.html:45
+#: cart/templates/cart/cart_detail.html:233
 msgid "Total Price"
 msgstr "Precio Total"
 
-#: cart/templates/cart/cart_detail.html:37
-#: cart/templates/cart/cart_detail.html:88
-#: cart/templates/cart/cart_detail.html:203
+#: cart/templates/cart/cart_detail.html:46
+#: cart/templates/cart/cart_detail.html:114
+#: cart/templates/cart/cart_detail.html:237
 msgid "Remove"
 msgstr "Eliminar"
 
-#: cart/templates/cart/cart_detail.html:53
-#: cart/templates/cart/cart_detail.html:156
+#: cart/templates/cart/cart_detail.html:79
+#: cart/templates/cart/cart_detail.html:190
 #, python-format
 msgid "Minimum %(min_pax_n)s Passenger!"
 msgid_plural "Minimum %(min_pax_n)s Passengers!"
 msgstr[0] "¡Mínimo %(min_pax_n)s Pasajero/a!"
 msgstr[1] "¡Mínimo %(min_pax_n)s Pasajeros!"
 
-#: cart/templates/cart/cart_detail.html:69
-#: cart/templates/cart/cart_detail.html:192
+#: cart/templates/cart/cart_detail.html:95
+#: cart/templates/cart/cart_detail.html:226
 msgid "Update"
 msgstr "Cambiar"
 
-#: cart/templates/cart/cart_detail.html:96
+#: cart/templates/cart/cart_detail.html:122
 msgid "You have no tour reservations yet!"
 msgstr "¡Usted no posee reservaciones de tours aún!"
 
-#: cart/templates/cart/cart_detail.html:101
-#: cart/templates/cart/cart_detail.html:216
+#: cart/templates/cart/cart_detail.html:127
+#: cart/templates/cart/cart_detail.html:250
 msgid "Sub-Total"
 msgstr "Sub-Total"
 
-#: cart/templates/cart/cart_detail.html:114
-#: cart/templates/cart/cart_detail.html:230
+#: cart/templates/cart/cart_detail.html:140
+#: cart/templates/cart/cart_detail.html:264
 #, python-format
 msgid "%(combo_name)s Discount"
 msgstr "Descuento %(combo_name)s"
 
-#: cart/templates/cart/cart_detail.html:127
-#: cart/templates/cart/cart_detail.html:242
-#, python-format
-msgid "CLP %(combo_discount)s per passenger"
-msgstr "CLP %(combo_discount)s por pasajero"
-
-#: cart/templates/cart/cart_detail.html:133
-#: cart/templates/cart/cart_detail.html:254
+#: cart/templates/cart/cart_detail.html:151
+#: cart/templates/cart/cart_detail.html:279
 msgid "Total"
 msgstr "Total"
 
-#: cart/templates/cart/cart_detail.html:273
+#: cart/templates/cart/cart_detail.html:298
 msgid "Confirm Reservations"
 msgstr "Confirmar Reservaciones"
+
+#: cart/views.py:24
+msgid ""
+"We're sorry. You already have a Tour Combo added. To reserve more or "
+"different tours, please remove the combo first."
+msgstr ""
+"Lo sentimos. Usted ya posee un combo de tours agregado. Para reservar otro o "
+"tours diferentes, por favor elimine el combo agregado primero."
+
+#: cart/views.py:44
+msgid ""
+"We're sorry. You can only have one Tour Combo OR multiple Tours per "
+"reservation. To reserve a combo, please remove your other tours or combo "
+"first."
+msgstr ""
+"Lo sentimos. Usted solo puede reservar un combo de tours Ó varios tours a la "
+"vez. Para reservar un combo, por favor elimine el combo o los tours ya "
+"agregados."

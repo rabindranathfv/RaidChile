@@ -104,7 +104,13 @@ def order_create(request):
 			cart.clear()
 			return redirect('orders:order_create_success')
 
-	context = {'form': form}
+	combo = None
+	if cart['combo_id']:
+		combo = get_object_or_404(Combo, id=cart['combo_id'], available=True)
+	context = {
+		'form': form,
+		'combo': combo,
+	}
 	# Set language switcher urls
 	cur_language = translation.get_language()
 	try:
