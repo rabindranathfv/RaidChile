@@ -347,7 +347,7 @@ msgstr "Min. passageiros por reserva"
 #, python-format
 msgid "%(min_pass)s person."
 msgid_plural "%(min_pass)s people."
-msgstr[0] "%(min_pass)s1 pessoa."
+msgstr[0] "%(min_pass)s pessoa."
 msgstr[1] "%(min_pass)s pessoas."
 
 #: raidchileapp/templates/raidchileapp/combo_details.html:103
