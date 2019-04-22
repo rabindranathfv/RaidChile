@@ -70,7 +70,7 @@ def tour_filter_search(request, queryset, search_form, sale_price_filter=False):
 def home(request):
 	contact_form = ContactForm(request.POST or None)
 	search_form = SearchForm()
-	combos = Combo.objects.filter(available=True).annotate(Count('tours')).prefetch_related('image')[:4] # First 4 combos
+	combos = Combo.objects.filter(available=True).order_by('name_es').annotate(Count('tours')).prefetch_related('image')[:4] # First 4 combos
 
 	context = {
 		'combos': combos,
