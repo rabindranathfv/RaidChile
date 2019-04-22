@@ -374,7 +374,7 @@ msgstr "Todos os Tours"
 #: raidchileapp/templates/raidchileapp/search_sidebar.html:11
 #: raidchileapp/templates/raidchileapp/search_sidebar.html:13
 msgid "All Tour Combos"
-msgstr "Todos os combos turísticos"
+msgstr "Todos os Combos"
 
 #: raidchileapp/templates/raidchileapp/combo_search_results.html:19
 #: raidchileapp/templates/raidchileapp/search_results.html:17
