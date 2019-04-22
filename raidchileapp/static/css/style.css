@@ -209,8 +209,8 @@ ul#id_locations{
 
 	/* For phones: */
 .search-gallery-image{
-	min-height: 400px;
-	line-height: 400px;
+	min-height: 250px;
+	line-height: 250px;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
@@ -229,8 +229,8 @@ ul#id_locations{
 }
 
 .combo-detail-tour-image{
-	min-height: 400px;
-	line-height: 400px;
+	min-height: 250px;
+	line-height: 250px;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
