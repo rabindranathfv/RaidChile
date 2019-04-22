@@ -72,24 +72,24 @@ class CommentForm(forms.Form):
 
 ########################## ADMIN FORMS ########################
 class CategoryAdminForm(forms.ModelForm):
-	tours = forms.ModelMultipleChoiceField(
+	products = forms.ModelMultipleChoiceField(
 		queryset=Tour.objects.all(),
 		required=False,
 		widget=FilteredSelectMultiple(
-			verbose_name=_('Tours'),
+			verbose_name=_('Products'),
 			is_stacked=False
 		)
 	)
 
 	class Meta:
 		model = Category
-		fields = ['tours']
+		fields = ['products']
 
 	def __init__(self, *args, **kwargs):
 		super(CategoryAdminForm, self).__init__(*args, **kwargs)
 
 		if self.instance and self.instance.pk:
-			self.fields['tours'].initial = self.instance.tours.all()
+			self.fields['products'].initial = self.instance.tours.all()
 
 	def save(self, commit=True):
 		category = super(CategoryAdminForm, self).save(commit=False)
@@ -98,7 +98,7 @@ class CategoryAdminForm(forms.ModelForm):
 		category.save()
 
 		#if category.pk:
-		category.tours.set(self.cleaned_data['tours'])
+		category.tours.set(self.cleaned_data['products'])
 		self.save_m2m()
 
 		return category
