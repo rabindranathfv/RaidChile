@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.translation import gettext_lazy as _
 
-from .models import Location, Tour, Category
+from .models import Location, Tour, Category, Product
 
 # Create the forms here
 class SearchForm(forms.Form):
@@ -73,7 +73,7 @@ class CommentForm(forms.Form):
 ########################## ADMIN FORMS ########################
 class CategoryAdminForm(forms.ModelForm):
 	products = forms.ModelMultipleChoiceField(
-		queryset=Tour.objects.all(),
+		queryset=Product.objects.all(),
 		required=False,
 		widget=FilteredSelectMultiple(
 			verbose_name=_('Products'),
@@ -89,7 +89,7 @@ class CategoryAdminForm(forms.ModelForm):
 		super(CategoryAdminForm, self).__init__(*args, **kwargs)
 
 		if self.instance and self.instance.pk:
-			self.fields['products'].initial = self.instance.tours.all()
+			self.fields['products'].initial = self.instance.products.all()
 
 	def save(self, commit=True):
 		category = super(CategoryAdminForm, self).save(commit=False)
@@ -98,7 +98,7 @@ class CategoryAdminForm(forms.ModelForm):
 		category.save()
 
 		#if category.pk:
-		category.tours.set(self.cleaned_data['products'])
+		category.products.set(self.cleaned_data['products'])
 		self.save_m2m()
 
 		return category
