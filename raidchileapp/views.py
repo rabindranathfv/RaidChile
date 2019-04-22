@@ -166,7 +166,7 @@ def search_all_tours(request):
 
 def tour_search_by_category(request, category_slug):
 	search_form = SearchForm(request.GET or None)
-	categories = Category.objects.filter(combo=False, available=True)
+	categories = Category.objects.filter(available=True)
 	try:
 		category = Category.objects.get(
 			Q(available=True) & (
