@@ -297,6 +297,7 @@ class ComboAdmin(admin.ModelAdmin):
 		'image_tag',
 	]
 	autocomplete_fields = [
+		'locations',
 		'categories',
 		'image',
 	]
