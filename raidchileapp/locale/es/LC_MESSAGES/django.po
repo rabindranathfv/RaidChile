@@ -172,7 +172,7 @@ msgstr "tipo de producto"
 
 #: raidchileapp/models.py:238
 msgid "description (in English)"
-msgstr "descripción del tour (en inglés)"
+msgstr "descripción (en inglés)"
 
 #: raidchileapp/models.py:239 raidchileapp/models.py:243
 #: raidchileapp/models.py:247
@@ -183,11 +183,11 @@ msgstr ""
 
 #: raidchileapp/models.py:242
 msgid "description (in Spanish)"
-msgstr "descripción del tour  (en español)"
+msgstr "descripción (en español)"
 
 #: raidchileapp/models.py:246
 msgid "description (in Portuguese)"
-msgstr "descripción del tour (en portugués)"
+msgstr "descripción (en portugués)"
 
 #: raidchileapp/models.py:251
 msgid "minimum passenger number"
