@@ -26,7 +26,13 @@
 										<i class="fa fa-photo fa-5x w3-opacity-max"></i>
 									{% endif %}
 								</div>
-								<img src="{{ img_url }}" alt="{{ img_alt }}" class="full-width-img  w3-hide-large">
+								{% if img_url %}
+									<img src="{{ img_url }}" alt="{{ img_alt }}" class="full-width-img w3-hide-medium w3-hide-large">
+								{% else %}
+									<div class="search-gallery-image w3-white w3-center w3-hide-medium w3-hide-large">
+										<i class="fa fa-photo fa-5x w3-opacity-max"></i>
+									</div>
+								{% endif %}
 							{% endwith %}
 						</div>
 						<!--  Description of Tour  -->
