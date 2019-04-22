@@ -267,6 +267,7 @@ class ComboAdmin(admin.ModelAdmin):
 			'name_pt_BR',
 			'slug_pt_BR'
 		),
+		'locations',
 		'categories',
 		(
 			'min_pax_number'
