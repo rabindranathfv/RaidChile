@@ -308,6 +308,11 @@ class ComboAdmin(admin.ModelAdmin):
 		'slug_pt_BR': ('name_pt_BR',),
 	}
 
+	def get_queryset(self, request):
+		qs = super(ComboAdmin, self).get_queryset(request)
+		self.request = request
+		return qs
+
 	# Method to display image tag inside django admin
 	def image_tag(self, obj):
 		img_full_url = self.request.scheme + '://' + str(self.request.get_host()) + obj.image.image.url
