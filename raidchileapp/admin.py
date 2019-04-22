@@ -39,7 +39,7 @@ class CategoryAdmin(admin.ModelAdmin):
 		),
 		'image',
 		'image_tag',
-		'tours'
+		'products'
 	]
 	search_fields = ['name_es']
 	readonly_fields = [
