@@ -269,7 +269,7 @@ msgstr[1] "Confirmar reservas de %(cart_l)s tours"
 #: orders/templates/orders/order_create.html:17
 #, python-format
 msgid "Confirming Reservation of 1 Combo of %(cart_l)s Tours"
-msgstr "Confirmar reserva de 1 Combo de%(cart_l)s Tours"
+msgstr "Confirmar reserva de 1 Combo de %(cart_l)s Tours"
 
 #: orders/templates/orders/order_create.html:22
 msgid ""
@@ -285,7 +285,7 @@ msgid ""
 "message box"
 msgstr ""
 "Se você tiver alguma dúvida ou condição especial, pode escrevê-las na caixa "
-"de mensagens."
+"de mensagens"
 
 #: orders/templates/orders/order_create.html:35
 msgid "Close"

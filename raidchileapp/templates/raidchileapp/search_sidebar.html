@@ -8,7 +8,7 @@
 		<h5>{% trans "Categories" %}</h5>
 		<div class="w3-row w3-margin-bottom">
 			{% if type != 'combo' %}
-				<a class="w3-tag w3-green w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_combos' %}">{% trans "All Tour Combos" %}</a>
+				<a class="w3-tag w3-green w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_combos' %}"><strong>{% trans "All Tour Combos" %}</strong></a>
 				<!--<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_combos' %}">{% trans "All Tour Combos" %}</a><br> -->
 			{% else %}
 				<strong class="w3-tag w3-green w3-round w3-block vertical-category-tag w3-opacity">{% trans "All Tour Combos" %}</strong>
@@ -16,7 +16,7 @@
 			{% endif %}
 
 			{% if category or type == 'combo' %}
-				<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a>
+				<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_tours' %}"><strong>{% trans "All Tours" %}</strong></a>
 				<!--<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a><br>-->
 			{% else %}
 				<strong class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-opacity">{% trans "All Tours" %}</strong>
@@ -26,7 +26,7 @@
 				{% with cats=categories.all %}
 					{% for cat in cats %}
 						{% if cat != category %}
-							<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{{ cat.get_absolute_url }}">{{ cat }}</a>
+							<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{{ cat.get_absolute_url }}"><strong>{{ cat }}</strong></a>
 							<!--<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat }}</a><br> -->
 						{% else %}
 							<strong class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-opacity">{{ cat }}</strong>
