@@ -8,23 +8,29 @@
 		<h5>{% trans "Categories" %}</h5>
 		<div class="w3-row w3-margin-bottom">
 			{% if type != 'combo' %}
-				<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_combos' %}">{% trans "All Tour Combos" %}</a><br>
+				<a class="w3-tag w3-green w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_combos' %}">{% trans "All Tour Combos" %}</a>
+				<!--<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_combos' %}">{% trans "All Tour Combos" %}</a><br> -->
 			{% else %}
-				<span class="w3-text-blue"><strong>{% trans "All Tour Combos" %}</strong></span><br>
+				<strong class="w3-tag w3-green w3-round w3-block vertical-category-tag w3-opacity">{% trans "All Tour Combos" %}</strong>
+				<!--<span class="w3-text-green"><strong>{% trans "All Tour Combos" %}</strong></span><br>-->
 			{% endif %}
 
 			{% if category or type == 'combo' %}
-				<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a><br>
+				<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a>
+				<!--<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a><br>-->
 			{% else %}
-				<span class="w3-text-blue"><strong>{% trans "All Tours" %}</strong></span><br>
+				<strong class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-opacity">{% trans "All Tours" %}</strong>
+				<!--<span class="w3-text-blue"><strong>{% trans "All Tours" %}</strong></span><br> -->
 			{% endif %}
 			{% if categories.exists %}
 				{% with cats=categories.all %}
 					{% for cat in cats %}
 						{% if cat != category %}
-							<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat }}</a><br>
+							<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{{ cat.get_absolute_url }}">{{ cat }}</a>
+							<!--<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat }}</a><br> -->
 						{% else %}
-							<span class="w3-text-blue"><strong>{{ cat }}</strong></span><br>
+							<strong class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-opacity">{{ cat }}</strong>
+							<!--<span class="w3-text-blue"><strong>{{ cat }}</strong></span><br> -->
 						{% endif %}
 					{% endfor %}
 				{% endwith %}

@@ -207,6 +207,12 @@ ul#id_locations{
 	margin-top: 27px;
 }
 
+.vertical-category-tag{
+	margin: 5px 0;
+	padding: 10px 5px ;
+}
+
+
 	/* For phones: */
 .search-gallery-image{
 	min-height: 250px;
@@ -242,6 +248,12 @@ ul#id_locations{
 		min-height: 190px;
 		line-height: 190px;
 	}
+
+	.vertical-category-tag{
+		margin: 2px 0;
+		padding: 0 2px;
+	}
+
 }
 
 @media only screen and (min-width: 993px) {
