@@ -35,6 +35,7 @@ def is_captcha_valid(request):
 
 	return False
 
+
 def get_email_html_translated(language, template, context):
 	with translation.override(language):
 		return render_to_string(template, context)

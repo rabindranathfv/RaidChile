@@ -7,8 +7,16 @@
 
 	<div class="w3-content home-content ">
 		<div class="w3-container">
-			<div class="w3-center">
-				<h2>{{ tour }}</h2>
+			{% if in_combo %}
+				<a class="w3-margin-top w3-padding-16 back-combo-btn" href="{{ combo.get_absolute_url }}">
+					<h5><i class="fa fa-angle-left fa-lg"></i> {% trans "Back to" %} {{ combo }}</h5>
+				</a>
+			{% endif %}
+			<div class="w3-row" style="margin-top: 40px;">
+				<div class="w3-col m1 w3-container"></div>
+				<div class="w3-col m10 w3-center">
+					<h2>{{ tour }}</h2>
+				</div>
 			</div>
 
 			<!--  Slideshow of the tour photos  -->

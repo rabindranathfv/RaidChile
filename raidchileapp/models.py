@@ -301,12 +301,14 @@ class Product(models.Model):
 			return self.description_en
 
 	# Easily set all the prices of a product to the given price.
-	def set_all_prices(self, price):
-		price = Decimal(price)
-		self.adult_reg_price = price
-		self.adult_sale_price = price
-		self.children_reg_price = price
-		self.children_sale_price = price
+	def get_slug(self):
+		cur_language = translation.get_language()
+		if cur_language == 'es':
+			return self.slug_es
+		elif cur_language == 'pt-br':
+			return self.slug_pt_BR
+		else:
+			return self.slug_en
 
 
 class Tour(Product):

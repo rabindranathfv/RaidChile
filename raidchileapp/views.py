@@ -273,3 +273,48 @@ def search_all_combos(request):
 		translation.activate(cur_language)
 
 	return render(request, "raidchileapp/combo_search.html", context)
+
+
+def tour_detail_in_combo(request, id, slug, tour_id):
+	try:
+		combo = Combo.objects.prefetch_related('tours').get(
+			Q(available=True) &
+			Q(id=id) & (
+				Q(slug_es=slug) |
+				Q(slug_en=slug) |
+				Q(slug_pt_BR=slug)
+			)
+		)
+		tour = combo.tours.prefetch_related('images').get(id=tour_id)
+	except Combo.DoesNotExist:
+		raise Http404("No Tour Combo matches the given query.")
+	except Tour.DoesNotExist:
+		raise Http404("No Tour matches the given query.")
+
+	cart_product_form = CartAddProductForm(
+		initial={
+			'adult_quantity': tour.min_pax_number,
+		}
+	)
+	comment_form = CommentForm()
+	context = {
+		'in_combo': True,
+		'combo': combo,
+		'tour': tour,
+		'comment_form': comment_form,
+		'cart_product_form' : cart_product_form,
+	}
+
+	# Set language switcher urls
+	cur_language = translation.get_language()
+	try:
+		translation.activate('es')
+		context['redirect_url_es'] = reverse('raidchileapp:tour_detail_in_combo', args=[combo.id, combo.slug_es, tour.id])
+		translation.activate('en')
+		context['redirect_url_en'] = reverse('raidchileapp:tour_detail_in_combo', args=[combo.id, combo.slug_en, tour.id])
+		translation.activate('pt-br')
+		context['redirect_url_pt_BR'] = reverse('raidchileapp:tour_detail_in_combo', args=[combo.id, combo.slug_pt_BR, tour.id])
+	finally:
+		translation.activate(cur_language)
+
+	return render(request, "raidchileapp/tour_details.html", context)

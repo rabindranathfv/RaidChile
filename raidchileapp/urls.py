@@ -22,4 +22,5 @@ urlpatterns = [
 	path('tours/<int:id>/<slug:slug>/', views.tour_details, name='tour_details'),
 	path('combos/', views.search_all_combos, name='search_all_combos'),
 	path('combos/<int:id>/<slug:slug>/', views.combo_details, name='combo_details'),
+	path('combos/<int:id>/<slug:slug>/<int:tour_id>', views.tour_detail_in_combo, name='tour_detail_in_combo'),
 ]

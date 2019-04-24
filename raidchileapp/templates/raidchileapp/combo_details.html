@@ -13,7 +13,7 @@
 					{{ combo.get_description|linebreaksbr }}
 				</h5>
 			</div>
-			<div class="w3-container w3-white">
+			<div class="w3-container w3-white w3-card-2">
 				<div class="w3-center"><h3><strong>{% trans "Tours" %}</strong></h3></div>
 				<!--  A row per tour with image and general info  -->
 				{% for tour in combo.tours.all %}
@@ -57,7 +57,7 @@
 							</h5>
 							<!-- Tour details button -->
 							<div class="w3-center w3-padding">
-								<a class="w3-button w3-black w3-large w3-margin-bottom" href="{{ tour.get_absolute_url }}">{% trans "See more..." %}</a>
+								<a class="w3-button w3-black w3-large w3-margin-bottom" href="{% url 'raidchileapp:tour_detail_in_combo' combo.id combo.get_slug tour.id %}">{% trans "See more..." %}</a>
 							</div>
 						</div>
 					</div>
@@ -94,7 +94,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="w3-col l6 w3-container w3-margin-top w3-padding">
+				<div class="w3-col l6 w3-container w3-margin-top w3-margin-bottom w3-padding">
 					<!--  Reservation mini form -->
 					<h5>
 						<strong>
