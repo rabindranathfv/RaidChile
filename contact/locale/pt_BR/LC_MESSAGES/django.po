@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-20 17:38-0400\n"
+"POT-Creation-Date: 2019-04-23 21:22-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,11 +110,11 @@ msgstr "Saudações,"
 msgid "Chile Raid's Admin Site"
 msgstr "Site administrativo do Chile Raid"
 
-#: contact/views.py:58
+#: contact/views.py:60
 msgid "New Contact Message - Chile Raid"
 msgstr "Nova mensagem de contato - Chile Raid"
 
-#: contact/views.py:85
+#: contact/views.py:87
 msgid ""
 "Your contact message was sent successfully! We'll contact you as soon as "
 "possible."
@@ -122,6 +122,6 @@ msgstr ""
 "Sua mensagem de contato foi enviada com sucesso !!! Entraremos em contato o "
 "mais breve possivel."
 
-#: contact/views.py:87
+#: contact/views.py:89
 msgid "Invalid reCAPTCHA. Please try again."
 msgstr "ReCaptcha inválida. Por favor tente novamente."
