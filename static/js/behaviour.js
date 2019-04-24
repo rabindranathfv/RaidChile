@@ -1,4 +1,5 @@
 $( document ).ready(function(){
+
 	// Guarantee that the datepicker uses the correct dateFormat and minDate.
 	$(".datepicker.reservation").datepicker({ dateFormat: 'dd/mm/yy', minDate: 0});
 
@@ -17,6 +18,14 @@ $( document ).ready(function(){
 	$('#language-switch').click(function(){
 		$(this).toggleClass('extended-switch');
 		$('#language-choices').toggle()
+	});
+	// Make the language choices close up when clicking anywhere else while it's open.
+	$(document).click(function(event) {
+		//if you click on anything except the choices itself or the "open modal" link, close the modal
+		if (!$(event.target).closest(".language-container, #language-switch").length) {
+			$("#language-switch").removeClass("extended-switch");
+			$("#language-choices").hide();
+		}
 	});
 
 	// Validate that the passengers total number is higher than the minimun

@@ -53,7 +53,7 @@ body,h1,h2,h3,h4,h5,h6 {
 	}
 
 	.languages-container{
-		top: 70px;
+		top: 60px;
 		right: 5px;
 	}
 }
@@ -145,12 +145,20 @@ textarea.no-resize{
 
 /*  ==========   Tour Details content Styles   ==========  */
 
-.hidden{
-	display: none;
+.back-combo-btn{
+	position: absolute;
+	top: 190px;
 }
 
-.slideshow-slide{
+@media only screen and (min-width: 601px) {
+	/* For tablets: */
+	.back-combo-btn{
+		top: 10px;
+	}
+}
 
+.hidden{
+	display: none;
 }
 
 .slide-thumbnail{
@@ -207,6 +215,12 @@ ul#id_locations{
 	margin-top: 27px;
 }
 
+.vertical-category-tag{
+	margin: 5px 0;
+	padding: 10px 5px ;
+}
+
+
 	/* For phones: */
 .search-gallery-image{
 	min-height: 250px;
@@ -242,6 +256,12 @@ ul#id_locations{
 		min-height: 190px;
 		line-height: 190px;
 	}
+
+	.vertical-category-tag{
+		margin: 2px 0;
+		padding: 0 2px;
+	}
+
 }
 
 @media only screen and (min-width: 993px) {
