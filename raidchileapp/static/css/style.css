@@ -8,6 +8,19 @@
 body,h1,h2,h3,h4,h5,h6 {
 	font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
+/*  ==========   Navbar Styles   ==========  */
+
+.brand-img{
+	height:49px;
+}
+
+.brand-a{
+	padding: 5px 24px !important;
+}
+
+.big-brand-img{
+	height: 350px;
+}
 
 /*  ==========   Language Switcher Styles   ==========  */
 

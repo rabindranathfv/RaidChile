@@ -5,8 +5,11 @@ $( document ).ready(function(){
 
 	// Search filter sidebar responsive functions
 	$("#filter-toggle").click(function(){
-		console.log("Click");
 		$("#filters-sidebar").toggleClass("w3-hide-small");
+	});
+
+	$("#navbar-toggle").click(function(){
+		$("#mobile-navbar").toggleClass("w3-hide");
 	});
 
 	// Back to the top button function
