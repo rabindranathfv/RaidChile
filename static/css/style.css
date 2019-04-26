@@ -18,10 +18,6 @@ body,h1,h2,h3,h4,h5,h6 {
 	padding: 5px 24px !important;
 }
 
-.big-brand-img{
-	height: 350px;
-}
-
 /*  ==========   Language Switcher Styles   ==========  */
 
 
@@ -102,6 +98,14 @@ body,h1,h2,h3,h4,h5,h6 {
 	text-justify: inter-word;
 }
 
+
+.big-brand-img{
+	height: 350px;
+}
+
+.text-shadow{
+	text-shadow:2px 2px 0 #444;
+}
 
 .width30{
 	width: 30px;
