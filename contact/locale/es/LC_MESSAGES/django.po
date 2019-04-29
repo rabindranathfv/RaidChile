@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 21:18-0400\n"
+"POT-Creation-Date: 2019-04-29 12:38-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgid "Full name"
 msgstr "Nombre Completo"
 
 #: contact/forms.py:38 contact/templates/emails/new_contact_admin_alert.html:7
-msgid "Email"
+msgid "E-mail"
 msgstr "Correo Electrónico"
 
 #: contact/forms.py:44 contact/templates/emails/new_contact_admin_alert.html:9

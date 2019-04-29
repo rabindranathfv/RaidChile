@@ -35,7 +35,7 @@ class ContactForm(forms.ModelForm):
 			),
 			'email': forms.EmailInput(
 				attrs={
-					'placeholder': _('Email'),
+					'placeholder': _('E-mail'),
 					'class': 'w3-input w3-padding-16 w3-border'
 				}
 			),
