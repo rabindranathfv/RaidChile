@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 21:22-0400\n"
+"POT-Creation-Date: 2019-04-29 12:38-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -362,8 +362,8 @@ msgstr "O numero mínimo de passageiros é %(tour_min_pax)s !!"
 
 #: raidchileapp/templates/raidchileapp/combo_details.html:122
 #: raidchileapp/templates/raidchileapp/tour_details.html:153
-msgid "Reserve Now"
-msgstr "Reservar !!!"
+msgid "Reserve"
+msgstr "Reservar"
 
 #: raidchileapp/templates/raidchileapp/combo_search.html:5
 #: raidchileapp/templates/raidchileapp/search_sidebar.html:19
@@ -424,21 +424,21 @@ msgstr ""
 "Pacotes turísticos a preços acessiveis projetados para oferecer uma aventura "
 "maravilhosa no Chile."
 
-#: raidchileapp/templates/raidchileapp/home.html:39
+#: raidchileapp/templates/raidchileapp/home.html:47
 msgid "See details"
 msgstr "Ver detalhes"
 
-#: raidchileapp/templates/raidchileapp/home.html:48
+#: raidchileapp/templates/raidchileapp/home.html:56
 msgid "We're sorry, there are no tour combos available right now."
 msgstr "Desculpe, não há combos disponíveis no momento."
 
-#: raidchileapp/templates/raidchileapp/home.html:57
-#: raidchileapp/templates/raidchileapp/navbar.html:8
-#: raidchileapp/templates/raidchileapp/navbar.html:9
+#: raidchileapp/templates/raidchileapp/home.html:65
+#: raidchileapp/templates/raidchileapp/navbar.html:12
+#: raidchileapp/templates/raidchileapp/navbar.html:28
 msgid "About us"
 msgstr "Sobre nos"
 
-#: raidchileapp/templates/raidchileapp/home.html:59
+#: raidchileapp/templates/raidchileapp/home.html:67
 msgid ""
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
 "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
@@ -450,16 +450,16 @@ msgid ""
 "dolore magna aliqua. Ut enim ad minim veniam."
 msgstr ""
 
-#: raidchileapp/templates/raidchileapp/home.html:70
+#: raidchileapp/templates/raidchileapp/home.html:78
 msgid "We accept"
 msgstr "Nós aceitamos"
 
-#: raidchileapp/templates/raidchileapp/home.html:80
-#: raidchileapp/templates/raidchileapp/home.html:147
+#: raidchileapp/templates/raidchileapp/home.html:88
+#: raidchileapp/templates/raidchileapp/home.html:155
 msgid "Phone"
 msgstr "Telefone"
 
-#: raidchileapp/templates/raidchileapp/home.html:92
+#: raidchileapp/templates/raidchileapp/home.html:100
 msgid ""
 "For private tours, please contact us to negotiate pricing and conditions. "
 "Thank you."
@@ -467,22 +467,22 @@ msgstr ""
 "Para tours privados, entre em contato conosco para negociar as condições e "
 "preços, obrigado."
 
-#: raidchileapp/templates/raidchileapp/home.html:98
+#: raidchileapp/templates/raidchileapp/home.html:106
 msgid "Tours Locations"
 msgstr "Locais turísticos"
 
-#: raidchileapp/templates/raidchileapp/home.html:99
+#: raidchileapp/templates/raidchileapp/home.html:107
 msgid "You can find a tour in any of these beautiful locations and more:"
 msgstr ""
 "Você pode fazer um Tour em cualquer um desses locais bonitos e muito mais:"
 
-#: raidchileapp/templates/raidchileapp/home.html:144
+#: raidchileapp/templates/raidchileapp/home.html:152
 msgid "Contact Us"
 msgstr "Entre em Contato Conosco"
 
-#: raidchileapp/templates/raidchileapp/home.html:145
-msgid "If you have any questions, do not hesitate to ask them."
-msgstr "Se você tiver alguma dúvida, não hesite em consulta."
+#: raidchileapp/templates/raidchileapp/home.html:153
+msgid "If you have any questions, do not hesitate to ask us."
+msgstr "Se você tiver alguma dúvida, não hesite em nos perguntar."
 
 #: raidchileapp/templates/raidchileapp/inline_product_search_form.html:6
 msgid "Search Terms"
@@ -492,12 +492,13 @@ msgstr "Termos de Pesquisa"
 msgid "Tour Search"
 msgstr "Pesquisar por Tour"
 
-#: raidchileapp/templates/raidchileapp/navbar.html:11
+#: raidchileapp/templates/raidchileapp/navbar.html:14
+#: raidchileapp/templates/raidchileapp/navbar.html:29
 msgid "Contact"
 msgstr "Contato"
 
-#: raidchileapp/templates/raidchileapp/navbar.html:14
 #: raidchileapp/templates/raidchileapp/navbar.html:17
+#: raidchileapp/templates/raidchileapp/navbar.html:31
 #, python-format
 msgid "Reservations (%(cart_l)s)"
 msgstr "Reservas (%(cart_l)s)"

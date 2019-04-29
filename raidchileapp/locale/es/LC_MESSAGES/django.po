@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 21:18-0400\n"
+"POT-Creation-Date: 2019-04-29 12:38-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -364,7 +364,7 @@ msgstr "¡El número mínimo de pasajeros es %(tour_min_pax)s!"
 
 #: raidchileapp/templates/raidchileapp/combo_details.html:122
 #: raidchileapp/templates/raidchileapp/tour_details.html:153
-msgid "Reserve Now"
+msgid "Reserve"
 msgstr "Reservar"
 
 #: raidchileapp/templates/raidchileapp/combo_search.html:5
@@ -428,21 +428,21 @@ msgstr ""
 "Paquetes de tours a precios accesibles diseñados para brindarte una "
 "maravillosa aventura por Chile."
 
-#: raidchileapp/templates/raidchileapp/home.html:39
+#: raidchileapp/templates/raidchileapp/home.html:47
 msgid "See details"
 msgstr "Ver detalles"
 
-#: raidchileapp/templates/raidchileapp/home.html:48
+#: raidchileapp/templates/raidchileapp/home.html:56
 msgid "We're sorry, there are no tour combos available right now."
 msgstr "Lo sentimos, no existen combos disponibles en este momento."
 
-#: raidchileapp/templates/raidchileapp/home.html:57
-#: raidchileapp/templates/raidchileapp/navbar.html:8
-#: raidchileapp/templates/raidchileapp/navbar.html:9
+#: raidchileapp/templates/raidchileapp/home.html:65
+#: raidchileapp/templates/raidchileapp/navbar.html:12
+#: raidchileapp/templates/raidchileapp/navbar.html:28
 msgid "About us"
 msgstr "Conócenos"
 
-#: raidchileapp/templates/raidchileapp/home.html:59
+#: raidchileapp/templates/raidchileapp/home.html:67
 msgid ""
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
 "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
@@ -454,16 +454,16 @@ msgid ""
 "dolore magna aliqua. Ut enim ad minim veniam."
 msgstr ""
 
-#: raidchileapp/templates/raidchileapp/home.html:70
+#: raidchileapp/templates/raidchileapp/home.html:78
 msgid "We accept"
 msgstr "Aceptamos"
 
-#: raidchileapp/templates/raidchileapp/home.html:80
-#: raidchileapp/templates/raidchileapp/home.html:147
+#: raidchileapp/templates/raidchileapp/home.html:88
+#: raidchileapp/templates/raidchileapp/home.html:155
 msgid "Phone"
 msgstr "Teléfono"
 
-#: raidchileapp/templates/raidchileapp/home.html:92
+#: raidchileapp/templates/raidchileapp/home.html:100
 msgid ""
 "For private tours, please contact us to negotiate pricing and conditions. "
 "Thank you."
@@ -471,21 +471,21 @@ msgstr ""
 "Para tours privados, por favor contáctenos para negociar las condiciones y "
 "los precios. Gracias."
 
-#: raidchileapp/templates/raidchileapp/home.html:98
+#: raidchileapp/templates/raidchileapp/home.html:106
 msgid "Tours Locations"
 msgstr "Ubicaciones de Tours"
 
-#: raidchileapp/templates/raidchileapp/home.html:99
+#: raidchileapp/templates/raidchileapp/home.html:107
 msgid "You can find a tour in any of these beautiful locations and more:"
 msgstr ""
 "Podrá conseguir un tour en cualquiera de estas bellas ubicaciones y más:"
 
-#: raidchileapp/templates/raidchileapp/home.html:144
+#: raidchileapp/templates/raidchileapp/home.html:152
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: raidchileapp/templates/raidchileapp/home.html:145
-msgid "If you have any questions, do not hesitate to ask them."
+#: raidchileapp/templates/raidchileapp/home.html:153
+msgid "If you have any questions, do not hesitate to ask us."
 msgstr "Si tiene alguna pregunta, no dude en preguntarnos."
 
 #: raidchileapp/templates/raidchileapp/inline_product_search_form.html:6
@@ -496,12 +496,13 @@ msgstr "Términos de Búsqueda"
 msgid "Tour Search"
 msgstr "Búsqueda de Tours"
 
-#: raidchileapp/templates/raidchileapp/navbar.html:11
+#: raidchileapp/templates/raidchileapp/navbar.html:14
+#: raidchileapp/templates/raidchileapp/navbar.html:29
 msgid "Contact"
 msgstr "Contacto"
 
-#: raidchileapp/templates/raidchileapp/navbar.html:14
 #: raidchileapp/templates/raidchileapp/navbar.html:17
+#: raidchileapp/templates/raidchileapp/navbar.html:31
 #, python-format
 msgid "Reservations (%(cart_l)s)"
 msgstr "Reservaciones (%(cart_l)s)"

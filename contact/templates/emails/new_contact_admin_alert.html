@@ -4,7 +4,7 @@
 <p>{% blocktrans %}Hi, this is an automatic alert from Chile Raid. A new contact message was sent by an user{% endblocktrans %}:</p>
 
 <p><strong>{% trans "Full name" %}:</strong> {{ contact_msg.full_name }}</p>
-<p><strong>{% trans "Email" %}:</strong> {{ contact_msg.email }}</p>
+<p><strong>{% trans "E-mail" %}:</strong> {{ contact_msg.email }}</p>
 {% if contact_msg.phone %}<p><strong>{% trans "Phone" %}:</strong> {{ contact_msg.phone }}</p>{% endif %}
 <p><strong>{% trans "Message" %}:</strong> {{ contact_msg.message|linebreaksbr }}</p>
 
