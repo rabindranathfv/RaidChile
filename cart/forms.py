@@ -6,6 +6,7 @@ class CartAddProductForm(forms.Form):
 	adult_quantity = forms.IntegerField(
 		label=_('Adults'),
 		min_value=1,
+		max_value=500,
 		widget= forms.NumberInput(
 			attrs={
 				'class': 'w3-input w3-border'
@@ -16,6 +17,7 @@ class CartAddProductForm(forms.Form):
 		label=_('Children'),
 		initial=0,
 		min_value=0,
+		max_value=500,
 		widget= forms.NumberInput(
 			attrs={
 				'class': 'w3-input w3-border'
