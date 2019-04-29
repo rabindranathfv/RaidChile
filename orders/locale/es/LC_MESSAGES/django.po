@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-29 12:38-0400\n"
+"POT-Creation-Date: 2019-04-29 13:14-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid "Full name"
 msgstr "Nombre Completo"
 
 #: orders/forms.py:38 orders/templates/emails/order_contents.html:36
-msgid "Email"
+msgid "E-mail"
 msgstr "Correo Electrónico"
 
 #: orders/forms.py:44

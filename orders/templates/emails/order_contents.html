@@ -33,7 +33,7 @@
 <p>{% trans "This was the provided contact information" %}:</p>
 
 <p><strong>{% trans "Full name" %}:</strong> {{ order.full_name }}</p>
-<p><strong>{% trans "Email" %}:</strong> {{ order.email }}</p>
+<p><strong>{% trans "E-mail" %}:</strong> {{ order.email }}</p>
 {% if order.phone %}<p><strong>{% trans "Phone" %}:</strong> {{ order.phone }}</p>{% endif %}
 {% if order.message %}<p><strong>{% trans "Message" %}:</strong> {{ order.message|linebreaksbr }}</p>{% endif %}
 {% endautoescape %}
