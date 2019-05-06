@@ -164,13 +164,13 @@ textarea.no-resize{
 
 .back-combo-btn{
 	position: absolute;
-	top: 190px;
+	top: 30px;
 }
 
 @media only screen and (min-width: 601px) {
 	/* For tablets: */
 	.back-combo-btn{
-		top: 10px;
+		top: 30px;
 	}
 }
 

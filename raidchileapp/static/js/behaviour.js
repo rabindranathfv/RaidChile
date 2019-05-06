@@ -10,6 +10,7 @@ $( document ).ready(function(){
 
 	$("#navbar-toggle").click(function(){
 		$("#mobile-navbar").toggleClass("w3-hide");
+		$(".back-combo-btn").toggleClass("w3-hide");
 	});
 
 	// Back to the top button function
