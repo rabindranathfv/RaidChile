@@ -483,7 +483,7 @@ class TourImage(models.Model):
 	)
 
 	class Meta:
-		ordering = ('-created_at', )
+		ordering = ('created_at', )
 		verbose_name = _('tour image')
 		verbose_name_plural = _('tour images')
 
