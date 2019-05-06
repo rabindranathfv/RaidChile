@@ -30,7 +30,7 @@
 						<!--  Thumbnail images in rows of 4  -->
 						<div class="w3-row-padding w3-section">
 							{% for image in gallery %}
-								<div class="w3-col s3 m2">
+								<div class="w3-col s3 m2 w3-margin-bottom">
 									<div class="w3-opacity {% if forloop.first %}w3-opacity-off{% endif %} w3-hover-opacity-off slide-thumbnail" style="background: url('{{ image.image.url }}')"></div>
 								</div>
 							{% endfor %}
