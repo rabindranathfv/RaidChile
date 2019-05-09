@@ -521,7 +521,7 @@ class Review(models.Model):
 		max_length=100,
 		verbose_name=_('email')
 	)
-	message = models.CharField(
+	message = models.TextField(
 		max_length=800,
 		verbose_name=_('review')
 	)
@@ -529,6 +529,10 @@ class Review(models.Model):
 		choices=RATING_CHOICES,
 		default=3,
 		verbose_name=_('Rating')
+	)
+	seen = models.BooleanField(
+		default=False,
+		verbose_name=_('seen')
 	)
 	visible = models.BooleanField(
 		default=True,
@@ -544,7 +548,7 @@ class Review(models.Model):
 	)
 
 	class Meta:
-		ordering = ('-rating', '-created_at')
+		ordering = ('seen', '-created_at')
 		verbose_name = _('Review')
 		verbose_name_plural = _('Reviews')
 

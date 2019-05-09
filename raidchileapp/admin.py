@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
-from .models import Category, Feature, Location, Tour, Combo, TourImage
+from .models import Category, Feature, Location, Tour, Combo, TourImage, Review
 from .forms import CategoryAdminForm
 
 # Register your models here.
@@ -370,3 +370,43 @@ class TourImageAdmin(admin.ModelAdmin):
 		return mark_safe(html_img)
 
 admin.site.register(TourImage, TourImageAdmin)
+
+class ReviewAdmin(admin.ModelAdmin):
+	list_display = [
+		'product',
+		'seen',
+		'rating',
+		'visible',
+		'created_at',
+	]
+	list_filter = [
+		'created_at',
+		'seen',
+		'visible',
+		'product'
+	]
+	list_editable = ['seen']
+	fields = [
+		(
+			'updated_at',
+			'created_at'
+		),
+		(
+			'full_name',
+			'email'
+		),
+		(
+			'rating',
+			'seen',
+			'visible'
+		),
+		'product',
+		'message',
+	]
+	readonly_fields = [
+		'created_at',
+		'updated_at',
+		'product',
+	]
+
+admin.site.register(Review, ReviewAdmin)

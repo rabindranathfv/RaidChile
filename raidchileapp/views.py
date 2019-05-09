@@ -116,7 +116,7 @@ def tour_details(request, id, slug):
 	)
 	page = request.GET.get('page', 1)
 	review_form = ReviewForm(initial={'product':tour, 'rating':3})
-	review_list = tour.reviews.filter(visible=True)
+	review_list = tour.reviews.filter(visible=True).order_by('-rating', '-created_at')
 	paginator = Paginator(review_list, REVIEWS_PER_PAGE)
 	reviews_data = {'total_reviews': review_list.count()}
 	avg_reviews = review_list.aggregate(avg_reviews=Avg('rating'))
@@ -259,7 +259,7 @@ def combo_details(request, id, slug):
 
 	page = request.GET.get('page', 1)
 	review_form = ReviewForm(initial={'product':combo, 'rating':3})
-	review_list = combo.reviews.filter(visible=True)
+	review_list = combo.reviews.filter(visible=True).order_by('-rating', '-created_at')
 	paginator = Paginator(review_list, REVIEWS_PER_PAGE)
 	reviews_data = {'total_reviews': review_list.count()}
 	avg_reviews = review_list.aggregate(avg_reviews=Avg('rating'))
@@ -361,7 +361,7 @@ def tour_detail_in_combo(request, id, slug, tour_id):
 	)
 	page = request.GET.get('page', 1)
 	review_form = ReviewForm(initial={'product':tour, 'rating':3})
-	review_list = tour.reviews.filter(visible=True)
+	review_list = tour.reviews.filter(visible=True).order_by('-rating', '-created_at')
 	paginator = Paginator(review_list, REVIEWS_PER_PAGE)
 	reviews_data = {'total_reviews': review_list.count()}
 	avg_reviews = review_list.aggregate(avg_reviews=Avg('rating'))
