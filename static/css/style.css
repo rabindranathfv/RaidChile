@@ -221,7 +221,11 @@ textarea.no-resize{
 }
 
 .avatar-mwidth{
-	max-width: 96px;
+	max-width: 35px;
+}
+
+.checked {
+  color: orange;
 }
 
 /*  ==========   Search section Styles   ==========  */
