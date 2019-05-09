@@ -149,75 +149,7 @@
 				</div>
 			</div>
 
-			<!-- User Commentaries Section -->
-			<div class="w3-row w3-margin-bottom">
-				<div class="w3-col l1 w3-container"></div>
-				<div class="w3-col l10">
-					<div class="w3-container w3-pale-red">
-						<h3>Comments</h3>
-					</div>
-					<div class="w3-container w3-white ">
-						<!-- Sample comment 1 -->
-						<div class="w3-row-padding w3-padding-16">
-							<div class="w3-col s2 w3-center">
-								<img class="w3-circle avatar-mwidth" src="{% static 'img/default_avatar.png' %}">
-							</div>
-							<div class="w3-col s12 m10 l9">
-								<p class="justify-text"><b>Username</b>:<br>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</p>
-							</div>
-						</div>
-						<!-- Sample comment 2 -->
-						<div class="w3-row-padding ">
-							<div class="w3-col s2 w3-center">
-								<img class="w3-circle avatar-mwidth" src="{% static 'img/default_avatar.png' %}">
-							</div>
-							<div class="w3-col s12 m10 l9">
-								<p class="justify-text"><b>Username2</b>:<br>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!-- Comment form -->
-					<div class="w3-container w3-padding-16 w3-black w3-card w3-margin-top">
-						<h3>We would like to know your opinion</h3>
-						<form action="" method="POST">
-							{% csrf_token %}
-							<div class="w3-row-padding">
-								<div class="w3-half w3-margin-bottom">
-									{{ comment_form.name }}
-								</div>
-								<div class="w3-half w3-margin-bottom">
-									{{ comment_form.email }}
-								</div>
-							</div>
-							<div class="w3-row-padding">
-								<div class="w3-col s12 w3-margin-bottom">
-									{{ comment_form.comment }}
-								</div>
-							</div>
-							<div class="w3-row-padding">
-								<div class="w3-half w3-margin-bottom">
-									<button type="submit" class="w3-button w3-red w3-margin-top"><i class="fa fa-send fa-fw"></i> Post Comment</button>
-								</div>
-							</div>
-						</form>
-					</div>
-
-				</div>
-			</div>
+			{% include "raidchileapp/review_list.html" %}
 
 		</div>
 	</div>

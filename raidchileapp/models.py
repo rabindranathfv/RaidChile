@@ -495,3 +495,58 @@ class TourImage(models.Model):
 			return self.alternative_pt_BR
 		else:
 			return self.alternative_en
+
+class Review(models.Model):
+	RATING_CHOICES = (
+		(1, '1'),
+		(2, '2'),
+		(3, '3'),
+		(4, '4'),
+		(5, '5')
+	)
+
+	product =  models.ForeignKey(
+		Product,
+		related_name='reviews',
+		related_query_name='review',
+		on_delete=models.CASCADE,
+		verbose_name=_('product')
+	)
+	full_name = models.CharField(
+		max_length=150,
+		db_index=True,
+		verbose_name=_('full name')
+	)
+	email = models.EmailField(
+		max_length=100,
+		verbose_name=_('email')
+	)
+	message = models.CharField(
+		max_length=800,
+		verbose_name=_('review')
+	)
+	rating = models.PositiveIntegerField(
+		choices=RATING_CHOICES,
+		default=3,
+		verbose_name=_('Rating')
+	)
+	visible = models.BooleanField(
+		default=True,
+		verbose_name=_('visible')
+	)
+	created_at = models.DateTimeField(
+		auto_now_add=True,
+		verbose_name=_('created at')
+	)
+	updated_at = models.DateTimeField(
+		auto_now=True,
+		verbose_name=_('updated at')
+	)
+
+	class Meta:
+		ordering = ('id', )
+		verbose_name = _('Review')
+		verbose_name_plural = _('Reviews')
+
+	def __str__(self):
+		return str(self.product) + ": {} stars - {:%d/%m/%Y %H:%M}".format(self.rating, self.created_at)

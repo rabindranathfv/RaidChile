@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.translation import gettext_lazy as _
 
-from .models import Location, Tour, Category, Product
+from .models import Location, Tour, Category, Product, Review
 
 # Create the forms here
 class SearchForm(forms.Form):
@@ -51,24 +51,37 @@ class SearchForm(forms.Form):
 		)
 	)
 
-class CommentForm(forms.Form):
-	name = forms.CharField(	label='Name',
-							max_length=100,
-							widget=forms.TextInput(attrs={'placeholder': 'Name',
-														'class': 'w3-input w3-border'})
-						)
-	email = forms.EmailField(	label='Email',
-								max_length=100,
-								widget=forms.EmailInput(attrs={'placeholder': 'Email',
-																'class': 'w3-input w3-border'})
-								)
-	comment = forms.CharField(	label='Comment',
-							max_length=500,
-							widget=forms.Textarea(attrs={'placeholder': 'Comment',
-														'rows': 2,
-														'cols': 50,
-														'class': 'w3-input w3-padding-16 w3-border no-resize'})
-							)
+
+class ReviewForm(forms.ModelForm):
+
+	class Meta:
+		model = Review
+		fields = ['product', 'rating', 'full_name', 'email', 'message']
+		widgets = {
+			'product': forms.HiddenInput(),
+			'rating': forms.HiddenInput(),
+			'full_name': forms.TextInput(
+				attrs={
+					'placeholder': _('Full name'),
+					'class': 'w3-input w3-padding-16 w3-border'
+				}
+			),
+			'email': forms.EmailInput(
+				attrs={
+					'placeholder': _('E-mail'),
+					'class': 'w3-input w3-padding-16 w3-border'
+				}
+			),
+			'message': forms.Textarea(
+				attrs={
+					'placeholder': _('Review (800 characters max.)'),
+					'rows': 3,
+					'cols': 50,
+					'class': 'w3-input w3-padding-16 w3-border no-resize'
+				}
+			)
+		}
+
 
 ########################## ADMIN FORMS ########################
 class CategoryAdminForm(forms.ModelForm):

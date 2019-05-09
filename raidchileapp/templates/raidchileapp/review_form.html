@@ -1,0 +1,41 @@
+{% load i18n %}
+<div class="w3-container w3-padding-16 w3-black w3-card w3-margin-top">
+	{% if review_form.errors %}
+	    {% for field in review_form %}
+	        {% for error in field.errors %}
+	            <div class="alert alert-danger">
+	                <strong>{{ error|escape }}</strong>
+	            </div>
+	        {% endfor %}
+	    {% endfor %}
+	    {% for error in review_form.non_field_errors %}
+	        <div class="alert alert-danger">
+	            <strong>{{ error|escape }}</strong>
+	        </div>
+	    {% endfor %}
+	{% endif %}
+	<h3>{% trans "We would like to know your opinion" %}.</h3>
+	<form action="" method="POST">
+		{% csrf_token %}
+		{{ review_form.product }}
+		{{ review_form.rating }}
+		<div class="w3-row-padding">
+			<div class="w3-half w3-margin-bottom">
+				{{ review_form.full_name }}
+			</div>
+			<div class="w3-half w3-margin-bottom">
+				{{ review_form.email }}
+			</div>
+		</div>
+		<div class="w3-row-padding">
+			<div class="w3-col s12 w3-margin-bottom">
+				{{ review_form.message }}
+			</div>
+		</div>
+		<div class="w3-row-padding">
+			<div class="w3-half w3-margin-bottom">
+				<button type="submit" class="w3-button w3-red w3-margin-top"><i class="fa fa-send fa-fw"></i> {% trans "Post Review" %}</button>
+			</div>
+		</div>
+	</form>
+</div>

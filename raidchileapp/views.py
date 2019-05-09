@@ -1,8 +1,8 @@
 from decimal import Decimal
 
-from django.db.models import Count, Q, Prefetch, Max
+from django.db.models import Avg, Count, Q, Prefetch, Max
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.utils import translation
 from django.utils.translation import gettext as _
@@ -10,8 +10,8 @@ from django.utils.translation import gettext as _
 from cart.forms import CartAddProductForm
 from contact.forms import ContactForm
 
-from .models import Category, Feature, Location, Tour, Combo, TourImage
-from .forms import CommentForm, SearchForm
+from .models import Category, Feature, Location, Tour, Combo, TourImage, Review
+from .forms import ReviewForm, SearchForm
 
 ##################################
 def tour_filter_search(request, queryset, search_form, sale_price_filter=False):
@@ -95,7 +95,7 @@ def home(request):
 
 def tour_details(request, id, slug):
 	try:
-		tour = Tour.objects.get(
+		tour = Tour.objects.prefetch_related('reviews').get(
 			Q(available=True) &
 			Q(id=id) & (
 				Q(slug_es=slug) |
@@ -111,10 +111,18 @@ def tour_details(request, id, slug):
 			'adult_quantity': tour.min_pax_number,
 		}
 	)
-	comment_form = CommentForm()
+	review_form = ReviewForm(initial={'product':tour, 'rating':3})
+	print (review_form)
+	review_list = tour.reviews.filter(visible=True)
+
+	reviews_data = {'total_reviews': review_list.count()}
+	avg_reviews = review_list.aggregate(avg_reviews=Avg('rating'))
+	reviews_data = {**reviews_data, **avg_reviews}
+
 	context = {
 		'tour': tour,
-		'comment_form': comment_form,
+		'review_list' : review_list,
+		'reviews_data': reviews_data,
 		'cart_product_form' : cart_product_form,
 	}
 
@@ -130,6 +138,19 @@ def tour_details(request, id, slug):
 	finally:
 		translation.activate(cur_language)
 
+	# Reviews form processing
+	if request.method == 'POST':
+		review_form  = ReviewForm(request.POST)
+		print('Entered POST')
+		if review_form.is_valid():
+			print('Form valid: Saving and redirecting')
+			review_form.save()
+			return redirect("raidchileapp:tour_details", id=id, slug=slug)
+		else:
+			print(review_form.errors)
+			print(review_form.cleaned_data)
+
+	context['review_form'] = review_form
 	return render(request, "raidchileapp/tour_details.html", context)
 
 
