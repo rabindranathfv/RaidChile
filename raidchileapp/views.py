@@ -257,8 +257,26 @@ def combo_details(request, id, slug):
 		}
 	)
 
+	page = request.GET.get('page', 1)
+	review_form = ReviewForm(initial={'product':combo, 'rating':3})
+	review_list = combo.reviews.filter(visible=True)
+	paginator = Paginator(review_list, REVIEWS_PER_PAGE)
+	reviews_data = {'total_reviews': review_list.count()}
+	avg_reviews = review_list.aggregate(avg_reviews=Avg('rating'))
+	reviews_data = {**reviews_data, **avg_reviews}
+
+	try:
+		review_list = paginator.page(page)
+	except PageNotAnInteger:
+		review_list = paginator.page(1)
+	except EmptyPage:
+		review_list = paginator.page(paginator.num_pages)
+
 	context = {
 		'combo': combo,
+		'review_list' : review_list, #Page object
+		'rating_range' : list(range(1,6)),
+		'reviews_data': reviews_data,
 		'cart_product_form' : cart_product_form,
 	}
 
@@ -274,6 +292,19 @@ def combo_details(request, id, slug):
 	finally:
 		translation.activate(cur_language)
 
+	# Reviews form processing
+	if request.method == 'POST':
+		review_form  = ReviewForm(request.POST)
+		print('Entered POST')
+		if review_form.is_valid():
+			review_form.save()
+			return redirect("raidchileapp:combo_details", id=id, slug=slug)
+		else:
+			print(review_form.errors)
+			print(review_form.cleaned_data)
+
+
+	context['review_form'] = review_form
 	return render(request, "raidchileapp/combo_details.html", context)
 
 
@@ -328,12 +359,28 @@ def tour_detail_in_combo(request, id, slug, tour_id):
 			'adult_quantity': tour.min_pax_number,
 		}
 	)
-	comment_form = CommentForm()
+	page = request.GET.get('page', 1)
+	review_form = ReviewForm(initial={'product':tour, 'rating':3})
+	review_list = tour.reviews.filter(visible=True)
+	paginator = Paginator(review_list, REVIEWS_PER_PAGE)
+	reviews_data = {'total_reviews': review_list.count()}
+	avg_reviews = review_list.aggregate(avg_reviews=Avg('rating'))
+	reviews_data = {**reviews_data, **avg_reviews}
+
+	try:
+		review_list = paginator.page(page)
+	except PageNotAnInteger:
+		review_list = paginator.page(1)
+	except EmptyPage:
+		review_list = paginator.page(paginator.num_pages)
+
 	context = {
 		'in_combo': True,
 		'combo': combo,
 		'tour': tour,
-		'comment_form': comment_form,
+		'review_list' : review_list, #Page object
+		'rating_range' : list(range(1,6)),
+		'reviews_data': reviews_data,
 		'cart_product_form' : cart_product_form,
 	}
 
@@ -349,4 +396,16 @@ def tour_detail_in_combo(request, id, slug, tour_id):
 	finally:
 		translation.activate(cur_language)
 
+	# Reviews form processing
+	if request.method == 'POST':
+		review_form  = ReviewForm(request.POST)
+		print('Entered POST')
+		if review_form.is_valid():
+			review_form.save()
+			return redirect("raidchileapp:tour_detail_in_combo", id=id, slug=slug, tour_id=tour_id)
+		else:
+			print(review_form.errors)
+			print(review_form.cleaned_data)
+
+	context['review_form'] = review_form
 	return render(request, "raidchileapp/tour_details.html", context)

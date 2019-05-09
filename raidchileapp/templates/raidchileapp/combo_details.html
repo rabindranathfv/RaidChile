@@ -9,23 +9,47 @@
 		<div class="w3-container">
 			<div class="w3-center w3-padding-16">
 				<h2>{{ combo }}</h2>
+				<!-- Rating section -->
+				<h5 style="margin-top: 2px; margin-bottom: 2px;">
+					<b>{% trans "Rating: " %}</b>
+					{% for n in rating_range %}
+						{% if reviews_data.avg_reviews >= n %}
+							<span class="fa fa-star checked"></span>
+						{% else %}
+							<span class="fa fa-star"></span>
+						{% endif %}
+					{% endfor %}
+					{% if reviews_data.avg_reviews %}
+						({{ reviews_data.avg_reviews|floatformat }}) {% trans "from" %} {{ reviews_data.total_reviews }}
+						{% blocktrans count t_reviews=reviews_data.total_reviews trimmed %}
+							review.
+						{% plural %}
+							reviews.
+						{% endblocktrans %}
+					{% else %}
+						(0)
+					{% endif %}
+				</h5>
 				<h5>
 					{{ combo.get_description|linebreaksbr }}
 				</h5>
 			</div>
 			<div class="w3-container w3-white w3-card-2">
 				<div class="w3-center"><h3><strong>{% trans "Tours" %}</strong></h3></div>
+
 				<!--  A row per tour with image and general info  -->
 				{% for tour in combo.tours.all %}
 					<div class="w3-row-padding w3-padding-16">
 						<!--  Tour Image  -->
 						<div class="w3-col s12 l6 w3-margin-bottom">
 							{% with img_url=tour.images.first.image.url img_alt=tour.images.first %}
-								<div class="combo-detail-tour-image w3-white w3-hide-small w3-center w3-card" style="background: url('{{ img_url }}')">
-									{% if not img_url %}
-										<i class="fa fa-photo fa-5x w3-opacity-max"></i>
-									{% endif %}
-								</div>
+								<a href="{% url 'raidchileapp:tour_detail_in_combo' combo.id combo.get_slug tour.id %}">
+									<div class="combo-detail-tour-image w3-white w3-hide-small w3-center w3-card" style="background: url('{{ img_url }}')">
+										{% if not img_url %}
+											<i class="fa fa-photo fa-5x w3-opacity-max"></i>
+										{% endif %}
+									</div>
+								</a>
 								{% if img_url %}
 									<img src="{{ img_url }}" alt="{{ img_alt }}" class="full-width-img w3-hide-medium w3-hide-large">
 								{% else %}
@@ -66,8 +90,12 @@
 					{% endif %}
 				{% endfor %}
 			</div>
-			<div class="w3-center w3-margin-top"><h3><strong>{% trans "Pricing" %}</strong></h3></div>
-			<div class="w3-row-padding w3-margin-bottom">
+
+			<div class="w3-row-padding w3-margin-bottom w3-padding-32">
+				<div class="w3-col s12 w3-center">
+					<h3><strong>{% trans "Pricing" %}</strong></h3>
+					<hr class="better-hr">
+				</div>
 				<div class="w3-col l6 w3-container w3-margin-top">
 					<!-- Pricing tables -->
 					<div class="w3-row">
@@ -127,6 +155,7 @@
 				</div>
 			</div>
 			<!-- comments and rating -->
+			{% include "raidchileapp/review_list.html" %}
 		</div>
 	</div>
 {% endblock content %}
