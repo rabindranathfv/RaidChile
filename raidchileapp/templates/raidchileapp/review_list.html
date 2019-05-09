@@ -6,18 +6,30 @@
 		<div class="w3-container w3-pale-red">
 			<h3>{% trans "Reviews" %} Total: {{ reviews_data.total_reviews }} with Average: {{ reviews_data.avg_reviews }}</h3>
 		</div>
-		<div class="w3-container w3-white ">
+		<div class="w3-container w3-white w3-padding-16">
 			{% with reviews=review_list%}
 				{% for review in reviews %}
 					<!-- Sample comment 1 -->
-					<div class="w3-row-padding w3-padding-16">
-						<div class="w3-col s2 w3-center">
-							<img class="w3-circle avatar-mwidth" src="{% static 'img/default_avatar.png' %}">
-						</div>
-						<div class="w3-col s12 m10 l9">
-							<p class="justify-text"><b>{{ review.full_name }}</b> {{ review.created_at }}:<br>
-							{{ review.message }}
-							</p>
+					<div class="w3-row-padding w3-margin-bottom">
+						<img class="w3-circle avatar-mwidth" src="{% static 'img/default_avatar.png' %}">
+						<span class="w3-margin-left"><b> {{ review.full_name }}</b></span>
+						<p class="justify-text" style="margin-top: 2px; margin-bottom: 2px;">
+							{% for n in rating_range %}
+								{% if review.rating >= n %}
+									<span class="fa fa-star checked"></span>
+								{% else %}
+									<span class="fa fa-star"></span>
+								{% endif %}
+							{% endfor %}
+						</p>
+						<p class="justify-text w3-opacity-min" style="margin-top: 2px; margin-bottom: 2px;">{{ review.created_at }}</p>
+						<p class="justify-text" style="margin-top: 5px;">{{ review.message|linebreaksbr }}</p>
+					</div>
+				{% empty %}
+					<div class="w3-col s12 w3-center w3-padding-32">
+						<div class="w3-content w3-light-gray w3-card-2 w3-padding-large">
+							<i class="w3-text-dark-gray fa fa-frown-o fa-3x"></i>
+							<h4><em>{% trans "There are no reviews for this product yet." %}</em></h4>
 						</div>
 					</div>
 				{% endfor %}

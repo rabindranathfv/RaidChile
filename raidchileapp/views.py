@@ -122,6 +122,7 @@ def tour_details(request, id, slug):
 	context = {
 		'tour': tour,
 		'review_list' : review_list,
+		'rating_range' : list(range(1,6)),
 		'reviews_data': reviews_data,
 		'cart_product_form' : cart_product_form,
 	}
