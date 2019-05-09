@@ -18,6 +18,33 @@ $( document ).ready(function(){
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	});
 
+	// Rating Stars Colouring and value setting when clicking them
+	$("#rating_input span.fa-star").click(function(){
+		$(this).addClass('checked');
+		$(this).prevAll(".fa-star").addClass('checked');
+		$(this).nextAll(".fa-star").removeClass('checked');
+		var val = parseInt($(this).find(".value-span").text())
+		$("#rating_input .number-rating").text(val);
+		$("#id_rating").val(val);
+		// make the form errors hide and submit button available
+		$(this).closest("form").find("p.none_rating_error").hide();
+		$(this).closest("form").find("#submit-review").prop( "disabled", false );
+	});
+
+	// Validation of the review form rating being set.
+	$('form#review_add_form').submit(function() {
+		var rating_value = parseInt( $(this).find("#rating_input .number-rating").text());
+		// Validate that the rating value is between 1 and 5
+		if (rating_value < 1 || rating_value > 5){
+			// Display warning and disable post button
+			$(this).find("p.none_rating_error").show();
+			$(this).find("#submit-review").prop( "disabled", true );
+			return false;
+		}else{
+			return true;
+		}
+	});
+
 	// Making the languague choices drowpdown interactive and look right.
 	$('#language-switch').click(function(){
 		$(this).toggleClass('extended-switch');

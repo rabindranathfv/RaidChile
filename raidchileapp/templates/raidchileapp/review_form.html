@@ -1,24 +1,56 @@
 {% load i18n %}
 <div class="w3-container w3-padding-16 w3-black w3-card w3-margin-top">
 	{% if review_form.errors %}
-	    {% for field in review_form %}
-	        {% for error in field.errors %}
-	            <div class="alert alert-danger">
-	                <strong>{{ error|escape }}</strong>
-	            </div>
-	        {% endfor %}
-	    {% endfor %}
-	    {% for error in review_form.non_field_errors %}
-	        <div class="alert alert-danger">
-	            <strong>{{ error|escape }}</strong>
-	        </div>
-	    {% endfor %}
+		{% for field in review_form %}
+			{% for error in field.errors %}
+				<div class="alert alert-danger">
+					<strong>{{ error|escape }}</strong>
+				</div>
+			{% endfor %}
+		{% endfor %}
+		{% for error in review_form.non_field_errors %}
+			<div class="alert alert-danger">
+				<strong>{{ error|escape }}</strong>
+			</div>
+		{% endfor %}
 	{% endif %}
 	<h3>{% trans "We would like to know your opinion" %}.</h3>
-	<form action="" method="POST">
+	<form action="" method="POST" id="review_add_form">
 		{% csrf_token %}
 		{{ review_form.product }}
 		{{ review_form.rating }}
+		<div class="w3-row-padding">
+			<div class="w3-col s12">
+				<p class="none_rating_error w3-text-red" style="display: none;">
+					<b>
+					{% blocktrans %}
+						Please choose a rating!
+					{% endblocktrans %}
+					</b>
+				</p>
+				<h3 id="rating_input">
+					Rating:
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">1</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">2</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">3</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">4</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">5</span>
+					</span>
+					(<span class="number-rating">
+						0
+					</span>)
+				</h3>
+			</div>
+		</div>
 		<div class="w3-row-padding">
 			<div class="w3-half w3-margin-bottom">
 				{{ review_form.full_name }}
@@ -34,7 +66,9 @@
 		</div>
 		<div class="w3-row-padding">
 			<div class="w3-half w3-margin-bottom">
-				<button type="submit" class="w3-button w3-red w3-margin-top"><i class="fa fa-send fa-fw"></i> {% trans "Post Review" %}</button>
+				<button type="submit" class="w3-button w3-red w3-margin-top" id="submit-review">
+					<i class="fa fa-send fa-fw"></i> {% trans "Post Review" %}
+				</button>
 			</div>
 		</div>
 	</form>

@@ -50,6 +50,29 @@
 					<h2>{% trans "Information" %}</h2>
 					<hr class="better-hr">
 					<div class="w3-row">
+						<!-- Rating section -->
+						<h5 style="margin-top: 2px; margin-bottom: 2px;">
+							<b>{% trans "Rating: " %}</b>
+							{% for n in rating_range %}
+								{% if reviews_data.avg_reviews >= n %}
+									<span class="fa fa-star checked"></span>
+								{% else %}
+									<span class="fa fa-star"></span>
+								{% endif %}
+							{% endfor %}
+							{% if reviews_data.avg_reviews %}
+								({{ reviews_data.avg_reviews|floatformat }}) {% trans "from" %} {{ reviews_data.total_reviews }}
+								{% blocktrans count t_reviews=reviews_data.total_reviews trimmed %}
+									review.
+								{% plural %}
+									reviews.
+								{% endblocktrans %}
+							{% else %}
+								(0)
+							{% endif %}
+						</h5>
+					</div>
+					<div class="w3-row">
 						<div class="w3-half">
 							<h5><strong>{% trans "Type" %}:</strong> {{ tour.get_duration_type_display }}</h5>
 						</div>
