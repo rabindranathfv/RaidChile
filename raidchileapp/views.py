@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Avg, Count, Q, Prefetch, Max
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -12,6 +13,8 @@ from contact.forms import ContactForm
 
 from .models import Category, Feature, Location, Tour, Combo, TourImage, Review
 from .forms import ReviewForm, SearchForm
+
+REVIEWS_PER_PAGE = 5
 
 ##################################
 def tour_filter_search(request, queryset, search_form, sale_price_filter=False):
@@ -111,17 +114,24 @@ def tour_details(request, id, slug):
 			'adult_quantity': tour.min_pax_number,
 		}
 	)
+	page = request.GET.get('page', 1)
 	review_form = ReviewForm(initial={'product':tour, 'rating':3})
-	print (review_form)
 	review_list = tour.reviews.filter(visible=True)
-
+	paginator = Paginator(review_list, REVIEWS_PER_PAGE)
 	reviews_data = {'total_reviews': review_list.count()}
 	avg_reviews = review_list.aggregate(avg_reviews=Avg('rating'))
 	reviews_data = {**reviews_data, **avg_reviews}
 
+	try:
+		review_list = paginator.page(page)
+	except PageNotAnInteger:
+		review_list = paginator.page(1)
+	except EmptyPage:
+		review_list = paginator.page(paginator.num_pages)
+
 	context = {
 		'tour': tour,
-		'review_list' : review_list[:5],
+		'review_list' : review_list, #Page object
 		'rating_range' : list(range(1,6)),
 		'reviews_data': reviews_data,
 		'cart_product_form' : cart_product_form,

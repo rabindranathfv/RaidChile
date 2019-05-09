@@ -7,7 +7,7 @@
 			<h3>{% trans "Reviews" %}</h3>
 		</div>
 		<div class="w3-container w3-white w3-padding-16">
-			{% with reviews=review_list%}
+			{% with reviews=review_list %}
 				{% for review in reviews %}
 					<!-- Sample comment 1 -->
 					<div class="w3-row-padding w3-margin-bottom">
@@ -34,6 +34,30 @@
 					</div>
 				{% endfor %}
 			{% endwith %}
+
+			{% if review_list.has_other_pages %}
+				<div class="w3-center">
+					<div class="w3-bar w3-border">
+					{% if review_list.has_previous %}
+						<a href="?page={{ review_list.previous_page_number }}" class="w3-bar-item w3-button">&laquo;</a>
+					{% else %}
+						<span class="w3-bar-item w3-button w3-opacity">&laquo;</span>
+					{% endif %}
+					{% for i in review_list.paginator.page_range %}
+						{% if review_list.number == i %}
+							<span class="w3-bar-item w3-button w3-red">{{ i }}</span>
+						{% else %}
+							<a href="?page={{ i }}" class="w3-bar-item w3-button">{{ i }}</a>
+						{% endif %}
+					{% endfor %}
+					{% if review_list.has_next %}
+						<a href="?page={{ review_list.next_page_number }}" class="w3-bar-item w3-button">&raquo;</a>
+					{% else %}
+						<span class="w3-bar-item w3-button w3-opacity">&raquo;</span>
+					{% endif %}
+					</div>
+				</div>
+			{% endif %}
 		</div>
 
 		<!-- Comment form -->
