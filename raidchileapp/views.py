@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Avg, Count, Q, Prefetch, Max
 from django.http import Http404
@@ -156,6 +157,7 @@ def tour_details(request, id, slug):
 		if review_form.is_valid():
 			print('Form valid: Saving and redirecting')
 			review_form.save()
+			messages.success(request, _('Your review was sent successfully! Thank you for the feedback.'))
 			return redirect("raidchileapp:tour_details", id=id, slug=slug)
 		else:
 			print(review_form.errors)
@@ -298,6 +300,7 @@ def combo_details(request, id, slug):
 		print('Entered POST')
 		if review_form.is_valid():
 			review_form.save()
+			messages.success(request, _('Your review was sent successfully! Thank you for the feedback.'))
 			return redirect("raidchileapp:combo_details", id=id, slug=slug)
 		else:
 			print(review_form.errors)
@@ -402,6 +405,7 @@ def tour_detail_in_combo(request, id, slug, tour_id):
 		print('Entered POST')
 		if review_form.is_valid():
 			review_form.save()
+			messages.success(request, _('Your review was sent successfully! Thank you for the feedback.'))
 			return redirect("raidchileapp:tour_detail_in_combo", id=id, slug=slug, tour_id=tour_id)
 		else:
 			print(review_form.errors)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-09 17:46-0400\n"
+"POT-Creation-Date: 2019-05-10 13:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,6 +342,7 @@ msgid "Search"
 msgstr "Buscar"
 
 #: raidchileapp/templates/raidchileapp/combo_details.html:14
+#: raidchileapp/templates/raidchileapp/review_form.html:43
 #: raidchileapp/templates/raidchileapp/tour_details.html:55
 msgid "Rating: "
 msgstr "Puntaje: "
@@ -573,15 +574,15 @@ msgstr "Contacto"
 msgid "Reservations (%(cart_l)s)"
 msgstr "Reservaciones (%(cart_l)s)"
 
-#: raidchileapp/templates/raidchileapp/review_form.html:17
+#: raidchileapp/templates/raidchileapp/review_form.html:3
 msgid "We would like to know your opinion"
 msgstr "Nos gustaría conocer tu opinión"
 
-#: raidchileapp/templates/raidchileapp/review_form.html:26
+#: raidchileapp/templates/raidchileapp/review_form.html:37
 msgid "Please choose a rating!"
 msgstr "¡Por favor escoja un puntaje!"
 
-#: raidchileapp/templates/raidchileapp/review_form.html:70
+#: raidchileapp/templates/raidchileapp/review_form.html:79
 msgid "Post Review"
 msgstr "Enviar Reseña"
 
@@ -652,3 +653,8 @@ msgid "We're sorry, there are no features available for this tour right now."
 msgstr ""
 "Lo sentimos, no existen características disponibles para este tour en estos "
 "momentos"
+
+#: raidchileapp/views.py:160 raidchileapp/views.py:303
+#: raidchileapp/views.py:408
+msgid "Your review was sent successfully! Thank you for the feedback."
+msgstr "¡Su reseña ha sido enviada con éxito! Gracias por su opinión."

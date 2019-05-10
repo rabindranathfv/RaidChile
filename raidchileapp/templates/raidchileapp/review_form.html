@@ -1,21 +1,32 @@
 {% load i18n %}
-<div class="w3-container w3-padding-16 w3-black w3-card w3-margin-top">
+<div class="w3-container w3-padding-16 w3-black w3-card w3-margin-top" id="review-send">
+	<h3>{% trans "We would like to know your opinion" %}.</h3>
+
+	{% include "contact/messages.html" %}
+
+	<!-- Error display if anything -->
 	{% if review_form.errors %}
 		{% for field in review_form %}
 			{% for error in field.errors %}
-				<div class="alert alert-danger">
-					<strong>{{ error|escape }}</strong>
+				<div class="w3-panel w3-round w3-border w3-pale-red w3-border-red w3-text-red w3-display-container w3-animate-up" role="alert">
+					<span onclick = "this.parentElement.style.display='none'" class="w3-padding close-btn pointer-cursor w3-xlarge w3-display-right" aria-label="Close">
+						&times;
+					</span>
+					<p>{{ error|escape }}</p>
 				</div>
 			{% endfor %}
 		{% endfor %}
 		{% for error in review_form.non_field_errors %}
-			<div class="alert alert-danger">
-				<strong>{{ error|escape }}</strong>
+			<div class="w3-panel w3-round w3-border w3-pale-red w3-border-red w3-text-red w3-display-container w3-animate-up" role="alert">
+				<span onclick = "this.parentElement.style.display='none'" class="w3-padding close-btn pointer-cursor w3-xlarge w3-display-right" aria-label="Close">
+					&times;
+				</span>
+				<p>{{ error|escape }}</p>
 			</div>
 		{% endfor %}
 	{% endif %}
-	<h3>{% trans "We would like to know your opinion" %}.</h3>
-	<form action="" method="POST" id="review_add_form">
+	<!-- Review post form -->
+	<form action="#review-send" method="POST" id="review_add_form">
 		{% csrf_token %}
 		{{ review_form.product }}
 		{{ review_form.rating }}

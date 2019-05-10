@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-09 17:46-0400\n"
+"POT-Creation-Date: 2019-05-10 13:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr "E-mail"
 
 #: raidchileapp/forms.py:77
 msgid "Review (800 characters max.)"
-msgstr "Revisão (800 caracteres máx.)"
+msgstr "Resenha (800 caracteres máx.)"
 
 #: raidchileapp/forms.py:92
 msgid "Products"
@@ -301,7 +301,7 @@ msgstr "e-mail"
 
 #: raidchileapp/models.py:526
 msgid "review"
-msgstr "revisão"
+msgstr "resenha"
 
 #: raidchileapp/models.py:531
 msgid "Rating"
@@ -317,12 +317,12 @@ msgstr "Visível"
 
 #: raidchileapp/models.py:552
 msgid "Review"
-msgstr "Revisão"
+msgstr "Resenha"
 
 #: raidchileapp/models.py:553
 #: raidchileapp/templates/raidchileapp/review_list.html:7
 msgid "Reviews"
-msgstr "Revisões"
+msgstr "Resenhas"
 
 #: raidchileapp/templates/raidchileapp/banner_product_search_form.html:6
 msgid "Min. Price (CLP)"
@@ -340,6 +340,7 @@ msgid "Search"
 msgstr "Pesquisar"
 
 #: raidchileapp/templates/raidchileapp/combo_details.html:14
+#: raidchileapp/templates/raidchileapp/review_form.html:43
 #: raidchileapp/templates/raidchileapp/tour_details.html:55
 msgid "Rating: "
 msgstr "Pontos: "
@@ -353,8 +354,8 @@ msgstr "de"
 #: raidchileapp/templates/raidchileapp/tour_details.html:65
 msgid "review."
 msgid_plural "reviews."
-msgstr[0] "revisão."
-msgstr[1] "revisões."
+msgstr[0] "resenha."
+msgstr[1] "resenhas."
 
 #: raidchileapp/templates/raidchileapp/combo_details.html:67
 #: raidchileapp/templates/raidchileapp/tour_details.html:77
@@ -569,21 +570,21 @@ msgstr "Contato"
 msgid "Reservations (%(cart_l)s)"
 msgstr "Reservas (%(cart_l)s)"
 
-#: raidchileapp/templates/raidchileapp/review_form.html:17
+#: raidchileapp/templates/raidchileapp/review_form.html:3
 msgid "We would like to know your opinion"
 msgstr "Gostaríamos de saber a sua opinião"
 
-#: raidchileapp/templates/raidchileapp/review_form.html:26
+#: raidchileapp/templates/raidchileapp/review_form.html:37
 msgid "Please choose a rating!"
 msgstr "Por favor, escolha uma pontuação!"
 
-#: raidchileapp/templates/raidchileapp/review_form.html:70
+#: raidchileapp/templates/raidchileapp/review_form.html:79
 msgid "Post Review"
-msgstr "Enviar Revisão"
+msgstr "Enviar Resenha"
 
 #: raidchileapp/templates/raidchileapp/review_list.html:32
 msgid "There are no reviews for this product yet."
-msgstr "Ainda não há revisões sobre este produto."
+msgstr "Ainda não há resenhas sobre este produto."
 
 #: raidchileapp/templates/raidchileapp/search_results.html:27
 #, python-format
@@ -643,3 +644,8 @@ msgstr "O preço inclui:"
 msgid "We're sorry, there are no features available for this tour right now."
 msgstr ""
 "Desculpe, não há caracteristicas disponíveis para este tour no momento."
+
+#: raidchileapp/views.py:160 raidchileapp/views.py:303
+#: raidchileapp/views.py:408
+msgid "Your review was sent successfully! Thank you for the feedback."
+msgstr "Sua resenha foi enviada com sucesso! Obrigado pela sua opinião."

@@ -1,6 +1,6 @@
 {% load static %}{% load i18n %}
 <!-- User Reviews Section -->
-<div class="w3-row w3-margin-bottom">
+<div class="w3-row w3-margin-bottom" id="review-section">
 	<div class="w3-col l1 w3-container"></div>
 	<div class="w3-col l10">
 		<div class="w3-container w3-pale-red">
@@ -39,7 +39,7 @@
 				<div class="w3-center">
 					<div class="w3-bar w3-border">
 					{% if review_list.has_previous %}
-						<a href="?page={{ review_list.previous_page_number }}" class="w3-bar-item w3-button">&laquo;</a>
+						<a href="?page={{ review_list.previous_page_number }}#review-section" class="w3-bar-item w3-button">&laquo;</a>
 					{% else %}
 						<span class="w3-bar-item w3-button w3-opacity">&laquo;</span>
 					{% endif %}
@@ -47,11 +47,11 @@
 						{% if review_list.number == i %}
 							<span class="w3-bar-item w3-button w3-red">{{ i }}</span>
 						{% else %}
-							<a href="?page={{ i }}" class="w3-bar-item w3-button">{{ i }}</a>
+							<a href="?page={{ i }}#review-section" class="w3-bar-item w3-button">{{ i }}</a>
 						{% endif %}
 					{% endfor %}
 					{% if review_list.has_next %}
-						<a href="?page={{ review_list.next_page_number }}" class="w3-bar-item w3-button">&raquo;</a>
+						<a href="?page={{ review_list.next_page_number }}#review-section" class="w3-bar-item w3-button">&raquo;</a>
 					{% else %}
 						<span class="w3-bar-item w3-button w3-opacity">&raquo;</span>
 					{% endif %}
