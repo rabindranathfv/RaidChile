@@ -15,7 +15,7 @@
 
 <form action="{% if category %}{{ cat_url }}{% else %}{{ all_url }}{% endif %}" method="GET" id="search-form">
 	<!-- Search Bar Section -->
-	<div class="w3-container combo-header" style="background:url('{% if category.image. %}{{ category.image.image.url }}{% else %}{% static 'img/banner-img.jpg' %}{% endif %}')">
+	<div class="w3-container combo-header" style="background:url('{% if category.image %}{{ category.image.image.url }}{% else %}{% static 'img/banner-img.jpg' %}{% endif %}')">
 		<div class="w3-row w3-margin-top">
 			<div class="w3-col m1 w3-container"></div>
 			<div class="w3-col s12 m10">
