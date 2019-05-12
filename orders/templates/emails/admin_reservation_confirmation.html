@@ -1,0 +1,20 @@
+{% load humanize %}{% load i18n %}{% autoescape off %}
+<h2>{% trans "A New Reservation Order has been Confirmed by an User!" %}</h2>
+
+<p>{% trans "Hi, this is an automatic message from Chile Raid" %}.</p>
+<h3>{% blocktrans with order_id=order.id %}Tour Reservation Order #{{ order_id }}{% endblocktrans %}</h3>
+<p>{% trans "The confirmed order has the following tour reservations" %}:</p>
+
+{% include 'emails/order_contents.html' %}
+
+<p>{% trans "If you want to see this order inside the Chile Raid's Admin site, please use the following link" %}:<br>
+<br>
+	<a href="{{ order_admin_url }}" style="padding-left: 15px; font-size: 16px">{{ order_admin_url }}</a>
+</p>
+<br>
+
+<p>{% trans "Please do NOT reply to this automated message" %}.</p>
+
+{% trans "Cheers," %}<br>
+{% trans "Chile Raid's Admin Site" %}.<br>
+{% endautoescape %}

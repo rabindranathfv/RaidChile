@@ -1,14 +1,27 @@
 {% extends "raidchileapp/base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block page_title %} Your Pending Reservations {% endblock page_title %}
+{% block page_title %} {% trans "Confirm your Reservations" %} {% endblock page_title %}
 
 {% block content %}
 	<div class="w3-container w3-center w3-margin-top">
-		<h2>Confirming Reservation{{ cart|length|pluralize }} of {{ cart|length }} Tour{{ cart|length|pluralize }}</h2>
-		<h6>
-			To confirm your pending reservations please fill the following form with your contact information and the planned date for the{% if cart|length > 1 %} first{% endif %} tour.<br>
-			If you have any questions or special conditions you can type them in the message box.
+		<h2>
+			{% if not combo %}
+				{% blocktrans count cart_l=cart|length trimmed %}
+				Confirming Reservation of {{ cart_l }} Tour
+				{% plural %}
+				Confirming Reservations of {{ cart_l }} Tours
+				{% endblocktrans %}
+			{% else %}
+				{% blocktrans with cart_l=combo.tours.count trimmed %}
+					Confirming Reservation of 1 Combo of {{ cart_l }} Tours
+				{% endblocktrans %}
+			{% endif %}
+		</h2>
+		<h6>{% blocktrans trimmed %}
+			To confirm your pending reservations please fill the following form with your contact information and the planned date for the first tour.{% endblocktrans %}<br>
+			{% trans "If you have any questions or special conditions you can type them in the message box" %}.
 		</h6>
 	</div>
 	<div class="w3-container w3-padding-32">
@@ -19,7 +32,7 @@
 					{% for field in form %}
 						{% for error in field.errors %}
 							<div class="w3-panel w3-round w3-border w3-pale-red w3-border-red w3-text-red w3-display-container w3-animate-left" role="alert">
-								<span onclick = "this.parentElement.style.display='none'" class="w3-padding close-btn pointer-cursor w3-xlarge w3-display-right" aria-label="Close">
+								<span onclick = "this.parentElement.style.display='none'" class="w3-padding close-btn pointer-cursor w3-xlarge w3-display-right" aria-label="{% trans 'Close' %}">
 									&times;
 								</span>
 								<p>{{ error|escape }}</p>
@@ -57,7 +70,7 @@
 				</div>
 				<div class="w3-row-padding">
 					<div class="w3-rest w3-padding-small w3-margin-bottom">
-						<button type="submit" class="w3-button w3-black w3-padding-large w3-right"><i class="fa fa-send fa-fw"></i> Confirm</button>
+						<button type="submit" class="w3-button w3-black w3-padding-large w3-right"><i class="fa fa-send fa-fw"></i> {% trans "Confirm" %}</button>
 					</div>
 				</div>
 			</form>

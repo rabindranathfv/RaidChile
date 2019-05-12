@@ -1,14 +1,22 @@
 {% extends "raidchileapp/base.html" %}
-{% load static %}
+{% load static %}{% load humanize %}{% load i18n %}
 
-{% block page_title %} {{ tour.name }} {% endblock page_title %}
+{% block page_title %} {{ tour }} {% endblock page_title %}
 
 {% block content %}
 
 	<div class="w3-content home-content ">
 		<div class="w3-container">
-			<div class="w3-center">
-				<h2>{{ tour.name }}</h2>
+			{% if in_combo %}
+				<a class="w3-margin-top w3-padding-16 back-combo-btn" href="{{ combo.get_absolute_url }}">
+					<h5><i class="fa fa-angle-left fa-lg"></i> {% trans "Back to" %} {{ combo }}</h5>
+				</a>
+			{% endif %}
+			<div class="w3-row" style="margin-top: 40px;">
+				<div class="w3-col m1 w3-container"></div>
+				<div class="w3-col m10 w3-center">
+					<h2>{{ tour }}</h2>
+				</div>
 			</div>
 
 			<!--  Slideshow of the tour photos  -->
@@ -16,20 +24,20 @@
 				{% with gallery=tour.images.all %}
 					{% if gallery %}
 						{% for image in gallery %}
-							<img class="slideshow-slide w3-animate-left {% if not forloop.first %}hidden{% endif %} full-width-img" src="{{ image.image.url }}">
+							<div class="slideshow-slide w3-animate-left {% if not forloop.first %}hidden{% endif %}" style="background: url('{{ image.image.url }}')"></div>
 						{% endfor %}
 
 						<!--  Thumbnail images in rows of 4  -->
 						<div class="w3-row-padding w3-section">
 							{% for image in gallery %}
-								<div class="w3-col s3">
-									<img class="w3-opacity {% if forloop.first %}w3-opacity-off{% endif %} w3-hover-opacity-off slide-thumbnail" src="{{ image.image.url }}">
+								<div class="w3-col s3 m2 w3-margin-bottom">
+									<div class="w3-opacity {% if forloop.first %}w3-opacity-off{% endif %} w3-hover-opacity-off slide-thumbnail" style="background: url('{{ image.image.url }}')"></div>
 								</div>
 							{% endfor %}
 						</div>
 					{% else %}
 						<div class="w3-center w3-padding-64">
-							<h4><em>We're sorry, there are no images available for this tour right now.</em></h4>
+							<h4><em>{% trans "We're sorry, there are no images available for this tour right now." %}</em></h4>
 						</div>
 					{% endif %}
 				{% endwith %}
@@ -39,38 +47,61 @@
 			<div class="w3-row-padding">
 				<!--  Description of Tour  -->
 				<div class="w3-col s12 l6 w3-margin-bottom">
-					<h2>Information</h2>
+					<h2>{% trans "Information" %}</h2>
 					<hr class="better-hr">
 					<div class="w3-row">
+						<!-- Rating section -->
+						<h5 style="margin-top: 2px; margin-bottom: 2px;">
+							<b>{% trans "Rating: " %}</b>
+							{% for n in rating_range %}
+								{% if reviews_data.avg_reviews >= n %}
+									<span class="fa fa-star checked"></span>
+								{% else %}
+									<span class="fa fa-star"></span>
+								{% endif %}
+							{% endfor %}
+							{% if reviews_data.avg_reviews %}
+								({{ reviews_data.avg_reviews|floatformat }}) {% trans "from" %} {{ reviews_data.total_reviews }}
+								{% blocktrans count t_reviews=reviews_data.total_reviews trimmed %}
+									review.
+								{% plural %}
+									reviews.
+								{% endblocktrans %}
+							{% else %}
+								(0)
+							{% endif %}
+						</h5>
+					</div>
+					<div class="w3-row">
 						<div class="w3-half">
-							<h5><strong>Type:</strong> {{ tour.get_tour_type_display }}</h5>
+							<h5><strong>{% trans "Type" %}:</strong> {{ tour.get_duration_type_display }}</h5>
 						</div>
 						<div class="w3-half">
-							<h5><strong>Duration:</strong> {{ tour.duration }} Hour{{ tour.duration|pluralize }}</h5>
+							<h5><strong>{% trans "Duration" %}:</strong> {% blocktrans count tour_duration=tour.duration %}{{ tour_duration }} Hour{% plural %}{{ tour_duration }} Hours{% endblocktrans %}</h5>
 						</div>
 					</div>
 
 					<h6 class='justify-text'>
-						{{ tour.description|linebreaksbr }}
+						{{ tour.get_description|linebreaksbr }}
 					</h6>
 
-					<h5 class="w3-margin-top"><strong>Categories:</strong></h5>
+					<h5 class="w3-margin-top"><strong>{% trans "Categories" %}:</strong></h5>
 					<h4>
 						<span class="w3-tag w3-blue w3-round">
-							<a  href="{% url 'raidchileapp:search_all_tours' %}">All Tours</a>
+							<a  href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a>
 						</span>
 					{% for cat in tour.categories.all %}
 					<span class="w3-tag {% if cat.combo %}w3-green{% else %}w3-blue{% endif %} w3-round w3-margin-top">
-						<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+						<a href="{{ cat.get_absolute_url }}">{{ cat }}</a>
 					</span>
 					{% endfor %}
 					</h4>
 				</div>
-				<!--  Tour features and categories  -->
+				<!--  Tour features and prices  -->
 				<div class="w3-col s12 l6 w3-margin-bottom">
-					<h2>Pricing</h2>
+					<h2>{% trans "Pricing" %}</h2>
 					<hr class="better-hr">
-					<h6>If you reserve all the tours in a combo you'll get a discount per passenger!</h6>
+					<h6>{% trans "If you reserve this tour as part of a combo you'll get a discount per passenger!" %}</h6>
 					<div class="w3-row">
 						<div class="w3-col s1 w3-container"></div>
 						<div class="w3-col s10">
@@ -78,52 +109,51 @@
 								<thead>
 									<tr class="w3-red">
 										<th></th>
-										<th>Adults</th>
-										<th>Children</th>
+										<th>{% trans "Adults" %}</th>
+										<th>{% trans "Children" %}</th>
 									</tr>
 								</thead>
 								<tr>
-									<th>Prices</th>
-									<td>CLP<span class="number-font"> {{ tour.adult_reg_price }}</span></td>
-									<td>CLP<span class="number-font"> {{ tour.children_reg_price }}</span></td>
+									<th>{% trans "Prices" %}</th>
+									<td><span class="number-font">CLP {{ tour.adult_reg_price|intcomma }}</span></td>
+									<td><span class="number-font">CLP {{ tour.children_reg_price|intcomma }}</span></td>
 								</tr>
 								<!--<tr>
 									<th>Sale</th>
-									<td>CLP<span class="number-font"> {{ tour.adult_sale_price }}</span></td>
-									<td>CLP<span class="number-font"> {{ tour.children_sale_price }}</span></td>
+									<td>CLP<span class="number-font"> {{ tour.adult_sale_price|intcomma }}</span></td>
+									<td>CLP<span class="number-font"> {{ tour.children_sale_price|intcomma }}</span></td>
 								</tr>-->
 							</table>
+						</div>
 					</div>
-					</div>
-					<h5 class="w3-padding-large"><strong>Price includes:</strong></h5>
+					<h5 class="w3-padding-large"><strong>{% trans "Price includes:" %}</strong></h5>
 					<div class="w3-row-padding">
 						{% for feature in tour.features.all %}
 							<div class="w3-half w3-margin-bottom">
-								<i class="fa {{ feature.icon }} fa-2x fa-fw"></i><h5 class="w3-show-inline-block">{{ feature.name }}</h5>
+								<i class="fa {{ feature.icon }} fa-2x fa-fw"></i><h5 class="w3-show-inline-block">{{ feature }}</h5>
 							</div>
 						{% empty %}
-							<div class="w3-center w3-padding-64">
-								<h6><em>We're sorry, there are no features available for this tour right now.</em></h6>
+							<div class="w3-center w3-padding-32">
+								<h6><em>{% trans "We're sorry, there are no features available for this tour right now." %}</em></h6>
 							</div>
 						{% endfor %}
 					</div>
-				</div>
-			</div>
-
-			<!--  Reservation mini form -->
-			<div class="w3-row">
-				<div class="w3-col l6 w3-container"></div>
-				<div class="w3-col l6 w3-padding">
-					<h5><strong>Min. passengers per reservation:</strong> {{ tour.min_pax_number }} ppl.</h5>
-				</div>
-			</div>
-			<div class="w3-row w3-margin-bottom">
-				<div class="w3-col l6 w3-container"></div>
-				<div class="w3-col l6 w3-container">
-					<form action="{% url 'cart:cart_add' tour.id %}" method="POST" id="cart_add_form">
+					<!--  Reservation mini form -->
+					<div class="w3-padding">
+						<h5>
+							<strong>
+								{% trans "Min. passengers per reservation" %}:
+							</strong> {% blocktrans count min_pass=tour.min_pax_number %}{{ min_pass }} person.{% plural %}{{ min_pass }} people.{% endblocktrans %}
+						</h5>
+					</div>
+					<form action="{% url 'cart:cart_add' tour.id %}" method="POST" class="w3-margin-bottom" id="cart_add_form">
 						{% csrf_token %}
 						{{ cart_product_form.update }}
-						<p class="min_pax_error w3-text-red" style="display: none;"><b>The minimum number of passengers must be greater or equal to {{ tour.min_pax_number }}!</b></p>
+						<p class="min_pax_error w3-text-red" style="display: none;">
+							<b>
+							{% blocktrans with tour_min_pax=tour.min_pax_number %}{{ tour_min_pax }} is the minimum number of passengers!{% endblocktrans %}
+							</b>
+						</p>
 						<div class="w3-row">
 							<div class="w3-third w3-padding-small">
 								{{ cart_product_form.adult_quantity.label }}
@@ -134,7 +164,7 @@
 								{{ cart_product_form.children_quantity }}
 							</div>
 							<div class="w3-third w3-center">
-								<button type="submit" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin" id="submit-reserve">Reserve Now</button>
+								<button type="submit" class="w3-button w3-xlarge w3-bold w3-red w3-margin-bottom w3-card-2 w3-margin" id="submit-reserve">{% trans "Reserve" %}</button>
 								<div style="display: none;" class="min_pax">{{ tour.min_pax_number }}</div>
 							</div>
 						</div>
@@ -142,75 +172,7 @@
 				</div>
 			</div>
 
-			<!-- User Commentaries Section -->
-			<div class="w3-row w3-margin-bottom">
-				<div class="w3-col l1 w3-container"></div> <!-- Offset empty column -->
-				<div class="w3-col l10">
-					<div class="w3-container w3-pale-red">
-						<h3>Comments</h3>
-					</div>
-					<div class="w3-container w3-white ">
-						<!-- Sample comment 1 -->
-						<div class="w3-row-padding w3-padding-16">
-							<div class="w3-col s2 w3-center">
-								<img class="w3-circle avatar-mwidth" src="{% static 'img/default_avatar.png' %}">
-							</div>
-							<div class="w3-col s12 m10 l9">
-								<p class="justify-text"><b>Nombre de Usuario</b>:<br>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</p>
-							</div>
-						</div>
-						<!-- Sample comment 2 -->
-						<div class="w3-row-padding ">
-							<div class="w3-col s2 w3-center">
-								<img class="w3-circle avatar-mwidth" src="{% static 'img/default_avatar.png' %}">
-							</div>
-							<div class="w3-col s12 m10 l9">
-								<p class="justify-text"><b>Nombre de Usuario2</b>:<br>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!-- Comment form -->
-					<div class="w3-container w3-padding-16 w3-black w3-card w3-margin-top">
-						<h3>Queremos conocer tu opinión</h3>
-						<form action="" method="POST">
-							{% csrf_token %}
-							<div class="w3-row-padding">
-								<div class="w3-half w3-margin-bottom">
-									{{ comment_form.name }}
-								</div>
-								<div class="w3-half w3-margin-bottom">
-									{{ comment_form.email }}
-								</div>
-							</div>
-							<div class="w3-row-padding">
-								<div class="w3-col s12 w3-margin-bottom">
-									{{ comment_form.comment }}
-								</div>
-							</div>
-							<div class="w3-row-padding">
-								<div class="w3-half w3-margin-bottom">
-									<button type="submit" class="w3-button w3-red w3-margin-top"><i class="fa fa-send fa-fw"></i> Enviar Comentario</button>
-								</div>
-							</div>
-						</form>
-					</div>
-
-				</div>
-			</div>
+			{% include "raidchileapp/review_list.html" %}
 
 		</div>
 	</div>

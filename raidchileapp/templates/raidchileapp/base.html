@@ -5,8 +5,14 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="RocketLabs">
-		<title>{% block page_title %}{% endblock page_title %}| Chile Raids</title>
+		<title>{% block page_title %}{% endblock page_title %}| Chile Raid</title>
+
+		<!-- Favicons -->
+		<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+		<link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
 
 		<!--   Bootstrap 4 CSS    -->
 		<!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"> -->
@@ -25,6 +31,9 @@
 	<body class="w3-light-grey">
 		<!-- Webpage navbar goes here (if applicable)-->
 		{% include "raidchileapp/navbar.html" %}
+
+		<!-- Webpage languague switcher goes here (if applicable)-->
+		{% include "raidchileapp/language_vertical_switcher.html" %}
 
 		<!-- Webpage content goes inside this block -->
 		{% block content %}{% endblock content %}

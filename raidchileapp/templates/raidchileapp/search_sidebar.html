@@ -1,39 +1,36 @@
-<div class="w3-container w3-border-right w3-hide-small w3-animate-top" id="filters-sidebar">
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<div class="w3-container w3-border-right w3-hide-small w3-animate-left" id="filters-sidebar">
 	<!-- Filters start from here -->
-	{% if combos.exists %}
-		<!-- Tour Combos -->
-	<div class="w3-border-bottom">
-		<h5>Tour Combos</h5>
-		<div class="w3-row w3-margin-bottom">
-			{% with sets=combos.all %}
-			{% for combo in sets %}
-				{% if combo != category %}
-					<a class="w3-text-blue" href="{{ combo.get_absolute_url }}">{{ combo.name }}</a><br>
-				{% else %}
-					<span class="w3-text-blue"><strong>{{ combo.name }}</strong></span><br>
-				{% endif %}
-			{% endfor %}
-			{% endwith %}
-		</div>
-	</div>
-	{% endif %}
 
 	<!-- Categories -->
 	<div class="w3-border-bottom">
-		<h5>Categories</h5>
+		<h5>{% trans "Categories" %}</h5>
 		<div class="w3-row w3-margin-bottom">
-			{% if category %}
-				<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_tours' %}">All Tours</a><br>
+			{% if type != 'combo' %}
+				<a class="w3-tag w3-green w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_combos' %}"><strong>{% trans "All Tour Combos" %}</strong></a>
+				<!--<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_combos' %}">{% trans "All Tour Combos" %}</a><br> -->
 			{% else %}
-				<span class="w3-text-blue"><strong>All Tours</strong></span><br>
+				<strong class="w3-tag w3-green w3-round w3-block vertical-category-tag w3-opacity">{% trans "All Tour Combos" %}</strong>
+				<!--<span class="w3-text-green"><strong>{% trans "All Tour Combos" %}</strong></span><br>-->
+			{% endif %}
+
+			{% if category or type == 'combo' %}
+				<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{% url 'raidchileapp:search_all_tours' %}"><strong>{% trans "All Tours" %}</strong></a>
+				<!--<a class="w3-text-blue" href="{% url 'raidchileapp:search_all_tours' %}">{% trans "All Tours" %}</a><br>-->
+			{% else %}
+				<strong class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-opacity">{% trans "All Tours" %}</strong>
+				<!--<span class="w3-text-blue"><strong>{% trans "All Tours" %}</strong></span><br> -->
 			{% endif %}
 			{% if categories.exists %}
 				{% with cats=categories.all %}
 					{% for cat in cats %}
 						{% if cat != category %}
-							<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a><br>
+							<a class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-hover-opacity" href="{{ cat.get_absolute_url }}"><strong>{{ cat }}</strong></a>
+							<!--<a class="w3-text-blue" href="{{ cat.get_absolute_url }}">{{ cat }}</a><br> -->
 						{% else %}
-							<span class="w3-text-blue"><strong>{{ cat.name }}</strong></span><br>
+							<strong class="w3-tag w3-blue w3-round w3-block vertical-category-tag w3-opacity">{{ cat }}</strong>
+							<!--<span class="w3-text-blue"><strong>{{ cat }}</strong></span><br> -->
 						{% endif %}
 					{% endfor %}
 				{% endwith %}
@@ -41,51 +38,31 @@
 		</div>
 	</div>
 
-	{% if not category.combo %}
 	<div class="w3-border-bottom">
-		<h5>Locations</h5>
+		<h5>{% trans "Locations" %}</h5>
 		{{ search_form.locations }}
 	</div>
 
 	<div class="w3-border-bottom">
-		<h5>Price (CLP)</h5>
+		<h5>{% trans "Price" %} (CLP)</h5>
 		<div class="w3-row w3-margin-bottom">
 			<div class="w3-half w3-center">
 				<label>Min.</label>
 				{{ search_form.min_price }}
-				<!-- <input class="w3-input w3-border w3-round"type="text" placeholder="Min"> -->
 			</div>
 			<div class="w3-half w3-center">
 				<label>Max.</label>
 				{{ search_form.max_price }}
-				<!--<input class="w3-input w3-border w3-round" type="text" placeholder="Max"> -->
 			</div>
 		</div>
 	</div>
 
-	<!--
-	<div class="w3-border-bottom">
-		<h5>Passengers</h5>
-
-		<div class="w3-row-padding w3-margin-bottom">
-			<div class="w3-half w3-center">
-				<label>Adults:</label>
-				{{ search_form.adult_qty }}
-			</div>
-			<div class="w3-half w3-center">
-				<label>Children:</label>
-				{{ search_form.kids_qty }}
-			</div>
-		</div>
-	</div>
-	-->
 	<div class="w3-center">
-		<button type="submit" for="search-form" class="w3-button w3-block w3-dark-gray w3-margin-top"><i class="fa fa-sliders fa-fw"></i> Apply </button>
+		<button type="submit" for="search-form" class="w3-button w3-block w3-dark-gray w3-margin-top"><i class="fa fa-sliders fa-fw"></i> {% trans "Apply" %}</button>
 	</div>
 
-	{% endif %}
 	<div class="w3-container w3-padding-64 w3-hide-small"></div> <!-- Fill space so footer won't cut sidebar -->
 </div>
 <div class="w3-center">
-	<button type="button" class="w3-button w3-red w3-large w3-hide-medium w3-hide-large w3-margin-top" id="filter-toggle"><i class="fa fa-sliders"></i> Filters</button>
+	<button type="button" class="w3-button w3-red w3-large w3-hide-medium w3-hide-large w3-margin-top" id="filter-toggle"><i class="fa fa-sliders"></i> {% trans "Filters" %}</button>
 </div>

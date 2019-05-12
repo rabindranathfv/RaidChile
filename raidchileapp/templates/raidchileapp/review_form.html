@@ -1,0 +1,85 @@
+{% load i18n %}
+<div class="w3-container w3-padding-16 w3-black w3-card w3-margin-top" id="review-send">
+	<h3>{% trans "We would like to know your opinion" %}.</h3>
+
+	{% include "contact/messages.html" %}
+
+	<!-- Error display if anything -->
+	{% if review_form.errors %}
+		{% for field in review_form %}
+			{% for error in field.errors %}
+				<div class="w3-panel w3-round w3-border w3-pale-red w3-border-red w3-text-red w3-display-container w3-animate-up" role="alert">
+					<span onclick = "this.parentElement.style.display='none'" class="w3-padding close-btn pointer-cursor w3-xlarge w3-display-right" aria-label="Close">
+						&times;
+					</span>
+					<p>{{ error|escape }}</p>
+				</div>
+			{% endfor %}
+		{% endfor %}
+		{% for error in review_form.non_field_errors %}
+			<div class="w3-panel w3-round w3-border w3-pale-red w3-border-red w3-text-red w3-display-container w3-animate-up" role="alert">
+				<span onclick = "this.parentElement.style.display='none'" class="w3-padding close-btn pointer-cursor w3-xlarge w3-display-right" aria-label="Close">
+					&times;
+				</span>
+				<p>{{ error|escape }}</p>
+			</div>
+		{% endfor %}
+	{% endif %}
+	<!-- Review post form -->
+	<form action="#review-send" method="POST" id="review_add_form">
+		{% csrf_token %}
+		{{ review_form.product }}
+		{{ review_form.rating }}
+		<div class="w3-row-padding">
+			<div class="w3-col s12">
+				<p class="none_rating_error w3-text-red" style="display: none;">
+					<b>
+					{% blocktrans trimmed %}
+						Please choose a rating!
+					{% endblocktrans %}
+					</b>
+				</p>
+				<h5 id="rating_input">
+					{% trans "Rating: " %}
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">1</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">2</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">3</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">4</span>
+					</span>
+					<span class="fa fa-star fa-lg pointer-cursor">
+						<span class="value-span w3-hide">5</span>
+					</span>
+					(<span class="number-rating">0</span>)
+				</h5>
+			</div>
+		</div>
+		<div class="w3-row-padding">
+			<div class="w3-half w3-margin-bottom">
+				{{ review_form.full_name }}
+			</div>
+			<div class="w3-half w3-margin-bottom">
+				{{ review_form.email }}
+			</div>
+		</div>
+		<div class="w3-row-padding">
+			<div class="w3-col s12 w3-margin-bottom">
+				{{ review_form.message }}
+			</div>
+		</div>
+		<div class="w3-row-padding">
+			<div class="w3-half w3-margin-bottom">
+				<button type="submit" class="w3-button w3-red w3-margin-top" id="submit-review">
+					<i class="fa fa-send fa-fw"></i> {% trans "Post Review" %}
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="w3-padding-32"></div>

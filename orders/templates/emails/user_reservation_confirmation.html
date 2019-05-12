@@ -1,62 +1,22 @@
-{% autoescape off %}
+{% load humanize %} {% load i18n %} {% autoescape off %}
+<h2>{% trans "Thank you for Confirming your Tour Reservations!" %}</h2>
 
-<h2>Thank you for Confirming your Tour Reservations!</h2>
+<p>{% trans "Hi, this is an automatic message from Chile Raid" %}.</p>
+<h3>{% blocktrans with order_id=order.id %}Tour Reservation Order #{{ order_id }}{% endblocktrans %}</h3>
+<p>{% trans "You have confirmed the following tour reservations" %}:</p>
 
-<p>Hi, this is an automatic message from Chile Raids.</p>
-<h3>Tour Reservation Order #{{ order.id }}</h3>
-<p>You have confirmed the following tour reservations:</p>
-<hr>
-{% with items=order.items.all %}
-	{% for item in items %}
-
-	<h4 style="margin-bottom: 5px;">Tour name: {{ item.product.name }}</h4>
-	<p style="padding-left: 20px; margin-top: 5px;">
-		For {{ item.adult_quantity }} Adult{{ item.adult_quantity|pluralize }}{% if item.children_quantity > 0 %} and {{ item.children_quantity }} Child{{ item.children_quantity|pluralize:'ren' }}{% endif %}.
-	</p>
-	<p style="padding-left: 20px; margin-top: 5px;">
-		<b>Pricing</b>: Adults: {{ item.adult_reg_price }}{% if item.children_quantity > 0 %} Children: {{ item.children_reg_price }}.{% endif %}.
-	</p>
-	<h4>Tour Total: CLP {{ item.get_reg_cost }}</h4>
-	<hr>
-	{% endfor %}
-{% endwith %}
-{% if combo %}
-	<h3>Sub-Total: <strong>CLP {{ subtotal }}.</strong></h3>
-	<h3>Combo Discount: CLP -{{ discount }} (CLP {{ combo.combo_discount }} per passenger).</h3>
-	<h3 style="margin-bottom: 10px;">{{ combo.name }}:</h3>
-	{% with tours=combo.tours.all %}
-		<ul style="margin-top: 10px;">
-			{% for tour in tours %}
-				<li>{{ tour.name }}</li>
-			{% endfor %}
-		</ul>
-	{% endwith %}
-{% endif %}
-<h2>Total: <strong>CLP {{ total }}.</strong></h2>
-<p> The planned date for the first tour was: <strong style="letter-spacing: 1px;">{{ order.trip_date|date:'d/m/Y' }}</strong></p> 
-
-<p>You provided the following contact information:</p>
-
-<p><strong>Full name:</strong> {{ order.full_name }}</p>
-<p><strong>Email:</strong> {{ order.email }}</p>
-{% if order.phone %}
-	<p><strong>Phone:</strong> {{ order.phone }}</p>
-{% endif %}
-{% if order.message %}
-<p><strong>Message:</strong> {{ order.message|linebreaksbr }}</p>
-{% endif %}
+{% include 'emails/order_contents.html' %}
 
 <p>
-	If you have any questions, do NOT reply to this automated message, instead you can contact us at:<br>
-	<br>
+{% trans "If you have any questions, do NOT reply to this automated message, instead you can contact us at" %}:<br>
+<br>
 	<a href="{{ contact_url }}" style="padding-left: 15px; font-size: 16px">{{ contact_url }}</a><br>
-	<br>
-	If your question is about this reservation order, please provide us with your reservation number in the message.
+<br>
+{% trans "If your doubt or question is about this reservation order, please provide us with your reservation number in the message" %}.
 </p>
 <br>
+<h4>{% trans "If you did not made this reservation order please disregard this email" %}.</h4>
 
-<h4>If you did not made this reservation order please disregard this email.</h4>
-
-Cheers,<br>
-<h4>Chile Raids</h4><br>
+{% trans "Cheers," %}<br>
+<h4>{% trans "Chile Raid" %}.</h4><br>
 {% endautoescape %}

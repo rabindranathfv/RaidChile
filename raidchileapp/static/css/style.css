@@ -8,14 +8,79 @@
 body,h1,h2,h3,h4,h5,h6 {
 	font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
+/*  ==========   Navbar Styles   ==========  */
+
+.brand-img{
+	height:49px;
+}
+
+.brand-a{
+	padding: 5px 24px !important;
+}
+
+/*  ==========   Language Switcher Styles   ==========  */
+
+
+
+#language-switch{
+	outline : none;
+}
+
+.retracted-switch{
+	border-radius: 20px 20px 20px 20px !important;
+}
+
+.extended-switch{
+	border-radius: 20px 20px 0px 0px !important;
+}
+
+/* For mobile: */
+#language-choices{
+	border-radius: 0px 0px 20px 20px !important;
+	padding-bottom: 8px !important;
+}
+
+.lang-flag-img{
+	width: 35px;
+}
+
+.languages-container{
+	position: fixed;
+	top: 90px;
+	right: 5px;
+	z-index: 100;
+}
+
+@media only screen and (min-width: 601px) {
+	/* For tablets and desktop: */
+	#language-choices{
+		padding-bottom: 12px !important;
+	}
+
+	.lang-flag-img{
+		width: 45px;
+	}
+
+	.languages-container{
+		top: 60px;
+		right: 5px;
+	}
+}
 
 /*  ==========   Header Styles   ==========  */
 
 .main-banner{
-	max-width: 1500px;
+	max-width: 1532px;
+	min-height: 700px;
 }
 .banner-img {
 	min-width: 1000px;
+}
+
+.home-banner-image{
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
 }
 
 /*  ==========   Home page content Styles   ==========  */
@@ -33,6 +98,14 @@ body,h1,h2,h3,h4,h5,h6 {
 	text-justify: inter-word;
 }
 
+
+.big-brand-img{
+	max-height: 350px;
+}
+
+.text-shadow{
+	text-shadow:2px 2px 0 #444;
+}
 
 .width30{
 	width: 30px;
@@ -58,6 +131,7 @@ textarea.no-resize{
 	/* For phones: */
 .home-gallery-image{
 	min-height: 400px;
+	line-height: 400px;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
@@ -74,6 +148,7 @@ textarea.no-resize{
 	/* For tablets: */
 	.home-gallery-image{
 		min-height: 250px;
+		line-height: 250px;
 	}
 }
 
@@ -81,30 +156,58 @@ textarea.no-resize{
 	/* For desktop: */
 	.home-gallery-image{
 		min-height: 400px;
+		line-height: 400px;
 	}
 }
 
 /*  ==========   Tour Details content Styles   ==========  */
 
-.hidden{
-	display: none;
+.back-combo-btn{
+	position: absolute;
+	top: 30px;
 }
 
-.slideshow-slide{
+@media only screen and (min-width: 601px) {
+	/* For tablets: */
+	.back-combo-btn{
+		top: 30px;
+	}
+}
 
+.hidden{
+	display: none;
 }
 
 .slide-thumbnail{
 	width: 100%;
 	cursor:pointer;
+	height: 100px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
 }
 
 .slideshow-area{
 	max-width: 800px
 }
 
+.slideshow-slide{
+	height: 300px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: contain !important;
+}
+
 .better-hr{
 	border: 1px solid #AAA;
+}
+
+@media only screen and (min-width: 601px) {
+	/* For tablets: */
+	.slideshow-slide{
+		height: 450px;
+	}
+
 }
 
 /*  ==========   Comment section Styles   ==========  */
@@ -118,7 +221,11 @@ textarea.no-resize{
 }
 
 .avatar-mwidth{
-	max-width: 96px;
+	max-width: 35px;
+}
+
+.checked {
+  color: orange;
 }
 
 /*  ==========   Search section Styles   ==========  */
@@ -148,9 +255,16 @@ ul#id_locations{
 	margin-top: 27px;
 }
 
+.vertical-category-tag{
+	margin: 5px 0;
+	padding: 10px 5px ;
+}
+
+
 	/* For phones: */
 .search-gallery-image{
-	min-height: 400px;
+	min-height: 250px;
+	line-height: 250px;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
@@ -162,17 +276,39 @@ ul#id_locations{
 	overflow-y: auto;
 }
 
+.combo-gallery-title{
+	height: 35px;
+	width: 100%;
+	overflow-y: auto;
+}
+
+.combo-detail-tour-image{
+	min-height: 400px;
+	line-height: 400px;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+}
+
 @media only screen and (min-width: 601px) {
 	/* For tablets: */
 	.search-gallery-image{
 		min-height: 190px;
+		line-height: 190px;
 	}
+
+	.vertical-category-tag{
+		margin: 2px 0;
+		padding: 0 2px;
+	}
+
 }
 
 @media only screen and (min-width: 993px) {
 	/* For desktop: */
 	.search-gallery-image{
 		min-height: 240px;
+		line-height: 240px;
 	}
 }
 

@@ -1,0 +1,50 @@
+{% load humanize %}{% load i18n %}
+<div class="w3-row-padding w3-margin-top">
+	{% for tour in tours %}
+		<div class="w3-col m6 l4 w3-margin-bottom">
+			{% with img_url=tour.images.first.image.url img_alt=tour.images.first %}
+				<a href="{{ tour.get_absolute_url }}">
+					<div class="search-gallery-image w3-white w3-hide-small w3-center" style="background: url('{{ img_url }}')">
+						{% if not img_url %}
+							<i class="fa fa-photo fa-5x w3-opacity-max"></i>
+						{% endif %}
+					</div>
+					{% if img_url %}
+						<img src="{{ img_url }}" alt="{{ img_alt }}" class="full-width-img w3-hide-medium w3-hide-large">
+					{% else %}
+						<div class="search-gallery-image w3-white w3-center w3-hide-medium w3-hide-large">
+							<i class="fa fa-photo fa-5x w3-opacity-max"></i>
+						</div>
+					{% endif %}
+				</a>
+			{% endwith %}
+			<div class="w3-container w3-white w3-card-4">
+				<!-- Tour title -->
+				<h5 class="search-gallery-title">{{ tour }}</h5>
+				<!-- Tour adult sale prices -->
+				<h6 class="w3-opacity">{% trans "From" %} <span class="number-font">CLP {{ tour.adult_reg_price|intcomma }}</span></h6>
+				<h6>
+				{% blocktrans with duration_type=tour.get_duration_type_display tour_duration=tour.duration trimmed %}
+					{{ duration_type }} Tour: {{ tour_duration }} Hours
+				{% endblocktrans %}
+				</h6>
+				<!-- Features Icons -->
+				<p class="w3-large">
+					{% for feature in tour.features.all %}
+					<i class="fa {{ feature.icon }}"></i>
+					{% endfor %}
+				</p>
+				<!-- Tour details button -->
+				<a class="w3-button w3-block w3-black w3-margin-bottom" href="{{ tour.get_absolute_url }}">{% trans "See more..." %}</a>
+			</div>
+		</div>
+	{% empty %}
+		<div class="w3-col s12 w3-center w3-padding-64">
+			<!-- Logo acá  -->
+			<div class="w3-content w3-light-gray w3-card-2 w3-padding-large">
+				<i class="w3-text-dark-gray fa fa-frown-o fa-5x"></i>
+				<h4><em>{% trans "We're sorry, there are no matching tours available for this search right now." %}<br>{% trans "Please try with a different category, combo or filters" %}</em></h4>
+			</div>
+		</div>
+	{% endfor %}
+</div>
