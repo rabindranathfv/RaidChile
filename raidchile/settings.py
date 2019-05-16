@@ -43,6 +43,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = [
                 'rafaelv.pythonanywhere.com',
+                'chileraid.pythonanywhere.com',
                 'chileraid.cl',
                 'www.chileraid.cl',
                 'localhost'
@@ -128,6 +129,9 @@ else:
             'PASSWORD': config('DB_PASSWORD'),
             'HOST': config('DB_HOST'),
             'PORT': config('DB_PORT', cast=int),
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
         }
     }
 
