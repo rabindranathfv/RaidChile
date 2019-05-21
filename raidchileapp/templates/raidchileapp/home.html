@@ -65,19 +65,27 @@
 				<h3>{% trans "About us" %}</h3>
 				<h6 class='justify-text'>
 					{% blocktrans trimmed %}
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-					esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-					cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-					id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+					CHILE RAID was born in 2018 as a consequence of the development of the
+                    tourism industry in Chile, with the clear objective of making known our
+                    territory, traditions and customs, we invite the tourist to enter a greater level of
+                    knowledge and integration of our country, and thus becoming
+                    the first choice of travel when planning your vacation. The tours, with iconic destinations of our geography, history, wine tradition
+                    and the modernity of a cosmopolitan city like Santiago, are the raw material
+                    for our staff to create an unforgettable and everlasting experience for all
+                    our visitors.
+                    {% endblocktrans %}
+                </h6>
+                <h6 class='justify-text'>
+                    {% blocktrans trimmed %}
+                    We achieve this objective thanks to our work team made up by guides,
+                    facilitators and trained drivers of proven dedication and experience. Let us
+                    serve you, take you through a charming journey to discover our country and
+                    our people, thank you for traveling with us.
 					{% endblocktrans %}
 				</h6>
-				<p>{% trans "We accept" %}: <i class="fa fa-credit-card fa-2x"></i> <i class="fa fa-cc-mastercard fa-2x"></i> <i class="fa fa-cc-amex fa-2x"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal fa-2x"></i></p>
+				<!--<p>{% trans "We accept" %}: <i class="fa fa-credit-card fa-2x"></i> <i class="fa fa-cc-mastercard fa-2x"></i> <i class="fa fa-cc-amex fa-2x"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal fa-2x"></i></p>-->
 			</div>
-			<div class="w3-col l7 w3-center w3-margin-top">
+			<div class="w3-col l7 w3-center w3-margin-top w3-padding-32">
 				<!-- Image of location/map -->
 				<img src="{% static 'img/chile_raid_logo.png' %}" class="w3-image big-brand-img ">
 			</div>
@@ -85,7 +93,7 @@
 
 		<div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
 			<div class="w3-third"><i class="fa fa-map-marker w3-text-red"></i> Santiago, Chile</div>
-			<div class="w3-third"><i class="fa fa-phone w3-text-red"></i> {% trans "Phone" %}: +56 9 151515</div>
+			<!--<div class="w3-third"><i class="fa fa-phone w3-text-red"></i> {% trans "Phone" %}: +56 9 151515</div> -->
 			<div class="w3-third"><i class="fa fa-envelope w3-text-red"></i> chileraid@gmail.com</div>
 		</div>
 		<!-- END About Section -->
@@ -152,11 +160,12 @@
 			<h2>{% trans "Contact Us" %}</h2>
 			<p>{% trans "If you have any questions, do not hesitate to ask us." %}</p>
 			<i class="fa fa-map-marker w3-text-red width30"></i> Santiago, Chile<br>
-			<i class="fa fa-phone w3-text-red width30"></i> {% trans "Phone" %}: +56 9 151515<br>
+			<!--<i class="fa fa-phone w3-text-red width30"></i> {% trans "Phone" %}: +56 9 151515<br> -->
 			<i class="fa fa-envelope w3-text-red width30"> </i> chileraid@gmail.com<br>
 			<!-- Contact Form fields and submit button -->
 			{% include "contact/contact_form.html" %}
 		</div>
+		<div class="w3-padding-32"></div>
 		{% endif %}
 
 		<!-- End page content -->

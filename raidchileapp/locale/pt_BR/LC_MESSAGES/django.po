@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-10 13:47-0400\n"
+"POT-Creation-Date: 2019-05-21 07:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -507,26 +507,46 @@ msgstr "Sobre nos"
 
 #: raidchileapp/templates/raidchileapp/home.html:67
 msgid ""
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
-"tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
-"quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
-"consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse "
-"cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat "
-"non proident, sunt in culpa qui officia deserunt mollit anim id est laborum "
-"consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et "
-"dolore magna aliqua. Ut enim ad minim veniam."
+"CHILE RAID was born in 2018 as a consequence of the development of the "
+"tourism industry in Chile, with the clear objective of making known our "
+"territory, traditions and customs, we invite the tourist to enter a greater "
+"level of knowledge and integration of our country, and thus becoming the "
+"first choice of travel when planning your vacation. The tours, with iconic "
+"destinations of our geography, history, wine tradition and the modernity of "
+"a cosmopolitan city like Santiago, are the raw material for our staff to "
+"create an unforgettable and everlasting experience for all our visitors."
 msgstr ""
+"CHILE RAID nasceu em 2018 como conseqüência do desenvolvimento da indústria "
+"do turismo no Chile, com o objetivo claro de tornar conhecido nosso território, "
+"tradições e costumes, convidamos o turista a entrar em um nível de conhecimento "
+"e maior integração de nosso país, conseguindo assim sempre se tornar a primeira "
+"escolha de viagem ao planejar suas férias. As caminhadas, com destinos icônicos "
+"de nossa geografia, história, tradição vinícola e a modernidade de uma cidade "
+"cosmopolita como Santiago, são a matéria-prima para que nossa equipe amalgame "
+"uma experiência inesquecível e perene para todos os nossos visitantes."
 
-#: raidchileapp/templates/raidchileapp/home.html:78
+#: raidchileapp/templates/raidchileapp/home.html:79
+msgid ""
+"We achieve this objective thanks to our work team made up by guides, "
+"facilitators and trained drivers of proven dedication and experience. Let us "
+"serve you, take you through a charming journey to discover our country and "
+"our people, thank you for traveling with us."
+msgstr ""
+"Alcançamos este objetivo graças à nossa equipe de trabalho formada por guias, "
+"facilitadores e motoristas treinados, com dedicação e experiência comprovadas. "
+"Deixe-nos servi-lo, levá-lo através de uma viagem encantadora para descobrir "
+"o nosso país e nosso povo, obrigado por viajar conosco."
+
+#: raidchileapp/templates/raidchileapp/home.html:86
 msgid "We accept"
 msgstr "Nós aceitamos"
 
-#: raidchileapp/templates/raidchileapp/home.html:88
-#: raidchileapp/templates/raidchileapp/home.html:155
+#: raidchileapp/templates/raidchileapp/home.html:96
+#: raidchileapp/templates/raidchileapp/home.html:163
 msgid "Phone"
 msgstr "Telefone"
 
-#: raidchileapp/templates/raidchileapp/home.html:100
+#: raidchileapp/templates/raidchileapp/home.html:108
 msgid ""
 "For private tours, please contact us to negotiate pricing and conditions. "
 "Thank you."
@@ -534,20 +554,20 @@ msgstr ""
 "Para tours privados, entre em contato conosco para negociar as condições e "
 "preços, obrigado."
 
-#: raidchileapp/templates/raidchileapp/home.html:106
+#: raidchileapp/templates/raidchileapp/home.html:114
 msgid "Tours Locations"
 msgstr "Locais turísticos"
 
-#: raidchileapp/templates/raidchileapp/home.html:107
+#: raidchileapp/templates/raidchileapp/home.html:115
 msgid "You can find a tour in any of these beautiful locations and more:"
 msgstr ""
 "Você pode fazer um Tour em cualquer um desses locais bonitos e muito mais:"
 
-#: raidchileapp/templates/raidchileapp/home.html:152
+#: raidchileapp/templates/raidchileapp/home.html:160
 msgid "Contact Us"
 msgstr "Entre em Contato Conosco"
 
-#: raidchileapp/templates/raidchileapp/home.html:153
+#: raidchileapp/templates/raidchileapp/home.html:161
 msgid "If you have any questions, do not hesitate to ask us."
 msgstr "Se você tiver alguma dúvida, não hesite em nos perguntar."
 
