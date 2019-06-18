@@ -46,6 +46,8 @@ ALLOWED_HOSTS = [
                 'chileraid.pythonanywhere.com',
                 'chileraid.cl',
                 'www.chileraid.cl',
+                'www.chileraidtours.cl',
+                'chileraidtours.cl',
                 'localhost'
                 ]
 
